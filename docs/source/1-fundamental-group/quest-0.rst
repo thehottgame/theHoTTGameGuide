@@ -36,26 +36,29 @@ it says the former is a point in the latter,
 where the latter is viewed as a space;
 in the first case ``Type`` is the space of spaces.
 
-.. raw:: md
+.. raw:: html
 
    <p>
    <details>
    <summary>Further details</summary>
 
-   This is called a _higher inductive type_ (HIT), which generally
-   follows the format of
+This is called a *higher inductive type* (HIT), which generally
+follows the format of
 
-   - `data`
-   - the name of the HIT - in our case `S¹`
-   - the _type_ of the HIT, in our case `Type`
-   - `where` followed by
-   - the _constructors_ of the HIT, in our case `base` and `loop`,
-     which we will think of as vertices, edges, surfaces, and so on
+* ``data``
+* the name of the HIT - in our case ``S¹``
+* the *type* of the HIT, in our case ``Type``
+* ``where`` followed by
+* the *constructors* of the HIT, in our case ``base`` and ``loop``,
+  which we will think of as vertices, edges, surfaces, and so on.
 
-   You can think of these as CW-complexes.
+You can think of these as CW-complexes.
+
+.. raw:: html
 
    </details>
    </p>
+
 
 An "edge" is the same as a path.
 There are other paths in ``S¹``,
