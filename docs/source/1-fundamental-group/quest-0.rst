@@ -1,11 +1,10 @@
 .. _quest-0:
 
 **************
-Working with the Circle
+Quest 0 - Working with the Circle
 **************
 
 .. _part-0:
-
 
 Part 0 - The Definition of the Circle
 =====================================
@@ -29,7 +28,7 @@ Here is our definition of the circle in ``agda``.
      base : S¹
      loop : base ≡ base
 
-The ``base ≡ base`` is the * space of paths from ``base`` to ``base`` *.
+The ``base ≡ base`` is the *space of paths from* ``base`` *to* ``base``.
 The definition asserts that there is a point called ``loop``
 in ``base ≡ base``, i.e. a path from ``base`` to itself.
 Whenever we have a colon like ``S¹ : Type`` or ``base : S¹``
@@ -38,9 +37,9 @@ where the latter is viewed as a space;
 in the first case ``Type`` is the space of spaces.
 
 .. NOTE::
-   :hidden:
+   .. TODO : make toggle.
 
-   This is called a _higher inductive type_ (HIT), which generally
+   This is called a *higher inductive type* (HIT), which generally
    follows the format of
 
    * ``data``
@@ -50,9 +49,11 @@ in the first case ``Type`` is the space of spaces.
    * the *constructors* of the HIT, in our case ``base`` and ``loop``,
      which we will think of as vertices, edges, surfaces, and so on.
 
+   You can think of these as CW-complexes.
+
 An "edge" is the same as a path.
 There are other paths in ``S¹``,
-for example the *constant path at ``base``*.
+for example the *constant path at* ``base``.
 In ``1FundamentalGroup/Quest0.agda`` navigate to
 
 .. code-block:: agda
