@@ -36,19 +36,26 @@ it says the former is a point in the latter,
 where the latter is viewed as a space;
 in the first case ``Type`` is the space of spaces.
 
-.. sidebar:: Further details
+.. raw:: md
 
-   This is called a *higher inductive type* (HIT), which generally
+   <p>
+   <details>
+   <summary>Further details</summary>
+
+   This is called a _higher inductive type_ (HIT), which generally
    follows the format of
 
-   * ``data``
-   * the name of the HIT - in our case ``S¹``
-   * the *type* of the HIT, in our case ``Type``
-   * ``where`` followed by
-   * the *constructors* of the HIT, in our case ``base`` and ``loop``,
-     which we will think of as vertices, edges, surfaces, and so on.
+   - `data`
+   - the name of the HIT - in our case `S¹`
+   - the _type_ of the HIT, in our case `Type`
+   - `where` followed by
+   - the _constructors_ of the HIT, in our case `base` and `loop`,
+     which we will think of as vertices, edges, surfaces, and so on
 
    You can think of these as CW-complexes.
+
+   </details>
+   </p>
 
 An "edge" is the same as a path.
 There are other paths in ``S¹``,
@@ -203,7 +210,9 @@ by 'lifting the homotopy' ``h : Refl ≡ loop`` and
 considering the end points of the 'lifted paths'.
 ``Refl`` will 'lift' to a 'constant path' and ``loop`` will 'lift' to
 
-.. image of lifted paths
+.. image:: image/lifted_loops.png
+  :width: 1000
+  :alt: liftedPaths
 
 Let's assume for the moment that we have ``flipPath`` already and
 define ``doubleCover``.
@@ -254,11 +263,9 @@ Part 2 - Defining `flipPath` via Univalence
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
 
-..
-   <img src="images/doubleCover.png"
-        alt="doubleCover"
-        width="1000"
-        class="center"/>
+.. image:: images/doubleCover.png
+  :width: 1000
+  :alt: doubleCover
 
 This means we need ``flipPath`` to correspond to
 the unique non-identity permutation of ``Bool``
