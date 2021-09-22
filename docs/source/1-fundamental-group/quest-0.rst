@@ -36,8 +36,7 @@ it says the former is a point in the latter,
 where the latter is viewed as a space;
 in the first case ``Type`` is the space of spaces.
 
-.. sidebar::
-    :header: Further details
+.. sidebar:: Further details
 
    This is called a *higher inductive type* (HIT), which generally
    follows the format of
@@ -139,8 +138,8 @@ We will fill the hole ``{!!}``.
 
 .. _part-1:
 
-Part 1 -  `Refl ≡ loop` is empty
-================================
+Part 1 -  ``Refl ≡ loop`` is empty
+==================================
 
 To get a better feel of ``S¹``,
 we show that the space of paths (homotopies) between
@@ -189,7 +188,7 @@ We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
-.. image:: ../1-fundamental-group/image/doubleCover.svg
+.. image:: image/doubleCover.png
   :width: 1000
   :alt: doubleCover
 
