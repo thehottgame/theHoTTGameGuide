@@ -1,8 +1,14 @@
+.. _quest-0:
+
+**************
+Working with the Circle
+**************
+
 .. _part-0:
 
-**********
-The Definition of the Circle
-**********
+
+Part 0 - The Definition of the Circle
+=====================================
 
 In this series of quests we will prove that the fundamental group
 of ``S¹`` is ``ℤ``.
