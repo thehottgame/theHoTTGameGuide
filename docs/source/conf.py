@@ -2,9 +2,8 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'The HoTT Game'
+author = 'Ken Lee, Joseph Hua'
 
 release = '0.1'
 version = '0.1.0'
