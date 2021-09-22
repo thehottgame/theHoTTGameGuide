@@ -59,7 +59,6 @@ You can think of these as CW-complexes.
    </details>
    </p>
 
-
 An "edge" is the same as a path.
 There are other paths in ``S¹``,
 for example the *constant path at* ``base``.
@@ -185,10 +184,12 @@ about how one would come up with the following argument.
 Unfortunately, sometimes mathematics is in need of a new trick
 and this was one of them.
 
-| The trick is to make a path ``p : true ≡ false``
-| from the assumed path (homotopy) ``h : Refl ≡ loop`` by
-| constructing a non-trivial ``Bool``-bundle over the circle,
-| hence obtaining a map ``( Refl ≡ loop ) → ⊥``.
+.. admonition:: The trick
+
+   We make a path ``p : true ≡ false``
+   from the assumed path (homotopy) ``h : Refl ≡ loop`` by
+   constructing a non-trivial ``Bool``-bundle over the circle,
+   hence obtaining a map ``( Refl ≡ loop ) → ⊥``.
 
 To elaborate :
 ``Bool`` here refers to the discrete space with two points ``true, false``.
@@ -205,7 +206,7 @@ a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 Viewing the picture vertically,
 for each point ``x : S¹``,
 we call ``doubleCover x`` the *fiber of* ``doubleCover`` *over* ``x``.
-All the fibers look like ``Bool``, hence our choice of the name ``Bool``*-bundle*.
+All the fibers look like ``Bool``, hence our choice of the name ``Bool``- \*bundle*.
 
 We will get a path from ``true`` to ``false``
 in the fiber of ``doubleCover`` over ``base``
@@ -266,7 +267,7 @@ Part 2 - Defining `flipPath` via Univalence
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
 
-.. image:: images/doubleCover.png
+.. image:: image/doubleCover.png
   :width: 1000
   :alt: doubleCover
 
@@ -386,16 +387,17 @@ The isomorphism
   in the sense that you will not be able to access ``s`` and ``r`` outside this proof.
   Note that what follows ``where`` must be indented.
 
-  ..
+  .. raw:: html
+
      <p>
      <details>
      <summary>Skipped step</summary>
 
-     * To find out why we put ``s b`` on the left you can try
-       .. code-block::
+  * To find out why we put ``s b`` on the left you can try
+     .. code-block::
 
-         flipIso : Bool ≅ Bool
-         flipIso = iso Flip Flip s r where
+        flipIso : Bool ≅ Bool
+        flipIso = iso Flip Flip s r where
 
            s : section Flip Flip
            s = {!!}
@@ -403,39 +405,49 @@ The isomorphism
            r : retract Flip Flip
            r = {!!}
 
-     * Check the goal of the hole ``s = {!!}`` and try using ``C-c C-r``.
-       It should give you ``λ x → {!!}``.
-       This says it's asking for some new proof for each ``x : Bool``.
-       If you check the goal you can find out what proof it wants
-       and that ``x : Bool``.
-     * To do a proof for each ``x : Bool``, we can also just stick
-       ``x`` before the ``=`` and do away with the ``λ``.
+  * Check the goal of the hole ``s = {!!}`` and try using ``C-c C-r``.
+    It should give you ``λ x → {!!}``.
+    This says it's asking for some new proof for each ``x : Bool``.
+    If you check the goal you can find out what proof it wants
+    and that ``x : Bool``.
+  * To do a proof for each ``x : Bool``, we can also just stick
+    ``x`` before the ``=`` and do away with the ``λ``.
+
+  .. raw:: html
+
      </details>
      </p>
+
 * Check the goal of the hole ``s b = {!!}``.
   In the ``*Agda Information*`` window, you should see
 
   .. code-block:: agda
 
-    Goal: Flip (Flip b) ≡ b
-    —————————————————————————————————
-    b : Bool
+     Goal: Flip (Flip b) ≡ b
+     —————————————————————————————————
+     b : Bool
 
   Try to prove this.
-  ..
+
+  .. raw:: html
+
      <p>
      <details>
      <summary>Tips</summary>
 
-     You need to case on what ``b`` can be.
-     Then for the case of ``true`` and ``false``,
-     try ``C-c C-r`` to see if ``agda`` can help.
+  You need to case on what ``b`` can be.
+  Then for the case of ``true`` and ``false``,
+  try ``C-c C-r`` to see if ``agda`` can help.
 
-     The added benefit of having ``b`` before the ``=``
-     is exactly this - that we can case on what ``b`` can be.
-     This is called *pattern matching*.
+  The added benefit of having ``b`` before the ``=``
+  is exactly this - that we can case on what ``b`` can be.
+  This is called *pattern matching*.
+
+  .. raw:: html
+
      </details>
      </p>
+
 * Do the same for ``r b = {!!}``.
 * Use ``C-c C-d`` to check that ``agda`` is okay with ``flipIso``.
 
@@ -511,13 +523,17 @@ drawn as a dot ``true``.
 When we 'lift' ``loop`` - starting at the point ``true : doubleCover base`` -
 it will look like
 
-.. image of lifting paths
+.. image:: image/lifted_loops.png
+  :width: 1000
+  :alt: liftedPaths
 
 The homotopy ``h : Refl ≡ loop`` is 'lifted'
 (starting at 'lifted ``Refl``')
 to some kind of surface
 
-.. image of lifting homotopy
+.. image:: image/lifted_homotopy.png
+  :width: 1000
+  :alt: liftedHomotopy
 
 According to the pictures the end point of the 'lifted'
 ``Refl`` is ``true`` and the end point of the 'lifted' ``loop`` is ``false``.
