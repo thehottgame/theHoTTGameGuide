@@ -287,7 +287,8 @@ We proceed in steps :
    As a corollary,
    we can make paths in ``Type`` from isomorphisms in ``Type``.
 
-## The function
+The function
+------------
 
 * In ``1FundamentalGroup/Quest0.agda``, navigate to :
 
