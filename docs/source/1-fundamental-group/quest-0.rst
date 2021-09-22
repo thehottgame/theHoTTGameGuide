@@ -36,7 +36,7 @@ it says the former is a point in the latter,
 where the latter is viewed as a space;
 in the first case ``Type`` is the space of spaces.
 
-.. toggle-header::
+.. sidebar::
     :header: Further details
 
    This is called a *higher inductive type* (HIT), which generally
@@ -112,15 +112,15 @@ We will fill the hole ``{!!}``.
   ``agda`` will check the *goal*, i.e. what kind of thing you need to stick in.
   The goal (``*Agda information*`` window) should now be more focused :
 
-.. code-block::
+  .. code-block::
 
-   Goal: S¹
-   —————————————————————————
-   i : I
-   ———— Constraints ——————————————
-   ?0 (i = i1) = base : S¹ (blocked on _3, belongs to problem 4)
-   ?0 (i = i0) = base : S¹ (blocked on _3, belongs to problem 4)
-   _4 := λ i → ?0 (i = i) (blocked on problem 4)
+     Goal: S¹
+     —————————————————————————
+     i : I
+     ———— Constraints ——————————————
+     ?0 (i = i1) = base : S¹ (blocked on _3, belongs to problem 4)
+     ?0 (i = i0) = base : S¹ (blocked on _3, belongs to problem 4)
+     _4 := λ i → ?0 (i = i) (blocked on problem 4)
 
 * since this is the constant path, write ``base`` in the hole.
 * press ``C-c C-SPC`` to fill the hole with ``base``.
@@ -189,8 +189,9 @@ We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
-..
-  doubleCover image
+.. image:: ../1-fundamental-group/image/doubleCover.svg
+  :width: 1000
+  :alt: doubleCover
 
 Viewing the picture vertically,
 for each point ``x : S¹``,

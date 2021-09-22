@@ -16,7 +16,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
-    'sphinxcontrib.contentui',
 ]
 
 intersphinx_mapping = {
