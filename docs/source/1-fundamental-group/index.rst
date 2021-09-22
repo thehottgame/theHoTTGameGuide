@@ -8,3 +8,6 @@ Fundamental Group of the Circle
    :maxdepth: 2
 
    quest-0
+   quest-1
+   quest-2
+   quest-3
