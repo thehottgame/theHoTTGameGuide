@@ -261,7 +261,7 @@ define ``doubleCover``.
 Defining ``flipPath`` is quite involved and we will do so in the following part.
 
 
-Part 2 - Defining `flipPath` via Univalence
+Part 2 - Defining ``flipPath`` via Univalence
 ===========================================
 
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
