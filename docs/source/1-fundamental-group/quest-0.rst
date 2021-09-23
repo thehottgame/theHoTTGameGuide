@@ -6,8 +6,11 @@ Quest 0 - Working with the Circle
 
 .. _part-0:
 
-Part 0 - The Definition of the Circle
+Part 0 - The Circle
 =====================================
+
+Theory - Definition of the Circle
+------------------------
 
 In this series of quests we will prove that the fundamental group
 of ``S¹`` is ``ℤ``.
@@ -28,38 +31,37 @@ Here is our definition of the circle in ``agda``.
      base : S¹
      loop : base ≡ base
 
-The ``base ≡ base`` is the *space of paths from* ``base`` *to* ``base``.
-The definition asserts that there is a point called ``loop``
-in ``base ≡ base``, i.e. a path from ``base`` to itself.
-Whenever we have a colon like ``S¹ : Type`` or ``base : S¹``
-it says the former is a point in the latter,
-where the latter is viewed as a space;
-in the first case ``Type`` is the space of spaces.
+This reads :
 
-.. raw:: html
+* ``S¹`` is a point in ``Type``, the *space of spaces*.
+  In other words, ``S1`` is a space.
+* ``base`` is a point in the space ``S¹``
+* ``loop`` is a *path* in ``S1`` from ``base`` to itself.
+  This is phrased as saying ``loop`` is a point in ``base ≡ base``
+  the *space of paths from* ``base`` *to* ``base``.
 
-   <p>
-   <details>
-   <summary>Further details</summary>
+You can see this as defining the circle via a CW-complex.
 
-This is called a *higher inductive type* (HIT), which generally
-follows the format of
+.. important:: Type theory notation
 
-* ``data``
-* the name of the HIT - in our case ``S¹``
-* the *type* of the HIT, in our case ``Type``
-* ``where`` followed by
-* the *constructors* of the HIT, in our case ``base`` and ``loop``,
-  which we will think of as vertices, edges, surfaces, and so on.
+   In general ``a : A`` is read as ``a`` is a point
+   in the space ``A``.
+   Note that in the above definition ``S¹`` is seen
+   both as a point and a space depending on the context.
+   In ``cubical agda``,
+   everything is a point in a 'unique' space.
 
-You can think of these as CW-complexes.
+.. important:: Type theory notation
 
-.. raw:: html
+   In general when ``a b : A``
+   (``a`` and ``b`` are points in a space ``A``),
+   we have a *path space* ``a ≡ b``,
+   whose points are *paths* from
+   ``a`` to ``b`` in the space ``A``.
 
-   </details>
-   </p>
+Exercise - defining the constant path ``refl``
+----------------------------------------------
 
-An "edge" is the same as a path.
 There are other paths in ``S¹``,
 for example the *constant path at* ``base``.
 In ``1FundamentalGroup/Quest0.agda`` navigate to
@@ -69,14 +71,22 @@ In ``1FundamentalGroup/Quest0.agda`` navigate to
    Refl : base ≡ base
    Refl = {!!}
 
-we will guide you through defining it.
-We are about to construct a path ``Refl : base ≡ base``
-(read path ``Refl`` from ``base`` to ``base``).
-The *hole* ``{!!}`` is where you describe the path.
+We will guide you through defining it.
+We are about to construct a path ``Refl : base ≡ base``,
+a path from ``base`` to ``base``.
+
+.. tip:: Holes
+
+   The ``{!!}`` are called *holes*.
+   These are places in the file where ``agda`` is expecting
+   you to write something.
+   You can also write ``?`` instead.
+
 We will fill the hole ``{!!}``.
 
-* enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
+* Enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
   Whenever you do this, ``agda`` will check the document is written correctly.
+  We say ``agda`` *compiles* the file.
   This will open the ``*Agda Information*`` window looking like
 
   .. code-block::
@@ -86,13 +96,32 @@ We will fill the hole ``{!!}``.
      ?2 : (something)
      ...
 
-  This says you have some unfilled *holes*.
+  This is the list of unfilled holes that are in your file currently.
+  You should see that the holes in the file have changed in appearance,
+  for example :
+
+  .. code-block:: agda
+
+     Refl : base ≡ base
+     Refl = { }0
+
+  These are what holes look like when the file is compiled.
+  The numbering is just for reference and may change upon reloading.
 * Navigate to between holes using ``C-c C-f`` (forward)
-  or ``C-c C-b`` (backward)
-* Enter ``C-c C-r``. The ``r`` stands for _refine_.
+  or ``C-c C-b`` (backward).
+
+  .. NOTE::
+
+     We have compiled a list of useful ``agda`` commands in
+     `Getting Started <getting-started>`_.
+
+* Move to the first hole, making sure your cursor is inside the hole,
+  enter ``C-c C-r``. The ``r`` stands for _refine_.
   Whenever you do this whilst having your cursor in a hole,
   Agda will try to help you.
+
 * You should now see ``λ i → {!!}``.
+  This is the ``agda`` way of writing ``i mapsto {!!}``.
   Load the file again (using ``C-c C-l``) and
   the ``*Agda Information*`` window should now look like :
 
@@ -107,18 +136,14 @@ We will fill the hole ``{!!}``.
        ?0 (i = i1) = base : S¹ (blocked on _3)
        ?0 (i = i0) = base : S¹ (blocked on _3)
 
-  This is ``agda`` suggesting that for each
-  ``i : I`` (if you like you can think of this as a generic point
-  on the the unit interval ``I``)
-  you give a point in between the start and end of the path,
-  such that at "``i = 1``" and "``i = 0``" it is ``base``.
-  This is all you need to specify a path in ``agda``.
+  Do not worry about the errors,
+  we will soon explain it.
 
-* navigate to that new hole
-* enter ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
+* Navigate to that new hole in ``λ i → {!!}`` and
+  enter ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
   Whenever you make this command whilst having your cursor in a hole,
-  ``agda`` will check the *goal*, i.e. what kind of thing you need to stick in.
-  The goal (``*Agda information*`` window) should now be more focused :
+  ``agda`` will check the *goal*, i.e. what ``agda`` is expecting in the hole.
+  The ``*Agda information*`` window should now be more focused :
 
   .. code-block::
 
@@ -130,17 +155,47 @@ We will fill the hole ``{!!}``.
      ?0 (i = i0) = base : S¹ (blocked on _3, belongs to problem 4)
      _4 := λ i → ?0 (i = i) (blocked on problem 4)
 
-* since this is the constant path, write ``base`` in the hole.
-* press ``C-c C-SPC`` to fill the hole with ``base``.
+  This says :
+
+  * ``agda`` is expecting a point in ``S1`` for this hole.
+  * you have a point ``i`` in ``I`` available to you.
+    You can think of ``I`` as the 'unit interval'
+    and ``i`` as a generic point in the interval.
+  * The point in ``S1`` that you give has to satisfy the constraints that
+    it is ``base`` when '``i = 1``' and '``i = 0``'.
+    Afterall, we are defining a path from ``base`` to itself.
+  * Don't worry about the last line.
+
+* Since ``Refl`` is meant to be the constant path at ``base``,
+  write ``base`` in the hole.
+* Press ``C-c C-SPC`` to fill the hole with ``base``.
   In general when you have some text (and your cursor) in a hole,
   doing ``C-c C-SPC`` will tell ``agda`` to replace the hole with that text.
   ``agda`` will give you an error if it can't make sense of your text.
-* the number of holes in the ``*Agda Information*``
-  window should have gone down by one,
-  this means ``agda`` has accepted what you filled this hole with.
-  Just to be sure you can also reload the ``agda`` file and check
-  that ``agda`` has no complaints.
-* if you want to play around with this you can start again
+
+  .. tip:: Filling holes
+
+     Everytime you are filling a hole,
+     it is recommended that you first write what you want to fill
+     in the hole *then* do ``C-c C-SPC``.
+     You can do it in the reverse order,
+     however the recommended order has other benefits down the line.
+
+* Load the file again (``C-c C-l``).
+  The ``*Agda Information*`` window should now look like this :
+
+  .. code-block:: agda
+
+     ?0 : Bool
+     ?1 : Bool ≅ Bool
+     ?2 : Bool ≡ Bool
+     ?3 : Type
+     ?4 : doubleCover base
+     ?5 : ⊥
+
+  The ``?0 : S1`` has disappeared.
+  This means ``agda`` has accepted what you filled this hole with.
+* If you want to play around with this you reset this question
   by replacing what you wrote with ``?`` and doing
   ``C-c C-l``.
 
