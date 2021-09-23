@@ -42,7 +42,8 @@ This reads :
 
 You can see this as defining the circle via a CW-complex.
 
-.. important:: Type theory notation
+.. important::
+    :header: Type theory notation
 
    In general ``a : A`` is read as ``a`` is a point
    in the space ``A``.
@@ -113,7 +114,7 @@ We will fill the hole ``{!!}``.
   .. NOTE::
 
      We have compiled a list of useful ``agda`` commands in
-     `Getting Started <getting-started>`_.
+     `Emacs Commands <emacs-commands>`_.
 
 * Move to the first hole, making sure your cursor is inside the hole,
   enter ``C-c C-r``. The ``r`` stands for _refine_.
@@ -198,7 +199,6 @@ We will fill the hole ``{!!}``.
 * If you want to play around with this you reset this question
   by replacing what you wrote with ``?`` and doing
   ``C-c C-l``.
-
 
 .. _part-1:
 
