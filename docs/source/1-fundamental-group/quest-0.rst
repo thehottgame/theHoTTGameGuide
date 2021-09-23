@@ -42,8 +42,7 @@ This reads :
 
 You can see this as defining the circle via a CW-complex.
 
-.. important::
-    :header: Type theory notation
+.. topic:: Type theory notation
 
    In general ``a : A`` is read as ``a`` is a point
    in the space ``A``.
@@ -52,7 +51,7 @@ You can see this as defining the circle via a CW-complex.
    In ``cubical agda``,
    everything is a point in a 'unique' space.
 
-.. important:: Type theory notation
+.. topic:: Type theory notation
 
    In general when ``a b : A``
    (``a`` and ``b`` are points in a space ``A``),
@@ -114,7 +113,7 @@ We will fill the hole ``{!!}``.
   .. NOTE::
 
      We have compiled a list of useful ``agda`` commands in
-     `Emacs Commands <emacs-commands>`_.
+     :ref:`Emacs Commands <emacs-commands>`.
 
 * Move to the first hole, making sure your cursor is inside the hole,
   enter ``C-c C-r``. The ``r`` stands for _refine_.
