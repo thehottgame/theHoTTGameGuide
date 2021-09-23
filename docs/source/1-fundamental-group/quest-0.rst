@@ -10,7 +10,7 @@ Part 0 - The Circle
 =====================================
 
 Theory - Definition of the Circle
-------------------------
+---------------------------------
 
 In this series of quests we will prove that the fundamental group
 of ``S¹`` is ``ℤ``.
@@ -121,7 +121,7 @@ We will fill the hole ``{!!}``.
   Agda will try to help you.
 
 * You should now see ``λ i → {!!}``.
-  This is the ``agda`` way of writing ``i mapsto {!!}``.
+  This is the ``agda`` way of writing ``i ↦ {!!}``.
   Load the file again (using ``C-c C-l``) and
   the ``*Agda Information*`` window should now look like :
 
@@ -159,11 +159,11 @@ We will fill the hole ``{!!}``.
 
   * ``agda`` is expecting a point in ``S¹`` for this hole.
   * you have a point ``i`` in ``I`` available to you.
-    You can think of ``I`` as the 'unit interval'
+    You can think of ``I`` as the "unit interval"
     and ``i`` as a generic point in the interval.
-  * The point in ``/ 1 `` that you give has to satisfy the constraints that
-    it is ``base`` when '``i = 1``' and '``i = 0``'.
-    In ``agda``, ``i0`` and ``i1`` are the 'start' and 'end' point of ``I``.
+  * The point in ``S¹`` that you give has to satisfy the constraints that
+    it is ``base`` when "``i = 1``" and "``i = 0``".
+    In ``agda``, ``i0`` and ``i1`` are the "start" and "end" point of ``I``.
     Afterall, we are defining a path from ``base`` to itself.
   * Don't worry about the last line.
 
@@ -323,9 +323,15 @@ define ``doubleCover``.
   We are assuming we have ``flipPath`` defined already
   and want to map ``loop`` to ``flipPath``,
   so ``loop i`` should map to a generic point in the path ``flipPath``.
+
+  .. NOTE::
+
+     We can use ``flipPath`` without completing the definition of ``flipPath``.
+
   Try filling the hole.
 * Once you think you are done, reload the ``agda`` file with ``C-c C-l``
-  and if it doesn't complain this means there are no problems with your definition.
+  and if it doesn't complain
+  this means there are no problems with your definition.
   Compare your definition to that in ``1FundamentalGroup/Quest0Solutions.agda``
   to check that your definition is the one we want.
   Here is a definition that ``agda`` will accept, but is *not* what we need:
@@ -433,7 +439,7 @@ The isomorphism
     flipIso : Bool ≅ Bool
     flipIso = {!!}
 
-* Write ``iso`` in the hole and refine with ``C-c C-r``.
+* Refine with ``C-c C-r``.
   You should now see
 
   .. code-block:: agda
@@ -441,9 +447,26 @@ The isomorphism
     flipIso : Bool ≅ Bool
     flipIso = iso {!!} {!!} {!!} {!!}
 
+* ``iso`` belongs to the following space :
+
+  .. code-block:: agda
+
+     iso : (fun : A→ B) (inv : B→ A)
+       (rightInv : section fun inv) (leftInv : retract fun inv) →
+       A ≅ B
+
+  which says that ``iso`` will produce an isomorphism from ``A`` to ``B``
+  given a map ``fun`` forwards and an inverse ``inv`` backwards,
+  and points of the space ``section fun inv`` and ``retract fun inv``.
+  Try to find out what ``section`` and ``retract`` are
+  by doing ``C-c C-n`` and entering their respective names.
+  They should respectively say that
+  ``inv`` is a right and left inverse of ``fun``.
+
 * Check that ``agda`` expects functions ``Bool → Bool``
   to go in the first two holes.
-  These are the maps back and forth which constitute the isomorphism,
+  This is because it is expecting a function and its inverse,
+  respectively,
   so fill them with ``Flip`` and its inverse ``Flip``.
 * Check the goal of the next two holes.
   They should be
@@ -458,25 +481,27 @@ The isomorphism
 
      retract Flip Flip
 
-  This means we need to prove
-  ``Flip`` is a right inverse and a left inverse of ``Flip``.
-
 * Write the following so that your code looks like
 
   .. code-block:: agda
 
     flipIso : Bool ≅ Bool
-    flipIso = iso Flip Flip s r where
+    flipIso = iso Flip Flip {!!} {!!} where
 
-    s : section Flip Flip
-    s b = {!!}
+      rightInv : section Flip Flip
+      rightInv x = {!!}
 
-    r : retract Flip Flip
-    r b = {!!}
+      leftInv : retract Flip Flip
+      leftInv x = {!!}
 
   The ``where`` allows you to make definitions local to the current definition,
-  in the sense that you will not be able to access ``s`` and ``r`` outside this proof.
-  Note that what follows ``where`` must be indented.
+  in the sense that you will not be able to access
+  ``rightInv`` and ``leftInv`` outside this proof.
+
+  .. danger::
+
+     ``agda`` is indentation and space sensitive.
+     So the parts after ``where`` must be indented.
 
   .. raw:: html
 
@@ -484,39 +509,52 @@ The isomorphism
      <details>
      <summary>Skipped step</summary>
 
-  * To find out why we put ``s b`` on the left you can try
+  * To find out why we put ``rightInv x`` on the left you can try
      .. code-block::
 
         flipIso : Bool ≅ Bool
-        flipIso = iso Flip Flip s r where
+        flipIso = iso Flip Flip {!!} {!!} where
 
-           s : section Flip Flip
-           s = {!!}
+           rightInv : section Flip Flip
+           rightInv = {!!}
 
-           r : retract Flip Flip
-           r = {!!}
+           leftInv : retract Flip Flip
+           leftInv = {!!}
 
-  * Check the goal of the hole ``s = {!!}`` and try using ``C-c C-r``.
+  * Check the goal of the hole ``rightInv = {!!}`` and try using ``C-c C-r``.
     It should give you ``λ x → {!!}``.
-    This says it's asking for some new proof for each ``x : Bool``.
-    If you check the goal you can find out what proof it wants
-    and that ``x : Bool``.
+    This says it's asking for something for each ``x : Bool``.
+    (Recall that ``λ x → {!!}`` is the ``agda`` notation for
+    ``x ↦ {!!}``.)
+    If you check the goal you can find out what it wants
+    and that you have available ``x : Bool``.
   * To do a proof for each ``x : Bool``, we can also just stick
-    ``x`` before the ``=`` and do away with the ``λ``.
+    ``x`` before the ``=`` and do away with the ``λ`` like this :
+
+    .. code-block:: agda
+
+       flipIso : Bool ≅ Bool
+       flipIso = iso Flip Flip {!!} {!!} where
+
+          rightInv : section Flip Flip
+          rightInv x = {!!}
+
+          leftInv : retract Flip Flip
+          leftInv = {!!}
 
   .. raw:: html
 
      </details>
      </p>
 
-* Check the goal of the hole ``s b = {!!}``.
+* Check the goal of the hole ``rightInv x = {!!}``.
   In the ``*Agda Information*`` window, you should see
 
   .. code-block:: agda
 
-     Goal: Flip (Flip b) ≡ b
+     Goal: Flip (Flip x) ≡ x
      —————————————————————————————————
-     b : Bool
+     x : Bool
 
   Try to prove this.
 
@@ -524,14 +562,14 @@ The isomorphism
 
      <p>
      <details>
-     <summary>Tips</summary>
+     <summary>Hint</summary>
 
-  You need to case on what ``b`` can be.
+  You need to case on what ``x`` can be.
   Then for the case of ``true`` and ``false``,
   try ``C-c C-r`` to see if ``agda`` can help.
 
-  The added benefit of having ``b`` before the ``=``
-  is exactly this - that we can case on what ``b`` can be.
+  The added benefit of having ``x`` before the ``=``
+  is exactly this - that we can case on what ``x`` can be.
   This is called *pattern matching*.
 
   .. raw:: html
@@ -539,7 +577,8 @@ The isomorphism
      </details>
      </p>
 
-* Do the same for ``r b = {!!}``.
+* Do the same for ``leftInv x = {!!}``.
+* Fill in the missing goals using ``rightInv``, ``leftInv``.
 * Use ``C-c C-d`` to check that ``agda`` is okay with ``flipIso``.
 
 The path
