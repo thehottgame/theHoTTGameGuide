@@ -34,9 +34,9 @@ Here is our definition of the circle in ``agda``.
 This reads :
 
 * ``S¹`` is a point in ``Type``, the *space of spaces*.
-  In other words, ``S1`` is a space.
+  In other words, ``S¹`` is a space.
 * ``base`` is a point in the space ``S¹``
-* ``loop`` is a *path* in ``S1`` from ``base`` to itself.
+* ``loop`` is a *path* in ``S¹`` from ``base`` to itself.
   This is phrased as saying ``loop`` is a point in ``base ≡ base``
   the *space of paths from* ``base`` *to* ``base``.
 
@@ -157,12 +157,13 @@ We will fill the hole ``{!!}``.
 
   This says :
 
-  * ``agda`` is expecting a point in ``S1`` for this hole.
+  * ``agda`` is expecting a point in ``S¹`` for this hole.
   * you have a point ``i`` in ``I`` available to you.
     You can think of ``I`` as the 'unit interval'
     and ``i`` as a generic point in the interval.
-  * The point in ``S1`` that you give has to satisfy the constraints that
+  * The point in ``/ 1 `` that you give has to satisfy the constraints that
     it is ``base`` when '``i = 1``' and '``i = 0``'.
+    In ``agda``, ``i0`` and ``i1`` are the 'start' and 'end' point of ``I``.
     Afterall, we are defining a path from ``base`` to itself.
   * Don't worry about the last line.
 
@@ -193,7 +194,7 @@ We will fill the hole ``{!!}``.
      ?4 : doubleCover base
      ?5 : ⊥
 
-  The ``?0 : S1`` has disappeared.
+  The ``?0 : S¹`` has disappeared.
   This means ``agda`` has accepted what you filled this hole with.
 * If you want to play around with this you reset this question
   by replacing what you wrote with ``?`` and doing
@@ -247,11 +248,10 @@ and this was one of them.
 
 To elaborate :
 ``Bool`` here refers to the discrete space with two points ``true, false``.
-(To find out the definition of ``Bool`` in ``agda``
-you can hover over ``Bool`` in ``agda`` and use ``M-SPC c d``.)
 We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
+
 
 .. image:: image/doubleCover.png
   :width: 1000
@@ -261,6 +261,19 @@ Viewing the picture vertically,
 for each point ``x : S¹``,
 we call ``doubleCover x`` the *fiber of* ``doubleCover`` *over* ``x``.
 All the fibers look like ``Bool``, hence our choice of the name ``Bool``- \*bundle*.
+
+.. admonition:: Homotopy type theory
+
+   A path ``p : X == Y`` between two *spaces* ``X Y : Type``
+   can be visualised as follows :
+
+   * Two spaces ``X`` and ``Y`` as end points.
+   * For the generic point ``i : I`` in the interval
+     ``p i : Type`` is a space that varies continuously with to respect to ``i``
+     such that ``p 0`` is ``X`` and ``p 1`` is ``Y``.
+
+   The continuity guarantees that each point along the path looks "the same".
+   In particular the end points look "the same".
 
 We will get a path from ``true`` to ``false``
 in the fiber of ``doubleCover`` over ``base``
@@ -288,7 +301,7 @@ define ``doubleCover``.
   The ``c`` stands for *cases*.
   You should now see two new holes :
 
-  .. codeadmonitionk:: agda
+  .. code-block:: agda
 
      doubleCover : S¹ → Type
      doubleCover base = {!!}
@@ -316,7 +329,7 @@ Defining ``flipPath`` is quite involved and we will do so in the following part.
 
 
 Part 2 - Defining ``flipPath`` via Univalence
-===========================================
+=============================================
 
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
