@@ -42,7 +42,7 @@ This reads :
 
 You can see this as defining the circle via a CW-complex.
 
-.. topic:: Type theory notation
+.. admonition:: Type theory notation
 
    In general ``a : A`` is read as ``a`` is a point
    in the space ``A``.
@@ -51,7 +51,7 @@ You can see this as defining the circle via a CW-complex.
    In ``cubical agda``,
    everything is a point in a 'unique' space.
 
-.. topic:: Type theory notation
+.. admonition:: Type theory notation
 
    In general when ``a b : A``
    (``a`` and ``b`` are points in a space ``A``),
@@ -75,7 +75,7 @@ We will guide you through defining it.
 We are about to construct a path ``Refl : base ≡ base``,
 a path from ``base`` to ``base``.
 
-.. tip:: Holes
+.. tip::
 
    The ``{!!}`` are called *holes*.
    These are places in the file where ``agda`` is expecting
@@ -116,7 +116,7 @@ We will fill the hole ``{!!}``.
      :ref:`Emacs Commands <emacs-commands>`.
 
 * Move to the first hole, making sure your cursor is inside the hole,
-  enter ``C-c C-r``. The ``r`` stands for _refine_.
+  enter ``C-c C-r``. The ``r`` stands for *refine*.
   Whenever you do this whilst having your cursor in a hole,
   Agda will try to help you.
 
@@ -173,7 +173,7 @@ We will fill the hole ``{!!}``.
   doing ``C-c C-SPC`` will tell ``agda`` to replace the hole with that text.
   ``agda`` will give you an error if it can't make sense of your text.
 
-  .. tip:: Filling holes
+  .. tip::
 
      Everytime you are filling a hole,
      it is recommended that you first write what you want to fill
@@ -278,7 +278,7 @@ define ``doubleCover``.
 * Navigate to the definition of ``doubleCover`` and make sure
   you have loaded the file with ``C-c C-l``.
 
-  .. code-block :: agda
+  .. code-block:: agda
 
      doubleCover : S¹ → Type
      doubleCover x = {!!}
@@ -288,7 +288,7 @@ define ``doubleCover``.
   The ``c`` stands for *cases*.
   You should now see two new holes :
 
-  .. code-block :: agda
+  .. codeadmonitionk:: agda
 
      doubleCover : S¹ → Type
      doubleCover base = {!!}
@@ -297,7 +297,7 @@ define ``doubleCover``.
   This means :
   ``S¹`` is made from a point ``base`` and an edge ``loop``,
   so a map out of ``S¹`` to a space is the same as choosing
-  a point and an edge to map ``base`` and ``loop`` to respectively.
+  a poin admonitionan edge to map ``base`` and ``loop`` to respectively.
   Since ``loop`` is a path from ``base`` to itself,
   its image must also be a path from the image of ``base`` to itself.
 * Use ``C-c C-f`` and/or ``C-c C-b`` to navigate to the first hole.
@@ -562,8 +562,7 @@ from ``true`` to ``false`` is empty.
 We will assume it here and leave the proof as a side quest,
 see ``1FundamentalGroup/Quest0SideQuests/SideQuest1``.
 
-* Load the file with ``C-c C-l`` and navigate to the hole.
-* Write ``true≢false`` in the hole and refine using ``C-c C-r``,
+* Load the file with ``C-c C-l`` and navigate to the hole.* Write ``true≢false`` in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically
   will make a new hole.
 * Check the goal in the new hole using ``C-c C-,``
@@ -573,7 +572,7 @@ To give this path we need to visualise 'lifting' ``Refl``, ``loop``
 and the homotopy ``h : Refl ≡ loop``
 along the Boolean-bundle ``doubleCover``.
 When we 'lift' ``Refl`` - starting at the point ``true : doubleCover base`` -
-it will still be a constant path at ``true``,
+itwill still be a constant path at ``true``,
 drawn as a dot ``true``.
 When we 'lift' ``loop`` - starting at the point ``true : doubleCover base`` -
 it will look like
