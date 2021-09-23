@@ -80,7 +80,7 @@ a path from ``base`` to ``base``.
    The ``{!!}`` are called *holes*.
    These are places in the file where ``agda`` is expecting
    you to write something.
-   You can also write ``?`` instead.
+   You can write ``?`` to make a hole.
 
 We will fill the hole ``{!!}``.
 
@@ -264,7 +264,8 @@ All the fibers look like ``Bool``, hence our choice of the name ``Bool``- \*bund
 
 .. admonition:: Homotopy type theory
 
-   A path ``p : X == Y`` between two *spaces* ``X Y : Type``
+   A path ``p : X ≡ Y`` between two *spaces* ``X Y : Type``
+   (viewed as points in the sapce of spaces)
    can be visualised as follows :
 
    * Two spaces ``X`` and ``Y`` as end points.
@@ -282,7 +283,7 @@ considering the end points of the 'lifted paths'.
 ``Refl`` will 'lift' to a 'constant path' and ``loop`` will 'lift' to
 
 .. image:: image/lifted_loops.png
-  :width: 1000
+  :width: 100
   :alt: liftedPaths
 
 Let's assume for the moment that we have ``flipPath`` already and
@@ -319,11 +320,33 @@ define ``doubleCover``.
 * Navigate to the second hole.
   Here ``loop i`` is a generic point in the path ``loop``,
   where ``i : I`` is a generic point of the 'unit interval'.
-  We want to map ``loop`` to ``flipPath``,
+  We are assuming we have ``flipPath`` defined already
+  and want to map ``loop`` to ``flipPath``,
   so ``loop i`` should map to a generic point in the path ``flipPath``.
   Try filling the hole.
 * Once you think you are done, reload the ``agda`` file with ``C-c C-l``
   and if it doesn't complain this means there are no problems with your definition.
+  Compare your definition to that in ``1FundamentalGroup/Quest0Solutions.agda``
+  to check that your definition is the one we want.
+  Here is a definition that ``agda`` will accept, but is *not* what we need:
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Bad definition</summary>
+
+  .. code:: agda
+
+     doubleCover : S¹ → Type
+     doubleCover base = Bool
+     doubleCover (loop i) = Bool
+
+  .. raw:: html
+
+     </details>
+     </p>
+
 
 Defining ``flipPath`` is quite involved and we will do so in the following part.
 
