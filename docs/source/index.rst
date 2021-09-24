@@ -8,6 +8,3 @@ The HoTT Game Guide
 
    getting-started/index
    1-fundamental-group/index
-   usage
-   api
-

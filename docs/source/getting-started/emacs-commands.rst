@@ -21,13 +21,15 @@ The 'ambient mode' is called *evil mode* and follows
 vim-like bindings.
 The following commands are for *evil mode*:
 
-- ``SPC h b b`` to look for bindings
+- ``SPC h b b`` to look for bindings (keyboard shortcuts)
 - ``SPC f f`` to find files. can use ``TAB`` for auto-completing paths
 - ``h j k l`` for left down up right
 - ``SPC b k`` to kill 'buffers'
 - ``i`` to go into *insert mode* (in insert mode you can insert text)
   and ``ESC`` or ``C-g`` to go back to *evil mode*.
 - ``C-_`` to undo
+- ``SPC h '`` to look up how to write a symbol.
+  (Put your cursor on the symbol first.)
 
 For beta users, to get the latest patch
 
