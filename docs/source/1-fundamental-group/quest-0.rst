@@ -31,6 +31,10 @@ Here is our definition of the circle in ``agda``.
      base : S¹
      loop : base ≡ base
 
+.. image:: image/S1-final.gif
+  :width: 1000
+  :alt: S1
+
 This reads :
 
 * ``S¹`` is a point in ``Type``, the *space of spaces*.
@@ -283,7 +287,7 @@ considering the end points of the 'lifted paths'.
 ``Refl`` will 'lift' to a 'constant path' and ``loop`` will 'lift' to
 
 .. image:: image/lifted_loops.png
-  :width: 100
+  :width: 1000
   :alt: liftedPaths
 
 Let's assume for the moment that we have ``flipPath`` already and
