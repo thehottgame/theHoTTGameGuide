@@ -270,37 +270,3 @@ so you can just quote the result from there.
 Now locate ``¬isProp S¹``.
 Try proving this using ``isProp→isSet``.
 
-
-
-
-
-
-
-
-..
-   .. raw:: html
-
-      <p>
-      <details>
-      <summary>Higher spheres, generalising h-triviality and equivalent definitions</summary>
-
-   In general, for a space ``X : Type`` to be h-trivial from dimension ``n``
-   is intuitively to be able to fill the image of any ``Sⁿ``.
-   We make a definition for ``Sⁿ`` in general using suspension,
-   and formalize this definition of h-triviality in a side quest.
-   .. enter side quest link
-
-   There are several ways of expressing h-triviality.
-   The one we have suggested is intuitive but not as clean
-   nor easy to work with as the following definition
-
-   .. code:: agda
-
-      isHLevel : (n : ℕ) (X : Type) → Type
-      isHLevel zero = isProp
-      isHLevel (suc n) = λ X → (x y : X) → isHLevel n (x ≡ y)
-
-   .. raw:: html
-
-      </details>
-      </p>
