@@ -1,11 +1,13 @@
 .. _quest-1:
 
-**************
+*************************
 Quest 1 - Higher Homotopy
-**************
+*************************
 
-Loop Space
-==========
+.. _part-0:
+
+Part 0 - Loop Space
+===================
 
 In this quest,
 we continue to formalise the problem statement.
@@ -108,8 +110,10 @@ You can use it to find out the definition of ``ℤ`` and ``ℕ``.
    </details>
    </p>
 
-Homotopy Levels
-===============
+.. _part-1:
+
+Part 1 - Homotopy Levels
+========================
 
 The loop space can contain higher homotopical information that
 the fundamental group does not capture.
@@ -151,17 +155,17 @@ which intuitively is not homotopic to the constant point ``base``.
 So ``base ≡ base`` has non-trivial path structure.
 
 .. image:: image/S2.png
-   :height: 100
-   :width: 200
+   :width: 1000
    :alt: description
 
-Let's be more precise about homotopical data :
+Here is one way of capturing homotopical data :
 We can check that a space is 'homotopically trivial' (h-trivial)
 from dimension ``n``
 by checking if spheres of dimension ``n`` can be filled.
 To be h-trivial from ``0`` is for any two points
 to have a line in between; to fill ``S⁰``.
 This data is captured in
+
 .. code:: agda
 
    isProp : Type → Type
@@ -180,7 +184,6 @@ to a path between them.
 
 We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected.
 
-
 .. raw:: html
 
    </details>
@@ -188,7 +191,9 @@ We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected
 
 Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
 and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
-to fill ``S¹``. This is captured in
+to fill ``S¹`` (using a slightly different definition of ``S¹``).
+.. link to sidequest
+This is captured in
 
 .. code:: agda
 
@@ -196,55 +201,37 @@ to fill ``S¹``. This is captured in
    isSet A = (x y : A) → isProp (x ≡ y)
 
 To define the fundamental group we will make the loop space satisfy
-``isSet`` by *trucating* the loop space'.
-First we show that ``isProp S¹`` and ``isSet S¹`` are both empty.
-Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
-In the cubical library we have the result
+``isSet`` by *trucating* the loop space',
+i.e. by forcefully adding homotopies between any two paths
+with the same start and end point.
+However, our work will show directly that the loop space is ``ℤ``
+(connected by some path to ``ℤ``), and later in this quest
+we see that ``ℤ`` satisfies ``isSet``.
+This implies the loop space satisfies ``isSet``, and truncating does nothing.
+
+From now on we set our goal as showing that the loop space is ``ℤ``.
+Apart from some exercises here and in side quests, we will not revisit
+the ideas of h-triviality or truncation.
+
+.. _part-2:
+
+Part 2 - ``isProp S¹`` is empty
+===============================
+
+First we show that ``isSet S¹`` is empty.
+The library contains the result
 
 .. code:: agda
 
    isProp→isSet : (A : Type) → isProp A → isSet A
 
-which we will not prove.
-Assuming ``¬isSetS¹``, use ``isProp→isSet`` to deduce ``¬isPropS¹``.
+which we can then use to show ``isProp S¹`` is also empty
+(we will show this in a side quest).
+.. link to side quest
+Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
 
-..
-   <!-- from now you should fill in the hypotheses of the proof yourself -->
-   <!-- (put ``h`` before the ``=`` sign or use ``C-c C-r``).  -->
-
-.. raw:: html
-
-   <p>
-   <details>
-   <summary>Higher spheres, generalising h-triviality and equivalent definitions</summary>
-
-In general, for a space ``X : Type`` to be h-trivial from dimension ``n``
-is intuitively to be able to fill the image of any ``Sⁿ``.
-We make a definition for ``Sⁿ`` in general using suspension,
-and formalize this definition of h-triviality in a side quest.
-.. enter side quest link
-
-There are several ways of expressing h-triviality.
-The one we have suggested is intuitive but not as clean
-nor easy to work with as the following definition
-
-.. code:: agda
-
-   isHLevel : (n : ℕ) (X : Type) → Type
-   isHLevel zero = isProp
-   isHLevel (suc n) = λ X → (x y : X) → isHLevel n (x ≡ y)
-
-
-
-
-.. raw:: html
-
-   </details>
-   </p>
-
-Turning our attention to ``¬isSetS¹``,
-again given ``h : isSet S¹`` -
-a map continuously taking each pair ``x y : A``
+We assume ``h : isSet S¹``, which
+continuously maps each pair ``x y : A``
 to a point in ``isProp (x ≡ y)``.
 We can apply ``h`` twice to the only point ``base`` available to us,
 obtaining a point of ``isProp (base ≡ base)``.
@@ -280,3 +267,47 @@ so you can just quote the result from there.
 
    </details>
    </p>
+
+Now locate ``¬isProp S¹``.
+Try proving this using ``isProp→isSet``.
+
+
+.. _part-3:
+
+Part 3 - ``ℤ`` satisfies ``isSet``
+==================================
+
+
+
+
+
+
+
+
+..
+   .. raw:: html
+
+      <p>
+      <details>
+      <summary>Higher spheres, generalising h-triviality and equivalent definitions</summary>
+
+   In general, for a space ``X : Type`` to be h-trivial from dimension ``n``
+   is intuitively to be able to fill the image of any ``Sⁿ``.
+   We make a definition for ``Sⁿ`` in general using suspension,
+   and formalize this definition of h-triviality in a side quest.
+   .. enter side quest link
+
+   There are several ways of expressing h-triviality.
+   The one we have suggested is intuitive but not as clean
+   nor easy to work with as the following definition
+
+   .. code:: agda
+
+      isHLevel : (n : ℕ) (X : Type) → Type
+      isHLevel zero = isProp
+      isHLevel (suc n) = λ X → (x y : X) → isHLevel n (x ≡ y)
+
+   .. raw:: html
+
+      </details>
+      </p>
