@@ -192,7 +192,7 @@ We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected
 Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
 and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
 to fill ``S¹`` (using a slightly different definition of ``S¹``,
-see `higher spheres <side-higher-spheres>`_).
+see :ref:`side-higher-spheres`).
 This is captured in
 
 .. code:: agda
@@ -210,7 +210,7 @@ we see that ``ℤ`` satisfies ``isSet``.
 This implies the loop space satisfies ``isSet``, and truncating does nothing.
 
 From now on we set our goal as showing that the loop space is ``ℤ``.
-Apart from some exercises here and in side quests, we will not revisit
+Apart from some exercises here and in :ref:`quest-1-side`, we will not revisit
 the ideas of h-triviality or truncation.
 
 .. _part-2:
@@ -225,9 +225,8 @@ The library contains the result
 
    isProp→isSet : (A : Type) → isProp A → isSet A
 
-which we can then use to show ``isProp S¹`` is also empty
-(we will show this in a side quest).
-.. link to side quest
+(see :ref:`side-h-cumulativity` and :ref:`side-prop-set-hlevel`)
+which we can then use to show ``isProp S¹`` is also empty.
 Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
 
 We assume ``h : isSet S¹``, which

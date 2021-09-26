@@ -10,7 +10,7 @@ Different notions of "empty"
 
 .. _side-true-not-false:
 
-``true≢false``
---------------
+Proving ``true≢false``
+----------------------
 
 Under construction

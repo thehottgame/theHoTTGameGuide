@@ -5,16 +5,25 @@ Quest 1 - Side Quests
 
 Under construction
 
-``isSet ℤ``
------------
+Proving ``isSet ℤ``
+-------------------
 
 Generalising h-triviality
 -------------------------
 .. ``isHLevel``
 
 
-``isHLevel`` versus ``isProp`` and ``isSet``
+.. _prop-set-hlevel:
+
+``isProp`` and ``isSet`` versus ``isHLevel``
 --------------------------------------------
+
+.. _side-h-cumulativity:
+
+h-Cumulativity
+--------------
+
+.. _side-higher-spheres:
 
 Higher spheres
 --------------
