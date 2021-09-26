@@ -201,12 +201,12 @@ This is captured in
    isSet A = (x y : A) → isProp (x ≡ y)
 
 To define the fundamental group we will make the loop space satisfy
-``isSet`` by *trucating* the loop space',
+``isSet`` by *:ref:`side-truncation`* the loop space',
 i.e. by forcefully adding homotopies between any two paths
 with the same start and end point.
 However, our work will show directly that the loop space is ``ℤ``
-(connected by some path to ``ℤ``), and later in this quest
-we see that ``ℤ`` satisfies ``isSet``.
+(connected by some path to ``ℤ``), which satisfies ``isSet``
+(see :ref:`side-isSetZ`).
 This implies the loop space satisfies ``isSet``, and truncating does nothing.
 
 From now on we set our goal as showing that the loop space is ``ℤ``.
@@ -269,12 +269,6 @@ so you can just quote the result from there.
 
 Now locate ``¬isProp S¹``.
 Try proving this using ``isProp→isSet``.
-
-
-.. _part-3:
-
-Part 3 - ``ℤ`` satisfies ``isSet``
-==================================
 
 
 

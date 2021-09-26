@@ -5,6 +5,8 @@ Quest 1 - Side Quests
 
 Under construction
 
+.. _side-isSet-Z:
+
 Proving ``isSet ℤ``
 -------------------
 
@@ -13,7 +15,7 @@ Generalising h-triviality
 .. ``isHLevel``
 
 
-.. _prop-set-hlevel:
+.. _side-prop-set-hlevel:
 
 ``isProp`` and ``isSet`` versus ``isHLevel``
 --------------------------------------------
@@ -30,6 +32,8 @@ Higher spheres
 
 Equivalent notions of h-triviality
 ----------------------------------
+
+.. _side-trunction:
 
 Truncation
 ----------
