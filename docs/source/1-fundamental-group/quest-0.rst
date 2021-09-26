@@ -230,7 +230,7 @@ Here are three candidate definitions for a space ``A`` to be empty :
 * there is an isomorphism ``i : A ≅ ⊥`` of spaces
 
 These turn out to be 'the same'
-(see `side quest <side-empty>`_),
+(see :ref:`side-empty`),
 however for our present purposes we will use the first definition.
 Our goal is therefore to produce a point in the function space
 
@@ -639,7 +639,7 @@ The cubical library has the result
 which says that the space of paths in ``Bool``
 from ``true`` to ``false`` is empty.
 We will assume it here and leave the proof as a side quest,
-see `side quest <side-true-not-false>`_.
+see :ref:`side-true-not-false`.
 
 * Load the file with ``C-c C-l`` and navigate to the hole.* Write ``true≢false`` in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically

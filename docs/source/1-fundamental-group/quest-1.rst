@@ -191,8 +191,8 @@ We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected
 
 Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
 and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
-to fill ``S¹`` (using a slightly different definition of ``S¹``).
-.. link to sidequest
+to fill ``S¹`` (using a slightly different definition of ``S¹``,
+see `higher spheres <side-higher-spheres>`_).
 This is captured in
 
 .. code:: agda
