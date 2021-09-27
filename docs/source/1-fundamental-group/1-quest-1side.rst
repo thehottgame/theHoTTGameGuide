@@ -1,4 +1,4 @@
-.. _quest-1-side:
+.. _1-quest-1-side:
 
 Quest 1 - Side Quests
 =====================
