@@ -1,4 +1,4 @@
-.. _quest-2:
+.. _quest2ComparisonMaps:
 
 *************************
 Quest 2 - Comparison maps

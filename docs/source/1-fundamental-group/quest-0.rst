@@ -1,10 +1,10 @@
-.. _quest-0:
+.. _quest0WorkingWithTheCircle:
 
 *********************************
 Quest 0 - Working with the Circle
 *********************************
 
-.. _part-0:
+.. _part0TheCircle:
 
 Part 0 - The Circle
 =====================================
@@ -117,7 +117,7 @@ We will fill the hole ``{!!}``.
   .. NOTE::
 
      We have compiled a list of useful ``agda`` commands in
-     :ref:`Emacs Commands <emacs-commands>`.
+     :ref:`Emacs Commands <emacsCommands>`.
 
 * Move to the first hole, making sure your cursor is inside the hole,
   enter ``C-c C-r``. The ``r`` stands for *refine*.
@@ -204,7 +204,7 @@ We will fill the hole ``{!!}``.
   by replacing what you wrote with ``?`` and doing
   ``C-c C-l``.
 
-.. _part-1:
+.. _part1ReflEquivLoopIsEmpty:
 
 Part 1 -  ``Refl ≡ loop`` is empty
 ==================================
@@ -230,7 +230,7 @@ Here are three candidate definitions for a space ``A`` to be empty :
 * there is an isomorphism ``i : A ≅ ⊥`` of spaces
 
 These turn out to be 'the same'
-(see :ref:`side-empty`),
+(see :ref:`differentNotionsOfEmpty`),
 however for our present purposes we will use the first definition.
 Our goal is therefore to produce a point in the function space
 
@@ -359,6 +359,7 @@ define ``doubleCover``.
 
 Defining ``flipPath`` is quite involved and we will do so in the following part.
 
+.. _part2DefiningFlipPathViaUnivalence:
 
 Part 2 - Defining ``flipPath`` via Univalence
 =============================================
@@ -619,7 +620,7 @@ The path
   The end result is of course ``true``,
   since ``flipPath`` is the path obtained from ``flip``!
 
-.. _part-3:
+.. _part3LiftingPathsUsingDoubleCover:
 
 Part 3 - Lifting paths using ``doubleCover``
 ============================================
@@ -638,7 +639,7 @@ The cubical library has the result
 which says that the space of paths in ``Bool``
 from ``true`` to ``false`` is empty.
 We will assume it here and leave the proof as a side quest,
-see :ref:`side-true-not-false`.
+see :ref:`trueNequivFalse`.
 
 * Load the file with ``C-c C-l`` and navigate to the hole.* Write ``true≢false`` in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically

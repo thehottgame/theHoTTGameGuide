@@ -1,4 +1,4 @@
-.. _emacs-commands:
+.. _emacsCommands:
 
 Emacs Commands
 ==========================

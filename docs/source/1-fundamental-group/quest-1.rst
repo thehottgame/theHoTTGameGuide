@@ -1,10 +1,10 @@
-.. _quest-1:
+.. _quest1HigherHomotopy:
 
 *************************
 Quest 1 - Higher Homotopy
 *************************
 
-.. _part-0:
+.. _part0LoopSpace:
 
 Part 0 - Loop Space
 ===================
@@ -110,7 +110,7 @@ You can use it to find out the definition of ``ℤ`` and ``ℕ``.
    </details>
    </p>
 
-.. _part-1:
+.. _part1HomotopyLevels:
 
 Part 1 - Homotopy Levels
 ========================
@@ -192,7 +192,7 @@ We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected
 Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
 and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
 to fill ``S¹`` (using a slightly different definition of ``S¹``,
-see :ref:`side-higher-spheres`).
+see :ref:`higherSpheres`).
 This is captured in
 
 .. code:: agda
@@ -201,19 +201,19 @@ This is captured in
    isSet A = (x y : A) → isProp (x ≡ y)
 
 To define the fundamental group we will make the loop space satisfy
-``isSet`` by *:ref:`side-truncation`* the loop space',
+``isSet`` by :ref:`truncating <truncation>` the loop space',
 i.e. by forcefully adding homotopies between any two paths
 with the same start and end point.
 However, our work will show directly that the loop space is ``ℤ``
 (connected by some path to ``ℤ``), which satisfies ``isSet``
-(see :ref:`side-isSetZ`).
+(see :ref:`provingIsSetZ`).
 This implies the loop space satisfies ``isSet``, and truncating does nothing.
 
 From now on we set our goal as showing that the loop space is ``ℤ``.
-Apart from some exercises here and in :ref:`quest-1-side`, we will not revisit
+Apart from some exercises here and in :ref:`quest1SideQuests`, we will not revisit
 the ideas of h-triviality or truncation.
 
-.. _part-2:
+.. _part2IsPropS1IsEmpty:
 
 Part 2 - ``isProp S¹`` is empty
 ===============================
@@ -225,7 +225,7 @@ The library contains the result
 
    isProp→isSet : (A : Type) → isProp A → isSet A
 
-(see :ref:`side-h-cumulativity` and :ref:`side-prop-set-hlevel`)
+(see :ref:`hCumulativity` and :ref:`isPropAndIsSetVersesIsHLevel`)
 which we can then use to show ``isProp S¹`` is also empty.
 Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
 

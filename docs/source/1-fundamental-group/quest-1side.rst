@@ -1,11 +1,11 @@
-.. _quest-1-side:
+.. _quest1SideQuests:
 
 Quest 1 - Side Quests
 =====================
 
 Under construction
 
-.. _side-isSet-Z:
+.. _provingIsSetZ:
 
 Proving ``isSet ℤ``
 -------------------
@@ -15,17 +15,17 @@ Generalising h-triviality
 .. ``isHLevel``
 
 
-.. _side-prop-set-hlevel:
+.. _isPropAndIsSetVersesIsHLevel:
 
 ``isProp`` and ``isSet`` versus ``isHLevel``
 --------------------------------------------
 
-.. _side-h-cumulativity:
+.. _hCumulativity:
 
 h-Cumulativity
 --------------
 
-.. _side-higher-spheres:
+.. _higherSpheres:
 
 Higher spheres
 --------------
@@ -145,7 +145,7 @@ to compare your solution.
 Equivalent notions of h-triviality
 ----------------------------------
 
-.. _side-trunction:
+.. _truncation:
 
 Truncation
 ----------

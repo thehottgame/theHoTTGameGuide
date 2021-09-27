@@ -1,4 +1,4 @@
-.. _getting-started:
+.. _gettingStarted:
 
 *******************************
 Getting Started
@@ -7,6 +7,6 @@ Getting Started
 .. toctree::
    :maxdepth: 2
 
-   about-hott-game
+   theHoTTGame
    installation
-   emacs-commands
+   emacsCommands

@@ -1,4 +1,4 @@
-.. _about-hott-game:
+.. _theHoTTGame:
 
 *************
 The HoTT Game
@@ -68,7 +68,7 @@ How to start?
 =============
 
 To start with ``1FundamentalGroup`` (for example),
-go to :ref:`../1-fundamental-group/quest-0`
+go to :ref:`quest0WorkingWithTheCircle`
 and follow the instructions there.
 Any ``agda`` should happen in your copy of the Hott Game repository.
 
@@ -76,4 +76,4 @@ Emacs issues
 ============
 
 If you can't figure out ``emacs`` or forget some command, then
-try consulting the :ref:`emacs-commands` page.
+try consulting the :ref:`emacsCommands` page.
