@@ -1,4 +1,4 @@
-.. _1-quest-1:
+.. _quest-1:
 
 *************************
 Quest 1 - Higher Homotopy

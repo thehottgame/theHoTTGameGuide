@@ -1,4 +1,4 @@
-.. _1-quest-0:
+.. _quest-0:
 
 *********************************
 Quest 0 - Working with the Circle
