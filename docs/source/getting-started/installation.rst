@@ -332,7 +332,7 @@ so we need to repeat the above process for it.
 
      LOCATION1/TheHoTTGame/TheHoTTGame.agda-lib
 
-- In Powershell, use ``agda -l fjdsk Dummy.agda`` again.
+- In ``terminal``, use ``agda -l fjdsk Dummy.agda`` again.
   The error message should now look something like
 
   .. code::
