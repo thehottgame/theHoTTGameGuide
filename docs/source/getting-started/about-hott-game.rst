@@ -68,7 +68,7 @@ How to start?
 =============
 
 To start with ``1FundamentalGroup`` (for example),
-go to :ref:`1-fundamental-group/quest-0`
+go to :ref:`../1-fundamental-group/quest-0`
 and follow the instructions there.
 Any ``agda`` should happen in your copy of the Hott Game repository.
 
