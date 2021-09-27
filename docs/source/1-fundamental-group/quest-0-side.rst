@@ -17,6 +17,7 @@ The following are "the same",
 Here we will take "the same" to mean there are maps from any one to another
 (they are "propositionally the same").
 We will first define the three.
+
 In ``1FundamentalGroup/Quest0SideQuests/Empty.agda`` locate the three definitions
 and try to fill them in according to the above.
 
@@ -77,9 +78,10 @@ First we fill in ``toEmpty→isoEmpty``
    <details>
    <summary>Hint 1</summary>
 
-- We need to give an isomorphism
-- To map forwards we need a map from ``A`` to ``⊥``,
-  to map backwards we need to map from ``⊥`` to ``A``.
+- We need to give an isomorphism,
+  i.e. a map from ``A`` to ``⊥``,
+  and a map from ``⊥`` to ``A``,
+  and proofs that these satisfy ``section`` and ``retract`` respectively.
 - If we have a point in ``⊥`` then we can get a point in any space.
 
 .. raw:: html
