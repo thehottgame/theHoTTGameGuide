@@ -14,6 +14,10 @@ This page will help you get the Game working for you.
 Installing Agda and the Cubical Agda library
 ============================================
 
+If you are a MacOS or Windows user we recommend you follow instructions on
+:ref:`installation`.
+More general instructions follow:
+
 Our Game is in ``agda``, which can be installed following instructions
 `on their site <https://agda.readthedocs.io/en/latest/getting-started/installation.html>`_.
 It is recommended that you use ``agda`` in the text editor

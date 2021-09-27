@@ -45,7 +45,7 @@ in ``.bash_profile`` (if old)
    # so that you can use 'doom' anywhere
    export PATH=”$HOME/.emacs.d/bin:$PATH”
 
-How to Install the HoTT Game on Windows
+Installation on Windows
 =======================================
 
 Prerequisites
@@ -95,20 +95,22 @@ Development Version of Agda
 ---------------------------
 
 IN POWERSHELL
-.. local?
 
 - Directly clone the repo for development version.
   *You can choose where to put this*.
+
   .. code::
 
     git clone https://github.com/agda/agda.git
 
 - We need to install ``make`` for windows. Easiest via cabal.
+
   .. code::
 
      cabal install make
 
 - Go into folder of agda repo then do
+
   .. code::
 
      cabal update
@@ -120,6 +122,7 @@ Getting ``agda-mode`` in ``doom emacs``:
 
 - to install ``agda2-mode`` open ``doom emacs``,
   do the shortcut ``M-x`` (``alt-x``) and type in
+
   .. code::
 
      package-install
@@ -205,6 +208,7 @@ so that it will look for it when an ``agda`` file uses code from it.
   The ``BLAHBLAHBLAH/libraries`` is where we tell ``agda`` of
   the location of libraries.
   For Windows, it should look like
+
   .. code::
 
      C:\Users\USERNAME\AppData\Roaming\agda\libraries
@@ -218,12 +222,14 @@ so that it will look for it when an ``agda`` file uses code from it.
 - In ``C:\Users\USERNAME\AppData\Roaming\agda``,
   create a file ``libraries`` if there isn't one already.
   Inside it, put
+
   .. code::
 
      LOCATION/cubical-0.3/cubical.agda-lib
 
 - Now do ``agda -l fjdsk Dummy.agda`` in powershell locally again.
   This time the error message should be
+
   .. code::
 
      Library 'fjdsk' not found.
@@ -253,6 +259,7 @@ so we need to repeat the above process for it.
   For the purposes of this guide,
   let's say you have put the HoTT Game in your computer
   at the path
+
   .. code::
 
      LOCATION1/TheHoTTGame
@@ -261,12 +268,14 @@ so we need to repeat the above process for it.
   one of which should be ``TheHoTTGame.agda-lib``.
 - Go back to ``BLAHBLAHBLAH/libraries``
   and add the following line
+
   .. code::
 
      LOCATION1/TheHoTTGame/TheHoTTGame.agda-lib
 
 - In Powershell, use ``agda -l fjdsk Dummy.agda`` again.
   The error message should now look something like
+
   .. code::
 
 
