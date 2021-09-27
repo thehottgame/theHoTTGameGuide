@@ -256,8 +256,7 @@ We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
-
-.. image:: image/doubleCover.png
+.. image:: image/doubleCover-final.gif
   :width: 1000
   :alt: doubleCover
 
@@ -367,7 +366,7 @@ Part 2 - Defining ``flipPath`` via Univalence
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
 
-.. image:: image/doubleCover.png
+.. image:: image/doubleCover-final.gif
   :width: 1000
   :alt: doubleCover
 
