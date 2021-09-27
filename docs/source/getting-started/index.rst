@@ -7,6 +7,6 @@ Getting Started
 .. toctree::
    :maxdepth: 2
 
-   theHoTTGame
+   about-hott-game
    installation
-   emacsCommands
+   emacs-commands
