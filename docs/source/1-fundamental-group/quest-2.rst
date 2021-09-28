@@ -4,8 +4,8 @@
 Quest 2 - Comparison maps
 *************************
 
-Comparison maps between ``Ω S¹ base`` and ``ℤ``
-===========================================
+Part 0 - Comparison maps between ``Ω S¹ base`` and ``ℤ``
+========================================================
 
 In ``Quest1`` we have defined the map ``loop_times : ℤ → Ω S¹ base``.
 Creating the inverse map is difficult without access to the entire circle.
@@ -20,38 +20,68 @@ The plan is :
 1. Define a function ``sucℤ : ℤ → ℤ`` that increases every integer by one
 2. Prove that ``sucℤ`` is an isomorphism by constructing
    an inverse map ``predℤ : ℤ → ℤ``.
-3. Turn ``sucℤ`` into a path ``sucPath : ℤ ≡ ℤ`` using ``isoToPath``
+3. Turn the isomorphism ``sucℤ`` into a path
+   ``sucPath : ℤ ≡ ℤ`` using ``isoToPath``
 4. Define ``helix : S¹ → Type`` by mapping ``base`` to ``ℤ`` and
    a generic point ``loop i`` to ``sucPath i``.
 5. Use ``helix`` and ``endPt`` to define the map
-   ``spinCountBase : base ≡ base → ℤ``
+   ``spinCountBase : base ≡ base → ℤ``.
    Intuitively it counts how many times a path loops around ``S¹``.
    a generic point ``loop i`` to ``sucPath i``.
 6. Generalize this across the circle.
 
 In this part, we focus on ``1``, ``2`` and ``3``.
 
-``sucℤ``
---------
+Defining ``sucℤ``
+-----------------
 
-- Setup the definition of ``sucℤ`` so that it looks of the form :
+- Set up the definition of ``sucℤ`` so that it is of the form :
 
   .. code:: agda
 
      Name : TypeOfSpace
      Name inputs = ?
 
-  Compare it with our solutions in ``1FundamentalGroup/Quest1.agda``
+  Just writing in the name and the type of the space is enough for now.
+  Load the file and check that it is looks like:
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Solution:</summary>
+
+  .. code:: agda
+
+     sucℤ : ℤ → ℤ
+     sucℤ = ?
+
+  .. raw:: html
+
+     </details>
+     </p>
+
 - We will define ``sucℤ`` the same way we defined ``loop_times`` :
   by induction.
   Do cases on the input of ``sucℤ``.
   You should have something like :
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Solution:</summary>
 
   .. code:: agda
 
      sucℤ : ℤ → ℤ
      sucℤ pos n = ?
      sucℤ negsuc n = ?
+
+  .. raw:: html
+
+     </details>
+     </p>
 
 - For the non-negative integers ``pos n`` we want to map to its successor.
   Recall that the ``n`` here is a point of the naturals ``ℕ`` whose definition is :
@@ -80,8 +110,10 @@ In this part, we focus on ``1``, ``2`` and ``3``.
   Then map ``negsuc 0`` to ``pos 0``.
   For ``negsuc (suc n)``, map it to ``negsuc n``.
 
-  </details>
-  </p>
+  .. raw:: html
+
+     </details>
+     </p>
 
 - This completes the definition of ``sucℤ``.
   Use ``C-c C-n`` to check it computes correctly.
@@ -107,8 +139,8 @@ In this part, we focus on ``1``, ``2`` and ``3``.
 - Imitating what we did with ``flipPath``,
   upgrade ``sucℤIso`` to ``sucℤPath``.
 
-Comparison maps between ``Ω S¹ base`` and ``ℤ`` - ``spinCount``
-===============================================================
+Part 1 - Comparison maps between ``Ω S¹ base`` and ``ℤ`` - ``spinCount``
+========================================================================
 
 The ``ℤ``-bundle ``helix``
 --------------------------
@@ -122,7 +154,7 @@ In ``Quest2.agda`` locate
    helix : S¹ → Type
    helix = {!!}
 
-Try to imitate the definition of ``doubleCover`` to define the bunlde ``helix``.
+Try to imitate the definition of ``doubleCover`` to define the bundle ``helix``.
 You should compare your definition to ours in ``Quest2Solutions.agda``.
 Note that we have called this ``helix``, since the picture of this ``ℤ``-bundle
 looks like
@@ -131,7 +163,7 @@ looks like
    /.. image:: images/helix.png
    :width: 1000
    :alt: helix
-s
+
 Counting loops
 --------------
 
@@ -148,6 +180,19 @@ Hence try to define
    spinCountBase : base ≡ base → helix base
    spinCountBase = {!!}
 
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint</summary>
+
+- ``endPt`` evaluates the end point of 'lifted paths'.
+
+.. raw:: html
+
+   </details>
+   </p>
+
 Try computing a few values using ``C-c C-n``,
 you can try it on ``refl``, ``loop``, ``loop 3 times``, ``loop (- 1) times`` and so on.
 
@@ -162,6 +207,7 @@ can actually be improved without any extra work to a function on all of ``S¹``.
    spinCount : (x : S¹) → base ≡ x → helix x
    spinCount = {!!}
 
+Try filling this in.
 We will show that this and a general version of ``loop_times`` are
 inverses of each other over ``S¹``, in particular obtaining an isomorphism
 between ``base ≡ base`` and ``ℤ``.
