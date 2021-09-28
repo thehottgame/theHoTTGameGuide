@@ -5,15 +5,10 @@ Quest 1 - Side Quests
 
 Under construction
 
-.. _provingIsSetZ:
-
-Proving ``isSet ℤ``
--------------------
-
 Generalising h-triviality
 -------------------------
-.. ``isHLevel``
-
+..
+   ``isHLevel``
 
 .. _isPropAndIsSetVersesIsHLevel:
 

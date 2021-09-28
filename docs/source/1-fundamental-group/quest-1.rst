@@ -96,7 +96,7 @@ You will need to invert paths using ``sym``.
 
    <p>
    <details>
-   <summary></summary>
+   <summary>Looking up definitions</summary>
 
 If you don't know the definition of something
 you can look up the definition by sticking your cursor
@@ -132,7 +132,7 @@ For example, consider ``S²``.
 
    <p>
    <details>
-   <summary>``refl``</summary>
+   <summary>refl</summary>
 
 
 For any space ``A`` and point ``a : A``,
@@ -201,15 +201,21 @@ This is captured in
    isSet A = (x y : A) → isProp (x ≡ y)
 
 To define the fundamental group we will make the loop space satisfy
-``isSet`` by :ref:`truncating <truncation>` the loop space',
+``isSet`` by *truncation* the loop space',
 i.e. by forcefully adding homotopies between any two paths
 with the same start and end point.
 However, our work will show directly that the loop space is ``ℤ``
 (connected by some path to ``ℤ``), which satisfies ``isSet``
-(see :ref:`provingIsSetZ`).
-This implies the loop space satisfies ``isSet``, and truncating does nothing.
+(see quest 3).
+..
+  link
+This implies the loop space satisfies ``isSet``, and *truncation* does nothing.
+We define :ref:`truncation` in a side quest.
 
-From now on we set our goal as showing that the loop space is ``ℤ``.
+.. admonition:: Updated goal
+
+   From now on we set our goal as showing that the loop space is ``ℤ``.
+
 Apart from some exercises here and in :ref:`quest1SideQuests`, we will not revisit
 the ideas of h-triviality or truncation.
 
@@ -228,6 +234,11 @@ The library contains the result
 (see :ref:`hCumulativity` and :ref:`isPropAndIsSetVersesIsHLevel`)
 which we can then use to show ``isProp S¹`` is also empty.
 Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
+
+.. code:: agda
+
+   ¬isSetS¹ : isSet S¹ → ⊥
+   ¬isSetS¹ = {!!}
 
 We assume ``h : isSet S¹``, which
 continuously maps each pair ``x y : A``
@@ -268,5 +279,11 @@ so you can just quote the result from there.
    </p>
 
 Now locate ``¬isProp S¹``.
+
+.. code::
+
+   ¬isPropS¹ : isProp S¹ → ⊥
+   ¬isPropS¹ = {!!}
+
 Try proving this using ``isProp→isSet``.
 
