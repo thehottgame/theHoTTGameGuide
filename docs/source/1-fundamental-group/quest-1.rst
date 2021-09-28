@@ -191,8 +191,7 @@ We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected
 
 Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
 and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
-to fill ``S¹`` (using a slightly different definition of ``S¹``,
-see :ref:`higherSpheres`).
+to fill ``S¹``.
 This is captured in
 
 .. code:: agda
@@ -231,7 +230,10 @@ The library contains the result
 
    isProp→isSet : (A : Type) → isProp A → isSet A
 
-(see :ref:`hCumulativity` and :ref:`isPropAndIsSetVersesIsHLevel`)
+(see future content about *homotopy levels* .)
+
+.. TODO insert link to content on homotopy levels
+
 which we can then use to show ``isProp S¹`` is also empty.
 Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
 
