@@ -1,7 +1,7 @@
 .. _trinitarianismOverview:
 
 *************************
-Trinitarianism - Overview
+Overview
 *************************
 
 This arc introduces the setting 'a place to do maths'.
