@@ -14,3 +14,4 @@ Fundamental Group of the Circle
    quest-1-side
    quest-2
    quest-3
+   quest-3-side
