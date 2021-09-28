@@ -7,6 +7,6 @@ The HoTT Game Guide
    :maxdepth: 2
 
    getting-started/index
-   0-trinitarianism
+   0-trinitarianism/index
    1-fundamental-group/index
   
