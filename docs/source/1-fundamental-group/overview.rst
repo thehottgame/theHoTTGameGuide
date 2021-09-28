@@ -1,7 +1,7 @@
 .. _fundamentalGroupOfTheCircleOverview:
 
 ******************************************
-Fundamental Group of the Circle - Overview
+Overview
 ******************************************
 
 One key attraction of HoTT (homotopy type theory)
