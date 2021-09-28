@@ -3,6 +3,10 @@
 The HoTT Game Guide
 ********************
 
+.. image:: 1-fundamental-group/images/doubleCover-final.gif
+  :width: 1000
+  :alt: doubleCover
+
 .. toctree::
    :maxdepth: 2
 

@@ -13,9 +13,8 @@ will have three interpretations:
 - Category theoretically, with types as objects in a category
 
 .. image:: images/trinitarianism.png
-
-   :width: 500
-   :alt: the holy trinity
+  :width: 500
+  :alt: the holy trinity
 
 Terms and Types
 ===============
