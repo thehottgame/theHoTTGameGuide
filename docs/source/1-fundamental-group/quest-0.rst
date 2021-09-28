@@ -31,7 +31,7 @@ Here is our definition of the circle in ``agda``.
      base : S¹
      loop : base ≡ base
 
-.. image:: image/S1-final.gif
+.. image:: images/S1-final.gif
   :width: 1000
   :alt: S1
 
@@ -256,7 +256,7 @@ We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
-.. image:: image/doubleCover-final.gif
+.. image:: images/doubleCover-final.gif
   :width: 1000
   :alt: doubleCover
 
@@ -285,7 +285,7 @@ by 'lifting the homotopy' ``h : Refl ≡ loop`` and
 considering the end points of the 'lifted paths'.
 ``Refl`` will 'lift' to a 'constant path' and ``loop`` will 'lift' to
 
-.. image:: image/lifted_loops.png
+.. image:: images/lifted_loops.png
   :width: 1000
   :alt: liftedPaths
 
@@ -367,7 +367,7 @@ Part 2 - Defining ``flipPath`` via Univalence
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
 
-.. image:: image/doubleCover-final.gif
+.. image:: images/doubleCover-final.gif
   :width: 1000
   :alt: doubleCover
 
@@ -656,7 +656,7 @@ drawn as a dot ``true``.
 When we 'lift' ``loop`` - starting at the point ``true : doubleCover base`` -
 it will look like
 
-.. image:: image/lifted_loops.png
+.. image:: images/lifted_loops.png
   :width: 1000
   :alt: liftedPaths
 
@@ -664,7 +664,7 @@ The homotopy ``h : Refl ≡ loop`` is 'lifted'
 (starting at 'lifted ``Refl``')
 to some kind of surface
 
-.. image:: image/lifted_homotopy.png
+.. image:: images/lifted_homotopy.png
   :width: 1000
   :alt: liftedHomotopy
 

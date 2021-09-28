@@ -82,6 +82,7 @@ In this part, we focus on ``1``, ``2`` and ``3``.
 
   </details>
   </p>
+
 - This completes the definition of ``sucℤ``.
   Use ``C-c C-n`` to check it computes correctly.
   E.g. check that ``sucℤ (- 1)`` computes to ``pos 0``
@@ -127,10 +128,10 @@ Note that we have called this ``helix``, since the picture of this ``ℤ``-bundl
 looks like
 
 ..
-   .. image:: helix.png
+   /.. image:: images/helix.png
    :width: 1000
    :alt: helix
-
+s
 Counting loops
 --------------
 

@@ -154,7 +154,7 @@ in ``base ≡ base`` gives the surface of ``S²``,
 which intuitively is not homotopic to the constant point ``base``.
 So ``base ≡ base`` has non-trivial path structure.
 
-.. image:: image/S2.png
+.. image:: images/S2.png
    :width: 1000
    :alt: description
 

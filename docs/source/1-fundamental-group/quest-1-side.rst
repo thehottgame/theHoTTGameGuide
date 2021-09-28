@@ -67,7 +67,7 @@ so you will have to remove the last hole and
 just write what you think goes there.
 
 .. raw:: html
-
+s
    <p>
    <details>
    <summary>Solution</summary>

@@ -33,10 +33,8 @@ and try to fill them in according to the above.
    isoEmpty A = {!!}
 
 You may have noticed we used ``Type₁`` in the second definition.
-To find out what ``Type₁`` is, see the quests on trinitarianism.
-
-..
-   link to Trinitarianism
+To find out what ``Type₁`` is,
+see :ref:`_part3Universes` in :ref:`0-trinitarianism`.
 
 Check that your definitions are the same as ours by comparing with
 the solutions in
