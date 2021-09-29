@@ -1,19 +1,16 @@
 .. _quest2ComparisonMaps:
 
-*************************
-Quest 2 - Comparison maps
-*************************
-
-Part 0 - Comparison maps between ``Ω S¹ base`` and ``ℤ``
-========================================================
+******************************************
+Quest 2 - counting loops across the circle
+******************************************
 
 In ``Quest1`` we have defined the map ``loop_times : ℤ → Ω S¹ base``.
 Creating the inverse map is difficult without access to the entire circle.
 Similarly to how we used ``doubleCover`` to distinguish ``refl`` and ``base``,
 the idea is to replace ``Bool`` with ``ℤ``,
 allowing us to distinguish between all loops on ``S¹``.
-In ``Part0`` and ``Part1`` we will construct one of the two comparison maps
-across the whole circle, called ``spinCount``.
+In this quest we will construct one of the two comparison maps
+across the whole circle, called ``windingNumber``.
 
 The plan is :
 
@@ -25,12 +22,15 @@ The plan is :
 4. Define ``helix : S¹ → Type`` by mapping ``base`` to ``ℤ`` and
    a generic point ``loop i`` to ``sucPath i``.
 5. Use ``helix`` and ``endPt`` to define the map
-   ``spinCountBase : base ≡ base → ℤ``.
+   ``windingNumberBase : base ≡ base → ℤ``.
    Intuitively it counts how many times a path loops around ``S¹``.
    a generic point ``loop i`` to ``sucPath i``.
 6. Generalize this across the circle.
 
 In this part, we focus on ``1``, ``2`` and ``3``.
+
+Part 0 - Comparison maps between ``Ω S¹ base`` and ``ℤ``
+========================================================
 
 Defining ``sucℤ``
 -----------------
@@ -139,8 +139,8 @@ Defining ``sucℤ``
 - Imitating what we did with ``flipPath``,
   upgrade ``sucℤIso`` to ``sucℤPath``.
 
-Part 1 - Comparison maps between ``Ω S¹ base`` and ``ℤ`` - ``spinCount``
-========================================================================
+Part 1 - Winding Number
+=======================
 
 The ``ℤ``-bundle ``helix``
 --------------------------
@@ -160,9 +160,9 @@ Note that we have called this ``helix``, since the picture of this ``ℤ``-bundl
 looks like
 
 ..
-   /.. image:: images/helix.png
-   :width: 1000
-   :alt: helix
+   .. image:: images/helix.png
+      :width: 1000
+      :alt: helix
 
 Counting loops
 --------------
@@ -177,8 +177,8 @@ Hence try to define
 
 .. code:: agda
 
-   spinCountBase : base ≡ base → helix base
-   spinCountBase = {!!}
+   windingNumberBase : base ≡ base → helix base
+   windingNumberBase = {!!}
 
 .. raw:: html
 
@@ -199,15 +199,16 @@ you can try it on ``refl``, ``loop``, ``loop 3 times``, ``loop (- 1) times`` and
 Generalising
 ------------
 
-The function ``spinCountBase``
+The function ``windingNumberBase``
 can actually be improved without any extra work to a function on all of ``S¹``.
 
 .. code:: agda
 
-   spinCount : (x : S¹) → base ≡ x → helix x
-   spinCount = {!!}
+   windingNumber : (x : S¹) → base ≡ x → helix x
+   windingNumber = {!!}
 
 Try filling this in.
 We will show that this and a general version of ``loop_times`` are
 inverses of each other over ``S¹``, in particular obtaining an isomorphism
 between ``base ≡ base`` and ``ℤ``.
+
