@@ -130,10 +130,20 @@ Whenever you do this, ``agda`` will check the document is written correctly.
   The numbering is just for reference and may change upon reloading.
 * :ref:`Navigate between holes <emacsCommands>` using ``C-c C-f`` (forward)
   or ``C-c C-b`` (backward).
-* Navigate to the first hole, making sure your cursor is inside the hole,
-  and enter ``C-c C-r``. The ``r`` stands for :ref:`refine <emacsCommands>`.
+* Navigate to the first hole, making sure your cursor is inside the hole.
+  :ref:`Check the goal <emacsCommands>` using ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
+  Whenever you do ``C-c C-,``, ``agda`` will tell you what kind of "point" it expects in the hole.
+  The ``*Agda Information*`` window should be focused on this hole only :
+
+  .. code::
+
+     Goal: base ≡ base
+
+  This says ``agda`` is expecting a path from ``base`` to ``base`` in the hole.
+  Making sure your cursor is still inside the hole, enter ``C-c C-r``.
+  The ``r`` stands for :ref:`refine <emacsCommands>`.
   Whenever you do this whilst having your cursor in a hole,
-  Agda will try to help you.
+  ``agda`` will try to help you.
 * You should now see ``λ i → {!!}``.
   This is the ``agda`` way of writing ``i ↦ {!!}``.
   Load the file again (using ``C-c C-l``) and
@@ -154,11 +164,8 @@ Whenever you do this, ``agda`` will check the document is written correctly.
   we will soon explain it.
 
 * Navigate (``C-c C-f`` and ``C-c C-b``) to that new hole in ``λ i → {!!}`` and
-  enter ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
-  Whenever you make this command whilst having your cursor in a hole,
-  ``agda`` will :ref:`check the goal <emacsCommands>`,
-  i.e. what ``agda`` is expecting in the hole.
-  The ``*Agda information*`` window should now be more focused :
+  enter ``C-c C-,`` to  :ref:`check the goal <emacsCommands>`.
+  The ``*Agda information*`` window should look like :
 
   .. code-block::
 
@@ -312,9 +319,19 @@ define ``doubleCover``.
      doubleCover : S¹ → Type
      doubleCover x = {!!}
 
-* :ref:`Navigate to the hole <emacsCommands>`,
-  write ``x`` and do ``C-c C-c``.
-  The ``c`` stands for :ref:`cases <emacsCommands>`.
+* :ref:`Navigate to the hole <emacsCommands>` and :ref:`check the goal<emacsCommands>`.
+  It should look like
+
+  .. code::
+
+     Goal: Type
+     ————————————————————
+     x : S¹
+
+  This says it is expecting a point in ``Type``, the space of spaces,
+  i.e. it expects a space.
+  We will first :ref:`case on x <emacsCommands>`
+  by writing ``x`` in the hole and doing ``C-c C-c`` (``c`` for cases).
   You should now see two new holes :
 
   .. code-block:: agda
@@ -329,10 +346,10 @@ define ``doubleCover``.
   a point to map ``base`` to, and an edge to map ``loop`` to respectively.
   Since ``loop`` is a path from ``base`` to itself,
   its image must also be a path from the image of ``base`` to itself.
-* :ref:`Navigate <emacsCommands>` to the first new hole.
-  We want to map ``base`` to ``Bool`` so
+* :ref:`Navigate <emacsCommands>` to the first new hole and :ref:`check the goal<emacsCommands>`.
+  We want to map ``base`` to the space ``Bool`` so
   write ``Bool`` in the hole, then do ``C-c C-SPC`` to :ref:`fill <emacsCommands>` it.
-* :ref:`Navigate <emacsCommands>` to the second new hole.
+* :ref:`Navigate <emacsCommands>` to the second new hole and :ref:`check the goal<emacsCommands>`.
   Here ``loop i`` is a generic point in the path ``loop``,
   where ``i : I`` is a generic point of the 'unit interval'.
   We are assuming we have ``flipPath`` defined already
@@ -380,6 +397,8 @@ Part 2 - Defining ``flipPath`` via Univalence
 
 In this part, we will define the path ``flipPath : Bool ≡ Bool``.
 Recall the picture of ``doubleCover``.
+
+.. _doubleCoverAnimation2:
 
 .. image:: images/doubleCover-final.gif
   :width: 1000
@@ -429,6 +448,15 @@ We proceed in steps :
 
   Flip : Bool → Bool
   Flip x = {!!}
+
+* Make sure you are in :ref:`insert mode<emacsCommands`.
+* :ref:`Check the goal<emacsCommands>`.
+  It should be asking for a point in ``Bool``,
+  since we have already given it an ``x : Bool`` at the front.
+
+.. tip::
+
+   Whenever you encounter a new hole, you should first :ref:`check the goal<emacsCommands>`.
 
 * Write ``x`` inside the hole,
   and :ref:`case <emacsCommands>` on ``x`` using ``C-c C-c`` with your cursor still inside.
@@ -603,9 +631,9 @@ The isomorphism
      —————————————————————————————————
      x : Bool
 
-  The goal was ``section Flip Flip``, which was the same as ``(x : X) → Flip (Flip x) ≡ x``.
-  After giving an ``x`` in front the goal as become simply ``Flip (Flip x) ≡ x``.
-  Try to prove this.
+  This says ``rightInv`` should give for each ``x : Bool`` a path ``p : Flip (Flip x) ≡ x``.
+  We gave an ``x : Bool`` in front, so the goal is simply to give a path ``p : Flip (Flip x) ≡ x``.
+  Try to give such a path.
 
   .. raw:: html
 
@@ -614,11 +642,12 @@ The isomorphism
      <summary>Hint</summary>
 
   You need to :ref:`case <emacsCommands>` on what ``x`` can be.
-  Then for the case of ``true`` and ``false``,
-  try refining with ``C-c C-r`` to see if ``agda`` can help.
+  Then for the case of ``false``,
+  ``Flip (Flip false)`` should just be ``false`` by design,
+  so you need to give a path from ``false`` to ``false``.
 
   The benefit of having ``x`` before the ``=``
-  is exactly this - that we can case on what ``x`` can be.
+  is that we can case on what ``x`` can be.
   This is called *pattern matching*.
 
   .. raw:: html
@@ -628,7 +657,8 @@ The isomorphism
 
 * Do the same for ``leftInv x = {!!}``.
 * Fill in the missing goals from the original problem using ``rightInv``, ``leftInv``.
-* Use ``C-c C-d`` to check that ``agda`` is okay with ``flipIso``.
+* If you got the definition right then ``agda``
+  should not have any errors when you load using ``C-c C-l``.
 
 The path
 --------
@@ -664,6 +694,7 @@ The path
   as ``Bool`` is transformed along ``flipPath``.
   The end result is of course ``true``,
   since ``flipPath`` is the path obtained from ``flip``!
+  Try to follow what ``transport`` does in the :ref:`animation<doubleCoverAnimation2>`.
 
 .. _part3LiftingPathsUsingDoubleCover:
 
@@ -687,7 +718,9 @@ We will assume it here and leave the proof as a side quest,
 see :ref:`trueNequivFalse`.
 
 * Load the file with ``C-c C-l`` and navigate to the hole.
-  Write ``true≢false`` in the hole and refine using ``C-c C-r``,
+  Write ``true≢false``
+  (input ``\==n`` for ``≢``; see :ref:`looking up unicode shortcuts <emacsCommands>`)
+  in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically
   will make a new hole.
 * Check the goal in the new hole using ``C-c C-,``
@@ -695,9 +728,9 @@ see :ref:`trueNequivFalse`.
 
 To give this path we need to visualise 'lifting' ``Refl``, ``loop``
 and the homotopy ``h : Refl ≡ loop``
-along the Boolean-bundle ``doubleCover``.
+along the Bool-bundle ``doubleCover``.
 When we 'lift' ``Refl`` - starting at the point ``true : doubleCover base`` -
-itwill still be a constant path at ``true``,
+it will still be a constant path at ``true``,
 drawn as a dot ``true``.
 When we 'lift' ``loop`` - starting at the point ``true : doubleCover base`` -
 it will look like
@@ -738,15 +771,40 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
    a path from ``base`` to ``base`` and spits out the end point
    of the 'lifted path' starting at ``true``.
 
+..
+  insert image of endPt
+
 .. code-block:: agda
 
    endPtOfTrue : (p : base ≡ base) → doubleCover base
    endPtOfTrue p = ?
 
-Try filling in ``endPtOfTrue`` using ``endPt``
-and the skills you have developed so far.
-You can verify our expectation that ``endPtOfTrue Refl`` is ``true``
-and ``endPtOfTrue loop`` is ``false`` using ``C-c C-n``.
+- :ref:`Check the goal<emacsCommands>`.
+  It should be asking for
+
+  .. code::
+
+     Goal: Bool
+     ————————————————————————————————————————————————————————————
+     p : base ≡ base
+     ———— Constraints ———————————————————————————————————————————
+     ?0 (p = loop) = false : Bool
+       (blocked on _29, belongs to problem 90)
+     ?0 (p = Refl) = true : Bool (blocked on _29, belongs to problem 90)
+     _40 := λ p i → endPtOfTrue (p i) (blocked on problem 90)
+
+- We want to use ``endPt``, which can output something in the space ``B y``
+  (as described above).
+  In this case we want ``B y`` to be ``Bool``.
+  ``agda`` is smart and can figure out how to use ``endPt`` :
+
+  1. Type ``endPt`` into the hole and do ``C-c C-r``.
+  2. It should create some new holes.
+  3. :ref:`Check these new holes<emacsCommands>`.
+  4. Try to fill in these holes.
+- Once you think you are done,
+  you can verify our expectation that ``endPtOfTrue Refl`` is ``true``
+  and ``endPtOfTrue loop`` is ``false`` using ``C-c C-n``.
 
 Lastly we need to make the function ``endPtOfTrue``
 take the path ``h : Refl ≡ loop`` to a path from ``true`` to ``false``.
@@ -759,7 +817,7 @@ from ``f x`` to ``f y``.
 
    cong : (f : A → B) → (p : x ≡ y) → f x ≡ f y
 
-
+We will define ``cong`` in a :ref:`side quest<definingCong>`
 Using ``cong`` and ``endPtOfTrue`` you should be able to complete ``Quest0``.
 If you have done everything correctly you can reload ``agda`` and see that
 you have no remaining goals.

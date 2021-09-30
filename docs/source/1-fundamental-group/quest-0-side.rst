@@ -150,3 +150,10 @@ we will show
 
 Due to the previous side quest :ref:`differentNotionsOfEmpty` this tells us
 that the space ``true ≡ false`` is empty.
+
+.. _definingCong:
+
+Defining ``cong``
+-----------------
+
+Under construction
