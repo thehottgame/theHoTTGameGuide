@@ -7,9 +7,9 @@ Notation
 --------
 
 - ``SPC`` means space bar
-- ``C-`` means hold down ``Ctrl``
-- ``M-`` means hold down ``Alt`` for non-Macs and ``Option`` for Macs
-- ``S-`` means hold down ``Shift``
+- ``C-x`` means ``Ctrl-x``
+- ``M-x`` means ``Alt-x`` for non-Macs and ``Option-x`` for Macs
+- ``S-x`` means ``Shift-x``
 - ``RET`` means enter
 
 Example ``C-c C-l`` in Agda files is ``Ctrl-c``, let go, ``Ctrl-l``
@@ -22,14 +22,24 @@ vim-like bindings.
 The following commands are for *evil mode*:
 
 - ``SPC h b b`` to look for bindings (keyboard shortcuts)
-- ``SPC f f`` to find files. can use ``TAB`` for auto-completing paths
+- ``SPC f f`` to find files. can use ``TAB``
+  for auto-completing paths and ``Backspace`` to go up a directory
 - ``h j k l`` for left down up right
-- ``SPC b k`` to kill 'buffers'
+- ``SPC b k`` to kill 'buffers' (any little window is a buffer).
+  In general ``SPC b`` gives you many options for buffers.
+- ``SPC w k`` to kill unwanted windows
+  (emacs can get split up into many windows)
+  In general ``SPC w`` gives you many options for windows.
 - ``i`` to go into *insert mode* (in insert mode you can insert text)
   and ``ESC`` or ``C-g`` to go back to *evil mode*.
-- ``C-_`` to undo
+- ``C-_`` to undo (be careful with this, undo can go too far;
+  going into and out of insert mode is considered "one change"
+  in *evil mode*, so undoing might undo a
+  lot of changes made in *insert mode*).
+- ``r`` to redo (be careful with this, redo can go too far).
 - ``SPC h '`` to look up how to write a symbol.
   (Put your cursor on the symbol first.)
+
 
 For beta users, to get the latest patch
 
@@ -39,14 +49,21 @@ For beta users, to get the latest patch
 Agda usage
 ----------
 
-To insert text in the ``agda`` file use ``i`` to enter *insert mode*.
+.. important::
 
-- ``C-c C-l`` loads the file
-- ``C-c C-,`` checks goal of the hole your cursor is in.
-- ``C-c C-SPC`` fills hole your cursor is in.
-- ``C-c C-r`` refines the hole your cursor is in.
-- ``C-c C-c`` does cases on terms in the hole your cursor is in.
-- ``C-c C-d`` used for checking types of terms
-- ``C-c C-n`` used for 'reducing' terms to their 'simplest form'
-- ``C-c C-.`` does ``C-c C-,`` and ``C-c C-d``
-- ``M-SPC c d`` looks up the definition of the thing you are hovering over.
+   To insert text in the ``agda`` file use ``i`` to enter *insert mode*.
+   To escape *insert mode* do ``ESC`` or ``C-g``.
+   All the commands below should be done whilst in *insert mode*.
+
+- Load : ``C-c C-l`` loads the file
+- Check the goal : ``C-c C-,`` checks goal of the hole your cursor is in.
+- Fill the goal : ``C-c C-SPC`` fills hole your cursor is in.
+- Refine the goal : ``C-c C-r`` refines the hole your cursor is in.
+- Case on ``x`` : ``C-c C-c`` does cases on ``x``, where ``x`` is in the hole your cursor is in.
+- Deduce : ``C-c C-d`` asks you to give it term / point ``x``,
+  it deduces the type / space that ``x`` belongs to
+- Normalise : ``C-c C-n`` asks you to give it term / point ``x``,
+  it 'reduces' ``x`` to its 'simplest (normalised) form'
+- Combo : ``C-c C-.`` does ``C-c C-,`` and ``C-c C-d``
+- Looking up definitions : ``M-SPC c d`` looks up the definition of the thing you are hovering over.
+- Look up unicode shortcut : ``M-SPC h '`` looks up how to type the unicode character you are hovering over.

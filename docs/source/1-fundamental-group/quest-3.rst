@@ -1,7 +1,7 @@
-.. _pathsAndEquality:
+.. _ZIsASet:
 
 ****************************
-Quest 3 - Paths and Equality
+Quest 3 - ``ℤ`` is a Set
 ****************************
 
 .. admonition:: Goal
@@ -50,6 +50,53 @@ We focus on Goal 2 in this section.
 
 Part 0 - Equality as Paths
 ==========================
+
+Let us try naively interpreting some statements in two ways.
+
+- The first is as usual, reading ``x ≡ y`` as the space of paths and
+  ``p : x ≡ y`` as a path ``p`` from ``x`` to ``y``.
+- The second is reading ``x ≡ y`` as the proposition ``x`` *equals* ``y`` and
+  ``p : x ≡ y`` as a proof ``p`` that ``x`` *equals* ``y``.
+
+Recall that in the ``agda`` library we have
+
+.. code:: agda
+
+   refl : {A : Type} {x : A} → x ≡ x
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Implicit arguments</summary>
+
+.. tip::
+
+   In ``agda`` we can have a way of introducing
+   *implicit* variables of a function.
+   We do that by just using curley braces ``{ }`` instead
+   of round braces.
+   This is why when we use ``refl`` we don't need to mention
+   the inputs ``A`` and ``x``.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+We can read this as
+
+- For any space ``A`` and point ``x`` in ``A`` we have a path
+  from ``x`` to itself.
+- For any space ``A`` and point ``x`` in ``A`` we have a proof
+  that ``x`` is equal to itself; "reflexivity".
+
+We also have the statement
+
+.. code:: agda
+
+   sym : {A : Type} {x : A}
+
 
 .. refl, symm, trans and groupoid laws
 

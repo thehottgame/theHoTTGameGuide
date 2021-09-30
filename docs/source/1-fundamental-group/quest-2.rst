@@ -1,10 +1,10 @@
 .. _quest2ComparisonMaps:
 
-******************************************
-Quest 2 - counting loops across the circle
-******************************************
+************************
+Quest 2 - Winding Number
+************************
 
-In ``Quest1`` we have defined the map ``loop_times : ℤ → Ω S¹ base``.
+In :ref:`quest1HigherHomotopy` we have defined the map ``loop_times : ℤ → Ω S¹ base``.
 Creating the inverse map is difficult without access to the entire circle.
 Similarly to how we used ``doubleCover`` to distinguish ``refl`` and ``base``,
 the idea is to replace ``Bool`` with ``ℤ``,
@@ -29,8 +29,8 @@ The plan is :
 
 In this part, we focus on ``1``, ``2`` and ``3``.
 
-Part 0 - Comparison maps between ``Ω S¹ base`` and ``ℤ``
-========================================================
+Part 0 - Making a Path From ``ℤ`` to Itself
+===========================================
 
 Defining ``sucℤ``
 -----------------
@@ -89,8 +89,8 @@ Defining ``sucℤ``
   .. code:: agda
 
      data ℕ : Type where
-     zero : ℕ
-     suc : ℕ → ℕ
+       zero : ℕ
+       suc : ℕ → ℕ
 
   Use ``suc`` to map ``pos n`` to its successor.
 - The negative integers require a bit more care.
@@ -120,7 +120,7 @@ Defining ``sucℤ``
   E.g. check that ``sucℤ (- 1)`` computes to ``pos 0``
   and ``sucℤ (pos 0)`` computes to ``pos 1``.
 
-``sucℤ`` is an isomorphism
+``sucℤ`` is an Isomorphism
 --------------------------
 
 - The goal is to define ``predℤ : ℤ → ℤ`` which
@@ -133,7 +133,7 @@ Defining ``sucℤ``
   by using ``predℤ`` as the inverse and proving
   ``section sucℤ predℤ`` and ``retract sucℤ predℤ``.
 
-``sucℤ`` is a path
+``sucℤ`` is a Path
 ------------------
 
 - Imitating what we did with ``flipPath``,
@@ -164,7 +164,7 @@ looks like
       :width: 1000
       :alt: helix
 
-Counting loops
+Counting Loops
 --------------
 
 Now we can do what was originally difficult - constructing an inverse map

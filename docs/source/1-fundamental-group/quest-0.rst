@@ -4,6 +4,19 @@
 Quest 0 - Working with the Circle
 *********************************
 
+In this series of quests we will prove that the fundamental group
+of ``S¹`` is ``ℤ``.
+In fact, our strategy will also show that the higher homotopy groups of
+``S¹`` are all trivial.
+
+.. important::
+
+   In your cloned copy of the HoTT Game locate the file
+   ``1FundamentalGroup/Quest0.agda``,
+   and open this file in ``emacs``.
+   Before starting it is important to have a look at
+   our :ref:`guide to emacs and list of emacs commands <emacsCommands>`.
+
 .. _part0TheCircle:
 
 Part 0 - The Circle
@@ -12,10 +25,6 @@ Part 0 - The Circle
 Theory - Definition of the Circle
 ---------------------------------
 
-In this series of quests we will prove that the fundamental group
-of ``S¹`` is ``ℤ``.
-In fact, our strategy will also show that the higher homotopy groups of
-``S¹`` are all trivial.
 We begin by formalising the problem statement.
 
 A contruction of 'the circle' is :
@@ -63,7 +72,7 @@ You can see this as defining the circle via a CW-complex.
    whose points are *paths* from
    ``a`` to ``b`` in the space ``A``.
 
-Exercise - defining the constant path ``refl``
+Exercise - defining the constant path ``Refl``
 ----------------------------------------------
 
 There are other paths in ``S¹``,
@@ -82,15 +91,23 @@ a path from ``base`` to ``base``.
 .. tip::
 
    The ``{!!}`` are called *holes*.
-   These are places in the file where ``agda`` is expecting
-   you to write something.
-   You can write ``?`` to make a hole.
+   These are blanks in the ``agda`` file that you can fill
+   to complete the quest.
+   You can write ``?`` to make a new hole.
 
-We will fill the hole ``{!!}``.
+We will fill the hole ``Refl = {!!}``.
 
-* Enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
-  Whenever you do this, ``agda`` will check the document is written correctly.
-  We say ``agda`` *compiles* the file.
+* Make sure you are in :ref:`insert mode <emacsCommands>` by pressing ``i``.
+  To escape *insert mode* press ``ESC``.
+
+  .. NOTE::
+
+     We have compiled a list of useful ``emacs`` and ``agda`` commands in
+     :ref:`Emacs Commands <emacsCommands>`.
+
+* Enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l`).
+Whenever you do this, ``agda`` will check the document is written correctly.
+  We say ``agda`` *compiles*  or *loads* the file.
   This will open the ``*Agda Information*`` window looking like
 
   .. code-block::
@@ -111,19 +128,12 @@ We will fill the hole ``{!!}``.
 
   These are what holes look like when the file is compiled.
   The numbering is just for reference and may change upon reloading.
-* Navigate to between holes using ``C-c C-f`` (forward)
+* :ref:`Navigate between holes <emacsCommands>` using ``C-c C-f`` (forward)
   or ``C-c C-b`` (backward).
-
-  .. NOTE::
-
-     We have compiled a list of useful ``agda`` commands in
-     :ref:`Emacs Commands <emacsCommands>`.
-
-* Move to the first hole, making sure your cursor is inside the hole,
-  enter ``C-c C-r``. The ``r`` stands for *refine*.
+* Navigate to the first hole, making sure your cursor is inside the hole,
+  and enter ``C-c C-r``. The ``r`` stands for :ref:`refine <emacsCommands>`.
   Whenever you do this whilst having your cursor in a hole,
   Agda will try to help you.
-
 * You should now see ``λ i → {!!}``.
   This is the ``agda`` way of writing ``i ↦ {!!}``.
   Load the file again (using ``C-c C-l``) and
@@ -143,10 +153,11 @@ We will fill the hole ``{!!}``.
   Do not worry about the errors,
   we will soon explain it.
 
-* Navigate to that new hole in ``λ i → {!!}`` and
+* Navigate (``C-c C-f`` and ``C-c C-b``) to that new hole in ``λ i → {!!}`` and
   enter ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
   Whenever you make this command whilst having your cursor in a hole,
-  ``agda`` will check the *goal*, i.e. what ``agda`` is expecting in the hole.
+  ``agda`` will :ref:`check the goal <emacsCommands>`,
+  i.e. what ``agda`` is expecting in the hole.
   The ``*Agda information*`` window should now be more focused :
 
   .. code-block::
@@ -268,7 +279,7 @@ All the fibers look like ``Bool``, hence our choice of the name ``Bool``- \*bund
 .. admonition:: Homotopy type theory
 
    A path ``p : X ≡ Y`` between two *spaces* ``X Y : Type``
-   (viewed as points in the sapce of spaces)
+   (viewed as points in the space of spaces)
    can be visualised as follows :
 
    * Two spaces ``X`` and ``Y`` as end points.
@@ -292,17 +303,18 @@ considering the end points of the 'lifted paths'.
 Let's assume for the moment that we have ``flipPath`` already and
 define ``doubleCover``.
 
+* Make sure you are in :ref:`insert mode <emacsCommands>`.
 * Navigate to the definition of ``doubleCover`` and make sure
-  you have loaded the file with ``C-c C-l``.
+  you have :ref:`loaded the file <emacsCommands>` with ``C-c C-l``.
 
   .. code-block:: agda
 
      doubleCover : S¹ → Type
      doubleCover x = {!!}
 
-* Navigate your cursor to the hole,
+* :ref:`Navigate to the hole <emacsCommands>`,
   write ``x`` and do ``C-c C-c``.
-  The ``c`` stands for *cases*.
+  The ``c`` stands for :ref:`cases <emacsCommands>`.
   You should now see two new holes :
 
   .. code-block:: agda
@@ -314,13 +326,13 @@ define ``doubleCover``.
   This means :
   ``S¹`` is made from a point ``base`` and an edge ``loop``,
   so a map out of ``S¹`` to a space is the same as choosing
-  a poin admonitionan edge to map ``base`` and ``loop`` to respectively.
+  a point to map ``base`` to, and an edge to map ``loop`` to respectively.
   Since ``loop`` is a path from ``base`` to itself,
   its image must also be a path from the image of ``base`` to itself.
-* Use ``C-c C-f`` and/or ``C-c C-b`` to navigate to the first hole.
+* :ref:`Navigate <emacsCommands>` to the first new hole.
   We want to map ``base`` to ``Bool`` so
-  fill the hole with ``Bool`` using ``C-c C-SPC``.
-* Navigate to the second hole.
+  write ``Bool`` in the hole, then do ``C-c C-SPC`` to :ref:`fill <emacsCommands>` it.
+* :ref:`Navigate <emacsCommands>` to the second new hole.
   Here ``loop i`` is a generic point in the path ``loop``,
   where ``i : I`` is a generic point of the 'unit interval'.
   We are assuming we have ``flipPath`` defined already
@@ -332,11 +344,13 @@ define ``doubleCover``.
      We can use ``flipPath`` without completing the definition of ``flipPath``.
 
   Try filling the hole.
-* Once you think you are done, reload the ``agda`` file with ``C-c C-l``
+* Once you think you are done, :ref:`reload <emacsCommands>` the ``agda`` file with ``C-c C-l``
   and if it doesn't complain
   this means there are no problems with your definition.
   Compare your definition to that in ``1FundamentalGroup/Quest0Solutions.agda``
   to check that your definition is the one we want.
+  To navigate to solutions file escape *insert mode* using ``ESC`` and do ``SPC f f``
+  to find the file, see :ref:`emacsCommands`.
   Here is a definition that ``agda`` will accept, but is *not* what we need:
 
   .. raw:: html
@@ -375,11 +389,14 @@ This means we need ``flipPath`` to correspond to
 the unique non-identity permutation of ``Bool``
 that flips ``true`` and ``false``.
 
+The function
+------------
+
 We proceed in steps :
 
 1. Define the function ``Flip : Bool → Bool``.
 2. Promote this to an isomorphism ``flipIso : Bool ≅ Bool``.
-3. We use _univalence_ to turn ``flipIso`` into
+3. We use *univalence* to turn ``flipIso`` into
    a path ``flipPath : Bool ≡ Bool``.
    The univalence axiom asserts that
    paths in ``Type`` - the space of spaces - correspond to
@@ -387,8 +404,24 @@ We proceed in steps :
    As a corollary,
    we can make paths in ``Type`` from isomorphisms in ``Type``.
 
-The function
-------------
+.. admonition:: Isomorphism and Univalence
+
+   One with a topological mindset might worry if isomorphism means
+   homeomorphism, homotopy equivalence, bijection or something else;
+   one might even wonder what *continuity* is here.
+   The answer is that this is *synthetic homotopy theory*,
+   where
+
+   - there is *no need for real numbers*
+   - every map is continuous in the sense that they respect paths
+   - an isomorphism ``A ≅ B`` is given by the data of
+
+     - ``fun : A → B``
+     - ``inv : B → A``
+     - ``rightInv`` that says they form a section (more details on this later)
+     - ``leftInv`` that says they form a retract (more details on this later)
+   - (corollary of univalence) any isomorphism can be turned into a path between spaces
+
 
 * In ``1FundamentalGroup/Quest0.agda``, navigate to :
 
@@ -398,7 +431,7 @@ The function
   Flip x = {!!}
 
 * Write ``x`` inside the hole,
-  and do ``C-c C-c`` with your cursor still inside.
+  and :ref:`case <emacsCommands>` on ``x`` using ``C-c C-c`` with your cursor still inside.
   You should now see :
 
   .. code-block:: agda
@@ -414,7 +447,7 @@ The function
 * Since we want ``Flip`` to flip ``true`` and ``false``,
   fill the first hole with ``true`` and the second with ``false``.
 * To check things have worked,
-  try ``C-c C-d``. (``d`` stands for _deduce_.)
+  try ``C-c C-d`` (``d`` stands for :ref:`deduce its space <emacsCommands>`).
   Then ``agda`` will ask you to input an expression.
   Enter ``Flip``.
   In the ``*Agda Information*`` window,
@@ -424,11 +457,10 @@ The function
 
     Bool → Bool
 
-
   This means ``agda`` recognises ``Flip`` as a well-formulated term
   and is a point in the space of maps from ``Bool`` to ``Bool``.
 * We can also ask ``agda`` to compute outputs of ``Flip``.
-  Try ``C-c C-n`` (``n`` stands for _normalise_),
+  Try ``C-c C-n`` (``n`` stands for :ref:`normalise <emacsCommands`),
   ``agda`` should again be asking for an expression.
   Enter ``Flip true``.
   In the ``*Agda Information*`` window, you should see ``false``, as desired.
@@ -436,14 +468,14 @@ The function
 The isomorphism
 ---------------
 
-* Navigate to
+* :ref:`Navigate <emacsCommands>` to
 
   .. code-block:: agda
 
     flipIso : Bool ≅ Bool
     flipIso = {!!}
 
-* Refine with ``C-c C-r``.
+* :ref:`Refine <emacsCommands>` with ``C-c C-r``.
   You should now see
 
   .. code-block:: agda
@@ -451,13 +483,14 @@ The isomorphism
     flipIso : Bool ≅ Bool
     flipIso = iso {!!} {!!} {!!} {!!}
 
-* ``iso`` belongs to the following space :
+* Given two spaces ``A`` and ``B``,
+  ``iso`` (with respect to ``A`` and ``B``) belongs to the following space :
 
-  .. code-block:: agda
+  .. code-block::
 
-     iso : (fun : A→ B) (inv : B→ A)
-       (rightInv : section fun inv) (leftInv : retract fun inv) →
-       A ≅ B
+     iso : (fun : A → B) (inv : B → A)
+           (rightInv : section fun inv) (leftInv : retract fun inv) →
+           A ≅ B
 
   which says that ``iso`` will produce an isomorphism from ``A`` to ``B``
   given a map ``fun`` forwards and an inverse ``inv`` backwards,
@@ -467,25 +500,26 @@ The isomorphism
   They should respectively say that
   ``inv`` is a right and left inverse of ``fun``.
 
-* Check that ``agda`` expects functions ``Bool → Bool``
-  to go in the first two holes.
+* :ref:`Check the first two holes <emacsCommands>`,
+  ``agda`` should expect functions ``Bool → Bool``
+  to go in both of them.
   This is because it is expecting a function and its inverse,
   respectively,
   so fill them with ``Flip`` and its inverse ``Flip``.
 * Check the goal of the next two holes.
   They should be
 
-  .. code-block:: agda
+  .. code-block::
 
     section Flip Flip
 
   and
 
-  .. code-block:: agda
+  .. code-block::
 
      retract Flip Flip
 
-* Write the following so that your code looks like
+* Add the following to your code (make sure you copy it exactly) :
 
   .. code-block:: agda
 
@@ -498,60 +532,69 @@ The isomorphism
       leftInv : retract Flip Flip
       leftInv x = {!!}
 
+  Then :ref:`load <emacsCommands>` the file with ``C-c C-l``.
+  If ``agda`` gives an error it could be due to
+
+  1. missing spaces; ``agda`` is space sensitive
+  2. wrong indentation before ``rightInv`` and ``leftInv``; ``agda`` is intentation sensitive
+  3. missing the ``where`` in the second line.
+  4. lower and upper case differences
+
   The ``where`` allows you to make definitions local to the current definition,
   in the sense that you will not be able to access
   ``rightInv`` and ``leftInv`` outside this proof.
+  We will eventually fill the missing holes from before with ``rightInv`` and ``leftInv``.
+  If you like you can also place the definitions of
+  ``rightInv`` and ``leftInv`` before ``flipIso``.
 
-  .. danger::
+  ..
+     .. raw:: html
 
-     ``agda`` is indentation and space sensitive.
-     So the parts after ``where`` must be indented.
+        <p>
+        <details>
+        <summary>Why did we add an ``x``? </summary>
 
-  .. raw:: html
+     * To find out why we put ``rightInv x`` on the left you can try instead
 
-     <p>
-     <details>
-     <summary>Skipped step</summary>
+        .. code:: agda
 
-  * To find out why we put ``rightInv x`` on the left you can try
-     .. code-block::
+           flipIso : Bool ≅ Bool
+           flipIso = iso Flip Flip {!!} {!!} where
 
-        flipIso : Bool ≅ Bool
-        flipIso = iso Flip Flip {!!} {!!} where
+              rightInv : section Flip Flip
+              rightInv = {!!}
 
-           rightInv : section Flip Flip
-           rightInv = {!!}
+              leftInv : retract Flip Flip
+              leftInv = {!!}
 
-           leftInv : retract Flip Flip
-           leftInv = {!!}
+     * :ref:`Check the goal <emacsCommands>` of the hole ``rightInv = {!!}``
+       and try using ``C-c C-r``.
+       It should give you ``λ x → {!!}``.
+       This says it's asking for something for each ``x : Bool``.
+       (Recall that ``λ x → {!!}`` is the ``agda`` notation for
+       ``x ↦ {!!}``.)
+       If you check the goal you can find out what it wants
+       and that you have available ``x : Bool``.
+     * To do a proof for each ``x : Bool``, we can also just stick
+       ``x`` before the ``=`` and do away with the ``λ`` like this :
 
-  * Check the goal of the hole ``rightInv = {!!}`` and try using ``C-c C-r``.
-    It should give you ``λ x → {!!}``.
-    This says it's asking for something for each ``x : Bool``.
-    (Recall that ``λ x → {!!}`` is the ``agda`` notation for
-    ``x ↦ {!!}``.)
-    If you check the goal you can find out what it wants
-    and that you have available ``x : Bool``.
-  * To do a proof for each ``x : Bool``, we can also just stick
-    ``x`` before the ``=`` and do away with the ``λ`` like this :
+       .. code-block:: agda
 
-    .. code-block:: agda
+          flipIso : Bool ≅ Bool
+          flipIso = iso Flip Flip {!!} {!!} where
 
-       flipIso : Bool ≅ Bool
-       flipIso = iso Flip Flip {!!} {!!} where
+             rightInv : section Flip Flip
+             rightInv x = {!!}
 
-          rightInv : section Flip Flip
-          rightInv x = {!!}
+             leftInv : retract Flip Flip
+             leftInv = {!!}
 
-          leftInv : retract Flip Flip
-          leftInv = {!!}
+     .. raw:: html
 
-  .. raw:: html
+        </details>
+        </p>
 
-     </details>
-     </p>
-
-* Check the goal of the hole ``rightInv x = {!!}``.
+* :ref:`Check the goal <emacsCommands>` of the hole ``rightInv x = {!!}``.
   In the ``*Agda Information*`` window, you should see
 
   .. code-block:: agda
@@ -560,6 +603,8 @@ The isomorphism
      —————————————————————————————————
      x : Bool
 
+  The goal was ``section Flip Flip``, which was the same as ``(x : X) → Flip (Flip x) ≡ x``.
+  After giving an ``x`` in front the goal as become simply ``Flip (Flip x) ≡ x``.
   Try to prove this.
 
   .. raw:: html
@@ -568,11 +613,11 @@ The isomorphism
      <details>
      <summary>Hint</summary>
 
-  You need to case on what ``x`` can be.
+  You need to :ref:`case <emacsCommands>` on what ``x`` can be.
   Then for the case of ``true`` and ``false``,
-  try ``C-c C-r`` to see if ``agda`` can help.
+  try refining with ``C-c C-r`` to see if ``agda`` can help.
 
-  The added benefit of having ``x`` before the ``=``
+  The benefit of having ``x`` before the ``=``
   is exactly this - that we can case on what ``x`` can be.
   This is called *pattern matching*.
 
@@ -582,13 +627,13 @@ The isomorphism
      </p>
 
 * Do the same for ``leftInv x = {!!}``.
-* Fill in the missing goals using ``rightInv``, ``leftInv``.
+* Fill in the missing goals from the original problem using ``rightInv``, ``leftInv``.
 * Use ``C-c C-d`` to check that ``agda`` is okay with ``flipIso``.
 
 The path
 --------
 
-* Navigate to
+* :ref:`Navigate <emacsCommands>` to
 
   .. code-block:: agda
 
@@ -611,7 +656,7 @@ The path
   into paths between the corresponding points in the space of spaces ``Type``.
 * Fill in the hole with ``flipIso``
   and use ``C-c C-d`` to check ``agda`` is happy with ``flipPath``.
-* Try ``C-c C-n`` with ``transport flipPath false``.
+* Try to :ref:`normalise <emacsCommands>` ``transport flipPath false``.
   You should get ``true`` in the ``*Agda Information*`` window.
 
   What ``transport`` did is it took the path ``flipPath`` in the
@@ -641,7 +686,8 @@ from ``true`` to ``false`` is empty.
 We will assume it here and leave the proof as a side quest,
 see :ref:`trueNequivFalse`.
 
-* Load the file with ``C-c C-l`` and navigate to the hole.* Write ``true≢false`` in the hole and refine using ``C-c C-r``,
+* Load the file with ``C-c C-l`` and navigate to the hole.
+  Write ``true≢false`` in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically
   will make a new hole.
 * Check the goal in the new hole using ``C-c C-,``
