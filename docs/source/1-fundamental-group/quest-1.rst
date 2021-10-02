@@ -1,13 +1,13 @@
-.. _quest1HigherHomotopy:
+.. _quest1LoopSpaceOfTheCircle:
 
-*************************
-Quest 1 - Higher Homotopy
-*************************
+**************************************
+Quest 1 - Loop Space of the Circle
+**************************************
 
-.. _part0LoopSpace:
+.. _part0DefinitionOfTheLoopSpace:
 
-Part 0 - Loop Space
-===================
+Part 0 - Definition of the Loop Space
+=====================================
 
 In this quest,
 we continue to formalise the problem statement.
@@ -27,8 +27,11 @@ In general the *loop space* of a space ``A`` at a point ``a`` is defined as foll
 
 .. code:: agda
 
-   Ω : (A : Type) (a : A) → Type
-   Ω A a = a ≡ a
+   loopSpace : (A : Type) (a : A) → Type
+   loopSpace A a = a ≡ a
+
+Exercise - ``loop_times``
+-------------------------
 
 Clearly for each integer ``n : ℤ`` we have a path
 that is '``loop`` around ``n`` times'.
@@ -37,14 +40,14 @@ Locate ``loop_times`` in ``1FundamentalGroup/Quest1.agda``
 
 .. code:: agda
 
-   loop_times : ℤ → Ω S¹ base
+   loop_times : ℤ → loopSpace S¹ base
    loop n times = {!!}
 
 Try casing on ``n``, you should see
 
 .. code:: agda
 
-   loop_times : ℤ → Ω S¹ base
+   loop_times : ℤ → loopSpace S¹ base
    loop pos n times = {!!}
    loop negsuc n times = {!!}
 
@@ -110,182 +113,210 @@ You can use it to find out the definition of ``ℤ`` and ``ℕ``.
    </details>
    </p>
 
-.. _part1HomotopyLevels:
+Part 1 - Making a Path From ``ℤ`` to Itself
+===========================================
 
-Part 1 - Homotopy Levels
-========================
+In the previous part we have defined the map ``loop_times : ℤ → Ω S¹ base``.
+Creating the inverse map is difficult without access to the entire circle.
+Similarly to how we used ``doubleCover`` to distinguish ``refl`` and ``base``,
+the idea is to replace ``Bool`` with ``ℤ``,
+allowing us to distinguish between all loops on ``S¹``.
+In this quest we will construct one of the two comparison maps
+across the whole circle, called ``windingNumber``.
 
-The loop space can contain higher homotopical information that
-the fundamental group does not capture.
-For example, consider ``S²``.
+The plan is :
+
+1. Define a function ``sucℤ : ℤ → ℤ`` that increases every integer by one
+2. Prove that ``sucℤ`` is an isomorphism by constructing
+   an inverse map ``predℤ : ℤ → ℤ``.
+3. Turn the isomorphism ``sucℤ`` into a path
+   ``sucPath : ℤ ≡ ℤ`` using ``isoToPath``
+4. Define ``helix : S¹ → Type`` by mapping ``base`` to ``ℤ`` and
+   a generic point ``loop i`` to ``sucPath i``.
+5. Use ``helix`` and ``endPt`` to define the map
+   ``windingNumberBase : base ≡ base → ℤ``.
+   Intuitively it counts how many times a path loops around ``S¹``.
+   a generic point ``loop i`` to ``sucPath i``.
+6. Generalize this across the circle.
+
+In this part, we focus on ``1``, ``2`` and ``3``.
+
+Defining ``sucℤ``
+-----------------
+
+- Set up the definition of ``sucℤ`` so that it is of the form :
+
+  .. code:: agda
+
+     Name : TypeOfSpace
+     Name inputs = ?
+
+  Just writing in the name and the type of the space is enough for now.
+  Load the file and check that it is looks like:
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Solution:</summary>
+
+  .. code:: agda
+
+     sucℤ : ℤ → ℤ
+     sucℤ = ?
+
+  .. raw:: html
+
+     </details>
+     </p>
+
+- We will define ``sucℤ`` the same way we defined ``loop_times`` :
+  by induction.
+  Do cases on the input of ``sucℤ``.
+  You should have something like :
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Solution:</summary>
+
+  .. code:: agda
+
+     sucℤ : ℤ → ℤ
+     sucℤ pos n = ?
+     sucℤ negsuc n = ?
+
+  .. raw:: html
+
+     </details>
+     </p>
+
+- For the non-negative integers ``pos n`` we want to map to its successor.
+  Recall that the ``n`` here is a point of the naturals ``ℕ`` whose definition is :
+
+  .. code:: agda
+
+     data ℕ : Type where
+       zero : ℕ
+       suc : ℕ → ℕ
+
+  Use ``suc`` to map ``pos n`` to its successor.
+- The negative integers require a bit more care.
+  Recall that annoyingly ``negsuc n`` means "``- (n + 1)``".
+  We want to map ``- (n + 1)`` to ``- n``.
+  Try doing this.
+  Then realise "you run out of negative integers at ``-(0 + 1)``"
+  so you must do cases on ``n`` and treat the ``-(0 + 1)`` case separately.
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>Hint</summary>
+
+  Do ``C-c C-c`` on ``n``.
+  Then map ``negsuc 0`` to ``pos 0``.
+  For ``negsuc (suc n)``, map it to ``negsuc n``.
+
+  .. raw:: html
+
+     </details>
+     </p>
+
+- This completes the definition of ``sucℤ``.
+  Use ``C-c C-n`` to check it computes correctly.
+  E.g. check that ``sucℤ (- 1)`` computes to ``pos 0``
+  and ``sucℤ (pos 0)`` computes to ``pos 1``.
+
+``sucℤ`` is an Isomorphism
+--------------------------
+
+- The goal is to define ``predℤ : ℤ → ℤ`` which
+  "takes ``n`` to its predecessor ``n - 1``".
+  This will act as the (homotopical) inverse of ``sucℤ``.
+  Now that you have experience from defining ``sucℤ``,
+  try defining ``predℤ``.
+- Imitating what we did with ``flipIso`` and
+  give a point ``sucℤIso : ℤ ≅ ℤ``
+  by using ``predℤ`` as the inverse and proving
+  ``section sucℤ predℤ`` and ``retract sucℤ predℤ``.
+
+``sucℤ`` is a Path
+------------------
+
+- Imitating what we did with ``flipPath``,
+  upgrade ``sucℤIso`` to ``sucℤPath``.
+
+Part 2 - Winding Number
+=======================
+
+The ``ℤ``-bundle ``helix``
+--------------------------
+
+We want to make a ``ℤ``-bundle over ``S¹`` by
+'copying ℤ across the loop via ``sucℤPath``'.
+In ``Quest2.agda`` locate
 
 .. code:: agda
 
-   data S² : Type where
+   helix : S¹ → Type
+   helix = {!!}
 
-     base : S²
-     loop : base ≡ base
-     northHemisphere : loop ≡ refl
-     southHemisphere : refl ≡ loop
+Try to imitate the definition of ``doubleCover`` to define the bundle ``helix``.
+You should compare your definition to ours in ``Quest2Solutions.agda``.
+Note that we have called this ``helix``, since the picture of this ``ℤ``-bundle
+looks like
 
-.. raw:: html
-
-   <p>
-   <details>
-   <summary>refl</summary>
-
-
-For any space ``A`` and point ``a : A``,
-``refl`` is the constant path at ``a``.
-Technically speaking, we should write ``refl a`` to indicate the point we are at,
-however ``agda`` is often smart enough to figure that out.
-
-.. raw:: html
-
-   </details>
-   </p>
-
-Intuitively,
-any loop in the sphere ``S²`` based at ``base`` is homotopic to
-the constant path ``refl``.
-In other words, the fundamental group at ``base`` of ``S²`` is trivial.
-However, the "composition" of the path ``southHemisphere`` with ``northHemisphere``
-in ``base ≡ base`` gives the surface of ``S²``,
-which intuitively is not homotopic to the constant point ``base``.
-So ``base ≡ base`` has non-trivial path structure.
-
-.. image:: images/S2.png
-   :width: 1000
-   :alt: description
-
-Here is one way of capturing homotopical data :
-We can check that a space is 'homotopically trivial' (h-trivial)
-from dimension ``n``
-by checking if spheres of dimension ``n`` can be filled.
-To be h-trivial from ``0`` is for any two points
-to have a line in between; to fill ``S⁰``.
-This data is captured in
-
-.. code:: agda
-
-   isProp : Type → Type
-   isProp A = (x y : A) → x ≡ y
-
-.. raw:: html
-
-   <p>
-   <details>
-   <summary>All maps are continuous in HoTT</summary>
-
-There is a subtlety in the definition ``isProp``.
-This is *stronger* than saying that the space ``A`` is path connected.
-Since ``A`` is equipped with a continuous map taking pairs ``x y : A``
-to a path between them.
-
-We will show that ``isProp S¹`` is *empty* despite ``S¹`` being path connected.
-
-.. raw:: html
-
-   </details>
-   </p>
-
-Similarly, to be h-trivial from dimension ``1`` is for any two points ``x y : A``
-and any two paths ``p q : x ≡ y`` to have a homotopy from ``p`` to ``q``;
-to fill ``S¹``.
-This is captured in
-
-.. code:: agda
-
-   isSet : Type → Type
-   isSet A = (x y : A) → isProp (x ≡ y)
-
-To define the fundamental group we will make the loop space satisfy
-``isSet`` by *truncation* the loop space',
-i.e. by forcefully adding homotopies between any two paths
-with the same start and end point.
-However, our work will show directly that the loop space is ``ℤ``
-(connected by some path to ``ℤ``), which satisfies ``isSet``
-(see quest 3).
 ..
-  link
-This implies the loop space satisfies ``isSet``, and *truncation* does nothing.
-We define :ref:`truncation` in a side quest.
+   .. image:: images/helix.png
+      :width: 1000
+      :alt: helix
 
-.. admonition:: Updated goal
+Counting Loops
+--------------
 
-   From now on we set our goal as showing that the loop space is ``ℤ``.
-
-Apart from some exercises here and in :ref:`quest1SideQuests`, we will not revisit
-the ideas of h-triviality or truncation.
-
-.. _part2IsPropS1IsEmpty:
-
-Part 2 - ``isProp S¹`` is empty
-===============================
-
-First we show that ``isSet S¹`` is empty.
-The library contains the result
+Now we can do what was originally difficult - constructing an inverse map
+(over all points).
+Now we want to be able to count how many times a path ``base ≡ base`` loops around
+``S¹``, which we can do now using ``helix`` and finding end points of 'lifted' paths.
+For example the path ``loop`` should loop around once,
+counted by looking at the end point of 'lifted' ``loop``, starting at ``0``.
+Hence try to define
 
 .. code:: agda
 
-   isProp→isSet : (A : Type) → isProp A → isSet A
-
-(see future content about *homotopy levels* .)
-
-.. TODO insert link to content on homotopy levels
-
-which we can then use to show ``isProp S¹`` is also empty.
-Locate ``¬isSetS¹`` in ``1FundamentalGroup/Quest1.agda``.
-
-.. code:: agda
-
-   ¬isSetS¹ : isSet S¹ → ⊥
-   ¬isSetS¹ = {!!}
-
-We assume ``h : isSet S¹``, which
-continuously maps each pair ``x y : A``
-to a point in ``isProp (x ≡ y)``.
-We can apply ``h`` twice to the only point ``base`` available to us,
-obtaining a point of ``isProp (base ≡ base)``.
-Try mapping from this into the empty space.
+   windingNumberBase : base ≡ base → helix base
+   windingNumberBase = {!!}
 
 .. raw:: html
 
    <p>
    <details>
-   <summary>Hint 0</summary>
+   <summary>Hint</summary>
 
-We have already shown that ``Refl ≡ loop`` is the empty space.
-We have imported ``Quest0Solutions.agda`` for you,
-so you can just quote the result from there.
+- ``endPt`` evaluates the end point of 'lifted paths'.
 
 .. raw:: html
 
    </details>
    </p>
 
-.. raw:: html
+Try computing a few values using ``C-c C-n``,
+you can try it on ``refl``, ``loop``, ``loop 3 times``, ``loop (- 1) times`` and so on.
 
-   <p>
-   <details>
-   <summary>Hint 1</summary>
+Generalising
+------------
 
-- assume ``h``
-- type ``Refl≢loop`` it in the hole and refine
-- it should now be asking for a proof that ``Refl ≡ loop``
-- try to use ``h``
+The function ``windingNumberBase``
+can actually be improved without any extra work to a function on all of ``S¹``.
 
-.. raw:: html
+.. code:: agda
 
-   </details>
-   </p>
+   windingNumber : (x : S¹) → base ≡ x → helix x
+   windingNumber = {!!}
 
-Now locate ``¬isProp S¹``.
-
-.. code::
-
-   ¬isPropS¹ : isProp S¹ → ⊥
-   ¬isPropS¹ = {!!}
-
-Try proving this using ``isProp→isSet``.
-
+Try filling this in.
+We will show that this and a general version of ``loop_times`` are
+inverses of each other over ``S¹``, in particular obtaining an isomorphism
+between ``base ≡ base`` and ``ℤ``.

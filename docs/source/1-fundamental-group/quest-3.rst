@@ -29,6 +29,8 @@ where we have the definition of the *disjoint sum of two spaces* as follows
      inl : A → A ⊔ B
      inr : B → A ⊔ B
 
+It says there are two ways of making points in the space,
+taking them from ``A`` and taking them from ``B``.
 Proving ``ℤ ≡ ℕ ⊔ ℕ`` will be done in a :ref:`side quest <intEqNatSumNat>`.
 
 Thus we can break down our goal into two :
