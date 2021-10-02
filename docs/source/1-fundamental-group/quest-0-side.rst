@@ -18,8 +18,8 @@ Here we will take "the same" to mean there are maps from any one to another
 (they are "propositionally the same").
 We will first define the three.
 
-In ``1FundamentalGroup/Quest0SideQuests/Empty.agda`` locate the three definitions
-and try to fill them in according to the above.
+In ``1FundamentalGroup/Quest0.agda``, uncomment this side quest
+and locate these three definitions :
 
 .. code:: agda
 
@@ -32,29 +32,50 @@ and try to fill them in according to the above.
    isoEmpty : (A : Type) → Type
    isoEmpty A = {!!}
 
+Try to fill them in according to the above.
 You may have noticed we used ``Type₁`` in the second definition.
 To find out what ``Type₁`` is,
-see :ref:`_part3Universes` in :ref:`0-trinitarianism`.
+see :ref:`part3Universes` in :ref:`0-trinitarianism`.
 
 Check that your definitions are the same as ours by comparing with
 the solutions in
-``1FundamentalGroup/Quest0SideQuests/EmptySolutions.agda``.
+``1FundamentalGroup/Quest0Solutions.agda``.
 We will make maps from ``toEmpty A`` to ``isoEmpty A`` to ``pathEmpty A``
 and back to ``toEmpty A``.
-First we fill in ``toEmpty→isoEmpty``
+
+First we show that the empty space maps into any other space.
+This is very useful when working with the empty space.
+
+.. code:: agda
+
+   outOf⊥ : (A : Type) → ⊥ → A
+   outOf⊥ = ?
+
+Try to fill in the definition without looking at the hint.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint</summary>
+
+Recall the definition of the empty space
+being a CW-complex with nothing in it.
+We can always :ref:`case <emacsCommadns>`
+on variable points from CW-complexes.
+What cases are there?
+
+.. raw:: html
+
+   </details>
+   </p>
+
+We fill in ``toEmpty→isoEmpty``
 
 .. code:: agda
 
    toEmpty→isoEmpty : (A : Type) → toEmpty A → isoEmpty A
    toEmpty→isoEmpty A = {!!}
-
-.. admonition:: Tip
-
-   The *recursor* of ``⊥`` is quite useful here.
-   The recursor of ``⊥`` says that the empty space has an obvious map
-   into any other space;
-   given a point in ``⊥`` we can get a point in any space.
-   Define the recursor youself or use ``⊥Rec``, which is already there.
 
 .. raw:: html
 
@@ -100,8 +121,8 @@ Try filling in
    <details>
    <summary>Hint</summary>
 
-In general we have ``isoToPath`` which takes in an isomorphism
-and gives a path.
+We converted an isomorphism to a path in
+:ref:`quest 0 <quest0WorkingWithTheCircle>`.
 
 .. raw:: html
 

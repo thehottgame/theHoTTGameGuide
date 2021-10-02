@@ -67,3 +67,19 @@ Agda usage
 - Combo : ``C-c C-.`` does ``C-c C-,`` and ``C-c C-d``
 - Looking up definitions : ``M-SPC c d`` looks up the definition of the thing you are hovering over.
 - Look up unicode shortcut : ``M-SPC h '`` looks up how to type the unicode character you are hovering over.
+
+Unicode shortcuts
+-----------------
+
+In general follow the guidance given above to learn unicode shortcuts.
+However here are some commonly used ones to get you started
+
+- insert ``\to`` for ``→``
+- insert ``\==`` for ``≡``
+- insert ``\==n`` for ``≢``
+- insert ``\bot`` for ``⊥``
+- insert ``\neg`` for ``¬``
+- insert ``\GS`` for ``Σ``
+- insert ``\cong`` for ``≅``
+- insert ``\^`` for superscript, e.g. ``S\^1`` for ``S¹``
+- insert ``\bN`` for ``ℕ`` and ``\bZ`` for ``ℤ``
