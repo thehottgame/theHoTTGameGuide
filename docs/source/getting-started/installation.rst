@@ -381,7 +381,7 @@ Doom Emacs
 ----------
 
 Get doom emacs following instructions made
-`here <earvingad.github.io/posts/doom_emacs_windows/>`_
+`here <https://earvingad.github.io/posts/doom_emacs_windows/>`_
 
 
 ..
