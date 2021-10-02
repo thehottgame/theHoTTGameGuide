@@ -437,10 +437,13 @@ We proceed in steps :
 
      - ``fun : A → B``
      - ``inv : B → A``
-     - ``rightInv`` that says they form a section (more details on this later)
-     - ``leftInv`` that says they form a retract (more details on this later)
-   - (corollary of univalence) any isomorphism can be turned into a path between spaces
+     - ``rightInv`` that says (extensionally) ``fun ∘ inv`` is homotopic to the identity,
+       i.e. given any ``b : B`` we have a path ``fun ∘ inv b ≡ b``.
+     - ``leftInv`` that says (extensionally) ``inv ∘ fun`` is homotopic to the identity.
 
+     You might notice that the above looks like the classical
+     definition of homotopy equivalence. (They turn out to be "the same".)
+   - (corollary of univalence) any isomorphism can be turned into a path between spaces
 
 * In ``1FundamentalGroup/Quest0.agda``, navigate to :
 

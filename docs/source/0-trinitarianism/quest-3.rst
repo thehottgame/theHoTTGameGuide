@@ -41,19 +41,46 @@ It may not look the same as ours.
 Part 1 - The Statement
 ======================
 
-Now we can make the statement:
+Now we can make the statement that a sum of even naturals is even in ``agda``.
+Make sure it is of the form
 
 .. code:: agda
 
-   SumOfEven : (x : Σ ℕ isEven) → (y : Σ ℕ isEven) → isEven (x .fst + y .fst)
-   SumOfEven x y = ?
+   Name : Statement
+   Name = ?
+
+The statement should be of the form ``(x y : A) → B`` where ``A``
+represents the :ref:`subset <totalSpaceAsSubset>` of even naturals
+and ``B`` expresses what it means for the "sum of ``x`` and ``y``" to be even.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint</summary>
+
+Given ``x y : Σ ℕ isEven`` we want to show that their sum
+(really the sum of their fist components) is even,
+so we should give ``isEven (x .fst + y .fst)``
 
 .. tip::
 
    ``x .fst`` is another notation for ``fst x``.
    This works for all sigma types.
 
+.. raw:: html
+
+   </details>
+   </p>
+
 There are three ways to interpret this:
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Spoiler</summary>
+
 
 - For all even naturals ``x`` and ``y``,
   their sum is even.
@@ -64,12 +91,17 @@ There are three ways to interpret this:
   apply the conversion ``_+_``,
   and form a recipe for ``isEven`` of the result.
 - ``isEven (_ .fst + _ .fst)`` is a bundle over the categorical product
-  ``Σ ℕ isEven × Σ ℕ isEven`` and ``SumOfEven`` is a _section_ of the bundle.
+  ``Σ ℕ isEven × Σ ℕ isEven`` and ``SumOfEven`` is a *section* of the bundle.
   This means for every point ``(x , y)`` in ``Σ ℕ isEven × Σ ℕ isEven``,
   it gives a point in the fiber ``isEven (x .fst + y .fst)``.
 
   ..
      (picture)
+
+.. raw:: html
+
+   </details>
+   </p>
 
 More generally given ``A : Type`` and ``B : A → Type``
 we can form the *pi type* ``(x : A) → B x : Type``
@@ -77,7 +109,7 @@ we can form the *pi type* ``(x : A) → B x : Type``
 with three interpretations :
 
 - it is the proposition "for all ``x : A``, we have ``B x``",
-  and each term is a collection of proofs ``bx : B x``,
+  and each term of the pi type `is a collection of proofs ``bx : B x``,
   one for each ``x : A``.
 - recipes of ``(x : A) → B x`` are made by
   converting each ``x : A`` to some recipe of ``B x``.

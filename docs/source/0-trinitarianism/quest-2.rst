@@ -43,6 +43,8 @@ This is called a *sigma type*, which has three interpretations:
      :width: 500
      :alt: SigmaTypeOfIsEven
 
+  .. _totalSpaceAsSubset:
+
   which can also be viewed as the subset of even naturals,
   since the fibers are either empty or singleton.
   (It is a *subsingleton bundle*).
@@ -52,9 +54,10 @@ Part 1 - Making terms in Sigma Types
 
 Making a term of this type has three interpretations:
 
-- a natural ``n : ℕ`` together with a proof ``hn : isEven n`` that ``n`` is even.
-- a recipe ``n : ℕ`` together with a recipe ``hn : isEven n``.
-- a point in the total space is a point ``n : ℕ`` downstairs
+- (giving a proof that there existence of an even natural amounts to giving)
+  a natural ``n : ℕ`` and a proof ``hn : isEven n`` that ``n`` is even.
+- pairing a recipe ``n : ℕ`` with a recipe ``hn : isEven n``.
+- (giving a point in the total space is giving) a point ``n : ℕ`` downstairs
   together with a point ``hn : isEven n`` in its fiber.
 
 Now you can prove that there exists an even natural:
@@ -79,7 +82,7 @@ In the special case when ``B`` is not dependent on ``a : A``,
 i.e. it looks like ``λ a → C`` for some ``C : Type`` then
 ``Σ A B`` is just
 
-- the proposition ""``A`` and ``C``""
+- the proposition "``A`` and ``C``"
   since giving a proof of this is the same as giving a proof
   of ``A`` and a proof of ``C``
 - a recipe ``a : A`` together with a recipe ``c : C``
