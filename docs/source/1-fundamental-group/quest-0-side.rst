@@ -23,14 +23,24 @@ and locate these three definitions :
 
 .. code:: agda
 
-   toEmpty : (A : Type) → Type
-   toEmpty A = {!!}
+   _toEmpty : (A : Type) → Type
+   A toEmpty = {!!}
 
    pathEmpty : (A : Type) → Type₁
    pathEmpty A = {!!}
 
    isoEmpty : (A : Type) → Type
    isoEmpty A = {!!}
+
+.. NOTE::
+
+   You can use underscores when you name a function.
+   ``agda`` will put the inputs in the underscores in order.
+
+.. tip::
+
+   ``agda`` supports unicode symbols such as ``⊥``.
+   See :ref:`here <emacsCommands>` for how to insert ``⊥`` and other symbols.
 
 Try to fill them in according to the above.
 You may have noticed we used ``Type₁`` in the second definition.
@@ -44,12 +54,12 @@ We will make maps from ``toEmpty A`` to ``isoEmpty A`` to ``pathEmpty A``
 and back to ``toEmpty A``.
 
 First we show that the empty space maps into any other space.
-This is very useful when working with the empty space.
+This is *very useful* when working with the empty space.
 
 .. code:: agda
 
    outOf⊥ : (A : Type) → ⊥ → A
-   outOf⊥ = ?
+   outOf⊥ = {!!}
 
 Try to fill in the definition without looking at the hint.
 
@@ -61,7 +71,7 @@ Try to fill in the definition without looking at the hint.
 
 Recall the definition of the empty space
 being a CW-complex with nothing in it.
-We can always :ref:`case <emacsCommadns>`
+We can always :ref:`case <emacsCommands>`
 on variable points from CW-complexes.
 What cases are there?
 
@@ -77,6 +87,12 @@ We fill in ``toEmpty→isoEmpty``
    toEmpty→isoEmpty : (A : Type) → toEmpty A → isoEmpty A
    toEmpty→isoEmpty A = {!!}
 
+.. tip::
+
+   You can use ``where`` to extract lemmas / make local definitions
+   like we did in defining ``flipIso``;
+   see :ref:`here <part2DefiningFlipPathViaUnivalenceTheIsomorphism>`.
+
 .. raw:: html
 
    <p>
@@ -85,7 +101,8 @@ We fill in ``toEmpty→isoEmpty``
 
 - Check the goal to see what we have
   and what we need to give.
-- Assume ``f : toEmpty A``
+- Assume ``f : toEmpty A`` by putting an ``f``
+  before the ``=``.
 - Refine the goal to see what ``agda`` suggests.
 
 .. raw:: html
@@ -140,7 +157,7 @@ Lastly try filling in
 - We can assume a path ``p : pathEmpty A``
 - Check the goal again
 - Since ``toEmpty A`` as defined as ``A → ⊥`` we can assume a point ``x : A``
-- We can follow the point ``x`` along the path ``p`` using ``transport``,
+- We can follow the point ``x`` along the path ``p`` using ``pathToFun``,
   as we did for ``flipPath`` in :ref:`quest0WorkingWithTheCircle`.
 
 .. _trueNequivFalse:
@@ -156,6 +173,16 @@ we will show
    true≢false : true ≡ false → ⊥
    true≢false = {!!}
 
+We do this by making a *subsingleton bundle* over ``Bool``
+whose fiber over ``true`` is the singleton space ``⊤``
+and fiber over ``false`` is the empty space ``⊥``.
+The definition of ``⊤`` is
+
+.. code:: agda
+
+   data ⊤ : Type where
+     tt : ⊤
+
 - Assume a path ``h : true ≡ false``
 - Define a map from ``Bool`` to ``Type``
   (as a lemma or using
@@ -165,7 +192,7 @@ we will show
   since each *fiber* is ``⊤`` and ``⊥``,
   having only a single or no points.
 - We can follow how the point ``tt : ⊤``
-  changes along the path ``h`` using ``transport``,
+  changes along the path ``h`` using ``pathToFun``,
   as we did for ``flipPath`` in :ref:`quest0WorkingWithTheCircle`.
   This should give you a point in the empty space ``⊥``.
 

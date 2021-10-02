@@ -17,7 +17,7 @@ we continue to formalise the problem statement.
    The fundamental group of ``S¹`` is ``ℤ``.
 
 Intuitively,
-the fundamental group of ``S¹`` at ``base`` is
+the fundamental group of ``S¹`` at ``base``
 consists of loops based as ``base`` up to homotopy of paths.
 In homotopy type theory,
 we have a native description of loops based at ``base`` :
@@ -34,7 +34,7 @@ Exercise - ``loop_times``
 -------------------------
 
 Clearly for each integer ``n : ℤ`` we have a path
-that is '``loop`` around ``n`` times'.
+that is "``loop`` around ``n`` times".
 Locate ``loop_times`` in ``1FundamentalGroup/Quest1.agda``
 (note how ``agda`` treats underscores)
 
@@ -42,6 +42,11 @@ Locate ``loop_times`` in ``1FundamentalGroup/Quest1.agda``
 
    loop_times : ℤ → loopSpace S¹ base
    loop n times = {!!}
+
+.. NOTE::
+
+   You can use underscores when you name a function.
+   ``agda`` will put the inputs in the underscores in order.
 
 Try casing on ``n``, you should see
 
@@ -54,13 +59,18 @@ Try casing on ``n``, you should see
 It says to map out of ``ℤ`` it suffices to
 map the non-negative integers (``pos``)
 and the negative integers (``negsuc``).
+The definition of ``ℤ`` in ``agda`` is
 
 .. code:: agda
 
    data ℤ : Type where
-     pos    : (n : ℕ) → ℤ
-     negsuc : (n : ℕ) → ℤ
+     pos    : ℕ → ℤ
+     negsuc : ℕ → ℤ
 
+It says is ``ℤ`` is two copies of ``ℕ`` where the first
+copy represents ``0, 1, 2, ...``,
+and the second represents ``-1, -2, ...``
+(``negsuc n`` is meant to mean ``- (n + 1)``).
 This definition of ``ℤ`` uses the naturals, so try
 casing on ``n`` again, you should see
 
@@ -73,45 +83,75 @@ casing on ``n`` again, you should see
 
 It says to map out of ``ℕ`` it suffices to map ``zero`` and
 map each succesive integer ``suc n`` inductively.
-Try filling the first hole with
-what we get when we loop ``0`` (``pos zero``) times.
-For looping ``pos (suc n)`` times we loop ``n`` times and
-loop once more.
-For this we need composition of paths.
+We can do the same with ``negsuc n``,
+obtaining four cases.
 
 .. code:: agda
 
-   _∙_ : x ≡ y → y ≡ z → x ≡ z
+   loop_times : ℤ → Ω S¹ base
+   loop pos zero times = {!!}
+   loop pos (suc n) times = {!!}
+   loop negsuc zero times = {!!}
+   loop negsuc (suc n) times = {!!}
 
-Try typing ``_∙_`` or ``? ∙ ?`` in the hole (input ``/.``)
-and refining.
-Checking the new holes you should see that now you need
-to give two loops.
-Try giving it '``loop n times``' composed with ``loop``.
-Then try to also define the map on the negative integers.
-You will need to invert paths using ``sym``.
+These four cases represent :
 
-.. code:: agda
+- If you "loop 0 times" then you stay at ``base``.
+- If you "loop n + 1 times", you "loop n times"
+  then "loop once more".
+- If you "loop -1 times", you "loop once in reverse"
+- If you "loop -(n + 2) times", you loop "loop -(n + 1) times"
+  then "loop once more in reverse"
 
-   sym : x ≡ y → y ≡ x
+Individually
 
-.. raw:: html
+- Try filling the first hole with
+  what we get when we loop ``0`` (``pos zero``) times.
+- For looping ``pos (suc n)`` times we loop ``n`` times and
+  loop once more.
+  For this we need composition of paths.
 
-   <p>
-   <details>
-   <summary>Looking up definitions</summary>
+  .. code:: agda
 
-If you don't know the definition of something
-you can look up the definition by sticking your cursor
-on it and pressing ``M-SPC c d`` in *insert mode*
-or ``SPC c d`` in *evil mode*.
+     _∙_ : x ≡ y → y ≡ z → x ≡ z
 
-You can use it to find out the definition of ``ℤ`` and ``ℕ``.
+  Try typing ``_∙_`` or ``? ∙ ?`` in the hole (input ``/.``)
+  and refining.
+  Checking the new holes you should see that now you need
+  to give two loops.
 
-.. raw:: html
+  .. code:: agda
 
-   </details>
-   </p>
+     loop pos (suc n) times = {!!} ∙ {!!}
+
+  Try giving it "``loop n times``" concatenated with ``loop``.
+- To "loop in reverse" we use
+
+  .. code:: agda
+
+     sym : x ≡ y → y ≡ x
+
+  Use this to define "loop -1 times".
+- For the last case "concatenate loop -(n + 1) times with loop in reverse".
+
+..
+   .. raw:: html
+
+      <p>
+      <details>
+      <summary>Looking up definitions</summary>
+
+   If you don't know the definition of something
+   you can look up the definition by sticking your cursor
+   on it and pressing ``M-SPC c d`` in *insert mode*
+   or ``SPC c d`` in *evil mode*.
+
+   You can use it to find out the definition of ``ℤ`` and ``ℕ``.
+
+   .. raw:: html
+
+      </details>
+      </p>
 
 Part 1 - Making a Path From ``ℤ`` to Itself
 ===========================================
@@ -256,7 +296,7 @@ The ``ℤ``-bundle ``helix``
 
 We want to make a ``ℤ``-bundle over ``S¹`` by
 'copying ℤ across the loop via ``sucℤPath``'.
-In ``Quest2.agda`` locate
+In ``Quest1.agda`` locate
 
 .. code:: agda
 
@@ -264,7 +304,7 @@ In ``Quest2.agda`` locate
    helix = {!!}
 
 Try to imitate the definition of ``doubleCover`` to define the bundle ``helix``.
-You should compare your definition to ours in ``Quest2Solutions.agda``.
+You should compare your definition to ours in ``Quest1Solutions.agda``.
 Note that we have called this ``helix``, since the picture of this ``ℤ``-bundle
 looks like
 

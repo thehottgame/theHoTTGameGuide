@@ -27,7 +27,7 @@ Theory - Definition of the Circle
 
 We begin by formalising the problem statement.
 
-A contruction of 'the circle' is :
+A contruction of "the circle" is :
 
 - a point called ``base``
 - an edge from that point to itself called ``loop``
@@ -496,6 +496,8 @@ We proceed in steps :
   Enter ``Flip true``.
   In the ``*Agda Information*`` window, you should see ``false``, as desired.
 
+.. _part2DefiningFlipPathViaUnivalenceTheIsomorphism:
+
 The isomorphism
 ---------------
 
@@ -571,12 +573,14 @@ The isomorphism
   3. missing the ``where`` in the second line.
   4. lower and upper case differences
 
-  The ``where`` allows you to make definitions local to the current definition,
-  in the sense that you will not be able to access
-  ``rightInv`` and ``leftInv`` outside this proof.
-  We will eventually fill the missing holes from before with ``rightInv`` and ``leftInv``.
-  If you like you can also place the definitions of
-  ``rightInv`` and ``leftInv`` before ``flipIso``.
+  .. admonition:: where to use ``where``
+
+     The ``where`` allows you to make definitions local to the current definition,
+     in the sense that you will not be able to access
+     ``rightInv`` and ``leftInv`` outside this proof.
+     We will eventually fill the missing holes from before with ``rightInv`` and ``leftInv``.
+     If you like you can also place the definitions of
+     ``rightInv`` and ``leftInv`` before ``flipIso``.
 
   ..
      .. raw:: html
@@ -689,15 +693,30 @@ The path
   into paths between the corresponding points in the space of spaces ``Type``.
 * Fill in the hole with ``flipIso``
   and use ``C-c C-d`` to check ``agda`` is happy with ``flipPath``.
-* Try to :ref:`normalise <emacsCommands>` ``transport flipPath false``.
+* Try to :ref:`normalise <emacsCommands>` ``pathToFun flipPath false``.
   You should get ``true`` in the ``*Agda Information*`` window.
 
-  What ``transport`` did is it took the path ``flipPath`` in the
+  What ``pathToFun`` did is it took the path ``flipPath`` in the
   space of spaces ``Type`` and followed the point ``false``
   as ``Bool`` is transformed along ``flipPath``.
   The end result is of course ``true``,
   since ``flipPath`` is the path obtained from ``flip``!
-  Try to follow what ``transport`` does in the :ref:`animation<doubleCoverAnimation2>`.
+  Try to follow what ``pathToFun`` does in the
+  :ref:`animation<doubleCoverAnimation2>`.
+
+  .. raw:: html
+
+     <p>
+     <details>
+     <summary>``pathToFun``</summary>
+
+  ``pathToFun`` is called ``transport`` in the cubical library.
+
+  .. raw:: html
+
+     </details>
+     </p>
+
 
 .. _part3LiftingPathsUsingDoubleCover:
 
@@ -722,7 +741,7 @@ see :ref:`trueNequivFalse`.
 
 * Load the file with ``C-c C-l`` and navigate to the hole.
   Write ``true≢false``
-  (input ``\==n`` for ``≢``; see :ref:`looking up unicode shortcuts <emacsCommands>`)
+  (input ``\==n`` for ``≢``; see :ref:`emacsCommands`)
   in the hole and refine using ``C-c C-r``,
   ``agda`` knows ``true≢false`` maps to ``⊥`` so it automatically
   will make a new hole.
@@ -780,7 +799,7 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
 .. code-block:: agda
 
    endPtOfTrue : (p : base ≡ base) → doubleCover base
-   endPtOfTrue p = ?
+   endPtOfTrue p = {!!}
 
 - :ref:`Check the goal<emacsCommands>`.
   It should be asking for
@@ -788,9 +807,9 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
   .. code::
 
      Goal: Bool
-     ————————————————————————————————————————————————————————————
+     —————————————————————————─
      p : base ≡ base
-     ———— Constraints ———————————————————————————————————————————
+     ———— Constraints ———————————————
      ?0 (p = loop) = false : Bool
        (blocked on _29, belongs to problem 90)
      ?0 (p = Refl) = true : Bool (blocked on _29, belongs to problem 90)
@@ -802,9 +821,31 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
   ``agda`` is smart and can figure out how to use ``endPt`` :
 
   1. Type ``endPt`` into the hole and do ``C-c C-r``.
-  2. It should create some new holes.
-  3. :ref:`Check these new holes<emacsCommands>`.
-  4. Try to fill in these holes.
+     .. tip::
+
+        In general if the goal of the hole
+
+        .. code::
+
+           Goal: Y
+           ————————————————————————
+           f : X → Y
+           ...
+
+        is to find a point in a space ``Y``
+        and you have a function ``f : X → Y`` then you can write ``f``
+        in the hole and do ``C-c C-r``.
+
+     You should see
+
+     .. code:: agda
+
+        endPtOfTrue : (p : base ≡ base) → doubleCover base
+        endPtOfTrue p = endPt {!!} {!!} {!!}
+
+  2. :ref:`Check these new holes<emacsCommands>`.
+  3. Try to fill in these holes.
+
 - Once you think you are done,
   you can verify our expectation that ``endPtOfTrue Refl`` is ``true``
   and ``endPtOfTrue loop`` is ``false`` using ``C-c C-n``.

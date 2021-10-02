@@ -66,12 +66,12 @@ Agda usage
   it 'reduces' ``x`` to its 'simplest (normalised) form'
 - Combo : ``C-c C-.`` does ``C-c C-,`` and ``C-c C-d``
 - Looking up definitions : ``M-SPC c d`` looks up the definition of the thing you are hovering over.
-- Look up unicode shortcut : ``M-SPC h '`` looks up how to type the unicode character you are hovering over.
+- Look up unicode commands : ``M-SPC h '`` looks up how to type the unicode character you are hovering over.
 
-Unicode shortcuts
------------------
+Unicode commands
+----------------
 
-In general follow the guidance given above to learn unicode shortcuts.
+In general follow the guidance given above to learn unicode commands.
 However here are some commonly used ones to get you started
 
 - insert ``\to`` for ``→``
