@@ -4,8 +4,8 @@
 Overview
 *************************
 
-This arc introduces the setting 'a place to do maths'.
-The 'types' that will populated this 'place'
+This arc introduces the setting "a place to do maths".
+The "types" that will populated this "place"
 will have three interpretations:
 
 - Proof theoretically, with types as propositions
@@ -51,7 +51,7 @@ Dependent Types
 What is 'the Same'?
 ===================
 
-There will be one thing missing from this 'place to do maths'
+There will be one thing missing from this "place to do maths"
 and that is a notion of *equality*.
 How HoTT treats equality is where it deviates from its predecessors.
 See :ref:`pathsAndEquality`.

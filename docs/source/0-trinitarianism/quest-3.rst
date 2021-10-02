@@ -23,7 +23,7 @@ so it should have type ``ℕ → ℕ → ℕ``.
    n + m = ?
 
 Try coming up with a sensible definition.
-It may not look 'the same' as ours.
+It may not look the same as ours.
 
 .. raw:: html
 
@@ -31,7 +31,7 @@ It may not look 'the same' as ours.
    <details>
    <summary>Hint</summary>
 
-``n + 0`` should be ``n`` and ``n + (m + 1)`` should be ``(n + m) + 1``
+``n + 0`` should be ``n`` and ``n + (m + 1)`` should be ``(n + m) + 1``.
 
 .. raw:: html
 
@@ -107,7 +107,7 @@ Part 2 - Remarks
 - Use ``C-c C-n`` to check that they compute the same values
   on different examples.
 - Uncomment the code for ``Sum'OfEven`` in the solutions.
-  It is just ``SumOfEven`` but with ``+``s changed for ``+'``s.
+  It is just ``SumOfEven`` but with each ``+`` changed to ``+'``.
 - Load the file. Does the proof still work?
 
 Our proof ``SumOfEven`` relied on
@@ -119,4 +119,4 @@ it might not work anymore.
 .. admonition:: Important Question
 
    But ``_+_`` and ``_+'_`` compute the same values.
-   Are ``_+_`` and ``_+'_`` 'the same'? What is 'the same'?
+   Are ``_+_`` and ``_+'_`` "the same"? What is "the same"?

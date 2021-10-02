@@ -52,7 +52,7 @@ Lets see an example of *using* a term of type ``⊤``:
 
 
 - enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
-  Whenever you do this, Agda will check the document is written correctly.
+  Whenever you do this, ``agda`` will check the document is written correctly.
   This will open the ``*Agda Information*`` window looking like
 
   .. code::
@@ -68,9 +68,9 @@ Lets see an example of *using* a term of type ``⊤``:
 - Navigate to the hole ``{ }`` using ``C-c C-f`` (forward) or ``C-c C-b`` (backward)
 - Enter ``C-c C-r``. The ``r`` stands for *refine*.
   Whenever you do this whilst having your cursor in a hole,
-  Agda will try to help you.
-- You should see ``λ x → { }``. This is agdas notation for ``x ↦ { }``
-  and is called ``λ`` abstraction, think ``λ`` for let".
+  ``agda`` will try to help you.
+- You should see ``λ x → { }``. This is ``agda`` notation for ``x ↦ { }``
+  and is called ``λ`` abstraction, think "``λ`` for let".
 - Navigate to the new hole
 - Enter ``C-c C-,`` (this means ``Ctrl-c Ctrl-comma``).
   Whenever you make this command whilst having your cursor in a hole,
@@ -88,10 +88,10 @@ Lets see an example of *using* a term of type ``⊤``:
 - Write the proof/recipe/generalized element ``x`` of ``⊤`` in the hole
 - Press ``C-c C-SPC`` to fill the hole with ``x``.
   In general when you have some term (and your cursor) in a hole,
-  doing ``C-c C-SPC`` will tell Agda to replace the hole with that term.
+  doing ``C-c C-SPC`` will tell ``agda`` to replace the hole with that term.
   ``agda`` will give you an error if it cant make sense of your term.
 - The ``*Agda Information*`` window should now only have two unfilled holes left,
-  this means Agda has accepted your proof.
+  this means ``agda`` has accepted your proof.
 
   .. code::
 
@@ -103,15 +103,15 @@ Here is an important one:
 
 .. code:: agda
 
-   TrueToTrue" : ⊤ → ⊤
-   TrueToTrue" x = { }
+   TrueToTrue' : ⊤ → ⊤
+   TrueToTrue' x = { }
 
 - Naviagate to the hole and check the goal.
 - Note ``x`` is already taken out for you.
 - You can try type ``x`` in the hole and ``C-c C-c``
 - ``c`` stands for cases".
   Doing ``C-c C-c`` with ``x`` in the hole
-  tells agda to do cases on ``x``".
+  tells ``agda`` to do cases on ``x``".
   The only case is ``tt``.
 
 One proof says for any term ``x : ⊤`` give ``x`` again.
@@ -120,13 +120,13 @@ for which we just give ``tt``.
 
 .. admonition:: The same"
 
-   Are these proofs the same"? What is the same"?
+   Are these proofs "the same"? What is "the same"?
 
   (This question is deep and should be unsettling.
   The short answer is that they are *internally* but
-  not *externally* the same".)
+  not *externally* the same.)
 
-Built into the definition of ``⊤`` is agdas way of making a map out of ⊤
+Built into the definition of ``⊤`` is the way ``agda`` can make a map out of ``⊤``
 into another type ``A``, which we have just used.
 It says to map out of ``⊤`` it suffices to do the case when ``x`` is ``tt``", or
 
@@ -159,7 +159,7 @@ We can make a map from ``⊥`` to any other type, in particular into ``⊤``.
 
 - Navigate to the hole and do cases on ``x``.
 
-Agda knows that there are no cases so there is nothing to do!
+``agda`` knows that there are no cases so there is nothing to do!
 (See ``Quest0Solutions.agda``)
 This has three interpretations:
 
@@ -189,7 +189,7 @@ As a construction, this reads :
 - ``ℕ`` is a type of construction
 - ``zero`` is a recipe for ``ℕ``
 - ``suc`` takes an existing recipe for ``ℕ`` and gives
-    another recipe for ``ℕ``.
+  another recipe for ``ℕ``.
 
 We can also see ``ℕ`` categorically :
 ℕ is a natural numbers object in the category ``Type``.
@@ -203,13 +203,13 @@ such that the diagram commutes:
    :alt: nno
 
 ``ℕ`` has no interpretation as a proposition since
-there are too many proofs" -
-mathematicians classically dont distinguish
+there are "too many proofs" -
+mathematicians classically don't distinguish
 between proofs of a single proposition.
 (ZFC doesnt even mention logic internally,
 unlike type theory!)
 
-To see how to use terms of type ``ℕ``, i.e. induction on ``ℕ``,
+To see how to use terms of type ``ℕ``, i.e. to induct on ``ℕ``,
 go to :ref:`quest1DependentTypes`.
 
 .. _part3Universes:
@@ -237,10 +237,10 @@ The numberings of universes are called *levels*.
 It will be crucial that types can be treated as terms.
 This will allows us to
 
-- reason about "*structures*" such as the structure of a group",
-  think for all groups"
+- reason about "*structures*" such as "the structure of a group",
+  to express "for all groups, ..."
 - do category theory without stepping out of the theory
   (no need for classes etc. For experts, we have Grothendieck universes.)
-- reason about when two types are the same",
+- reason about when two types are "the same",
   for example when are two definitions of
-  the natural numbers the same"? What is the same'?
+  the natural numbers "the same"? What is "the same"?

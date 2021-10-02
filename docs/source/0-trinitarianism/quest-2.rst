@@ -24,7 +24,7 @@ In maths we might write
 
    ∃ x ∈ ℕ, isEven x
 
-which in agda notation is
+which in ``agda`` notation is
 
 .. code::
 
@@ -132,7 +132,7 @@ we can do
      div2 : Σ ℕ isEven → ℕ
      div2 (fst₁ , snd₁) = {!!}
 
-- Case on ``fst₁`` and tell agda what to give for ``0 , *``,
+- Case on ``fst₁`` and tell ``agda`` what to give for ``0 , *``,
   i.e. what "zero divided by two" ought to be.
 
   .. code:: agda
@@ -142,7 +142,7 @@ we can do
      div2 (suc fst₁ , snd₁) = {!!}
 
 - Navigate to the second hole and case on ``fst₁`` again.
-  Notice that agda knows there is no term looking like ``1 , *``
+  Notice that ``agda`` knows there is no term looking like ``1 , *``
   so it has skipped that case for us.
 
   .. code:: agda
@@ -159,7 +159,7 @@ we can do
 - Use ``C-c C-n`` and write ``div2 (2 , tt)`` for example.
 - Try dividing ``36`` by ``2``.
 
-*Important Observation* :
+*Important observation* :
 the two proofs ``2 , tt`` and ``36 , tt`` of the statement
 "there exists an even natural" are not "the same" in any sense,
 since if they were ``div2 (2 , tt)`` would be "the same" ``div2 (36/2 , tt)``,

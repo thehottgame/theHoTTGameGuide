@@ -18,7 +18,7 @@ what it means for a natural to be even.
 Part 0 - Predicates / Dependent Constructions / Bundles
 =======================================================
 
-This requires the notion of a _predicate_.
+This requires the notion of a *predicate*.
 In general a predicate on a type ``A : Type`` is
 a term of type ``A → Type``.
 For example,
@@ -40,10 +40,10 @@ For example,
      isEven (suc n) = {!!}
 
   It says "to define a function on ``ℕ``,
-  it suffices to define the function on the _cases_,
+  it suffices to define the function on the *cases*,
   ``zero`` and ``suc n``,
   since these are the only constructors given
-  in the definition of ``ℕ``."
+  in the definition of ``ℕ``".
   This has the following interpretations :
 
   - propositionally, this is the *principle of mathematical induction*.
@@ -72,11 +72,11 @@ For example,
 
   We have just used induction again.
 - Navigate to the first hole and check the goal.
-  Agda should be asking for a term of type ``Type``,
+  ``agda`` should be asking for a term of type ``Type``,
   so fill the hole with ``⊥``,
   since we don"t want ``suc zero`` to be even.
 - Navigate to the next hole and check the goal.
-  You should see in the "agda information" window,
+  You should see in the ``*Agda information*`` window,
 
   .. code::
 
@@ -87,11 +87,11 @@ For example,
   We are in the "inductive step",
   so we have access to the previous natural number.
 - Fill the hole with ``isEven n``,
-  since we want ``suc (suc n(`)` to be even *precisely when*
+  since we want ``suc (suc n)`` to be even *precisely when*
   ``n`` is even.
   The reason we have access to the term ``isEven n`` is again
   because we are in the "inductive step".
-- There should now be nothing in the "agda info" window.
+- There should now be nothing in the ``*Agda information*`` window.
   This means everything is working.
   (Compare your ``isEven`` with our solutions in ``Quest2Solutions.agda``.)
 
@@ -121,14 +121,14 @@ a *dependent type* ``F`` *over* ``A`` is a term ``F : A → Type``.
 This should be drawn as a collection of space parameterised
 by the space ``A``.
 
-.. image:: images/generalBunlde.png
+.. image:: images/generalBundle.png
   :width: 500
   :alt: Bundle
 
-You can check if ``2`` is even by asking agda to "reduce" the term ``isEven 2``
+You can check if ``2`` is even by asking ``agda`` to "reduce" the term ``isEven 2``
 (do ``C-c C-n``, "n" for normalize) and type in ``isEven 2``.
 (You can write in numerals since we are now secretly
-using ``ℕ`` from the cubical agda library.)
+using ``ℕ`` from the cubical ``agda`` library.)
 
 Part 2 - Using the Trinitarianism
 =================================

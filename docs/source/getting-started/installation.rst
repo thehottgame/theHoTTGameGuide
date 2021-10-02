@@ -380,8 +380,8 @@ Prerequisites
 Doom Emacs
 ----------
 
-Get doom emacs following instructions made
-`here <https://earvingad.github.io/posts/doom_emacs_windows/>`_
+Get doom emacs following instructions
+`here. <https://earvingad.github.io/posts/doom_emacs_windows/>`_
 
 
 ..
