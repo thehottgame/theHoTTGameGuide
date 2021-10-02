@@ -53,6 +53,13 @@ This reads :
   This is phrased as saying ``loop`` is a point in ``base ≡ base``
   the *space of paths from* ``base`` *to* ``base``.
 
+.. admonition:: Path
+
+   We think of a path in a space ``A`` as consisting
+   of its starting point, its end point,
+   and some generic point in the middle
+   agreeing on the boundary.
+
 You can see this as defining the circle via a CW-complex.
 
 .. admonition:: Type theory notation
@@ -62,7 +69,7 @@ You can see this as defining the circle via a CW-complex.
    Note that in the above definition ``S¹`` is seen
    both as a point and a space depending on the context.
    In ``cubical agda``,
-   everything is a point in a 'unique' space.
+   everything is a point in a "unique" space.
 
 .. admonition:: Type theory notation
 
@@ -230,6 +237,23 @@ Part 1 -  ``Refl ≡ loop`` is empty
 To get a better feel of ``S¹``,
 we show that the space of paths (homotopies) between
 ``Refl`` and ``loop``, written ``Refl ≡ loop``, is empty.
+
+.. admonition:: Paths between paths
+
+   In general if we have ``p q : x ≡ y`` in a space ``A``
+   then a path ``h : p ≡ q`` in the path space ``x ≡ y``
+   consists of
+
+   - the starting path ``p``
+   - the end path ``q``
+   - and some generic path in between ``h i : x ≡ y``
+     that agrees on the boundary
+
+   ..
+     insert picture
+
+   In algebraic topology this is called a *path homotopy*.
+
 First, we define the empty space and what it means for a space to be empty.
 Here is what this looks like in ``agda`` :
 
@@ -247,7 +271,7 @@ Here are three candidate definitions for a space ``A`` to be empty :
   in the space of spaces ``Type`` from ``A`` to the empty space
 * there is an isomorphism ``i : A ≅ ⊥`` of spaces
 
-These turn out to be 'the same'
+These turn out to be "the same"
 (see :ref:`differentNotionsOfEmpty`),
 however for our present purposes we will use the first definition.
 Our goal is therefore to produce a point in the function space
@@ -299,9 +323,9 @@ All the fibers look like ``Bool``, hence our choice of the name ``Bool``- \*bund
 
 We will get a path from ``true`` to ``false``
 in the fiber of ``doubleCover`` over ``base``
-by 'lifting the homotopy' ``h : Refl ≡ loop`` and
-considering the end points of the 'lifted paths'.
-``Refl`` will 'lift' to a 'constant path' and ``loop`` will 'lift' to
+by "lifting the homotopy" ``h : Refl ≡ loop`` and
+considering the end points of the "lifted paths".
+``Refl`` will "lift" to a "constant path" and ``loop`` will "lift" to
 
 .. image:: images/lifted_loops.png
   :width: 1000
@@ -351,7 +375,7 @@ define ``doubleCover``.
   write ``Bool`` in the hole, then do ``C-c C-SPC`` to :ref:`fill <emacsCommands>` it.
 * :ref:`Navigate <emacsCommands>` to the second new hole and :ref:`check the goal<emacsCommands>`.
   Here ``loop i`` is a generic point in the path ``loop``,
-  where ``i : I`` is a generic point of the 'unit interval'.
+  where ``i : I`` is a generic point of the "unit interval".
   We are assuming we have ``flipPath`` defined already
   and want to map ``loop`` to ``flipPath``,
   so ``loop i`` should map to a generic point in the path ``flipPath``.
@@ -748,35 +772,35 @@ see :ref:`trueNequivFalse`.
 * Check the goal in the new hole using ``C-c C-,``
   it should be asking for a path from ``true`` to ``false``.
 
-To give this path we need to visualise 'lifting' ``Refl``, ``loop``
+To give this path we need to visualise "lifting" ``Refl``, ``loop``
 and the homotopy ``h : Refl ≡ loop``
 along the Bool-bundle ``doubleCover``.
-When we 'lift' ``Refl`` - starting at the point ``true : doubleCover base`` -
+When we "lift" ``Refl`` - starting at the point ``true : doubleCover base`` -
 it will still be a constant path at ``true``,
 drawn as a dot ``true``.
-When we 'lift' ``loop`` - starting at the point ``true : doubleCover base`` -
+When we "lift" ``loop`` - starting at the point ``true : doubleCover base`` -
 it will look like
 
 .. image:: images/lifted_loops.png
   :width: 1000
   :alt: liftedPaths
 
-The homotopy ``h : Refl ≡ loop`` is 'lifted'
-(starting at 'lifted ``Refl``')
+The homotopy ``h : Refl ≡ loop`` is "lifted"
+(starting at "lifted ``Refl``")
 to some kind of surface
 
 .. image:: images/lifted_homotopy.png
   :width: 1000
   :alt: liftedHomotopy
 
-According to the pictures the end point of the 'lifted'
-``Refl`` is ``true`` and the end point of the 'lifted' ``loop`` is ``false``.
+According to the pictures the end point of the "lifted"
+``Refl`` is ``true`` and the end point of the "lifted" ``loop`` is ``false``.
 We are interested in the end points of each
-'lifted paths' in the 'lifted homotopy',
+"lifted paths" in the "lifted homotopy",
 since this forms a path in the endpoint fiber ``doubleCover base``
 from ``true`` to ``false``.
 
-We can evaluate the end points of both 'lifted paths' by using
+We can evaluate the end points of both "lifted paths" by using
 something in the cubical library (called ``subst``) which we call ``endPt``.
 
 .. code-block:: agda
@@ -788,10 +812,10 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
    It says given a bundle ``B`` over space ``A``,
    a path ``p`` from ``x : A`` to ``y : A``, and
    a point ``bx`` above ``x``,
-   we can get the end point of 'lifted ``p`` starting at ``bx``'.
+   we can get the end point of "lifted ``p`` starting at ``bx``".
    So let's make the function that takes
    a path from ``base`` to ``base`` and spits out the end point
-   of the 'lifted path' starting at ``true``.
+   of the "lifted paths" starting at ``true``.
 
 ..
   insert image of endPt
