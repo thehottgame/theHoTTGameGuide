@@ -30,6 +30,12 @@ In general the *loop space* of a space ``A`` at a point ``a`` is defined as foll
    loopSpace : (A : Type) (a : A) → Type
    loopSpace A a = a ≡ a
 
+For now, we will treat the loop space of ``S¹`` as the fundamental group.
+Later we will understand why this is illegal in general
+(the fundamental group is *set truncated*)
+but legitimate in this special case
+(the loop space of ``S¹`` turns out to be a *set* anyway).
+
 Exercise - ``loop_times``
 -------------------------
 
@@ -60,6 +66,8 @@ It says to map out of ``ℤ`` it suffices to
 map the non-negative integers (``pos``)
 and the negative integers (``negsuc``).
 The definition of ``ℤ`` in ``agda`` is
+
+.. _definitionOfZ:
 
 .. code:: agda
 

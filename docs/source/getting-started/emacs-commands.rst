@@ -83,3 +83,5 @@ However here are some commonly used ones to get you started
 - insert ``\cong`` for ``≅``
 - insert ``\^`` for superscript, e.g. ``S\^1`` for ``S¹``
 - insert ``\bN`` for ``ℕ`` and ``\bZ`` for ``ℤ``
+- insert ``\.`` for ``∙``
+- insert ``\sqcup`` for ``⊔``

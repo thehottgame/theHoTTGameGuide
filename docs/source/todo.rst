@@ -178,7 +178,7 @@ Intuitively,
 any loop in the sphere ``S²`` based at ``base`` is homotopic to
 the constant path ``refl``.
 In other words, the fundamental group at ``base`` of ``S²`` is trivial.
-However, the "composition" of the path ``southHemisphere`` with ``northHemisphere``
+However, the "concatenation" of the path ``southHemisphere`` with ``northHemisphere``
 in ``base ≡ base`` gives the surface of ``S²``,
 which intuitively is not homotopic to the constant point ``base``.
 So ``base ≡ base`` has non-trivial path structure.
