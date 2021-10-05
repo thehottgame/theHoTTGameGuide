@@ -4,6 +4,12 @@
 Quest 2 - ``ℤ`` is a Set
 ****************************
 
+..
+   **** teaching we just teach them how to compute
+   using J with some motivation
+   (how to think about it but not the motivation)
+   We will keep elaborations of this in 0-trinitarianism
+
 In the :ref:`previous quest<quest3LoopSpaceOfTheCircle>`
 we treated the loop space as the fundamental group of the circle.
 The reason for doing this is:
@@ -27,16 +33,16 @@ The reason for doing this is:
 
   .. insert picture
 
-- However, it turns out that ``loopSpace S¹ base`` satisfies 2.
+- However, it turns out that ``loopSpace S¹ base`` satisfies 2
   already - we say it *is a set* -
-  so *truncation* does nothing.
+  so *set truncation* does nothing.
 - By the end of this entire arc we will have made
   a path in the space ``loopSpace S¹ base ≡ ℤ``.
   In this quest we will show that ``ℤ`` is a set,
-  hence using ``pathToFun`` or ``endPt`` we can
-  also show that ``loopSpace S¹ base`` is a set.
+  hence using ``pathToFun`` or ``endPt`` we will evenutally be able to show
+  that ``loopSpace S¹ base`` is a set.
 
-Hence for this quest we aim to show
+Hence for this quest our goal is
 
 .. admonition:: Goal
 
@@ -53,8 +59,8 @@ Where
    isSet A = (x y : A) (p q : x ≡ y) → p ≡ q
 
 
-Showing ``ℤ`` is a set
-----------------------
+Part 0 - ``ℤ`` as a disjoint sum ``ℕ ⊔ ℕ``
+==========================================
 
 As a first step, we note that ``ℤ`` actually looks like
 two disjoint copies of ``ℕ``, i.e. we have
@@ -115,7 +121,9 @@ Thus we can break down our goal into two :
 Goal 1 will be handled in a :ref:`side quest <isSetNat>`.
 We focus on Goal 2 in this section.
 
-Part 0 - Paths as Equality
+.. _part1PathsAsEquality:
+
+Part 1 - Paths as Equality
 ==========================
 
 We first take a philosophical detour, which will soon bring rewards.
@@ -145,7 +153,8 @@ Recall that in the ``agda`` library we have
    We do that by just using curley braces ``{ }`` instead
    of round braces.
    This is why when we use ``refl`` we don't need to mention
-   the inputs ``A`` and ``x``.
+   the inputs ``A`` and ``x``,
+   ``agda`` is smart enough to figure them out itself.
 
 .. raw:: html
 
@@ -169,7 +178,8 @@ We can read this as
 
 - Paths can be reversed.
 - Symmetry; for any space ``A`` point ``x`` and ``y`` in ``A``
-  if ``x`` equals ``y`` then ``y`` equals ``x``.
+  if we have a proof that ``x`` equals ``y`` then
+  we can turn that into a proof that ``y`` equals ``x``.
 
 Furthermore we have
 
@@ -178,10 +188,11 @@ Furthermore we have
    _∙_ : {A : Type} {x y z : A} (p : x ≡ y) (q : y ≡ z) → x ≡ z
 
 - We can concatenate paths.
-- Transitivity; if ``x`` equals ``y`` and ``y`` equals ``z`` then
-  ``x`` equals ``z``
+- Transitivity; if we have proofs that
+  ``x`` equals ``y`` and ``y`` equals ``z`` then
+  we get a proof that ``x`` equals ``z``
 
-In this perspective we can review what we have shown before
+We can review what we have shown before in this perspective
 
 - ``a ≡ b → ⊥`` can be read as ``a`` is not equal to ``b``
   since assuming a proof that ``a`` is equal to ``b``
@@ -208,19 +219,24 @@ In this perspective we can review what we have shown before
 
    In HoTT the fact that two things are equal
    may not have a unique proof.
-   As we saw already that ``flipPath`` and ``refl``
-   are both proofs that ``Bool`` is equal to itself,
-   but computing the image of ``true`` under ``pathToFun``
-   using ``flipPath`` and ``refl`` will give us ``false``
-   and ``true`` respectively.
+   We have seen that ``refl`` and ``loop``
+   are both proofs that ``base`` is equal to itself,
+   but we showed that these proofs are not equal.
    This is an example of proof relevance;
    that we care about which proof of equality we give.
+
+.. admonition:: Trinitarianism
+
+   It is *not just the path space* that can be
+   interpreted as a proposition.
+   To have a proper introduction to this perspective
+   see our arc on :ref:`trinitarianism <0-trinitarianism>`.
 
 From now on we will switch between these perspectives
 depending on which is more appropriate.
 The "equality" point of view will help us to motivate important proofs.
 
-Part 1 - Groupoid laws
+Part 2 - Groupoid laws
 ======================
 
 Using this propositional perspective we can prove that any space
@@ -295,8 +311,8 @@ If all was correct, we have just produced a proof that
 Similarly,
 formulate and prove the statement that ``refl`` is a left identity.
 
-``sym`` is inverts arrows
--------------------------
+``sym`` inverts arrows
+----------------------
 
 In ``1FundamentalGroup/Quest2.agda`` locate
 
@@ -410,17 +426,176 @@ We have just shown that composition is associative.
 This completes our goal of showing that each space
 looks like a groupoid.
 
-Part 1 - First Attempt at Path Space of Sums / Coproducts
+Part 3 - First Attempt at Path Space of Sums / Coproducts
 =========================================================
+
 
 ..
    attempt path space of coproduct
    idea for ``J`` : think about recursor of equality
 
-Part 2 - Justifying ``J`` Geometrically
+Part 4 - Justifying ``J`` Geometrically
 =======================================
 
 .. geometrically realise ``J`` as transport + "refl in centre"
 
-Part 3 - Finishing Path Space of Sums
+Part 5 - Finishing Path Space of Sums
 =====================================
+
+IDK
+---
+
+We want to show that ``ℤ`` is a set,
+which we reduce to showing that ``ℕ ⊔ ℕ`` is a set
+by the path ``ℤ≡ℕ⊔ℕ`` we made at the beginning.
+Intuitively if ``ℕ`` is a set then two disjoint
+copies of it should also be a set,
+(think about filling spheres on the disjoint sum).
+
+So we first formulate a generalization of this result ``isSet⊔``,
+which says if spaces ``A`` and ``B`` are both sets
+then so is their disjoint sum.
+Please do this at the end of ``1FundamentalGroup/Quest2.agda``.
+It should look like
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code::
+
+   isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+   isSet⊔ = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+We can use this to show ``isSet (ℕ ⊔ ℕ)``, using ``isSetℕ : isSet ℕ``,
+which will be shown in a :ref:`side quest <isSetNat>`.
+Then using either ``pathToFun`` or ``endPt`` you can show
+``isSet ℤ`` from ``isSet (ℕ ⊔ ℕ)``,
+using the path from ``ℤ`` to ``ℕ ⊔ ℕ`` we made earlier.
+Try to set this up after your definition of ``isSet⊔``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint : The statement</summary>
+
+.. code:: agda
+
+   isSetℤ : isSet ℤ
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint : using ``pathToFun`` and ``endPt``</summary>
+
+To use ``pathToFun`` you must figure out what path you are following
+and what point you are following the path along.
+
+To use ``endPt`` you must figure out what bundle you are making,
+what the path in the base space is,
+and what point you are starting at in the first fiber.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Partial solutions</summary>
+
+The point you need to follow in either case
+is the point in the space ``isSet (ℕ ⊔ ℕ)``.
+Which we have :
+
+.. code:: agda
+
+   isSetℤ : isSet ℤ
+   isSetℤ = pathToFun {!!} (isSet⊔ isSetℕ isSetℕ)
+
+   isSetℤ' : isSet ℤ
+   isSetℤ' = endPt {!!} {!!} (isSet⊔ isSetℕ isSetℕ)
+
+.. raw:: html
+
+   </details>
+   </p>
+
+Once this is complete we can go back and work on ``isSet⊔``.
+
+- We assume ``hA : isSet A``,
+  ``hB : isSet B``, and points ``x y : A ⊔ B``.
+  Following along in ``agda`` your code should look like
+
+  .. code:: agda
+
+     isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+     isSet⊔ hA hB x y = {!!}
+
+- Check the goal.
+  It should be asking for a point in the space ``isProp (x ≡ y)``.
+- This is because the slicker definition of ``isSet`` used ``isProp``.
+
+  .. code:: agda
+
+     isProp : Type → Type
+     isProp A = (x y : A) → x ≡ y
+
+     isSet : Type → Type
+     isSet A = (x y : A) → isProp (x ≡ y)
+
+  Whilst ``isSet A`` says that any circle ``S¹`` can be filled,
+  ``isProp A`` - "``A`` is a proposition" -
+  says any two points has a path in between; ``S⁰`` can be filled.
+
+We must stop here and consider how to get information on
+the path space of ``A ⊔ B`` when our hypotheses are
+about the path spaces of ``A`` and ``B`` respectively.
+We could try to case on ``x`` and ``y``.
+
+- If ``x`` and ``y`` are both of the form ``inl ax`` and
+  ``inl ay`` for ``ax ay : A``,
+  then we are reduced to proving ``isProp (inl ax ≡ inl ay)``.
+  This *should* be due to ``hA``, which gives us a point in
+  ``isProp (ax ≡ ay)``.
+  However somehow we would have to identify the spaces
+  ``inl ax ≡ inl ay`` and ``ax ≡ ay``.
+- If ``x`` and ``y`` are of the forms ``inl ax`` and ``inr by``
+  respectively for ``ax : A`` and ``by : B`` then
+  intuitively the space ``inl ax ≡ inr bx`` *should* be empty.
+- The other two cases are similar.
+
+The conclusion is that we need some kind of
+classification of the path space of disjoint sums.
+
+.. admonition:: Path space of disjoint sums
+
+   A path in the the disjoint sum
+   should just be a path in one of the two parts.
+
+
+
+
+
+isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+isSet⊔ hA hB x y = pathToFun (cong isProp (sym (Path≡⊔NoConfusion x y)))
+                     (isProp⊔NoConfusion hA hB x y)
+
+isSetℤ : isSet ℤ
+isSetℤ = pathToFun (cong isSet (sym ℤ≡ℕ⊔ℕ)) (isSet⊔ isSetℕ isSetℕ)

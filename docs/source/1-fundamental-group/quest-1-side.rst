@@ -1,11 +1,12 @@
-.. _quest1SideQuests:
+..
+   .. _quest1SideQuests:
 
-Quest 1 - Side Quests
-=====================
+   Quest 1 - Side Quests
+   =====================
 
-Under construction
+   Under construction
 
-.. _truncation:
+   .. _truncation:
 
-Truncation
-----------
+   Truncation
+   ----------
