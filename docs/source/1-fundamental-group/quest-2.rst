@@ -426,24 +426,8 @@ We have just shown that composition is associative.
 This completes our goal of showing that each space
 looks like a groupoid.
 
-Part 3 - First Attempt at Path Space of Sums / Coproducts
-=========================================================
-
-
-..
-   attempt path space of coproduct
-   idea for ``J`` : think about recursor of equality
-
-Part 4 - Justifying ``J`` Geometrically
-=======================================
-
-.. geometrically realise ``J`` as transport + "refl in centre"
-
-Part 5 - Finishing Path Space of Sums
-=====================================
-
-IDK
----
+Part 3 - ``isSet ℤ``
+====================
 
 We want to show that ``ℤ`` is a set,
 which we reduce to showing that ``ℕ ⊔ ℕ`` is a set
@@ -455,7 +439,7 @@ copies of it should also be a set,
 So we first formulate a generalization of this result ``isSet⊔``,
 which says if spaces ``A`` and ``B`` are both sets
 then so is their disjoint sum.
-Please do this at the end of ``1FundamentalGroup/Quest2.agda``.
+Please do this in ``1FundamentalGroup/Quest2.agda`` where indicated.
 It should look like
 
 .. raw:: html
@@ -537,7 +521,29 @@ Which we have :
    </details>
    </p>
 
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solutions</summary>
+
+.. code:: agda
+
+   isSetℤ : isSet ℤ
+   isSetℤ = pathToFun (cong isSet (sym ℤ≡ℕ⊔ℕ)) (isSet⊔ isSetℕ isSetℕ)
+
+   isSetℤ' : isSet ℤ
+   isSetℤ' = endPt (λ A → isSet A) (sym ℤ≡ℕ⊔ℕ) (isSet⊔ isSetℕ isSetℕ)
+
+.. raw:: html
+
+   </details>
+   </p>
+
 Once this is complete we can go back and work on ``isSet⊔``.
+
+``isProp`` and ``isSet``
+------------------------
 
 - We assume ``hA : isSet A``,
   ``hB : isSet B``, and points ``x y : A ⊔ B``.
@@ -572,8 +578,8 @@ We could try to case on ``x`` and ``y``.
 - If ``x`` and ``y`` are both of the form ``inl ax`` and
   ``inl ay`` for ``ax ay : A``,
   then we are reduced to proving ``isProp (inl ax ≡ inl ay)``.
-  This *should* be due to ``hA``, which gives us a point in
-  ``isProp (ax ≡ ay)``.
+  This *should* be due to ``hA``, which gives us
+  ``hA ax ay : isProp (ax ≡ ay)``.
   However somehow we would have to identify the spaces
   ``inl ax ≡ inl ay`` and ``ax ≡ ay``.
 - If ``x`` and ``y`` are of the forms ``inl ax`` and ``inr by``
@@ -584,18 +590,186 @@ We could try to case on ``x`` and ``y``.
 The conclusion is that we need some kind of
 classification of the path space of disjoint sums.
 
+Path space of disjoint sums
+---------------------------
+
 .. admonition:: Path space of disjoint sums
 
    A path in the the disjoint sum
    should just be a path in one of the two parts.
 
+   Viewed as equality, this says points from ``A``
+   cannot be confused with points from ``B``
+   or points in ``A`` they were not already equal to.
+
+For now we leave ``isSet⊔`` alone and define a function ``⊔NoConfusion``
+that takes two points in ``A ⊔ B`` and returns a space,
+which is meant to represent the path space in each case.
+Try to describe this space in ``1FundamentalGroup/Quest2.agda``.
+It should look like:
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   ⊔NoConfusion : {A B : Type} → A ⊔ B → A ⊔ B → Type
+   ⊔NoConfusion = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+Then assume points ``x`` and ``y`` in the disjoint sum
+and try to case on them.
+There should be four cases.
+
+- When both points are from ``A``,
+  i.e. they are ``inl ax`` and ``inl ay``,
+  then we should give the space ``ax ≡ ay``,
+  which we expect to be isomorphic to ``inl ax ≡ inl ay``.
+- (Two cases) When each is from a different space we expect the path
+  space between them to be empty, so we should give ``⊥``.
+- If both are from ``B`` then we should
+  replicate what we did in the first case.
+
+Concluding ``isSet⊔``
+---------------------
+
+Now we have two of goals :
+
+- "``Path≡⊔NoConfusion``" :
+  We need to show that for each ``x y : A ⊔ B``
+  the path space is equal to our classification,
+  i.e. that ``(x ≡ y) ≡ (⊔NoConfusion x y)``
+- "``isProp⊔NoConfusion``" : For ``isSet⊔``, given
+  ``hA : isProp A``, ``hB : isProp B`` and ``x y : A ⊔ B``
+  we needed to show ``isProp (x ≡ y)``.
+  Hence we want to show that under the same assumptions
+  ``isProp (⊔NoConfusion x y)``.
+
+Formalise both of these above appropriate places indicated in
+``1FundamentalGroup/Quest2.agda``.
+They should look like
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solutions</summary>
+
+.. code:: agda
+
+   Path≡⊔NoConfusion : (x y : A ⊔ B) → (x ≡ y) ≡ ⊔NoConfusion x y
+   Path≡⊔NoConfusion = {!!}
+
+   isProp⊔NoConfusion : isSet A → isSet B → (x y : A ⊔ B) → isProp (⊔NoConfusion x y)
+   isProp⊔NoConfusion = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. tip:: Local variables
+
+   If you are tired of writing ``{A B : Type} →`` each time
+   you can stick
+
+   .. code::
+
+      private
+        variable
+          A B : Type
+
+   at the beginning of your ``agda`` file,
+   and it will assume ``A`` and ``B`` implicitely
+   whenever they are mentioned.
+   Make sure it is indented correctly.
+
+Without showing either of these new definitions,
+try using them to complete ``isSet⊔``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint</summary>
+
+We can use ``pathToFun`` or ``endPt``
+to follow how a proof of ``isProp`` on
+``⊔NoConfusion`` changes into a proof of in ``isProp``
+on the path space ``x ≡ y``
+(where proofs are points in a space).
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Partial solutions</summary>
+
+.. code:: agda
+
+   isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+   isSet⊔ hA hB x y = pathToFun {!!} (isProp⊔NoConfusion hA hB x y)
+
+   isSet⊔' : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+   isSet⊔' hA hB x y = endPt {!!} {!!} (isProp⊔NoConfusion hA hB x y)
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solutions</summary>
+
+.. code:: agda
+
+   isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+   isSet⊔ hA hB x y = pathToFun (cong isProp (sym (Path≡⊔NoConfusion x y)))
+                        (isProp⊔NoConfusion hA hB x y)
+
+   isSet⊔' : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
+   isSet⊔' hA hB x y = endPt (λ A → isProp A) (sym (Path≡⊔NoConfusion x y))
+                        (isProp⊔NoConfusion hA hB x y)
+
+.. raw:: html
+
+   </details>
+   </p>
+
+Proving ``isProp⊔NoConfusion``
+------------------------------
+
+Part 4 - Proving ``Path≡⊔NoConfusion``
+======================================
+
+..
+   Part 3 - First Attempt at Path Space of Sums / Coproducts
+   =========================================================
 
 
+   ..
+      attempt path space of coproduct
+      idea for ``J`` : think about recursor of equality
 
+   Part 4 - Justifying ``J`` Geometrically
+   =======================================
 
-isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
-isSet⊔ hA hB x y = pathToFun (cong isProp (sym (Path≡⊔NoConfusion x y)))
-                     (isProp⊔NoConfusion hA hB x y)
+   .. geometrically realise ``J`` as transport + "refl in centre"
 
-isSetℤ : isSet ℤ
-isSetℤ = pathToFun (cong isSet (sym ℤ≡ℕ⊔ℕ)) (isSet⊔ isSetℕ isSetℕ)
+   Part 5 - Finishing Path Space of Sums
+   =====================================
