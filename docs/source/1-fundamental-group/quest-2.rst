@@ -208,7 +208,7 @@ We can review what we have shown before in this perspective
   hence replacing a point in the fiber of ``x``
   with a point in the fiber of ``y``.
 - ``cong : (f : A → B) → (p : x ≡ y) → f x ≡ f y``
-  says that the image of a point under application of a function is unique.
+  says that if two points are equal then their images are equal.
 - ``true`` is not equal to ``false``
 - ``refl`` is not equal to ``loop``
 - ``flipPath : Bool ≡ Bool`` is a non-trivial equality
@@ -256,7 +256,7 @@ which says
    ``(y : A) × (p : x ≡ y)`` - the space of paths in ``A``
    that start at ``x`` -
    to make a map ``(y : A) (p : x ≡ y) → M y p``
-   it suffices to just give a point in ``M x refl``
+   it suffices to just give a point in ``M x refl`` :
 
    .. code:: agda
 
@@ -270,6 +270,19 @@ which says
    to show ``M`` about things equal to ``x``
    it suffices to just show it for ``x``.
    We assume ``J`` for now and justify it geometrically later on.
+
+   Importantly if you feed ``J`` a motive ``M``,
+   a proof ``prefl : M x refl`` and the path ``refl``,
+   ``J`` will give you something that is equal to ``prefl`` :
+
+   .. _JRefl:
+
+   .. code:: agda
+
+      JRefl : {x : A}
+          (M : (y : A) (p : x ≡ y) → Type)
+          → (hrefl : M x refl)
+          → J M hrefl ≡ refl
 
 ``refl`` is the identity
 ------------------------
@@ -646,7 +659,7 @@ Now we have two of goals :
   We need to show that for each ``x y : A ⊔ B``
   the path space is equal to our classification,
   i.e. that ``(x ≡ y) ≡ (⊔NoConfusion x y)``
-- "``isProp⊔NoConfusion``" : For ``isSet⊔``, given
+- "``isSet⊔NoConfusion``" : For ``isSet⊔``, given
   ``hA : isProp A``, ``hB : isProp B`` and ``x y : A ⊔ B``
   we needed to show ``isProp (x ≡ y)``.
   Hence we want to show that under the same assumptions
@@ -667,8 +680,8 @@ They should look like
    Path≡⊔NoConfusion : (x y : A ⊔ B) → (x ≡ y) ≡ ⊔NoConfusion x y
    Path≡⊔NoConfusion = {!!}
 
-   isProp⊔NoConfusion : isSet A → isSet B → (x y : A ⊔ B) → isProp (⊔NoConfusion x y)
-   isProp⊔NoConfusion = {!!}
+   isSet⊔NoConfusion : isSet A → isSet B → (x y : A ⊔ B) → isProp (⊔NoConfusion x y)
+   isSet⊔NoConfusion = {!!}
 
 .. raw:: html
 
@@ -720,10 +733,10 @@ on the path space ``x ≡ y``
 .. code:: agda
 
    isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
-   isSet⊔ hA hB x y = pathToFun {!!} (isProp⊔NoConfusion hA hB x y)
+   isSet⊔ hA hB x y = pathToFun {!!} (isSet⊔NoConfusion hA hB x y)
 
    isSet⊔' : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
-   isSet⊔' hA hB x y = endPt {!!} {!!} (isProp⊔NoConfusion hA hB x y)
+   isSet⊔' hA hB x y = endPt {!!} {!!} (isSet⊔NoConfusion hA hB x y)
 
 .. raw:: html
 
@@ -740,22 +753,388 @@ on the path space ``x ≡ y``
 
    isSet⊔ : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
    isSet⊔ hA hB x y = pathToFun (cong isProp (sym (Path≡⊔NoConfusion x y)))
-                        (isProp⊔NoConfusion hA hB x y)
+                        (isSet⊔NoConfusion hA hB x y)
 
    isSet⊔' : {A B : Type} → isSet A → isSet B → isSet (A ⊔ B)
    isSet⊔' hA hB x y = endPt (λ A → isProp A) (sym (Path≡⊔NoConfusion x y))
-                        (isProp⊔NoConfusion hA hB x y)
+                        (isSet⊔NoConfusion hA hB x y)
 
 .. raw:: html
 
    </details>
    </p>
 
-Proving ``isProp⊔NoConfusion``
-------------------------------
+Proving ``isSet⊔NoConfusion``
+-----------------------------
+
+We will now show that ``⊔NoConfusion`` "is a set".
+Locate your definition of ``isSet⊔NoConfusion``
+and try proving it.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint</summary>
+
+We need to case on which points we took ``A ⊔ B``.
+
+- If they are both "from ``A``" then we need to show that
+  the path spaces in ``A`` are propositions.
+- (2 cases) If they are from different spaces then we must show that
+  the path spaces in ``⊥`` are propositions.
+- If they are both "from ``B``" then it is similar to the first case.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+
 
 Part 4 - Proving ``Path≡⊔NoConfusion``
 ======================================
+
+It suffices to make an isomorphism
+----------------------------------
+
+Replicate our proof of ``flipPath`` in :ref:`quest 0 <>`,
+it suffices to show an isomorphism instead of an equality.
+Make this precise in ``1FundamentalGroup/Quest2``.
+
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Spoiler</summary>
+
+So that you can follow, we will make a lemma
+(you don't have to do this but each part of this proof will be relevant anyway) :
+
+.. code:: agda
+
+   Path≅⊔NoConfusion : (x y : A ⊔ B) → (x ≡ y) ≅ ⊔NoConfusion x y
+   Path≅⊔NoConfusion = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+To prove the isomorphism (for each arbitrary ``x`` and ``y``) we need
+four things, which we can extract as local definitions / lemmas using ``where``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Spoiler</summary>
+
+.. code:: agda
+
+  fun : (x y : A ⊔ B) → (x ≡ y) → ⊔NoConfusion x y
+  fun x y = {!!}
+
+  inv : (x y : A ⊔ B) → ⊔NoConfusion x y → x ≡ y
+  inv x y = {!!}
+
+  rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)
+  rightInv {A} {B} = {!!}
+
+  leftInv : (x y : A ⊔ B) → retract (fun x y) (inv x y)
+  leftInv = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+``fun``
+-------
+
+We will try to define the map forward, which we called ``fun``.
+If we assume and case on ``x`` and ``y`` in the disjoint sum then
+
+- When ``x`` and ``y`` are both from ``A`` then
+  they will be ``inl ax`` and ``inl ay``,
+  so checking the goal we should be required to give a point in
+  ``inl x ≡ inl y → x ≡ y``.
+  Read propositionally this says ``inl`` is injective.
+  You can think about how to do this, but
+  we thought this was *hard*,
+  especially considering the tech we already have.
+- When ``x`` and ``y`` are from different spaces then
+  checking the goal, we should be required to give a point in
+  ``inl ax ≡ inr by → ⊥``.
+  This says there are no paths between the disjoint parts.
+  This also seems hard.
+
+The trick is to *not* case on ``x`` and ``y``,
+and instead view things propositionally and use ``J``.
+Intuitively ``J`` allows us just do show this
+when ``x`` and ``y`` are both ``x``,
+i.e. give a point in ``⊔NoConfusion x x``.
+This is how the above is formalized
+(without showing ``⊔NoConfusion x x`` yet):
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Spoiler</summary>
+
+.. code:: agda
+
+   fun : (x y : A ⊔ B) → (x ≡ y) → ⊔NoConfusion x y
+   fun x y = J (λ y' p → ⊔NoConfusion x y') {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+To prove ``⊔NoConfusion x x`` it would be convenient to be able to case on ``x``
+so we will extract it as a lemma.
+Once you extract and case on ``x`` this it should be quite easy to show.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Spoiler</summary>
+
+.. code:: agda
+
+   ⊔NoConfusionSelf : (x : A ⊔ B) → ⊔NoConfusion x x
+   ⊔NoConfusionSelf (inl x) = refl
+   ⊔NoConfusionSelf (inr x) = refl
+
+.. raw:: html
+
+   </details>
+   </p>
+
+``inv``
+=======
+
+Try defining ``inv``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 0</summary>
+
+Check the goal.
+You can assume points ``x y : A ⊔ B``
+and a point ``h : ⊔NoConfusion x y``.
+If you case on ``x`` and ``y``
+you might find there are fewer cases than you need.
+This is because ``⊔NoConfusion (inl ax) (inr by)``
+was defined to be empty, so ``agda`` automatically removes the case.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 1</summary>
+
+In the case that both points are from ``x`` we need to show that
+given a proof ``p : ax ≡ ay`` we get a proof of ``inl ax ≡ inr ay``.
+We already have the result that if two points are equal then
+their images under a function are equal.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   inv : (x y : A ⊔ B) → ⊔NoConfusion x y → x ≡ y
+   inv (inl x) (inl y) p = cong inl p
+   inv (inr x) (inr y) p = cong inr p
+
+.. raw:: html
+
+   </details>
+   </p>
+
+``rightInv``
+------------
+
+Try to define
+``rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 0</summary>
+
+It is a good idea to case on ``x`` and ``y`` in the space ``A ⊔ B``,
+since ``inv`` is the first to take these inputs in here,
+and ``inv`` was defined by casing on ``x`` and ``y``.
+This should reduce us to just two cases,
+like when defining ``inv``.
+We will just describe the case when they are both from ``A``.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 1</summary>
+
+We can use ``J`` to reduce to the case of when the path is ``refl``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)
+   rightInv {A} {B} (inl x) (inl y) p = J (λ y' p → fun {A} {B} (inl x) (inl y') (inv (inl x) (inl y') p) ≡ p) {!!}
+
+   We added the implicit arguments ``{A}`` and ``{B}`` so we can actually access them here.
+   The remaining hole is for showing that
+
+.. code:: agda
+
+   fun (inl x) (inl x) (inv (inl x) (inl x) refl) ≡ refl
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 2</summary>
+
+It would help to make a chain of equalities.
+We defined ``inv (inl x) (inl x) refl`` to be ``refl``,
+so we only need to show that
+
+.. code:: agda
+
+   fun (inl x) (inl x) refl ≡ refl
+
+Since ``fun`` was defined using ``J`` we need to know how
+``J`` computes when it is fed ``refl``.
+We :ref:`described this before <JRefl>`, it is called ``JRefl``.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)
+   rightInv {A} {B} (inl x) (inl y) p = J (λ y' p → fun {A} {B} (inl x) (inl y') (inv (inl x) (inl y') p) ≡ p)
+                        (
+                          fun {A} {B} (inl x) (inl x) refl
+                        ≡⟨ JRefl {x = inl x} ((λ y' p → ⊔NoConfusion {A} {B} (inl x) y')) _ ⟩
+                        -- uses how J computes on refl
+                          refl ∎
+                        ) p
+   rightInv {A} {B} (inr x) (inr y) p = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+``leftInv``
+-----------
+
+Try to define ``leftInv``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hiint 0</summary>
+
+We should use ``J`` since ``fun`` "happens first".
+This should reduce the problem to showing
+
+.. code::
+
+   inv x x (fun x x refl) ≡ refl
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   leftInv : (x y : A ⊔ B) → retract (fun x y) (inv x y)
+   leftInv x y = J (λ y' p → inv x y' (fun x y' p) ≡ p) {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 1</summary>
+
+If you extract what is needed as a lemma
+you can case on the variable.
+Remember to use ``JRefl`` for the application of ``fun``.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+
+
 
 ..
    Part 3 - First Attempt at Path Space of Sums / Coproducts
@@ -763,7 +1142,7 @@ Part 4 - Proving ``Path≡⊔NoConfusion``
 
 
    ..
-      attempt path space of coproduct
+   attempt path space of coproduct
       idea for ``J`` : think about recursor of equality
 
    Part 4 - Justifying ``J`` Geometrically
