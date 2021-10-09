@@ -99,9 +99,8 @@ looks like ``⊤``".
 
    We will justify the use of the word "proposition" once
    we have introduced the propositional perspective on types,
-   see :ref:`trinitarianism<0-trinitarianism>` and :ref:`our explanation<laterref>`.
-
-   .. need a ref
+   see :ref:`trinitarianism<0-trinitarianism>` and
+   :ref:`part5UsingThePropositionalPerspective`.
 
    .. raw:: html
 
@@ -843,6 +842,8 @@ complete :ref:`quest 4<linkneeded>` in trinitarianism,
 and return to this quest with a completely new perspective.
 
 .. link needed
+
+.. _part5UsingThePropositionalPerspective:
 
 Part 5 - Using the Propositional Perspective
 ============================================
