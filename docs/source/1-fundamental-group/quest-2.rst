@@ -519,7 +519,7 @@ They should look like
    </details>
    </p>
 
-.. tip:: Local variables
+.. tip::
 
    If you are tired of writing ``{A B : Type} →`` each time
    you can stick
@@ -907,7 +907,7 @@ induct on paths in ``x ≡ y``.
 a function ``(x y : A ⊔ B) → (x ≡ y) → ⊔NoConfusion x y``,
 it suffices just to give a point in ``⊔NoConfusion x x``.
 Formalise the above
-(without showing ``⊔NoConfusion x x`` yet):
+(without showing ``⊔NoConfusion x x`` yet) :
 
 .. raw:: html
 
@@ -990,8 +990,8 @@ We can use ``J`` to reduce to the case of when the path is ``refl``.
    rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)
    rightInv {A} {B} (inl x) (inl y) p = J (λ y' p → fun {A} {B} (inl x) (inl y') (inv (inl x) (inl y') p) ≡ p) {!!}
 
-   We added the implicit arguments ``{A}`` and ``{B}`` so we can actually access them here.
-   The remaining hole is for showing that
+We added the implicit arguments ``{A}`` and ``{B}`` so we can actually access them here.
+The remaining hole is for showing that
 
 .. code:: agda
 
@@ -1062,7 +1062,7 @@ Try to define ``leftInv``.
 
    <p>
    <details>
-   <summary>Hiint 0</summary>
+   <summary>Hint 0</summary>
 
 We should use ``J`` since ``fun`` "happens first".
 This should reduce the problem to showing
@@ -1102,6 +1102,35 @@ This should reduce the problem to showing
 If you extract what is needed as a lemma
 you can case on the variable.
 Remember to use ``JRefl`` for the application of ``fun``.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   leftInv : (x y : A ⊔ B) → retract (fun x y) (inv x y)
+   leftInv x y = J (λ y' p → inv x y' (fun x y' p) ≡ p)
+                   (
+                     (inv x x (fun x x refl))
+                   ≡⟨ cong (inv x x) (JRefl ((λ y' p → ⊔NoConfusion x y')) _) ⟩
+                     inv x x (⊔NoConfusionSelf x)
+                   ≡⟨ lem x ⟩
+                     refl ∎
+                   ) where
+
+     lem : (x : A ⊔ B) → inv x x (⊔NoConfusionSelf x) ≡ refl
+     lem (inl x) = refl
+     lem (inr x) = refl
+
+
 
 .. raw:: html
 
