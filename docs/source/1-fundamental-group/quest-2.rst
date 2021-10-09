@@ -830,7 +830,7 @@ Here are the problems:
   we have no information about ``A`` and ``B``.
   More importantly :
 
-  .. important:: Path induction
+  .. important:: 
 
     We don't know how to induct on paths.
 
