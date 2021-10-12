@@ -23,9 +23,9 @@ Quest 2 - ``ℤ`` is a Set
 Part 0 - ``loopSpace loopSpace``
 ================================
 
-We might be interested in knowing what
+We are interested in knowing what
 the higher homotopy groups of ``S¹`` might be.
-Whilst the data of the fundamental group is captured
+Whilst the data of the fundamental group ``π₁ S¹`` is captured
 in ``loopSpace S¹ base``,
 the data of ``π₂ S¹`` would be captured in
 ``loopSpace (loopSpace S¹ base) refl``;
@@ -36,11 +36,11 @@ i.e. ``h`` would be a homotopy from the constant path to itself.
 .. insert picture
 
 The second loop space contains an obvious point ``refl : refl ≡ refl``
-(this is not quite the same "refl" as the one before),
+(this is of course not the same "refl" as the one before),
 and we could define the next loop space to be loops in
 ``loopSpace (loopSpace S¹ base) refl`` based at (the new) ``refl``.
 
-Since we will eventually give a path in ``loopSpace S¹ base ≡ ℤ``,
+Using what we will eventually show - ``loopSpace S¹ base ≡ ℤ`` -
 we can show that the second loop space of ``S¹`` is trivial,
 in the sense that it just consists of a point :
 
@@ -94,13 +94,34 @@ looks like ``⊤``".
    hence a "set" is a bunch of disjoint blobs,
    where each blob is contractible to a point.
    In other words a "set" is a type where any circle
-   (the circle must land in a blob)
-   can be filled (the blob is contractible).
+   (that lands in a blob)
+   can be filled (hence the blob is contractible).
 
    We will justify the use of the word "proposition" once
    we have introduced the propositional perspective on types,
    see :ref:`trinitarianism<0-trinitarianism>` and
    :ref:`part5UsingThePropositionalPerspective`.
+
+   .. raw:: html
+
+      </details>
+      </p>
+
+   .. raw:: html
+
+      <p>
+      <details>
+      <summary>All maps are continuous in HoTT</summary>
+
+   There is a subtlety in the definition ``isProp``.
+   Having ``isProp A`` is *stronger* than saying that the space ``A`` is path connected.
+   Since ``A`` is equipped with a *continuous* map taking pairs ``x y : A``
+   to a path between them.
+
+   We will show in a later quest
+   that ``isProp S¹`` is *empty* despite ``S¹`` being path connected.
+
+   .. missing link
 
    .. raw:: html
 
@@ -124,7 +145,7 @@ and try filling it in.
    <summary>Hint 0</summary>
 
 Imitating what we did with ``flipPath`` and ``flipIso``
-reduce this to showing for each ``x : A`` and ``h : isSet A``
+reduce this to showing that for each ``x : A`` and ``h : isSet A``
 we have
 
 - ``fun : x ≡ x → ⊤``
@@ -156,7 +177,7 @@ you only need to map ``tt``.
    <summary>Solution</summary>
 
 - ``fun`` can just be ``(λ p → tt)``
-- ``inv`` is
+- ``inv`` can be
 
   .. code:: agda
 
@@ -182,7 +203,7 @@ you only need to map ``tt``.
 For ``rightInv`` by casing on the point in ``⊤``
 there should be nothing much to show.
 
-For ``leftInv`` we just need to use our assumption
+For ``leftInv`` we need to use our assumption
 that "any two paths are homotopic".
 
 .. raw:: html
@@ -253,6 +274,38 @@ If you have made the function and inverse appropriately,
 you should only need constant paths in the
 proofs that they satisfy ``section`` and ``retract``
 respectively.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+  ℤ≡ℕ⊔ℕ : ℤ ≡ ℕ ⊔ ℕ
+  ℤ≡ℕ⊔ℕ = isoToPath (iso fun inv rightInv leftInv) where
+
+  fun : ℤ → ℕ ⊔ ℕ
+  fun (pos n) = inl n
+  fun (negsuc n) = inr n
+
+  inv : ℕ ⊔ ℕ → ℤ
+  inv (inl n) = pos n
+  inv (inr n) = negsuc n
+
+  rightInv : section fun inv
+  rightInv (inl n) = refl
+  rightInv (inr n) = refl
+
+  leftInv : retract fun inv
+  leftInv (pos n) = refl
+  leftInv (negsuc n) = refl
 
 .. raw:: html
 
@@ -334,7 +387,7 @@ in ``1FundamentalGroup/Quest2.agda``.
 
    <p>
    <details>
-   <summary>Hint : using ``pathToFun`` and ``endPt`` </summary>
+   <summary>Hint : following along paths </summary>
 
 To use ``pathToFun`` you must figure out what path you are following
 and what point you are following the path along.
@@ -355,8 +408,7 @@ and what point you are starting at in the first fiber.
    <summary>Partial solutions</summary>
 
 The point you need to follow in either case
-is the point in the space ``isSet (ℕ ⊔ ℕ)``.
-Which we have :
+is the point in the space ``isSet (ℕ ⊔ ℕ)`` :
 
 .. code:: agda
 
@@ -390,18 +442,37 @@ Which we have :
    </details>
    </p>
 
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Refining issues</summary>
+
+If you tried refining using ``endPt``
+you may have been given 2 holes instead of 3.
+This is because ``agda`` had too many
+possible options when trying to match up
+the output of ``endPt`` and the goal.
+To add an extra hole simply add a ``?``
+afterwards and reload.
+
+.. raw:: html
+
+   </details>
+   </p>
+
 Once this is complete we can go back and work on ``isSet⊔``.
 
 Part 3 - Path Space of Disjoint Sums
 ====================================
 
-Motivating Consideration of the Path Space
-------------------------------------------
+Motivation
+----------
 
 - Locate your formulation of ``isSet⊔``.
 - We assume ``hA : isSet A``,
   ``hB : isSet B``, and points ``x y : A ⊔ B``.
-  Following along in ``agda`` your code should look like
+  Currently our code looks like
 
   .. code:: agda
 
@@ -416,16 +487,17 @@ Motivating Consideration of the Path Space
   about the path spaces of ``A`` and ``B`` respectively.
   We could try to case on ``x`` and ``y``.
 
-- If ``x`` and ``y`` are both of the form ``inl ax`` and
-  ``inl ay`` for ``ax ay : A``,
-  then we just need to find a point in ``isProp (inl ax ≡ inl ay)``.
+- If ``x`` and ``y`` are "both from ``A``",
+  i.e. of the form ``inl ax`` and ``inl ay`` for ``ax ay : A``,
+  then we need to find a point in ``isProp (inl ax ≡ inl ay)``.
   This *should* be due to ``hA``, which gives us
   ``hA ax ay : isProp (ax ≡ ay)``.
-  However somehow we would have to identify the spaces
+  So somehow we need to identify the path spaces
   ``inl ax ≡ inl ay`` and ``ax ≡ ay``.
 - If ``x`` and ``y`` are of the forms ``inl ax`` and ``inr by``
   respectively for ``ax : A`` and ``by : B`` then
-  intuitively the space ``inl ax ≡ inr bx`` *should* be empty.
+  intuitively the space ``inl ax ≡ inr bx`` *should* be empty,
+  since the sum is disjoint.
 - The other two cases are similar.
 
 The conclusion is that we need some kind of
@@ -478,24 +550,24 @@ There should be four cases.
 - (Two cases) When each is from a different space we expect the path
   space between them to be empty, so we should give ``⊥``.
 - If both are from ``B`` then we should
-  replicate what we did in the first case
+  imitate what we did in the first case
 
 Using the Classification
 ------------------------
 
 Now we have two of goals :
 
-- "``Path≡⊔NoConfusion``" :
+- ``Path≡⊔NoConfusion`` :
   We need to show that for each ``x y : A ⊔ B``
   the path space looks like our classification,
   i.e. that ``(x ≡ y) ≡ (⊔NoConfusion x y)``
-- "``isSet⊔NoConfusion``" : For ``isSet⊔``, given
+- ``isSet⊔NoConfusion`` : For ``isSet⊔``, given
   ``hA : isProp A``, ``hB : isProp B`` and ``x y : A ⊔ B``
   we needed to show ``isProp (x ≡ y)``.
   Hence we want to show that under the same assumptions
   ``isProp (⊔NoConfusion x y)``.
 
-Formalise both of these above appropriate places indicated in
+Formalise (but don't prove) both of these where indicated in
 ``1FundamentalGroup/Quest2.agda``.
 They should look like
 
@@ -635,7 +707,7 @@ Make this precise in ``1FundamentalGroup/Quest2``.
    <summary>Spoiler</summary>
 
 So that you can follow, we will make a lemma
-(you don't have to do this but each part of this proof will be relevant anyway) :
+(you don't have to) :
 
 .. code:: agda
 
@@ -742,7 +814,7 @@ If we assume and case on ``x`` and ``y`` in the disjoint sum then
   they will be ``inl ax`` and ``inl ay``,
   so checking the goal we should be required to give a point in
   ``inl x ≡ inl y → x ≡ y``.
-  Reading this carelessly one could call this ``inl`` being injective.
+  Reading this carelessly one could call this "``inl`` is injective".
 - When ``x`` and ``y`` are from different spaces then
   checking the goal, we should be required to give a point in
   ``inl ax ≡ inr by → ⊥``.
@@ -827,7 +899,7 @@ Here are the problems:
   and ``B`` had a point then we cannot
   expect to have a map ``A ⊔ B → A``.
 - There is nothing to induct on :
-  we have no information about ``A`` and ``B``.
+  we have no information about ``x y : A``.
   More importantly :
 
   .. important:: Path induction
@@ -872,7 +944,18 @@ we showed in a new light :
 - ``flipPath : Bool ≡ Bool`` is a non-trivial equality
   between ``Bool`` and itself.
 - ``inl`` is injective (we still have not shown this yet).
-- ``isProp`` says there is at most one point in the space
+
+.. side quest?
+
+- ``isProp`` says there is at most one point in the space;
+  at most one proof of the proposition.
+  Classically propositions are meant to only have a single proof
+  ("proof irrelevance"), because for propositions ``A`` and ``B``,
+  having implications ``A → B`` and ``B → A`` is enough
+  to show ``A ≡ B``.
+
+.. side quest?
+
 - ``isSet`` says between any two points there is at most one path between them,
   i.e. "there is only ``refl``", i.e. the space is disjoint.
 
@@ -897,6 +980,8 @@ We instead take a step back and look at ``fun`` itself.
 this will become a corollary of the classification.)
 We also remove the cases so that we are back to just having
 
+.. side quest?
+
 .. code:: agda
 
    fun : (x y : A ⊔ B) → (x ≡ y) → ⊔NoConfusion x y
@@ -904,7 +989,7 @@ We also remove the cases so that we are back to just having
 
 You might have noticed by now that we are in the perfect position to
 induct on paths in ``x ≡ y``.
-``J`` (or path induction) says that to make
+Path induction - ``J`` - says that to make
 a function ``(x y : A ⊔ B) → (x ≡ y) → ⊔NoConfusion x y``,
 it suffices just to give a point in ``⊔NoConfusion x x``.
 Formalise the above
@@ -989,7 +1074,8 @@ We can use ``J`` to reduce to the case of when the path is ``refl``.
 .. code:: agda
 
    rightInv : (x y : A ⊔ B) → section (fun x y) (inv x y)
-   rightInv {A} {B} (inl x) (inl y) p = J (λ y' p → fun {A} {B} (inl x) (inl y') (inv (inl x) (inl y') p) ≡ p) {!!}
+   rightInv {A} {B} (inl x) (inl y) p =
+      J (λ y' p → fun {A} {B} (inl x) (inl y') (inv (inl x) (inl y') p) ≡ p) {!!}
 
 We added the implicit arguments ``{A}`` and ``{B}`` so we can actually access them here.
 The remaining hole is for showing that
@@ -1025,6 +1111,8 @@ so we only need to show that
 Since ``fun`` was defined using ``J`` we need to know how
 ``J`` computes when it is fed ``refl``.
 We :ref:`described this before <JRefl>`, it is called ``JRefl``.
+
+.. missing link
 
 .. raw:: html
 
@@ -1065,7 +1153,7 @@ Try to define ``leftInv``.
    <details>
    <summary>Hint 0</summary>
 
-We should use ``J`` since ``fun`` "happens first".
+We use ``J`` since ``fun`` "happens first".
 This should reduce the problem to showing
 
 .. code::
