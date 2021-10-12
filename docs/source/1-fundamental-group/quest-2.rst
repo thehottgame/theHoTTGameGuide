@@ -902,7 +902,7 @@ Here are the problems:
   we have no information about ``x y : A``.
   More importantly :
 
-  .. important:: Path induction
+  .. important:: 
 
     We don't know how to induct on paths.
 
