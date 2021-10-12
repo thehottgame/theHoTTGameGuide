@@ -1153,7 +1153,7 @@ Try to define ``leftInv``.
    <details>
    <summary>Hint 0</summary>
 
-We use ``J`` since ``fun`` "happens first".
+We do this but each part of this proof will be relevant anywayuse ``J`` since ``fun`` "happens first".
 This should reduce the problem to showing
 
 .. code::
