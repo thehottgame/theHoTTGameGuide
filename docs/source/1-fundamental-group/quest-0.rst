@@ -112,7 +112,7 @@ We will fill the hole ``Refl = {!!}``.
      We have compiled a list of useful ``emacs`` and ``agda`` commands in
      :ref:`Emacs Commands <emacsCommands>`.
 
-* Enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l`).
+* Enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
 Whenever you do this, ``agda`` will check the document is written correctly.
   We say ``agda`` *compiles*  or *loads* the file.
   This will open the ``*Agda Information*`` window looking like
