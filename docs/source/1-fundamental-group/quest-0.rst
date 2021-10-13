@@ -845,27 +845,28 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
   ``agda`` is smart and can figure out how to use ``endPt`` :
 
   1. Type ``endPt`` into the hole and do ``C-c C-r``.
-     .. tip::
 
-        In general if the goal of the hole
+  .. tip::
 
-        .. code::
+     In general if the goal of the hole
 
-           Goal: Y
-           ————————————————————————
-           f : X → Y
-           ...
+     .. code::
 
-        is to find a point in a space ``Y``
-        and you have a function ``f : X → Y`` then you can write ``f``
-        in the hole and do ``C-c C-r``.
+        Goal: Y
+        ————————————————————————
+        f : X → Y
+        ...
 
-     You should see
+     is to find a point in a space ``Y``
+     and you have a function ``f : X → Y`` then you can write ``f``
+     in the hole and do ``C-c C-r``.
 
-     .. code:: agda
+  You should see
 
-        endPtOfTrue : (p : base ≡ base) → doubleCover base
-        endPtOfTrue p = endPt {!!} {!!} {!!}
+  .. code:: agda
+
+     endPtOfTrue : (p : base ≡ base) → doubleCover base
+     endPtOfTrue p = endPt {!!} {!!} {!!}
 
   2. :ref:`Check these new holes<emacsCommands>`.
   3. Try to fill in these holes.
