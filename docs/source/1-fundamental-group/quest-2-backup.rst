@@ -1,10 +1,8 @@
-.. _quest2ZIsASet:
 
 ****************************
 Quest 2 - ``ℤ`` is a Set
 ****************************
 
-.. _part0APropositionalView:
 
 Part 0 - A propositional view
 =============================
@@ -293,7 +291,6 @@ which says
    a proof ``prefl : M x refl`` and the path ``refl``,
    ``J`` will give you something that is equal to ``prefl`` :
 
-   .. _JRefl:
 
    .. code:: agda
 

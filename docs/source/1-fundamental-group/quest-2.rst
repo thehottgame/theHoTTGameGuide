@@ -932,6 +932,8 @@ we showed in a new light :
   for each ``x`` in the domain.
   This can now be read as ``fun`` composed with ``inv``
   is equal to the identity on points.
+- ``isoToPath`` says that if two spaces are isomorphic
+  then they are equal.
 - ``endPt`` (``subst`` for substitute in the library)
   takes a bundle and a proof that ``x ≡ y`` in the base space
   and substitutes ``x`` for ``y``,

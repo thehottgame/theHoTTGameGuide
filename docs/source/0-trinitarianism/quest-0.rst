@@ -9,6 +9,7 @@ There are three ways of looking at ``A : Type``.
   - proof theoretically, "``A`` is a proposition"
   - type theoretically, "``A`` is a construction"
   - categorically, "``A`` is an object in category ``Type``"
+  - geometrically, "``A`` is a space in ``Type`` the space of spaces"
 
 A first example of a type construction is the function type.
 Given types ``A : Type`` and ``B : Type``,
@@ -17,6 +18,7 @@ we have another type ``A → B : Type`` which can be seen as
   - the proposition "``A`` implies ``B``"
   - the construction ways to convert ``A`` recipes to ``B`` recipes"
   - internal hom of the category ``Type``
+  - the space of functions
 
 To give examples of this, lets make some types first.
 
@@ -34,6 +36,7 @@ with three interpretations
 - ``⊤`` is a proposition "true" and there is a proof of it, called ``tt``.
 - ``⊤`` is a construction "top" with a recipe called ``tt``
 - ``⊤`` is a terminal object: every object has a morphism into ``⊤`` given by ``· ↦ tt``
+- ``⊤`` is the singleton space
 
 In general, the expression ``a : A`` is read "``a`` is a term of type ``A``",
 and has three interpretations,
@@ -41,6 +44,9 @@ and has three interpretations,
 - ``a`` is a proof of the proposition ``A``
 - ``a`` is a recipe for the construction ``A``
 - ``a`` is a generalised element of the object ``A`` in the category ``Type``.
+- ``a`` is a point in the space ``A``
+
+.. is the generalized element thing correct?
 
 The above tells you how we *make* a term of type ``⊤``.
 Lets see an example of *using* a term of type ``⊤``:
@@ -133,6 +139,7 @@ It says to map out of ``⊤`` it suffices to do the case when ``x`` is ``tt``", 
 - the only proof of ``⊤`` is ``tt``
 - the only recipe for ``⊤`` is ``tt``
 - the only one generalized element ``tt`` in ``⊤``
+- the only point in ``⊤`` is ``tt``
 
 Lets define another type.
 
@@ -149,6 +156,7 @@ with three interepretations
 - ``⊥`` is a proposition "false" with no proofs
 - ``⊥`` is a construction "bot" with no recipes
 - There are no generalized elements of ``⊥`` (it is a strict initial object)
+- ``⊥`` is the empty space
 
 We can make a map from ``⊥`` to any other type, in particular into ``⊤``.
 
@@ -172,6 +180,8 @@ This has three interpretations:
 - ``⊥`` is has a map into ``⊤``.
   This is due to ``⊥`` being initial
   in the category ``Type``.
+- The empty space is a subspace of the singleton space.
+  In fact the empty space is a subspace of any space.
 
 Part 2 - The natural numbers
 ============================
@@ -184,30 +194,37 @@ We can also encode "natural numbers" as a type.
      zero : ℕ
      suc : ℕ → ℕ
 
-As a construction, this reads :
+Our interpretations are:
 
-- ``ℕ`` is a type of construction
-- ``zero`` is a recipe for ``ℕ``
-- ``suc`` takes an existing recipe for ``ℕ`` and gives
-  another recipe for ``ℕ``.
+- ``ℕ`` has no interpretation as a proposition since
+  there are "too many proofs" -
+  mathematicians classically don't distinguish
+  between proofs of a single proposition.
+  (ZFC doesnt even mention logic internally,
+  but type theory does.)
+  In this sense constructions are *proof relevant* types.
 
-We can also see ``ℕ`` categorically :
-ℕ is a natural numbers object in the category ``Type``.
-This means it is equipped with morphisms ``zero : ⊤ → ℕ``
-and ``suc : ℕ → ℕ`` such that
-given any ``⊤ → A → A`` there exist a unique morphism ``ℕ → A``
-such that the diagram commutes:
+- As a construction :
+
+  - ``ℕ`` is a type of construction
+  - ``zero`` is a recipe for ``ℕ``
+  - ``suc`` takes an existing recipe for ``ℕ`` and gives
+    another recipe for ``ℕ``.
+
+- Categorically :
+  ``ℕ`` is a natural numbers object in the category ``Type``.
+  This means it is equipped with morphisms ``zero : ⊤ → ℕ``
+  and ``suc : ℕ → ℕ`` such that
+  given any ``⊤ → A → A`` there exist a unique morphism ``ℕ → A``
+  such that the diagram commutes:
 
 .. image:: images/nno.png
    :width: 500
    :alt: nno
 
-``ℕ`` has no interpretation as a proposition since
-there are "too many proofs" -
-mathematicians classically don't distinguish
-between proofs of a single proposition.
-(ZFC doesnt even mention logic internally,
-unlike type theory!)
+- Geometrically : we will show that ``ℕ`` is a discrete space in
+  :ref:`a later arc<isSetNat>`.
+  We call discrete spaces *sets*.
 
 To see how to use terms of type ``ℕ``, i.e. to induct on ``ℕ``,
 go to :ref:`quest1DependentTypes`.

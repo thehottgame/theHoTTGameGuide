@@ -10,7 +10,8 @@ will have three interpretations:
 
 - Proof theoretically, with types as propositions
 - Type theoretically, with types as programs
-- Category theoretically, with types as objects in a category
+- Category theoretically (geometrically),
+  with types as objects (spaces) in a category (the space of spaces)
 
 .. image:: images/trinitarianism.png
   :width: 500
@@ -25,11 +26,13 @@ Here are some things that we could like to have in a 'place to do maths'
   - recipes for making things inside objects
     (E.g. ``n + m`` for ``n`` and ``m`` in naturals.)
   - propositions to reason with (E.g. ``n = 0`` for ``n`` in naturals.)
+  - a notion of equality
 
 In proof theory, types are propositions and terms of a type are their proofs.
 In type theory, types are programs / constructions and
 terms are algorithms / recipes.
-In category theory, types are objects and terms are generalised elements.
+In category theory, types are objects (spaces) and
+terms are generalised elements (points in the space).
 
 Non-dependent Types
 ===================
@@ -51,7 +54,5 @@ Dependent Types
 What is 'the Same'?
 ===================
 
-There will be one thing missing from this "place to do maths"
-and that is a notion of *equality*.
+The last missing piece is a notion of *equality*.
 How HoTT treats equality is where it deviates from its predecessors.
-See :ref:`pathsAndEquality`.
