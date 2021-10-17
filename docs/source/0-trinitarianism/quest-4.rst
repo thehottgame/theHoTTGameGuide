@@ -46,8 +46,24 @@ with four interpretations :
   For every point ``x`` in ``A``,
   there is the constant path ``rfl x`` at ``x``.
 
-
-
+..
+   - exercise on mapping out of Id
+     - note that geometric interpretation fails
+       and promise justification later
+     - defining sym, trans
+     - groupoid laws A.K.A. types are infinity groupoids hence
+       geometric interpretation of types
+   - justifyig J geometrically
+     - transport + paths out of x contractible to refl x
+     - J and JRefl as the recursor and "computational rule"
+       for path type
+     - exercise : Id x y ≡ Path x y
+   - paths in various types
+     - pi types
+       - funExt
+     - sigma types
+       - heterogenous paths§
+     - universe ? ? ? univalence
 
 
 
