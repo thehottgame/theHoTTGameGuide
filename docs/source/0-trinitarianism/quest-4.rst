@@ -13,8 +13,7 @@ there has been no mention of "equality";
 we have never said what it meant for two
 types or two terms to be "the same".
 However, in :ref:`Fundamental Group of the Circle <1-fundamentalGroupOfTheCircle>`
-we *have* expressed what it means
-for two *spaces* to look the same,
+we *have* expressed what it means for two *spaces* to look the same,
 by creating a path from one space to the next.
 Indeed we will take this to be our *definition* of (internal) equality.
 
@@ -22,27 +21,30 @@ Part 0 - The Identity Type
 ==========================
 
 Given ``A : Type``  and  ``x y : A`` we have a type
-``x ≣ y : Type``, called the *identity type* of ``x`` and ``y``.
-For the quadriple equal sign input ``\===``.
+``Id x y : Type``, called the *identity type* of ``x`` to ``y``.
 
 .. code:: agda
 
-   data _≣_ {A : Type} : (x y : A) → Type where
+   data Id {A : Type} : (x y : A) → Type where
 
-     rfl : (x : A) → x ≣ x
+     rfl : (x : A) → Id x x
 
-The construction takes in (implicit) parameter ``A : Type``,
-then for each pair ``x y : A`` it returns a type ``x ≣ y``,
-with four interpretations
+The construction takes in (implicit) argument ``A : Type``,
+then for each pair ``x y : A`` it returns a type ``Id x y``,
+with four interpretations :
 
-- ``x ≣ y`` is the proposition "``x`` equals ``y``" and the
-  only possible proof is reflexivity.
-- The only recipe for the construction ``x ≣ y`` is given when
+- ``Id x y`` is the proposition "``x`` equals ``y``"
+  and for every ``x``, we have a proof ``rfl x`` that
+  "``x`` is equal to itself".
+  (Hence the name ``rfl``, which is short for *reflexivity*.)
+- The only recipe for the construction ``Id x y`` is given when
   ``x`` is the same recipe as ``y``.
-- The image of ``_≣_`` is the diagonal of ``A × A``.
-- ``x ≣ y`` is the space of paths from ``x`` to ``y``, and points
-  in the space are paths from ``x`` to ``y``
-
+- ``Id`` is a bundle over ``A × A`` and the diagonal map ``A -> A × A``
+  factors through ``Id -> A × A``.
+- ``Id x y`` is the space of paths from ``x`` to ``y``, i.e. points
+  in the space are paths from ``x`` to ``y`` in ``A``.
+  For every point ``x`` in ``A``,
+  there is the constant path ``rfl x`` at ``x``.
 
 
 

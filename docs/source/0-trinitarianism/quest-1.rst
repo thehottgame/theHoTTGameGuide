@@ -100,21 +100,39 @@ Part 1 - Interpretations of Bundles
 
 There are three interpretations of ``isEven : ℕ → Type``.
 
-- Already mentioned, ``isEven`` is a predicate on ``ℕ``.
-- ``isEven`` is a *dependent construction*.
+- Propositionally :
+  Already mentioned, ``isEven`` is a predicate on ``ℕ``.
+- As a construction :
+  ``isEven`` is a *dependent construction*.
   Specifically, ``isEven n`` is either ``⊤`` or ``⊥`` depending on ``n : ℕ``.
-- ``isEven`` is a *bundle over* ``ℕ``,
-  i.e. an object in the over-category ``Type↓ℕ``.
+- Geometrically :
+  seen as a map from the space ``ℕ`` to
+  the space of spaces ``Type``,
+  ``isEven`` assigns for every point ``n`` in ``ℕ``
+  a space ``isEven n``.
   Pictorially, it looks like
 
   .. image:: images/isEven.png
      :width: 500
      :alt: isEven
 
-  In the categorical perspective, for each ``n : ℕ``
-  ``isEven n`` is called the *fiber over* ``n``.
+  We say ``isEven`` is a *bundle of spaces over* ``ℕ``,
+  or simply *a bundle over* ``ℕ`` for short.
+  The space ``isEven n`` lying above each ``n``
+  is called the *fiber over* ``n``.
   In this particular example the fibers are either empty
   or singleton.
+
+  .. note::
+
+     In the above picture,
+     we have implicitly drawn ``ℕ`` as a bunch of "disconnected" points,
+     i.e. a *discrete* space.
+     See :ref:`a later arc<isSetNat>` where
+     this is justified.
+
+- Categorically :
+  ``isEven`` is an object in the over-category ``Type↓ℕ``.
 
 In general given a type ``A : Type``,
 a *dependent type* ``F`` *over* ``A`` is a term ``F : A → Type``.
@@ -138,14 +156,15 @@ as each has their own advantage
 
 - Types as propositions is often the most familiar perspective,
   and hence can offer guidance for the other two perspectives.
-  However the current mathematical paradigm uses proof irrelevance
+  However the current mathematical paradigm uses "proof irrelevance"
   (two proofs of the same proposition are always "the same"),
   which is *not* compatible with HoTT.
+  We will expand on this later.
 - Types as constructions conveys the way in which "data" is important,
   and should be preserved.
-- Types as objects allows us to draw pictures,
+- Types as objects/spaces allows us to draw pictures,
   thus guiding us through the syntax with geometric intuition.
 
 For each new idea introduced,
 make sure to justify it proof theoretically, type theoretically and
-categorically.
+categorically/geometrically.

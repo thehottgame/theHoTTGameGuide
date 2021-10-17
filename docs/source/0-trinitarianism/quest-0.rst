@@ -46,7 +46,7 @@ and has three interpretations,
 - ``a`` is a generalised element of the object ``A`` in the category ``Type``.
 - ``a`` is a point in the space ``A``
 
-.. is the generalized element thing correct?
+.. is the generalized element thing correct? Yes.
 
 The above tells you how we *make* a term of type ``⊤``.
 Lets see an example of *using* a term of type ``⊤``:
@@ -180,8 +180,9 @@ This has three interpretations:
 - ``⊥`` is has a map into ``⊤``.
   This is due to ``⊥`` being initial
   in the category ``Type``.
-- The empty space is a subspace of the singleton space.
-  In fact the empty space is a subspace of any space.
+- There is a map from the empty space to the singleton space.
+  In fact given any space ``A`` , there is a map
+  from the empty space to ``A``.
 
 Part 2 - The natural numbers
 ============================
@@ -222,9 +223,14 @@ Our interpretations are:
    :width: 500
    :alt: nno
 
-- Geometrically : we will show that ``ℕ`` is a discrete space in
-  :ref:`a later arc<isSetNat>`.
-  We call discrete spaces *sets*.
+- Geometrically : ``ℕ`` is a space with a point ``zero``
+  and for every point ``n`` in ``ℕ``, there is another point
+  ``suc n`` in ``ℕ``.
+
+.. Previous version :
+   we will show that ``ℕ`` is a discrete space in
+   :ref:`a later arc<isSetNat>`.
+   We call discrete spaces *sets*.
 
 To see how to use terms of type ``ℕ``, i.e. to induct on ``ℕ``,
 go to :ref:`quest1DependentTypes`.
@@ -236,6 +242,14 @@ Part 3 - Universes
 
 You may have noticed the notational similarities between
 ``zero : ℕ`` and ``ℕ : Type``.
+The type ``Type`` has the following interpretations :
+
+- As a construction :
+  any type of construction is a recipe for ``Type``.
+- Geometrically :
+  ``Type`` is a space of spaces.
+  Each individual point in ``Type`` is a space.
+
 This may have lead you to the question, ``Type : ?``.
 In type theory, we simply assert ``Type : Type₁``.
 But then we are chasing our tail, asking ``Type₁ : Type₂``.
@@ -254,10 +268,13 @@ The numberings of universes are called *levels*.
 It will be crucial that types can be treated as terms.
 This will allows us to
 
+- talk about *predicates* i.e. "propositions depending on a variable".
+  E.g. the proposition "``n`` is even" depends on a natural number ``n``.
+  See the next quest where we elaborate on this example.
 - reason about "*structures*" such as "the structure of a group",
   to express "for all groups, ..."
-- do category theory without stepping out of the theory
-  (no need for classes etc. For experts, we have Grothendieck universes.)
+- do category theory without stepping out of the theory.
+  (For experts, we have Grothendieck universes.)
 - reason about when two types are "the same",
   for example when are two definitions of
   the natural numbers "the same"? What is "the same"?
