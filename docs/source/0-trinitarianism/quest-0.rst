@@ -8,8 +8,8 @@ There are three ways of looking at ``A : Type``.
 
   - proof theoretically, "``A`` is a proposition"
   - type theoretically, "``A`` is a construction"
-  - categorically, "``A`` is an object in category ``Type``"
-  - geometrically, "``A`` is a space in ``Type`` the space of spaces"
+  - geometrically / categorically,
+    "``A`` is a space and ``Type`` is the category of spaces".
 
 A first example of a type construction is the function type.
 Given types ``A : Type`` and ``B : Type``,
@@ -17,8 +17,9 @@ we have another type ``A → B : Type`` which can be seen as
 
   - the proposition "``A`` implies ``B``"
   - the construction ways to convert ``A`` recipes to ``B`` recipes"
+  - the space of maps from ``A`` to ``B``,
+    i.e. maps from ``A`` to ``B`` correspond to points of ``A → B``.
   - internal hom of the category ``Type``
-  - the space of functions
 
 To give examples of this, lets make some types first.
 
