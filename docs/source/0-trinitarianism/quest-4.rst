@@ -20,6 +20,9 @@ Indeed we will take this to be our *definition* of (internal) equality.
 Part 0 - The Identity Type
 ==========================
 
+The construction
+----------------
+
 Given ``A : Type``  and  ``x y : A`` we have a type
 ``Id x y : Type``, called the *identity type* of ``x`` to ``y``.
 
@@ -31,7 +34,7 @@ Given ``A : Type``  and  ``x y : A`` we have a type
 
 The construction takes in (implicit) argument ``A : Type``,
 then for each pair ``x y : A`` it returns a type ``Id x y``,
-with four interpretations :
+with interpretations :
 
 - ``Id x y`` is the proposition "``x`` equals ``y``"
   and for every ``x``, we have a proof ``rfl x`` that
@@ -39,12 +42,38 @@ with four interpretations :
   (Hence the name ``rfl``, which is short for *reflexivity*.)
 - The only recipe for the construction ``Id x y`` is given when
   ``x`` is the same recipe as ``y``.
-- ``Id`` is a bundle over ``A × A`` and the diagonal map ``A -> A × A``
-  factors through ``Id -> A × A``.
 - ``Id x y`` is the space of paths from ``x`` to ``y``, i.e. points
   in the space are paths from ``x`` to ``y`` in ``A``.
   For every point ``x`` in ``A``,
   there is the constant path ``rfl x`` at ``x``.
+- ``Id`` is a bundle over ``A × A`` and the diagonal map ``A → A × A``,
+  taking ``x ↦ (x , x)``,
+  factors through ``Id → A × A``
+  (viewing ``Id`` as the total space ``Σ (A × A) Id``).
+
+.. image:: images/idType.png
+   :width: 500
+   :alt: idType
+
+.. picture latex https://q.uiver.app/?q=WzAsNCxbMiwwLCJcXHN1bV97KHgseSk6IEEgXFx0aW1lcyBBfSBcXG1hdGhybXtJZH0gKHggLCB5KSJdLFswLDAsIkEiXSxbMiwyLCJBIFxcdGltZXMgQSJdLFs0LDBdLFsxLDAsInggXFxtYXBzdG8gKHgseCxcXG1hdGhybXtyZWZsfSkiXSxbMSwyLCJcXG1hdGhybXtkaWFnb25hbH0iLDJdLFswLDIsIih4LHkscCkgXFxtYXBzdG8gKHgseSkiXV0=
+
+Mapping out of the Identity Type
+--------------------------------
+
+First we show
+
+.. code:: agda
+
+   sym : (A : Type) (x y : A) → Id x y → Id y x
+   sym = {!!}
+
+This has interpretations:
+
+- Equality is symmetric
+- We can turn recipes for the construction ``Id x y``
+  into recipes for the construction ``Id y x``
+- Paths can be reversed
+
 
 ..
    - exercise on mapping out of Id

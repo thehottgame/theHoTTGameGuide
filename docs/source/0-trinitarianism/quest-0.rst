@@ -32,20 +32,20 @@ Part 0 - True / Unit / Terminal object
      tt : ⊤
 
 It reads "``⊤`` is an inductive type with a constructor ``tt``",
-with three interpretations
+with interpretations
 
 - ``⊤`` is a proposition "true" and there is a proof of it, called ``tt``.
 - ``⊤`` is a construction "top" with a recipe called ``tt``
-- ``⊤`` is a terminal object: every object has a morphism into ``⊤`` given by ``· ↦ tt``
 - ``⊤`` is the singleton space
+- ``⊤`` is a terminal object: every object has a morphism into ``⊤`` given by ``· ↦ tt``
 
 In general, the expression ``a : A`` is read "``a`` is a term of type ``A``",
-and has three interpretations,
+and has interpretations interpretations,
 
 - ``a`` is a proof of the proposition ``A``
 - ``a`` is a recipe for the construction ``A``
-- ``a`` is a generalised element of the object ``A`` in the category ``Type``.
 - ``a`` is a point in the space ``A``
+- ``a`` is a generalised element of the object ``A`` in the category ``Type``.
 
 .. is the generalized element thing correct? Yes.
 
@@ -139,8 +139,8 @@ It says to map out of ``⊤`` it suffices to do the case when ``x`` is ``tt``", 
 
 - the only proof of ``⊤`` is ``tt``
 - the only recipe for ``⊤`` is ``tt``
-- the only one generalized element ``tt`` in ``⊤``
 - the only point in ``⊤`` is ``tt``
+- the only one generalized element ``tt`` in ``⊤``
 
 Lets define another type.
 
@@ -152,12 +152,12 @@ Part 1 - False / Empty / Initial object
    data ⊥ : Type where
 
 This reads "``⊥`` is an inductive type with no constructors",
-with three interepretations
+with interepretations
 
 - ``⊥`` is a proposition "false" with no proofs
 - ``⊥`` is a construction "bot" with no recipes
-- There are no generalized elements of ``⊥`` (it is a strict initial object)
 - ``⊥`` is the empty space
+- There are no generalized elements of ``⊥`` (it is a strict initial object)
 
 We can make a map from ``⊥`` to any other type, in particular into ``⊤``.
 
@@ -170,7 +170,7 @@ We can make a map from ``⊥`` to any other type, in particular into ``⊤``.
 
 ``agda`` knows that there are no cases so there is nothing to do!
 (See ``Quest0Solutions.agda``)
-This has three interpretations:
+Our interpretations:
 
 - "false" implies "true".
   In fact the same proof gives "false" implies anything (principle of explosion)
@@ -178,12 +178,12 @@ This has three interpretations:
   In fact the same construction gives a recipe of
   any other construction since
   there are no recipes of ``⊥``.
-- ``⊥`` is has a map into ``⊤``.
-  This is due to ``⊥`` being initial
-  in the category ``Type``.
 - There is a map from the empty space to the singleton space.
   In fact given any space ``A`` , there is a map
   from the empty space to ``A``.
+- ``⊥`` is has a map into ``⊤``.
+  This is due to ``⊥`` being initial
+  in the category ``Type``.
 
 Part 2 - The natural numbers
 ============================

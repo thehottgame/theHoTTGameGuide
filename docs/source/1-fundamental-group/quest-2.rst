@@ -19,6 +19,24 @@ Quest 2 - ``ℤ`` is a Set
     - list instances of trinitarianism here
   - finish proof
 
+An overview of this quest :
+
+- We want to show that the higher loop spaces of ``S¹``
+  are trivial
+- We note that it suffices to show that the loop space of ``ℤ``
+  is trivial, assuming the end result ``loopSpace S¹ base ≡ ℤ``.
+- Show that the loop space of any set is trivial,
+  hence it suffices to show that ``ℤ`` is a set
+- Show that ``ℤ`` looks like the sum of two disjoint copies of ``ℕ``,
+  and ``ℕ`` is a set;
+  it then suffices to show the general result that the disjoint sum of two
+  sets is a set.
+- To show that the disjoint sum of sets is a set we find ourselves
+  trying to classify the path space of disjoint sums.
+
+The bulk of the work will be to classify the path space of disjoint sums,
+and showing that it actually corresponds to the path space.
+This is the content of the last three parts.
 
 Part 0 - ``loopSpace loopSpace``
 ================================
@@ -40,26 +58,24 @@ The second loop space contains an obvious point ``refl : refl ≡ refl``
 and we could define the next loop space to be loops in
 ``loopSpace (loopSpace S¹ base) refl`` based at (the new) ``refl``.
 
-Using what we will eventually show - ``loopSpace S¹ base ≡ ℤ`` -
-we can show that the second loop space of ``S¹`` is trivial,
-in the sense that it just consists of a point :
+The important conclusion we will arrive at in this quest is
+that the loop space of ``ℤ`` - which will correspond to the
+second loop space of ``S¹`` (this is the conclusion of this entire arc) -
+is trivial, in the sense that it just consists of a point (up to paths) :
 
 .. code::
 
    loopSpace (loopSpace S¹ base) refl ≡ loopSpace ℤ 0 ≡ ⊤
 
-This is because *any two paths in* ``ℤ`` *are homotopic*,
-hence ``refl : 0 ≡ 0`` is homotopic to any other loop ``0 ≡ 0``,
+Intuitively this is because the only loop (up to a path) in ``ℤ`` from
+``0`` to itself is ``refl``,
 so ``loopSpace ℤ 0`` is contractible -
-it looks just like the point ``⊤``.
+it looks just like the singleton space ``⊥``.
+This is more general : *any two paths in* ``ℤ`` *are homotopic*,
+which we formalise in the definition ``isSet``.
 
 ``isSet``
 ---------
-
-We can justify what we have just said by showing that
-"if any two paths in a space ``A`` are homotopic then
-the loop space of ``A`` at any point in ``A``
-looks like ``⊤``".
 
 .. admonition:: ``isSet``
 
@@ -128,6 +144,10 @@ looks like ``⊤``".
       </details>
       </p>
 
+We can justify "the loop space of a set is trivial" by showing that
+"if any two paths in a space ``A`` are homotopic then
+the loop space of ``A`` at any point in ``A``
+looks like ``⊤``".
 So we show that
 
 .. code:: agda
@@ -233,7 +253,11 @@ that "any two paths are homotopic".
 .. admonition:: The goal
 
    We have therefore reduced our goal to
-   showing that ``ℤ`` is a set.
+   showing that ``ℤ`` is a set,
+   i.e. ``ℤ`` only has trivial paths in it,
+   which will tell us that the second loop
+   (and in fact any higher loop space)
+   of ``S¹`` is trivial.
 
 Part 1 - ``ℤ`` as a disjoint sum ``ℕ ⊔ ℕ``
 ==========================================
@@ -493,11 +517,14 @@ Motivation
   This *should* be due to ``hA``, which gives us
   ``hA ax ay : isProp (ax ≡ ay)``.
   So somehow we need to identify the path spaces
-  ``inl ax ≡ inl ay`` and ``ax ≡ ay``.
+  ``inl ax ≡ inl ay`` and ``ax ≡ ay``
+  (try to formalize this,
+  though we are not expecting a solution here).
 - If ``x`` and ``y`` are of the forms ``inl ax`` and ``inr by``
   respectively for ``ax : A`` and ``by : B`` then
   intuitively the space ``inl ax ≡ inr bx`` *should* be empty,
-  since the sum is disjoint.
+  since the sum is disjoint
+  (again we are not expecting a solution here).
 - The other two cases are similar.
 
 The conclusion is that we need some kind of

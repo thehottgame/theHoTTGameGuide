@@ -106,7 +106,7 @@ There are three ways to interpret this:
 More generally given ``A : Type`` and ``B : A → Type``
 we can form the *pi type* ``(x : A) → B x : Type``
 (in other languages ``Π (x : ℕ), isEven n``),
-with three interpretations :
+with interpretations :
 
 - it is the proposition "for all ``x : A``, we have ``B x``",
   and each term of the pi type `is a collection of proofs ``bx : B x``,

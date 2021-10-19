@@ -17,7 +17,7 @@ you will construct the following functions.
    curry : (A × B → C) → (A → B → C)
    curry f a b = {!!}
 
-These have three interpretations :
+These have interpretations :
 
 - ``uncurry`` is a proof that
   "if ``A`` implies (``B`` implies ``C``)",

@@ -16,12 +16,13 @@ Try to express and prove in ``agda`` the statement
 We make a summary of what is needed:
 
 - a definition of the type ``A ⊕ B`` (input ``\oplus``),
-  which has three interpretations
+  which has interpretations
 
   - the proposition "``A`` or ``B``"
   - the construction with two ways of making recipes
     ``left : A → A ⊕ B``
     and ``right : B → A ⊕ B``.
+  - the disjoint sum of two spaces
   - the coproduct of two objects ``A`` and ``B``.
     The type needs to take in parameters ``A : Type`` and ``B : Type``
 

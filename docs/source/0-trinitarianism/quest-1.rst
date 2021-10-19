@@ -98,7 +98,7 @@ For example,
 Part 1 - Interpretations of Bundles
 ===================================
 
-There are three interpretations of ``isEven : ℕ → Type``.
+The interpretations of ``isEven : ℕ → Type`` are
 
 - Propositionally :
   Already mentioned, ``isEven`` is a predicate on ``ℕ``.
@@ -151,7 +151,7 @@ using ``ℕ`` from the cubical ``agda`` library.)
 Part 2 - Using the Trinitarianism
 =================================
 
-We introduced new ideas through all three perspectives,
+We introduced new ideas through each perspectives,
 as each has their own advantage
 
 - Types as propositions is often the most familiar perspective,
