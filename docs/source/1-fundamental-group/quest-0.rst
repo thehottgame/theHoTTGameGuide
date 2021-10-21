@@ -308,7 +308,7 @@ a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
 .. raw:: html
 
-   <video controls width="1000">
+   <video controls width="600">
 
      <source src="../_static/doubleCover.webm"
              type="video/webm">
@@ -440,7 +440,7 @@ Recall the picture of ``doubleCover``.
 
 .. raw:: html
 
-   <video controls width="500">
+   <video controls width="600">
 
      <source src="../_static/doubleCover.webm"
              type="video/webm">
@@ -448,10 +448,6 @@ Recall the picture of ``doubleCover``.
    </video>
 
 ..
-   .. raw:: html
-
-      <video controls src="../_static/doubleCover.webm"></video>
-
    .. image:: images/doubleCover-final.gif
      :width: 1000
      :alt: doubleCover
