@@ -301,9 +301,20 @@ We will create a map ``doubleCover : S¹ → Type`` that sends
 ``base`` to ``Bool`` and the path ``loop`` to
 a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
-.. image:: images/doubleCover-final.gif
-  :width: 1000
-  :alt: doubleCover
+..
+   .. image:: images/doubleCover-final.gif
+     :width: 1000
+     :alt: doubleCover
+
+.. raw:: html
+   <video controls width="500">
+
+     <source src="images/doubleCover.webm"
+             type="video/webm">
+
+     Sorry, your browser doesn't support embedded videos.
+   </video>
+
 
 Viewing the picture vertically,
 for each point ``x : S¹``,
