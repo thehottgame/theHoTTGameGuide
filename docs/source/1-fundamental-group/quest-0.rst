@@ -825,7 +825,7 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
 
 .. code-block:: agda
 
-   endPtOfTrue : (p : base ≡ base) → doubleCover base
+   endPtOfTrue : base ≡ base → doubleCover base
    endPtOfTrue p = {!!}
 
 - :ref:`Check the goal<emacsCommands>`.
@@ -868,7 +868,7 @@ something in the cubical library (called ``subst``) which we call ``endPt``.
 
   .. code:: agda
 
-     endPtOfTrue : (p : base ≡ base) → doubleCover base
+     endPtOfTrue : base ≡ base → doubleCover base
      endPtOfTrue p = endPt {!!} {!!} {!!}
 
   2. :ref:`Check these new holes<emacsCommands>`.
