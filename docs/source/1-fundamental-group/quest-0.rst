@@ -310,10 +310,9 @@ a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
    <video controls width="1000">
 
-     <source src="_static/doubleCover.webm"
+     <source src="../_static/doubleCover.webm"
              type="video/webm">
 
-     Sorry, your browser doesn't support embedded videos.
    </video>
 
 
@@ -441,11 +440,21 @@ Recall the picture of ``doubleCover``.
 
 .. raw:: html
 
-   <video controls src="../_static/doubleCover.webm"></video>
+   <video controls width="500">
 
-.. image:: images/doubleCover-final.gif
-  :width: 1000
-  :alt: doubleCover
+     <source src="../_static/doubleCover.webm"
+             type="video/webm">
+
+   </video>
+
+..
+   .. raw:: html
+
+      <video controls src="../_static/doubleCover.webm"></video>
+
+   .. image:: images/doubleCover-final.gif
+     :width: 1000
+     :alt: doubleCover
 
 This means we need ``flipPath`` to correspond to
 the unique non-identity permutation of ``Bool``
