@@ -439,6 +439,10 @@ Recall the picture of ``doubleCover``.
 
 .. _doubleCoverAnimation2:
 
+.. raw:: html
+
+   <video controls src="_static/doubleCover.webm"></video>
+
 .. image:: images/doubleCover-final.gif
   :width: 1000
   :alt: doubleCover
