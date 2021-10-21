@@ -308,9 +308,9 @@ a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
 
 .. raw:: html
 
-   <video controls width="500">
+   <video controls width="1000">
 
-     <source src="images/doubleCover.webm"
+     <source src="_static/doubleCover.webm"
              type="video/webm">
 
      Sorry, your browser doesn't support embedded videos.
