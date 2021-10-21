@@ -307,6 +307,7 @@ a non-trivial path ``flipPath : Bool ≡ Bool`` in the space of spaces.
      :alt: doubleCover
 
 .. raw:: html
+
    <video controls width="500">
 
      <source src="images/doubleCover.webm"
