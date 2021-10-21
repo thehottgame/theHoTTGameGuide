@@ -441,7 +441,7 @@ Recall the picture of ``doubleCover``.
 
 .. raw:: html
 
-   <video controls src="_static/doubleCover.webm"></video>
+   <video controls src="../_static/doubleCover.webm"></video>
 
 .. image:: images/doubleCover-final.gif
   :width: 1000
