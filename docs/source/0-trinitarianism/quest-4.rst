@@ -281,17 +281,19 @@ We will revisit these ideas again in a later quest.
 
 .. missing link to later quest
 
-Part 1 - Groupoid Laws
-======================
+Part 1 - Mapping out of ``Id``
+==============================
 
-In this part we look at the algebraic properties of the identity type.
-Specifically, we will see that the identity type satisfies (infinity) groupoid
-laws.
+Groupoid Laws
+-------------
+
+The identity type satisfies (infinity) groupoid laws,
+which we have as exercises below.
 This aligns well with the geometric perspective of types :
 in classical homotopy theory any space has a groupoid structure
 and any groupoid can be made into a space.
 
-We will describe the groupoid laws and leave their formalisation
+We describe the groupoid laws and leave their formalisation
 and proofs as exercises.
 Note that our solutions may differ to yours depending on
 your choice of how to define transitivity / concatenation.
@@ -299,7 +301,8 @@ your choice of how to define transitivity / concatenation.
 We take the geometric perspective :
 
 - ``rfl`` is the left and right identity under concatenation,
-  (we also take ``Id`` as the notion of *equality of paths*)
+  (we can also take ``Id`` as the notion of *equality of paths*)
+
 
   .. raw:: html
 
@@ -342,6 +345,23 @@ We take the geometric perspective :
 
      </details>
      </p>
+
+  .. tip::
+
+     If you are tired of writing ``{A : Type} {x y : A}`` each time
+     you can stick
+
+     .. code::
+
+        private
+          variable
+            A : Type
+            x y : A
+
+     at the beginning of your ``agda`` file,
+     and it will assume ``A``, ``x`` and ``y`` implicitely
+     whenever they are mentioned.
+     Make sure it is indented correctly.
 
 - ``Sym`` is a left and right inverse.
 
@@ -418,6 +438,418 @@ We take the geometric perspective :
 
      </details>
      </p>
+
+Recursor - The Mapping Out Property of ``Id``
+---------------------------------------------
+
+We may wish to extract the way we have made maps out of the identity type :
+
+.. admonition:: Mapping out property of ``Id``
+
+   Assuming a space ``A`` and a point ``x : A``.
+   Given a bundle ``M : (y : A) (p : Id x y) → Type`` over the "space of paths out of ``x``",
+   in order to make a map ``{y : A} (p : Id x y) → M y p``,
+   it suffices to give a point in ``M x refl``.
+   This is traditionally called the "recursor" of ``Id``.
+   (We have still not justified this geometrically.)
+
+For example, in order to prove ``*Sym : {A : Type} {x y : A} (p : Id x y) → Id (p * Sym p) rfl``,
+we would choose our bundle ``M`` to be ``λ y p → Id (p * Sym p) rfl``,
+taking each ``y : A`` and ``p : Id x y`` to the space of paths from ``(p * Sym p)`` to ``rfl``
+in ``Id x x``.
+When we proved this in the previous section,
+``agda`` figured out what ``M`` needed to be and just asked for a proof of the case
+``M x rfl``.
+
+In ``0Trinitarianism/Quest4.agda``, try formalising the mapping out property,
+and call it ``outOfId``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>The statement</summary>
+
+.. code:: agda
+
+   outOfId : (M : (y : A) → Id x y → Type) → M x rfl
+     → {y : A} (p : Id x y) → M y p
+   outOfId = {!!}
+
+Note that we have used the symbol ``y`` in the type of ``M``,
+but it really is just a local variable and will not appear outside that bracket.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   outOfId : (M : (y : A) → Id x y → Type) → M x rfl
+     → {y : A} (p : Id x y) → M y p
+   outOfId M h rfl = h
+
+The proof is of course just casing on the path ``p``,
+as we are trying to extract that idea.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+Part 2 - The Path Space
+=======================
+
+If you came here from the quest on :ref:`fundamentalGroupOfTheCircle`
+then you may be wondering why there has not been any mention of
+the *path space* ``x ≡ y``.
+The reason is that whilst ``≡`` and ``Id`` are meant to represent the same idea,
+the implementation of ``Id`` is simple - we were able to write it down;
+whereas the implementation of ``≡`` is "external",
+and purely existing in ``cubical agda``.
+In this part we will show that the two are the same,
+and from this point onwards we will only use ``≡`` for equality and paths
+(as is the convention in the `cubical library <https://github.com/agda/cubical>`_).
+
+.. admonition:: The goal
+
+   Given two points ``x y : A``,
+   the path type ``x ≡ y`` is equal to ``Id x y``.
+   Where we take the notion of "equal to" as
+   giving a point in ``(x ≡ y) ≡ (Id x y)``.
+
+We will only use these axioms about ``≡``
+
+- If ``x`` is a point in some space then ``refl`` is a proof of ``x ≡ x``.
+- The mapping out property, called ``J`` :
+
+  .. code:: agda
+
+     J : (M : (y : A) → x ≡ y → Type) → M x refl
+       → {y : A} (p : x ≡ y) → M y p
+
+  This looks exactly like ``outOfId``.
+- The mapping out property applied to ``refl`` :
+
+  .. code:: agda
+
+     JRefl : (M : (y : A) → x ≡ y → Type) (h : M x refl)
+       → J M h refl ≡ h
+
+  This says that when we feed ``refl`` to ``J M h`` it indeed gives us
+  what we expect - something equal to ``h``.
+  Unfortunately this ``J M h refl`` is not *externally equal* to ``h``,
+  though that is a ``cubical agda`` issue and not a HoTT issue.
+- Univalence : if two spaces are isomorphic then they are equal.
+  We explain isomorphism and justify univalence geometrically in
+  :ref:`Quest 0 of the Fundamental Group arc<part2DefiningFlipPathViaUnivalence>`.
+
+  .. code:: agda
+
+     isoToPath : A ≅ B → A ≡ B
+
+Try to formalise the statement that the two are equal.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>The statement</summary>
+
+.. code:: agda
+
+   Path≡Id : (x ≡ y) ≡ (Id x y)
+   Path≡Id = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+We try to reduce this to giving an isomorphism.
+This involves a lot of small steps,
+which we split up into hints.
+
+.. Hint 0
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 0</summary>
+
+You can write ``isoToPath`` in the hole and "refine".
+Refining again will make it ask for the four components
+in the proof of an isomorphism.
+
+.. code:: agda
+
+   Path≡Id : (x ≡ y) ≡ (Id x y)
+   Path≡Id = isoToPath (iso {!!} {!!} {!!} {!!})
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 1
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 1</summary>
+
+To make an isomorphism we need to make maps forwards and backwards,
+these go in the first two holes.
+
+.. code:: agda
+
+   Path→Id : x ≡ y → Id x y
+   Path→Id = {!!}
+
+   Id→Path : Id x y → x ≡ y
+   Id→Path = {!!}
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 2
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 2</summary>
+
+To make the map forwards we will need to use ``J`` - the mapping
+out property of the path space.
+To map backwards we can use ``outOfId`` or just case on a path.
+
+.. code:: agda
+
+   Path→Id : x ≡ y → Id x y
+   Path→Id {A} {x} = J {!!} {!!}
+
+   Id→Path : Id x y → x ≡ y
+   Id→Path rfl = {!!}
+
+For the first, in order to state the motive we need the implicit arguments
+``A`` and ``x``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+.. code:: agda
+
+   Path→Id : x ≡ y → Id x y
+   Path→Id {A} {x} = J (λ y p → Id x y) rfl
+
+   Id→Path : Id x y → x ≡ y
+   Id→Path rfl = refl
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 3
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 3</summary>
+
+Filling in what we have so far and extracting the relevant lemmas
+we have
+
+.. code:: agda
+
+  Path≡Id : (x ≡ y) ≡ (Id x y)
+  Path≡Id {A} {x} {y} = isoToPath (iso Path→Id Id→Path rightInv leftInv) where
+
+     rightInv : section (Path→Id {A} {x} {y}) Id→Path
+     rightInv = {!!}
+
+     leftInv : retract (Path→Id {A} {x} {y}) Id→Path
+     leftInv = {!!}
+
+We have filled in the necessary implicit arguments for you.
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 4
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 4</summary>
+
+Since ``section Path→Id Id→Path`` will first take in ``p : Id x y``
+we give such a ``p`` and case on it.
+It should of course just turn into ``rfl``.
+
+Since ``retract Path→Id Id→Path`` will first take in ``p : x ≡ y``
+we directly use ``J``.
+
+.. code:: agda
+
+  Path≡Id : (x ≡ y) ≡ (Id x y)
+  Path≡Id {A} {x} {y} = isoToPath (iso Path→Id Id→Path rightInv leftInv) where
+
+     rightInv : section (Path→Id {A} {x} {y}) Id→Path
+     rightInv rfl = {!!}
+
+     leftInv : retract (Path→Id {A} {x} {y}) Id→Path
+     leftInv = J {!!} {!!}
+
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 5
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 5</summary>
+
+Checking the goal for ``rightInv`` we should see it requires a point in
+``Path→Id (λ _ → x) ≡ rfl``, which is the same as ``Path→Id refl ≡ rfl``.
+What's happened is ``agda`` knows that ``Id→Path rfl`` is just ``refl``
+(they are externally equal), so instead of asking for a point of
+``Path→Id (Id→Path rfl) ≡ rfl`` it just asks for a proof of the reduced version.
+(In our heads we reduce ``(λ _ → x)`` to ``refl`` but ``agda`` does the opposite.)
+
+We extract the above result as a lemma :
+
+.. code:: agda
+
+  Path→IdRefl : Path→Id (refl {x = x}) ≡ rfl
+  Path→IdRefl = {!!}
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+Since ``Path→Id`` uses ``J``,
+the only thing we can do here is use ``JRefl`` :
+
+.. code:: agda
+
+  Path→IdRefl : Path→Id (refl {x = x}) ≡ rfl
+  Path→IdRefl {x = x} = JRefl (λ y p → Id x y) rfl
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. raw:: html
+
+   </details>
+   </p>
+
+.. Hint 6
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Hint 6</summary>
+
+For ``leftInv``, giving the correct motive requires knowing what ``retract`` says.
+It should look like
+
+.. code:: agda
+
+   leftInv : retract (Path→Id {A} {x} {y}) Id→Path
+   leftInv = J (λ y p → Id→Path (Path→Id p) ≡ p) {!!}
+
+Checking the goal we should see it requires a point in
+``Id→Path (Path→Id refl) ≡ refl``.
+It should be that we just can replace ``Path→Id refl`` with ``rfl``
+using our lemma ``Path→IdRefl : Path→Id refl ≡ rfl`` -
+but we haven't proven anything about paths yet!
+Let us do so now : if ``f : A → B`` is a function (in our case ``Id→Path``)
+then if two of its inputs are the same ``x ≡ y`` then so are the outputs,
+``f x ≡ f y``.
+
+.. code::
+
+   cong : (f : A → B) (p : x ≡ y) → f x ≡ f y
+   cong = {!!}
+
+We can prove this directly using ``J`` or via ``Id``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solutions</summary>
+
+.. code:: agda
+
+   cong : (f : A → B) (p : x ≡ y) → f x ≡ f y
+   cong {x = x} f = J (λ y p → f x ≡ f y) refl
+
+   cong' : (f : A → B) (p : x ≡ y) → f x ≡ f y
+   cong' f p = Id→Path (Cong f (Path→Id p))
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. HERE
+
+.. code:: agda
+
+  leftInv : retract (Path→Id {A} {x} {y}) Id→Path
+  leftInv = J (λ y p → Id→Path (Path→Id p) ≡ p)
+    (
+      Id→Path (Path→Id refl)
+    ≡⟨ cong (λ p → Id→Path p) Path→IdRefl ⟩
+      Id→Path rfl
+    ≡⟨ refl ⟩
+      refl ∎
+    )
+
+
+.. raw:: html
+
+   </details>
+   </p>
+
+Part 3 - Justifying the Mapping Out Property Geometrically
+==========================================================
 
 
 

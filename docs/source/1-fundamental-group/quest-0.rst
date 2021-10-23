@@ -471,7 +471,7 @@ We proceed in steps :
    As a corollary,
    we can make paths in ``Type`` from isomorphisms in ``Type``.
 
-.. admonition:: Isomorphism and Univalence
+.. admonition:: Isomorphism
 
    One with a topological mindset might worry if isomorphism means
    homeomorphism, homotopy equivalence, bijection or something else;
@@ -491,7 +491,21 @@ We proceed in steps :
 
      You might notice that the above looks like the classical
      definition of homotopy equivalence. (They turn out to be "the same".)
-   - (corollary of univalence) any isomorphism can be turned into a path between spaces
+
+.. admonition:: Univalence
+
+   We have described paths between points as giving a starting point,
+   an ending point, and a generic point between that agrees on the boundary.
+   Drawing a path between *spaces* in the *space of spaces*,
+   we can see that such a path is the data of two
+   spaces that "continuously look the same":
+
+   .. insert picture
+
+   We already have a notion of "the same" for spaces,
+   which is isomorphism.
+   Hence we assume the following "univalence" axiom :
+   Any isomorphism can be turned into a path between spaces.
 
 * In ``1FundamentalGroup/Quest0.agda``, navigate to :
 
