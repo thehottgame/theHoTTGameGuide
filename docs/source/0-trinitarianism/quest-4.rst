@@ -176,7 +176,9 @@ There is an obvious one.
    We have *not* included a justification via the geometric perspective.
    This is because intuitively it's not quite obvious that to map out
    of the space of paths it suffices to map the constant path.
-   We will return to this issue in :ref:`part4JustifyingJGeometrically>`.
+   We will return to this issue when we justify the mapping out property geometrically.
+
+   .. missing link
 
 
 Transitivity
@@ -424,7 +426,7 @@ Recursor - The Mapping Out Property of ``Id``
 
 We may wish to extract the way we have made maps out of the identity type :
 
-.. admonition:: Mapping out property of ``Id`` (later to be known as ``J``)
+.. admonition:: Mapping out property of ``Id``
 
    Assuming a space ``A`` and a point ``x : A``.
    Given a bundle ``M : (y : A) (p : Id x y) → Type`` over the "space of paths out of ``x``",
@@ -487,33 +489,6 @@ as we are trying to extract that idea.
 Part 2 - The Path Space
 =======================
 
-Equality is Respected by everything
------------------------------------
-
-``Id`` is a good notion of equality not just because it is an equivalence relation,
-but because every other construction of a type respects ``Id`` in some sense.
-We give a list of examples here, whose proofs will be exercises in the :ref:`side quest<link>`.
-
-.. missing link to side quests
-
-- For the product of two spaces
-  we have ``Id A × Id B`` is isomorphic to ``Id (A × B)``.
-  More formally
-
-  .. code:: agda
-
-   id× : {A B : Type} (a0 a1 : A) (b0 b1 : B) → (Id a0 a1 × Id b0 b1) ≅ Id {A × B} ( a0 , b0 ) ( a1 , b1 )
-
-  where we have some kind of product of spaces (however you wish to define it)
-  and some kind of notion of isomorphism.
-  We will revisit these ideas again in a later quest.
-
-.. missing link to later quest
-
-
-Paths versus ``Id``
--------------------
-
 If you came here from the quest on :ref:`fundamentalGroupOfTheCircle`
 then you may be wondering why there has not been any mention of
 the *path space* ``x ≡ y``.
@@ -521,18 +496,12 @@ The reason is that whilst ``≡`` and ``Id`` are meant to represent the same ide
 the implementation of ``Id`` is simple - we were able to write it down;
 whereas the implementation of ``≡`` is "external",
 and purely existing in ``cubical agda``.
-In this part we will show that the two are the same,
-and from this point onwards we will only use ``≡`` for equality and paths
+In this part we will show that the two are "the same" as spaces i.e. isomorphic,
+and after this we will only use ``≡`` for equality and paths
 (as is the convention in the `cubical library <https://github.com/agda/cubical>`_).
 
-.. admonition:: The goal
-
-   Given two points ``x y : A``,
-   the path type ``x ≡ y`` is equal to ``Id x y``.
-   Where we take the notion of "equal to" as
-   giving a point in ``(x ≡ y) ≡ (Id x y)``.
-
-We will only use these axioms about ``≡``
+We assert the following three axioms for the path space
+(we will add another (univalence) in later):
 
 - If ``x`` is a point in some space then ``refl`` is a proof of ``x ≡ x``.
 - The mapping out property, called ``J`` :
@@ -554,33 +523,24 @@ We will only use these axioms about ``≡``
   what we expect - something equal to ``h``.
   Unfortunately this ``J M h refl`` is not *externally equal* to ``h``,
   though that is a ``cubical agda`` issue and not a HoTT issue.
-- Univalence : if two spaces are isomorphic then they are equal.
-  We explain isomorphism and justify univalence geometrically in
-  :ref:`Quest 0 of the Fundamental Group arc<part2DefiningFlipPathViaUnivalence>`.
 
-  .. code:: agda
+Paths versus ``Id``
+-------------------
 
-     isoToPath : A ≅ B → A ≡ B
+.. admonition:: The goal
 
-Try to formalise the statement that the two are equal.
+   Given two points ``x y : A``,
+   the path type ``x ≡ y`` is isomorphic to ``Id x y``.
+   We introduce isomorphism in
+   :ref:`Quest 0 of the Fundamental Group arc<part2DefiningFlipPathViaUnivalence>`.
 
-.. raw:: html
-
-   <p>
-   <details>
-   <summary>The statement</summary>
+So we are trying to show
 
 .. code:: agda
 
-   Path≡Id : (x ≡ y) ≡ (Id x y)
-   Path≡Id = {!!}
+   Path≅Id : (x ≡ y) ≅ (Id x y)
+   Path≅Id = {!!}
 
-.. raw:: html
-
-   </details>
-   </p>
-
-We try to reduce this to giving an isomorphism.
 This involves a lot of small steps,
 which we split up into hints.
 
@@ -592,14 +552,13 @@ which we split up into hints.
    <details>
    <summary>Hint 0</summary>
 
-You can write ``isoToPath`` in the hole and "refine".
-Refining again will make it ask for the four components
+"Refining" in the hole will make it ask for the four components
 in the proof of an isomorphism.
 
 .. code:: agda
 
-   Path≡Id : (x ≡ y) ≡ (Id x y)
-   Path≡Id = isoToPath (iso {!!} {!!} {!!} {!!})
+   Path≡Id : (x ≡ y) ≅ (Id x y)
+   Path≡Id = iso {!!} {!!} {!!} {!!}
 
 .. raw:: html
 
@@ -690,8 +649,8 @@ we have
 
 .. code:: agda
 
-  Path≡Id : (x ≡ y) ≡ (Id x y)
-  Path≡Id {A} {x} {y} = isoToPath (iso Path→Id Id→Path rightInv leftInv) where
+  Path≅Id : (x ≡ y) ≅ (Id x y)
+  Path≅Id {A} {x} {y} = iso Path→Id Id→Path rightInv leftInv where
 
      rightInv : section (Path→Id {A} {x} {y}) Id→Path
      rightInv = {!!}
@@ -723,8 +682,8 @@ we directly use ``J``.
 
 .. code:: agda
 
-  Path≡Id : (x ≡ y) ≡ (Id x y)
-  Path≡Id {A} {x} {y} = isoToPath (iso Path→Id Id→Path rightInv leftInv) where
+  Path≅Id : (x ≡ y) ≡ (Id x y)
+  Path≅Id {A} {x} {y} = iso Path→Id Id→Path rightInv leftInv where
 
      rightInv : section (Path→Id {A} {x} {y}) Id→Path
      rightInv rfl = {!!}
@@ -864,6 +823,11 @@ we just need to show that ``Id→Path (Path→Id refl) ≡ Id→Path rfl``.
    </details>
    </p>
 
+Concluding that the two types are isomorphic is a good reason to accept them as "the same"
+in the sense that if two spaces are isomorphic then they
+share the same properties, because isomorphism should interact nicely with other constructions.
+We expand upon this point in :ref:`part4Univalence`.
+
 Part 3 - Properties of the Path Space
 =====================================
 
@@ -880,6 +844,14 @@ which we list here :
   following points along the path of spaces.
 - The function ``endPt`` which follows a path along a bundle.
 
+Some of these properties are what Homotopy Type theorists believe to be the
+absolute minimal necessary philosophical foundations
+for considering paths to be a good notion of equality :
+
+- ``refl``, ``sym`` and ``_∙_`` give us that it is an equivalence relation
+- ``cong`` tells us that any function respects equality.
+- ``endPt`` and ``pathToFun`` approximately say
+  that any predicate / family / bundle ``B : A → Type`` respects equality.
 
 The Basics
 ----------
@@ -1001,7 +973,7 @@ has the following meanings :
 - If ``B`` is a predicate on ``A`` and ``x ≡ y``
   are equal terms of ``A`` then ``B x`` implies ``B y``.
   "We can substitute ``x`` for ``y`` in the proof of ``B x``".
-- If ``B`` is a construction dependent on terms of ``A``
+- If ``B`` is a family of constructions dependent on terms of ``A``
   and ``x ≡ y`` are identified recipes of ``A``,
   then recipes of ``B x`` can be turned into recipes of ``B y``.
   "We can substitute the recipe ``x`` for ``y`` in the recipe for ``B x``".
@@ -1010,7 +982,18 @@ has the following meanings :
   then we can follow any "lifted path" starting at some ``bx : B x``
   to find its end point ``by : B y``.
 
-Try to formalize and prove the above in ``0Trinitarianism/Quest4.agda``.
+.. admonition:: Predicates / families / bundles respect paths
+
+   If we have a predicate / family / bundle ``B`` as above
+   and an equality ``x ≡ y`` in ``A``,
+   then we know that ``cong`` will give us an equality of *spaces* ``B x ≡ B y``.
+   However, only in the presence of ``pathToFun`` is this equality any use -
+   surely if two spaces are equal then we should be able to
+   transport points from one to the other.
+   Hence ``endPt`` / ``pathToFun`` (often both referred to as transport)
+   justify the statement "predicates / families / bundles" respect paths.
+
+Try to formalize and prove ``endPt`` in ``0Trinitarianism/Quest4.agda``.
 Then show that it sends ``refl`` to what we expect.
 
 .. raw:: html
@@ -1019,7 +1002,7 @@ Then show that it sends ``refl`` to what we expect.
   <details>
   <summary>Solutions</summary>
 
-Of course, it is another application of ``J``.
+One option it is a raw application of ``J``.
 
 .. code::
 
@@ -1029,23 +1012,108 @@ Of course, it is another application of ``J``.
   endPtRefl : (B : A → Type) → endPt B (refl {x = x}) ≡ id
   endPtRefl {x = x} B = JRefl ((λ y p → B x → B y)) id
 
+We could also use ``cong`` and ``pathToFun`` as described above,
+however due to size issues that we have not addressed in our
+insufficiently general definition of ``cong``,
+we have used the library's version of ``cong``.
+(Outside this quest we will be using the library's version
+of these definitions.)
+
+.. code::
+
+  endPt' : (B : A → Type) (p : x ≡ y) → B x → B y
+  endPt' B p = pathToFun (Cubical.Foundations.Prelude.cong B p )
+
 .. raw:: html
 
   </details>
   </p>
 
-.. _part4JustifyingJGeometrically:
+.. _part4Univalence:
 
-Part 4 - Justifying ``J`` Geometrically
-=======================================
+Part 4 - Univalence
+===================
+
+Paths on Other Constructions
+----------------------------
+
+The path space tends to interact nicely with other constructions.
+We give a list of examples here to demonstrate this point :
+
+- For points ``(a0 , b0) (a1 , b1) : A × B`` in the product of two spaces
+  we have that ``(a0 , b0) ≡ (a1 , b1)``
+  is "the same" space as the product of path spaces ``(a0 ≡ a1) × (b0 ≡ b1)``.
+  Formally we express "the same" using an isomorphism :
+
+  .. code:: agda
+
+     Path× : {A B : Type} (a0 a1 : A) (b0 b1 : B) → (_≡_ {A × B} ( a0 , b0 ) ( a1 , b1 )) ≅ ((a0 ≡ a1) × (b0 ≡ b1))
+
+  where we have some kind of product of spaces (however you wish to define it).
+  We will prove this example in a side quest.
+
+  .. link
+
+- For points ``x y : A ⊔ B`` in the disjoint sum / coproduct of two spaces
+  we have that the space ``x ≡ y`` is one of the four cases
+
+  * If they are both "from ``A``" then ``x ≡ y`` is "the same as" the corresponding path space in ``A``
+  * If they are respectively from ``A`` and ``B`` then ``x ≡ y`` is "the same as" the empty space
+  * If they are respectively from ``B`` and ``A`` then ``x ≡ y`` is "the same as" the empty space
+  * If they are both "from ``B``" then ``x ≡ y`` is "the same as" the corresponding path space in ``B``
+
+  We go through this example in detail :ref:`here<classifyingThePathSpaceOfDisjointSums>`.
+- If we have two functions ``f g : A → B`` then ``f ≡ g`` is "the same" space as
+  ``(a : A) → f a ≡ g a``.
+  This is called "functional extensionality".
+  We show this at the end of this part.
+
+Univalence
+----------
+
+Now an important question arises from these considerations :
+
+.. important::
+
+  We have nice ways of describing what paths between points in constructions are,
+  but what should paths in the space of spaces be?
+
+Looking back on this quest (an perhaps one's life experience) we might think "isomorphism"
+as it is our competing notion of "the same" for spaces.
+The univalence axiom says something along the lines of this :
+
+.. admonition:: Univalence
+
+   If two spaces are isomorphic then they are equal.
+
+   .. code:: agda
+
+      isoToPath : {A B : Type} → A ≅ B → A ≡ B
+
+   .. raw:: html
+
+      <p>
+      <details>
+      <summary>Detail</summary>
+
+   Actually univalence tends to refer to something slightly different,
+   whilst this is a corollary of it.
+   Refer to `The HoTT Book <https://homotopytypetheory.org/book/>`_ for more details.
+
+   .. raw:: html
+
+      </details>
+      </p>
+
+Hence any isomorphism we have shown can be upgraded to a path between spaces
+in ``cubical agda``.
+For example ``(x ≡ y) ≡ (Id x y)`` can now be shown.
+
+``funExt``
+----------
 
 
 
-Part 5 - Dependent Paths
-========================
-
-Part 6 - Classifying Paths in Various Types
-===========================================
 
 ..
    - exercise on mapping out of Id
@@ -1065,3 +1133,4 @@ Part 6 - Classifying Paths in Various Types
      - sigma types
        - heterogenous paths§
      - universe ? ? ? univalence
+

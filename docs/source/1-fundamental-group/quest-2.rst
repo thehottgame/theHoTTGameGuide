@@ -530,8 +530,10 @@ Motivation
 The conclusion is that we need some kind of
 classification of the path space of disjoint sums.
 
-Classifying the path space
---------------------------
+.. _classifyingThePathSpaceOfDisjointSums:
+
+Classifying the Path Space of Disjoint Sums
+-------------------------------------------
 
 .. admonition:: Path space of disjoint sums
 
@@ -578,6 +580,26 @@ There should be four cases.
   space between them to be empty, so we should give ``⊥``.
 - If both are from ``B`` then we should
   imitate what we did in the first case
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution</summary>
+
+.. code:: agda
+
+   ⊔NoConfusion : A ⊔ B → A ⊔ B → Type
+   ⊔NoConfusion (inl x) (inl y) = x ≡ y -- Path A x y
+   ⊔NoConfusion (inl x) (inr y) = ⊥
+   ⊔NoConfusion (inr x) (inl y) = ⊥
+   ⊔NoConfusion (inr x) (inr y) = x ≡ y -- Path B x y
+
+.. raw:: html
+
+   </details>
+   </p>
+
 
 Using the Classification
 ------------------------
