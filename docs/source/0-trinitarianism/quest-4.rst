@@ -176,9 +176,8 @@ There is an obvious one.
    We have *not* included a justification via the geometric perspective.
    This is because intuitively it's not quite obvious that to map out
    of the space of paths it suffices to map the constant path.
-   We will return to this issue at a later point.
+   We will return to this issue in :ref:`part4JustifyingJGeometrically>`.
 
-   .. link to justifying J
 
 Transitivity
 ------------
@@ -261,25 +260,6 @@ but you can use whichever you prefer.
 
   </details>
   </p>
-
-Equality is Respected by everything
------------------------------------
-
-For ``Id`` be really be a good notion of equality we should show that
-in some sense all other constructions respect it.
-For example we might want to show that for the product of two spaces
-we have ``Id A × Id B`` is isomorphic to ``Id (A × B)``.
-More formally
-
-.. code:: agda
-
-   id× : {A B : Type} (a0 a1 : A) (b0 b1 : B) → (Id a0 a1 × Id b0 b1) ≅ Id {A × B} ( a0 , b0 ) ( a1 , b1 )
-
-where we have some kind of product of spaces (however you wish to define it)
-and some kind of notion of isomorphism.
-We will revisit these ideas again in a later quest.
-
-.. missing link to later quest
 
 Part 1 - Mapping out of ``Id``
 ==============================
@@ -444,7 +424,7 @@ Recursor - The Mapping Out Property of ``Id``
 
 We may wish to extract the way we have made maps out of the identity type :
 
-.. admonition:: Mapping out property of ``Id``
+.. admonition:: Mapping out property of ``Id`` (later to be known as ``J``)
 
    Assuming a space ``A`` and a point ``x : A``.
    Given a bundle ``M : (y : A) (p : Id x y) → Type`` over the "space of paths out of ``x``",
@@ -506,6 +486,30 @@ as we are trying to extract that idea.
 
 Part 2 - The Path Space
 =======================
+
+Equality is Respected by everything
+-----------------------------------
+
+``Id`` is a good notion of equality not just because it is an equivalence relation,
+but because every other construction of a type respects ``Id`` in some sense.
+We give a list of examples here, whose proofs will be exercises in the :ref:`side quest<link>`.
+
+.. missing link to side quests
+
+- For the product of two spaces
+  we have ``Id A × Id B`` is isomorphic to ``Id (A × B)``.
+  More formally
+
+  .. code:: agda
+
+   id× : {A B : Type} (a0 a1 : A) (b0 b1 : B) → (Id a0 a1 × Id b0 b1) ≅ Id {A × B} ( a0 , b0 ) ( a1 , b1 )
+
+  where we have some kind of product of spaces (however you wish to define it)
+  and some kind of notion of isomorphism.
+  We will revisit these ideas again in a later quest.
+
+.. missing link to later quest
+
 
 Paths versus ``Id``
 -------------------
@@ -889,15 +893,159 @@ To see solutions for this, please see ``0Trinitarianism/Quest4Solutions.agda``.
 ``pathToFun``
 -------------
 
+The function ``pathToFun`` (originally called ``transport`` in the ``cubical library``)
+has the following interpretations :
+
+- If two propositions are equal then one implies the other.
+- If two constructions can be identified then we can transport recipes
+  of ``A`` over to recipes of ``B``
+- If two spaces look the same / if there is a path between spaces in the space of spaces
+  then we can map one to the other
+  (it turns out that we can make ``pathToFun`` always give us an isomorphism).
+
+Try formalizing and defining ``pathToFun`` in ``0Trinitarianism/Quest4.agda``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The Statement</summary>
+
+.. code:: agda
+
+   pathToFun : A ≡ B → A → B
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 0
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 0</summary>
+
+Use ``J`` to reduce this to finding a map ``A → A``,
+and choose the identity map.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+.. code:: agda
+
+   id : A → A
+   id x = x
+
+   pathToFun : A ≡ B → A → B
+   pathToFun {A} = J (λ B p → (A → B)) id
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+Show that ``pathToFun`` sends ``refl`` to the identity map.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The Statment</summary>
+
+.. code:: agda
+
+   pathToFunRefl : pathToFun (refl {x = A}) ≡ id
+   pathToFunRefl = {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solutions</summary>
+
+Since the only thing we know about ``J`` is how
+it computes on ``refl``, we apply that :
+
+.. code:: agda
+
+   pathToFunRefl : pathToFun (refl {x = A}) ≡ id
+   pathToFunRefl {A} = JRefl (λ B p → (A → B)) id
+
+.. raw:: html
+
+  </details>
+  </p>
 
 ``endPt``
 ---------
 
+The function ``endPt`` (originally called ``subst`` in the ``cubical library``)
+has the following meanings :
 
-Part 4 - Justifying the Mapping Out Property Geometrically
-==========================================================
+- If ``B`` is a predicate on ``A`` and ``x ≡ y``
+  are equal terms of ``A`` then ``B x`` implies ``B y``.
+  "We can substitute ``x`` for ``y`` in the proof of ``B x``".
+- If ``B`` is a construction dependent on terms of ``A``
+  and ``x ≡ y`` are identified recipes of ``A``,
+  then recipes of ``B x`` can be turned into recipes of ``B y``.
+  "We can substitute the recipe ``x`` for ``y`` in the recipe for ``B x``".
+- If ``B`` is a bundle over the space ``A`` and
+  we have a path ``x ≡ y`` between points in ``A``,
+  then we can follow any "lifted path" starting at some ``bx : B x``
+  to find its end point ``by : B y``.
+
+Try to formalize and prove the above in ``0Trinitarianism/Quest4.agda``.
+Then show that it sends ``refl`` to what we expect.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solutions</summary>
+
+Of course, it is another application of ``J``.
+
+.. code::
+
+  endPt : (B : A → Type) (p : x ≡ y) → B x → B y
+  endPt {x = x} B = J (λ y p → B x → B y) id
+
+  endPtRefl : (B : A → Type) → endPt B (refl {x = x}) ≡ id
+  endPtRefl {x = x} B = JRefl ((λ y p → B x → B y)) id
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. _part4JustifyingJGeometrically:
+
+Part 4 - Justifying ``J`` Geometrically
+=======================================
 
 
+
+Part 5 - Dependent Paths
+========================
+
+Part 6 - Classifying Paths in Various Types
+===========================================
 
 ..
    - exercise on mapping out of Id
