@@ -995,6 +995,8 @@ we showed in a new light :
 - ``flipPath : Bool ≡ Bool`` is a non-trivial equality
   between ``Bool`` and itself.
 - ``inl`` is injective (we still have not shown this yet).
+- The objective of this whole arc is to show that
+  the fundamental group of the circle is *equal* to ``ℤ``.
 
 .. side quest?
 
