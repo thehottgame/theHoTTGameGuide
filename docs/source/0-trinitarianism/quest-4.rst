@@ -1050,10 +1050,8 @@ We give a list of examples here to demonstrate this point :
      Path× : {A B : Type} (a0 a1 : A) (b0 b1 : B) → (_≡_ {A × B} ( a0 , b0 ) ( a1 , b1 )) ≅ ((a0 ≡ a1) × (b0 ≡ b1))
 
   where we have some kind of product of spaces (however you wish to define it).
-  We will prove this example in a side quest.
-
-  .. missing link
-
+  We give a proof of this in ``Quest4Solutions``;
+  it is quite long but a good exercise in using ``J``.
 - For points ``x y : A ⊔ B`` in the disjoint sum / coproduct of two spaces
   we have that the space ``x ≡ y`` is one of the four cases
 
@@ -1066,7 +1064,10 @@ We give a list of examples here to demonstrate this point :
 - If we have two functions ``f g : A → B`` then ``f ≡ g`` is "the same" space as
   ``(a : A) → f a ≡ g a``.
   This is called "functional extensionality".
-  We show this at the end of this part.
+  The HoTT proof of this is not straight forward,
+  but in the :ref:`side quests <functionalExtensionality>`
+  we will go through a cubical-specific proof,
+  which is much simpler.
 
 Univalence
 ----------
@@ -1109,28 +1110,9 @@ Hence any isomorphism we have shown can be upgraded to a path between spaces
 in ``cubical agda``.
 For example ``(x ≡ y) ≡ (Id x y)`` can now be shown.
 
-``funExt``
-----------
-
-
-
-
-..
-   - exercise on mapping out of Id
-     - note that geometric interpretation fails
-       and promise justification later
-     - defining sym, trans
-     - groupoid laws A.K.A. types are infinity groupoids hence
-       geometric interpretation of types
+.. TODO
    - justifyig J geometrically
      - transport + paths out of x contractible to refl x
-     - J and JRefl as the recursor and "computational rule"
-       for path type
-     - exercise : Id x y ≡ Path x y
    - paths in various types
-     - pi types
-       - funExt
      - sigma types
        - heterogenous paths§
-     - universe ? ? ? univalence
-
