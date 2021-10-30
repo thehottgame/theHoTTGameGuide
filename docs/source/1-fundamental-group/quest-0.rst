@@ -243,17 +243,23 @@ we show that the space of paths (homotopies) between
 
 .. admonition:: Paths between paths
 
-   In general if we have ``p q : x ≡ y`` in a space ``A``
-   then a path ``h : p ≡ q`` in the path space ``x ≡ y``
+   In general if we have ``p q : a ≡ b`` in a space ``A``
+   then a path ``Path : p ≡ q`` in the path space ``a ≡ b``
    consists of
 
    - the starting path ``p``
    - the end path ``q``
-   - and some generic path in between ``h i : x ≡ y``
+   - and some generic path in between ``Path i : a ≡ b``
      that agrees on the boundary
 
-   ..
-     insert picture
+   .. raw:: html
+
+      <video controls width="600">
+
+          <source src="../_static/pathSpace.webm"
+                  type="video/webm">
+                  
+      </video>
 
    In algebraic topology this is called a *path homotopy*.
 
