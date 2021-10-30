@@ -1052,7 +1052,7 @@ We give a list of examples here to demonstrate this point :
   where we have some kind of product of spaces (however you wish to define it).
   We will prove this example in a side quest.
 
-  .. link
+  .. missing link
 
 - For points ``x y : A ⊔ B`` in the disjoint sum / coproduct of two spaces
   we have that the space ``x ≡ y`` is one of the four cases
