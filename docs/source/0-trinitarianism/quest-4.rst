@@ -774,6 +774,7 @@ then if two of its inputs are the same ``x ≡ y`` then so are the outputs,
    cong = {!!}
 
 We can prove this directly using ``J`` or via ``Id``.
+(We call it ``cong'`` to avoid clashing with the library's version)
 
 .. raw:: html
 
@@ -787,17 +788,19 @@ We can prove this directly using ``J`` or via ``Id``.
    Cong : (f : A → B) → Id x y → Id (f x) (f y)
    Cong f rfl = rfl
 
-   cong : (f : A → B) (p : x ≡ y) → f x ≡ f y
-   cong {x = x} f = J (λ y p → f x ≡ f y) refl
-
    cong' : (f : A → B) (p : x ≡ y) → f x ≡ f y
-   cong' f p = Id→Path (Cong f (Path→Id p))
+   cong' {x = x} f = J (λ y p → f x ≡ f y) refl
+
+   cong'' : (f : A → B) (p : x ≡ y) → f x ≡ f y
+   cong'' f p = Id→Path (Cong f (Path→Id p))
 
 .. raw:: html
 
   </details>
   </p>
 
+From now on we will just use ``cong`` from the library,
+but you can try to continue with your own version.
 Now using ``cong`` we can define ``leftInv``.
 Noting that externally ``Id→Path rfl`` is the same as ``refl``,
 we just need to show that ``Id→Path (Path→Id refl) ≡ Id→Path rfl``.
@@ -1022,7 +1025,7 @@ of these definitions.)
 .. code::
 
   endPt' : (B : A → Type) (p : x ≡ y) → B x → B y
-  endPt' B p = pathToFun (Cubical.Foundations.Prelude.cong B p )
+  endPt' B p = pathToFun (cong B p )
 
 .. raw:: html
 
