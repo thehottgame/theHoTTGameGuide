@@ -1,4 +1,4 @@
-.. _pathsAndEquality:
+.. _quest4PathsAndEquality:
 
 ****************************
 Quest 4 - Paths and Equality

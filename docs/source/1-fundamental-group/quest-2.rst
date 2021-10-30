@@ -959,7 +959,7 @@ Here are the problems:
   in general.
 
 To find out how to induct on paths,
-complete :ref:`quest 4<linkneeded>` in trinitarianism,
+complete :ref:`quest 4<quest4PathsAndEquality>` in trinitarianism,
 and return to this quest with a completely new perspective.
 
 .. link needed
