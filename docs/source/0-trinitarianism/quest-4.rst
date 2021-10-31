@@ -881,6 +881,58 @@ We won't go through each proof, but it is worth noting that since equalities ten
 to be non-external, a little more work is required.
 To see solutions for this, please see ``0Trinitarianism/Quest4Solutions.agda``.
 
+Chains of Equalities
+--------------------
+
+Something that will help organizing the above proofs and work later on is a
+notation for composition that suggests a "chain of equalities".
+Let's say that we want to show that ``a + (b + c) ≡ c + (a + b)`` for naturals ``a b c : ℕ``.
+Then classically one might write
+
+.. code:: agda
+
+     a + (b + c)
+   ≡ by associativity
+     (a + b) + c
+   ≡ by commutativity
+     c + (a + b)
+
+In ``agda`` we would have both proofs of associativity and commutativity.
+Let's call them ``ha`` and ``hc``
+(in practice they would probably be something like
+``+assoc a b c`` and ``+comm (a + b) c``).
+Then using some cleverly defined notation, we can write in ``agda``
+
+.. code:: agda
+
+   example : (a b c : ℕ) → a + (b + c) ≡ c + (a + b)
+   example a b c =
+       a + (b + c)
+     ≡⟨ ha ⟩
+       (a + b) + c
+     ≡⟨ hc ⟩
+       c + (a + b)
+     ∎
+
+One you define ``_∙_`` for composition of paths,
+you can get access to this notation
+by including the following code.
+Try figuring out why it works.
+
+.. code:: agda
+
+  _≡⟨_⟩_ : (x : A) → x ≡ y → y ≡ z → x ≡ z -- input \< and \>
+  _ ≡⟨ x≡y ⟩ y≡z = x≡y ∙ y≡z
+
+  _∎ : (x : A) → x ≡ x -- input \qed
+  _ ∎ = refl
+
+  infixr 30 _∙_
+  infix  3 _∎
+  infixr 2 _≡⟨_⟩_
+
+All of this is included in the solutions file.
+
 ``pathToFun``
 -------------
 
@@ -1128,6 +1180,9 @@ The univalence axiom says something along the lines of this :
 Hence any isomorphism we have shown can be upgraded to a path between spaces
 in ``cubical agda``.
 For example ``(x ≡ y) ≡ (Id x y)`` can now be shown.
+
+
+
 
 .. TODO
    - justifyig J geometrically
