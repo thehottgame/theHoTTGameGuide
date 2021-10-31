@@ -33,10 +33,10 @@ Given ``A : Type``  and  ``x y : A`` we have a type
 
    data Id {A : Type u} : (x y : A) → Type where
 
-     rfl : (x : A) → Id x x
+     rfl : {x : A} → Id x x
 
 The construction takes in (implicit) argument ``A : Type``,
-then for each pair of points ``x y : A`` it returns a space ``Id x y``,
+then for each pair of points ``x y : A`` it returns a space ``Id x y``
 with interpretations :
 
 - ``Id x y`` is the proposition "``x`` equals ``y`` (internally)"
@@ -59,6 +59,13 @@ with interpretations :
      :alt: idType
 
 .. picture latex https://q.uiver.app/?q=WzAsNCxbMiwwLCJcXHN1bV97KHgseSk6IEEgXFx0aW1lcyBBfSBcXG1hdGhybXtJZH0gKHggLCB5KSJdLFswLDAsIkEiXSxbMiwyLCJBIFxcdGltZXMgQSJdLFs0LDBdLFsxLDAsInggXFxtYXBzdG8gKHgseCxcXG1hdGhybXtyZWZsfSkiXSxbMSwyLCJcXG1hdGhybXtkaWFnb25hbH0iLDJdLFswLDIsIih4LHkscCkgXFxtYXBzdG8gKHgseSkiXV0=
+
+Write this up in ``0Trinitarinism/Quest4.agda``.
+We recommend you first try having
+the explicit argument for ``rfl`` in ``rfl : (x : A) → Id x x``,
+so you can see exactly what is going on,
+but we will use ``rfl`` with an implicit argument
+``rfl : {x : A} → Id x x``.
 
 .. admonition:: Internal versus external equality
 
@@ -180,6 +187,12 @@ There is an obvious one.
 
    .. missing link
 
+We can also make the relevant arguments implicit.
+We will be using the following version from now on :
+
+.. code:: agda
+
+   Sym : {A : Type} {x y : A} → Id x y → Id y x
 
 Transitivity
 ------------
@@ -203,15 +216,15 @@ the following interpretations of the same statement :
    idTrans : (A : Type) (x y z : A) → Id x y → Id y z → Id x z
    idTrans = {!!}
 
-   You may wish to make some of the arguments implicit.
-   We could also introduce notation that suggests concatenation:
+You may wish to make some of the arguments implicit.
+We could also introduce notation that suggests concatenation:
 
 .. code:: agda
 
    _*_ : {A : Type} {x y z : A} → Id x y → Id y z → Id x z
    _*_ = {!!}
 
-   We will use the second.
+We will use ``_*_``.
 
 .. raw:: html
 
@@ -460,6 +473,7 @@ and call it ``outOfId``.
 
 Note that we have used the symbol ``y`` in the type of ``M``,
 but it really is just a local variable and will not appear outside that bracket.
+We made the last ``y`` an implicit argument, since ``p`` contains the data of ``y``.
 
 .. raw:: html
 
@@ -521,8 +535,10 @@ We assert the following three axioms for the path space
 
   This says that when we feed ``refl`` to ``J M h`` it indeed gives us
   what we expect - something equal to ``h``.
-  Unfortunately this ``J M h refl`` is not *externally equal* to ``h``,
-  though that is a ``cubical agda`` issue and not a HoTT issue.
+  Unfortunately, though (given correct ``M`` and ``h``)
+  ``outOfId M h rfl`` would *externally* be equal to ``h``,
+  ``J M h refl`` is *not externally equal* to ``h``,
+  but this is a ``cubical agda`` issue and not a HoTT issue.
 
 Paths versus ``Id``
 -------------------
