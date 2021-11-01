@@ -1,4 +1,4 @@
-.. _ZIsASet:
+.. _quest3TheMissingComparisonMap:
 
 ************************************
 Quest 3 - The Missing Comparison Map
@@ -71,19 +71,36 @@ you will need to import the things we have defined.
 
 .. admonition:: Importing files
 
-   We have *not* imported ``1FundamentalGroup/Quest0Solutions.agda`` for you,
-   which is where ``S¹`` was defined.
-   To import either this or your own set of solutions,
-   after the ``where`` at the top of the file write
+   Unlike in the previous quests, we have *not* imported anything for you.
+   If you load the file ``agda`` should be complaining that it doesn't know what
+   ``S¹`` is.
+   You can import ``S¹ ; base ; loop`` from the file ``Cubical.HITs.S1`` in the ``cubical library``,
+   by writing
 
    .. code:: agda
 
-      open import 1FundamentalGroup.Quest0Solutions
+      open import Cubical.HITs.S1 using ( S¹ ; base ; loop )
 
-   If you load the document, ``agda`` will try to import any file
-   with this directory relative to the location of a ``.agda-lib`` file
-   specified in ``.agda/libraries``.
-   In this case it is relative to the location of ``TheHoTTGame.agda-lib``.
+   at the top of the file (after the ``where``).
+   ``Cubical.HITs.S1` is where ``S¹`` was defined in the cubical library
+   (this directory is relative to wherever the cubical library ``.agda-lib``
+   file is on your computer).
+   This will *only* import those three things from that file,
+   and is a good idea since we might have overlapping definitions
+   (such as ``helix``).
+
+   If you load again it should be complaining about ``helix``,
+   which was defined in ``1FundamentalGroup.Quest1``.
+   So in a new line add
+
+   .. code:: agda
+
+      open import 1FundamentalGroup.Quest1
+
+   Which should import *everything* from your ``Quest1`` file.
+   Load the file to check this works.
+   This time it has found the file relative to the HoTT Game library
+   ``TheHoTTGame.agda-lib``.
 
 In the case of ``base`` we want a map
 from ``helix base`` i.e. ``ℤ``, to ``base ≡ base``.
@@ -107,25 +124,39 @@ which we already defined in :ref:`quest1LoopSpaceOfTheCircle`.
   </p>
 
 The case of ``loop i`` will be a lot more work.
-Recall that for mapping out of the circle,
-for the case of having an "arbitrary point" ``loop i`` on ``loop``,
-we need to give a point in the codomain, such that it is
-(externally equal to) ``loop_times`` on the boundary.
-Indeed, checking the goal for the second case we see that we need to give a
-map ``succPath i → base ≡ loop i`` (it has reduces ``bundle (loop i)``),
-and the constraints below tell us the boundary conditions.
+In :ref:`quest0WorkingWithTheCircle`
+we already saw an example of making a map out of ``S¹``,
+by casing on the point in ``S¹``
+though it was not a *dependent map*.
+To recall, we made :
 
-What we really want to do is make a path from ``loop_times`` to itself,
-then apply that to ``i``.
-We could do this by extracting the path as a lemma and so on,
-but what the above really suggests is making a general way of mapping out of ``S¹``.
+.. code::
+
+   doubleCover : (x : S¹) → Type -- or simply S¹ → Type
+   doubleCover base = Bool
+   doubleCover (loop i) = flipPath i
+
+The path ``flipPath i`` was simply a path in (the constant bundle) ``Type``,
+which doesn't depend on the value of ``x : S¹``.
+However, in our situation we will need a *dependent* path,
+since ``helix x → base ≡ x`` is a *dependent* bundle
+over ``S¹`` (it depends on which ``x`` we took).
+Indeed, checking the goal for the second case we see that we need to give a
+map ``succPath i → base ≡ loop i`` (it reduces ``bundle (loop i)`` to ``SuccPath i``),
+and the constraints below tell us the boundary condition
+that it should be equal to ``loop_times`` at the start and end.
+
+We introduce dependent paths in :ref:`0-trinitarianism`.
+
+..
+  missing link
 
 ``outOfS¹``
 -----------
 
+With the knowledge of dependent paths,
+we can come up with a systematic way of mapping out of the circle.
 We suggest that making a map out of ``S¹`` should just be giving a point
-in the codomain and a path from that point to itself.
-Try formalizing this in ``1FundamentalGroup/Quest3``,
-calling this ``outOfS¹``.
+in the codomain and a dependent path over ``loop`` from that point to itself.
+Try formalizing this in ``1FundamentalGroup/Quest3``, calling this ``outOfS¹``.
 
-.. this requires knowing what path over is

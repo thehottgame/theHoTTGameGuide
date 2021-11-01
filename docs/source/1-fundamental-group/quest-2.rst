@@ -962,8 +962,6 @@ To find out how to induct on paths,
 complete :ref:`quest 4<quest4PathsAndEquality>` in trinitarianism,
 and return to this quest with a completely new perspective.
 
-.. link needed
-
 .. _part5UsingThePropositionalPerspective:
 
 Part 5 - Using the Propositional Perspective
