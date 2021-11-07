@@ -1,3 +1,4 @@
+.. _quest5DependentPaths:
 
 *************************
 Quest 5 - Dependent Paths
