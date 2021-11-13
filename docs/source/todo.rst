@@ -317,3 +317,54 @@ Now locate ``¬isProp S¹``.
    ¬isPropS¹ = {!!}
 
 Try proving this using ``isProp→isSet``.
+
+
+.. importing things
+
+..
+   If you follow along in ``1FundamentalGroup/Quest3.agda``
+   you will need to do some imports :
+
+   .. admonition:: Importing files
+
+      Unlike in the previous quests, we have *not* imported anything for you.
+      If you write the above definition and try to
+      load the file ``agda`` should be complaining that it doesn't know what
+      ``S¹`` is.
+
+      .. code::
+
+         Not in scope:
+           S¹
+           at ...
+         when scope checking S¹
+
+      You can import ``S¹ ; base ; loop`` from the file ``Cubical.HITs.S1`` in the ``cubical library``,
+      by writing
+
+      .. code:: agda
+
+         open import Cubical.HITs.S1 using ( S¹ ; base ; loop )
+
+      at the top of the file (after the ``where``).
+      ``Cubical.HITs.S1` is where ``S¹`` was defined in the cubical library
+      (this directory is relative to wherever the cubical library ``.agda-lib``
+      file is on your computer).
+      This will *only* import those three things from that file,
+      and is a good idea since we might have overlapping definitions
+      (such as ``helix``).
+
+      If you load again it should be complaining about ``helix``,
+      which was defined in ``1FundamentalGroup.Quest1``.
+      So in a new line add
+
+      .. code:: agda
+
+         open import 1FundamentalGroup.Quest1
+
+      Which should import *everything* from your ``Quest1`` file.
+      Load the file to check this works.
+      This time it has found the file relative to the HoTT Game library
+      ``TheHoTTGame.agda-lib``.
+
+      The file containing the definition of the path space is ``Cubical.Foundations.Prelude``.
