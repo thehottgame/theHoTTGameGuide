@@ -113,7 +113,7 @@ We give a detailed explanation in the hints and solution.
    <details>
    <summary>Hint 0</summary>
 
-Assume having a space ``A``, points ``x y : A`` and
+Assume we have a space ``A``, points ``x y : A`` and
 a proof of equality / recipe / path ``p : Id x y``.
 It may help to view ``Id x y`` as a construction
 to think about how to proceed.
