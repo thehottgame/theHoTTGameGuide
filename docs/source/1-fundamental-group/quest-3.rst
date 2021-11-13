@@ -47,8 +47,11 @@ So ``rewind`` should take "an integer ``n`` plus a bit",
 loop around ``n`` times, then add that extra corresponding bit,
 the path from ``base`` to ``x`` to the end.
 
-Part 0 - Dependent Paths
-========================
+Part 0 - Rewind
+===============
+
+Dependent paths
+---------------
 
 We first try making ``rewind`` directly.
 If we assume a point ``x : S¹``,
@@ -217,8 +220,9 @@ Let's make this a chain of equalities :
   </details>
   </p>
 
-Let us remind ourselves that this means,
-taking advantage of the propositional perspective.
+Functions and ``pathToFun``
+---------------------------
+
 The map ``loop_times`` takes an integer and
 does ``loop`` that many times.
 On the other hand ``pathToFun`` follows how ``loop_times``
@@ -227,9 +231,6 @@ and spits out the corresponding point at the end.
 This path of spaces is specifically a path of *function spaces*,
 so we need to find a more explicit way of describing what ``pathToFun``
 does to spaces of functions.
-
-Functions and ``pathToFun``
----------------------------
 
 To generalize, suppose we have spaces ``A0 A1 B0 B1 : Type``
 and paths ``A : A0 ≡ A1`` and ``B : B0 ≡ B1``.
@@ -254,7 +255,9 @@ We expect the outcome to be the same.
    pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
      pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
 
-.. missing picture of commutative diagram
+.. image:: images/pathToFunAndPiTypes.png
+  :width: 500
+  :alt: pathToFunAndPiTypes
 
 Here we simply use the result without proof.
 
@@ -266,7 +269,9 @@ We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
 into another map in the space ``ℤ → base ≡ base``,
 by following along the diagram
 
-.. missing picture of commutative diagram
+.. image:: images/pathToFunAndPiTypes'.png
+  :width: 500
+  :alt: pathToFunAndPiTypes'
 
 Specifically, this map should take an ``n : ℤ`` and first send it backwards along
 ``sucℤPath`` (``A``), supposedly giving us ``n - 1``.
@@ -277,9 +282,10 @@ obtaining some path from ``base ≡ base``, which we expect to be internally
 equal to ``loop n times``.
 We can see how this sweeps out the appropriate maps along the way :
 
-.. image:: images/mapFun.png
-  :width: 500
-  :alt: description
+..
+   .. image:: images/mapFun.png
+     :width: 500
+     :alt: description
 
 Try putting this together in our definition of ``rewind``,
 as a new intermediate step in our chain of equalities.
