@@ -1,66 +1,66 @@
-..
-   .. _quest3TheLoopSpaceIsZ:
+.. _quest3TheLoopSpaceIsZ:
 
-   *********************************
-   Quest 3 - The Loop Space is ``ℤ``
-   *********************************
+*********************************
+Quest 3 - The Loop Space is ``ℤ``
+*********************************
 
-   In :ref:`quest1LoopSpaceOfTheCircle` we introduced our main
-   method of proving that the fundamental group
-   (which we take to be ``loopSpace S¹ base`` for now)
-   is ``ℤ``,
-   and in :ref:`quest2ZIsASet` we decided that this
-   means to show that they are equal spaces.
+In :ref:`quest1LoopSpaceOfTheCircle` we introduced our main
+method of proving that the fundamental group
+(which we take to be ``loopSpace S¹ base`` for now)
+is ``ℤ``,
+and in :ref:`quest2ZIsASet` we decided that this
+means to show that they are equal spaces.
 
-   .. admonition:: The Goal
-
-      .. code:: agda
-
-         loopSpace≡ℤ : loopSpace S¹ base ≡ ℤ
-         loopSpace≡Z = {!!}
-
-   As usual we will show this via giving an isomorphism,
-   so we must make comparison maps forward and back.
-   However, we discovered we had to define the backwards map
-   *over all of* ``S¹``.
-   We already have ``windingNumber``, the forwards comparison map,
-   which gives us a map ``loopSpace S¹ base → ℤ`` when applied to ``base``.
+.. admonition:: The Goal
 
    .. code:: agda
 
-      windingNumber : (x : S¹) → base ≡ x → helix x
+      loopSpace≡ℤ : loopSpace S¹ base ≡ ℤ
+      loopSpace≡Z = {!!}
 
-   In this quest our goal is to make a map backwards
-
-   .. admonition:: Current Goal
-
-      .. code:: agda
-
-         rewind : (x : S¹) → helix x → base ≡ x
-
-Since ``windingNumber`` took a path and found how
-many times the path loops around, in general "an integer twisted around the helix a bit",
-or "an integer plus a bit".
-We want to make ``rewind`` do the reverse.
-So ``rewind`` should take "an integer ``n`` plus a bit",
-loop around ``n`` times, then add that extra corresponding bit,
-the path from ``base`` to ``x`` to the end.
-
-Part 0 - ``rewind``
-===================
-
-Dependent paths
----------------
-
-We try making ``rewind``.
-We can assume a point ``x : S¹``,
-then case on what it is.
+As usual we will show this via giving an isomorphism,
+so we must make comparison maps forward and back.
+However, we discovered we had to define the backwards map
+*over all of* ``S¹``.
+We already have ``windingNumber``, the forwards comparison map,
+which gives us a map ``loopSpace S¹ base → ℤ`` when applied to ``base``.
 
 .. code:: agda
 
-  rewind : (x : S¹) → helix x → base ≡ x
-  rewind base = {!!}
-  rewind (loop i) = {!!}
+   windingNumber : (x : S¹) → base ≡ x → helix x
+
+In this quest our goal is to make a map backwards
+
+.. admonition:: Current Goal
+
+   .. code:: agda
+
+      rewind : (x : S¹) → helix x → base ≡ x
+..
+
+   Since ``windingNumber`` took a path and found how
+   many times the path loops around, in general "an integer twisted around the helix a bit",
+   or "an integer plus a bit".
+   We want to make ``rewind`` do the reverse.
+   So ``rewind`` should take "an integer ``n`` plus a bit",
+   loop around ``n`` times, then add that extra corresponding bit,
+   the path from ``base`` to ``x`` to the end.
+
+   Part 0 - ``rewind``
+   ===================
+
+   Dependent paths
+   ---------------
+
+   We try making ``rewind``.
+   We can assume a point ``x : S¹``,
+   then case on what it is.
+
+   .. code:: agda
+
+     rewind : (x : S¹) → helix x → base ≡ x
+     rewind base = {!!}
+     rewind (loop i) = {!!}
 
 ..
    If you follow along in ``1FundamentalGroup/Quest3.agda``
