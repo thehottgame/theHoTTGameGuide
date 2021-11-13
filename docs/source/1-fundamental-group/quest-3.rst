@@ -172,76 +172,77 @@
      </details>
      </p>
 
-Functions and ``pathToFun``
----------------------------
+..
+   Functions and ``pathToFun``
+   ---------------------------
 
-The map ``loop_times`` takes an integer and
-does ``loop`` that many times.
-On the other hand ``pathToFun`` follows how ``loop_times``
-changed along the path of spaces ``λ i → sucℤPath i → base ≡ loop i``,
-and spits out the corresponding point at the end.
-This path of spaces is specifically a path of *function spaces*,
-so we need to find a more explicit way of describing what ``pathToFun``
-does to spaces of functions.
+   The map ``loop_times`` takes an integer and
+   does ``loop`` that many times.
+   On the other hand ``pathToFun`` follows how ``loop_times``
+   changed along the path of spaces ``λ i → sucℤPath i → base ≡ loop i``,
+   and spits out the corresponding point at the end.
+   This path of spaces is specifically a path of *function spaces*,
+   so we need to find a more explicit way of describing what ``pathToFun``
+   does to spaces of functions.
 
-To generalize, suppose we have spaces ``A0 A1 B0 B1 : Type``
-and paths ``A : A0 ≡ A1`` and ``B : B0 ≡ B1``.
-Then let ``pAB`` denote the path
-``λ i → A i → B i : (A0 → B0) ≡ (A1 → B1)``.
-We want to figure out what ``pathToFun``
-does when it follows a function ``f : A0 → B0`` along the path ``pAB``.
+   To generalize, suppose we have spaces ``A0 A1 B0 B1 : Type``
+   and paths ``A : A0 ≡ A1`` and ``B : B0 ≡ B1``.
+   Then let ``pAB`` denote the path
+   ``λ i → A i → B i : (A0 → B0) ≡ (A1 → B1)``.
+   We want to figure out what ``pathToFun``
+   does when it follows a function ``f : A0 → B0`` along the path ``pAB``.
 
-We know by functional extensionality that the function
-``pathToFun pAB f : A1 → B1``
-should be determined by what it does to terms in ``A1``,
-so we can assume ``a1 : A1``.
-The idea is we "apply ``f`` by sending ``a1`` back to ``A0``".
-Since ``pathToFun (sym A) a1`` is meant to give the point in ``A0``
-that "looks like ``a1``", we try applying ``f`` to this point,
-then send it across again via the path ``B`` to the point
-``f (pathToFun (sym A) a1)`` looks like in ``B1``.
-We expect the outcome to be the same.
+   We know by functional extensionality that the function
+   ``pathToFun pAB f : A1 → B1``
+   should be determined by what it does to terms in ``A1``,
+   so we can assume ``a1 : A1``.
+   The idea is we "apply ``f`` by sending ``a1`` back to ``A0``".
+   Since ``pathToFun (sym A) a1`` is meant to give the point in ``A0``
+   that "looks like ``a1``", we try applying ``f`` to this point,
+   then send it across again via the path ``B`` to the point
+   ``f (pathToFun (sym A) a1)`` looks like in ``B1``.
+   We expect the outcome to be the same.
 
-.. code:: agda
+   .. code:: agda
 
-   pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
-     pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
+      pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
+        pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
 
-..  https://q.uiver.app/?q=WzAsNCxbMCwwLCJBXzAiXSxbMCwyLCJBXzEiXSxbMiwwLCJCXzAiXSxbMiwyLCJCXzEiXSxbMCwxLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBBIiwyXSxbMiwzLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBCIl0sWzAsMiwiZiJdLFsxLDMsIlxcdGV4dHR0e3BhdGhUb0Z1bn1cXCxcXCxwX3tBQn0gXFwsXFwsZiAiLDJdXQ==
+   ..  https://q.uiver.app/?q=WzAsNCxbMCwwLCJBXzAiXSxbMCwyLCJBXzEiXSxbMiwwLCJCXzAiXSxbMiwyLCJCXzEiXSxbMCwxLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBBIiwyXSxbMiwzLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBCIl0sWzAsMiwiZiJdLFsxLDMsIlxcdGV4dHR0e3BhdGhUb0Z1bn1cXCxcXCxwX3tBQn0gXFwsXFwsZiAiLDJdXQ==
 
-.. image:: images/pathToFunAndPiTypes.png
-  :width: 500
-  :alt: pathToFunAndPiTypes
-  :align: center
+   .. image:: images/pathToFunAndPiTypes.png
+     :width: 500
+     :alt: pathToFunAndPiTypes
+     :align: center
 
 
-The proof of this in ``cubical agda`` is simply ``refl``,
-so we need not even extract it as a lemma.
+   The proof of this in ``cubical agda`` is simply ``refl``,
+   so we need not even extract it as a lemma.
 
-.. admonition:: A ``cubical`` hack
+   .. admonition:: A ``cubical`` hack
 
-   Is actually one of the axioms asserted in ``cubical agda``
-   that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
-   ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
-   Here we are using the ``cubical`` definition of ``pathToFun``
-   so we can simply write ``refl`` its proof.
+      Is actually one of the axioms asserted in ``cubical agda``
+      that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
+      ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
+      Here we are using the ``cubical`` definition of ``pathToFun``
+      so we can simply write ``refl`` its proof.
 
-   However, according the definition of ``pathToFun`` we gave
-   in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
-   but can be shown to be internally equal using ``J``.
-   We warn that in order to prove this using our definitions,
+      However, according the definition of ``pathToFun`` we gave
+      in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
+      but can be shown to be internally equal using ``J``.
+      We warn that in order to prove this using our definitions,
 
-We interpret what this result means in our specific case :
-We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
-into another map in the space ``ℤ → base ≡ base``,
-by following along the diagram
+   We interpret what this result means in our specific case :
+   We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
+   into another map in the space ``ℤ → base ≡ base``,
+   by following along the diagram
 
-.. https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXFoiXSxbMCwyLCJcXFoiXSxbMiwwLCJcXHRleHR0dHtiYXNlfSBcXGVxdWl2IFxcdGV4dHR0e2Jhc2V9Il0sWzIsMiwiXFx0ZXh0dHR7YmFzZX0gXFxlcXVpdiBcXHRleHR0dHtiYXNlfSJdLFsxLDAsIlxcdGV4dHR0e3BhdGhUb0Z1bn0gXFxcXCBcXHRleHR0dHtzdWN9IFxcWlxcdGV4dHR0e1BhdGh9ICJdLFszLDIsIlxcdGV4dHR0e3BhdGhUb0Z1biB9IHBfXFxlcXVpdiIsMl0sWzAsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFx0ZXh0dHR7bG9vcFxcX3RpbWVzfSAiLDJdXQ==
+   .. https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXFoiXSxbMCwyLCJcXFoiXSxbMiwwLCJcXHRleHR0dHtiYXNlfSBcXGVxdWl2IFxcdGV4dHR0e2Jhc2V9Il0sWzIsMiwiXFx0ZXh0dHR7YmFzZX0gXFxlcXVpdiBcXHRleHR0dHtiYXNlfSJdLFsxLDAsIlxcdGV4dHR0e3BhdGhUb0Z1bn0gXFxcXCBcXHRleHR0dHtzdWN9IFxcWlxcdGV4dHR0e1BhdGh9ICJdLFszLDIsIlxcdGV4dHR0e3BhdGhUb0Z1biB9IHBfXFxlcXVpdiIsMl0sWzAsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFx0ZXh0dHR7bG9vcFxcX3RpbWVzfSAiLDJdXQ==
 
-.. image:: images/pathToFunAndPiTypes'.png
-  :width: 500
-  :alt: pathToFunAndPiTypes'
-  :align: center
+   .. image:: images/pathToFunAndPiTypes'.png
+     :width: 500
+     :alt: pathToFunAndPiTypes'
+     :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath`` (``A``), supposedly giving us ``n - 1``.
