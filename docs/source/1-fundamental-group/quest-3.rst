@@ -1,174 +1,175 @@
-.. _quest3TheLoopSpaceIsZ:
+..
+   .. _quest3TheLoopSpaceIsZ:
 
-*********************************
-Quest 3 - The Loop Space is ``ℤ``
-*********************************
+   *********************************
+   Quest 3 - The Loop Space is ``ℤ``
+   *********************************
 
-In :ref:`quest1LoopSpaceOfTheCircle` we introduced our main
-method of proving that the fundamental group
-(which we take to be ``loopSpace S¹ base`` for now)
-is ``ℤ``,
-and in :ref:`quest2ZIsASet` we decided that this
-means to show that they are equal spaces.
+   In :ref:`quest1LoopSpaceOfTheCircle` we introduced our main
+   method of proving that the fundamental group
+   (which we take to be ``loopSpace S¹ base`` for now)
+   is ``ℤ``,
+   and in :ref:`quest2ZIsASet` we decided that this
+   means to show that they are equal spaces.
 
-.. admonition:: The Goal
+   .. admonition:: The Goal
 
-   .. code:: agda
+      .. code:: agda
 
-      loopSpace≡ℤ : loopSpace S¹ base ≡ ℤ
-      loopSpace≡Z = {!!}
+         loopSpace≡ℤ : loopSpace S¹ base ≡ ℤ
+         loopSpace≡Z = {!!}
 
-As usual we will show this via giving an isomorphism,
-so we must make comparison maps forward and back.
-However, we discovered we had to define the backwards map
-*over all of* ``S¹``.
-We already have ``windingNumber``, the forwards comparison map,
-which gives us a map ``loopSpace S¹ base → ℤ`` when applied to ``base``.
-
-.. code:: agda
-
-   windingNumber : (x : S¹) → base ≡ x → helix x
-
-In this quest our goal is to make a map backwards
-
-.. admonition:: Current Goal
+   As usual we will show this via giving an isomorphism,
+   so we must make comparison maps forward and back.
+   However, we discovered we had to define the backwards map
+   *over all of* ``S¹``.
+   We already have ``windingNumber``, the forwards comparison map,
+   which gives us a map ``loopSpace S¹ base → ℤ`` when applied to ``base``.
 
    .. code:: agda
 
-      rewind : (x : S¹) → helix x → base ≡ x
+      windingNumber : (x : S¹) → base ≡ x → helix x
 
-Since ``windingNumber`` took a path and found how
-many times the path loops around, in general "an integer twisted around the helix a bit",
-or "an integer plus a bit".
-We want to make ``rewind`` do the reverse.
-So ``rewind`` should take "an integer ``n`` plus a bit",
-loop around ``n`` times, then add that extra corresponding bit,
-the path from ``base`` to ``x`` to the end.
+   In this quest our goal is to make a map backwards
 
-Part 0 - ``rewind``
-===================
+   .. admonition:: Current Goal
 
-Dependent paths
----------------
+      .. code:: agda
 
-We try making ``rewind``.
-We can assume a point ``x : S¹``,
-then case on what it is.
+         rewind : (x : S¹) → helix x → base ≡ x
 
-.. code:: agda
+   Since ``windingNumber`` took a path and found how
+   many times the path loops around, in general "an integer twisted around the helix a bit",
+   or "an integer plus a bit".
+   We want to make ``rewind`` do the reverse.
+   So ``rewind`` should take "an integer ``n`` plus a bit",
+   loop around ``n`` times, then add that extra corresponding bit,
+   the path from ``base`` to ``x`` to the end.
 
-  rewind : (x : S¹) → helix x → base ≡ x
-  rewind base = {!!}
-  rewind (loop i) = {!!}
+   Part 0 - ``rewind``
+   ===================
 
-In the case of ``base`` we want a map
-from ``helix base`` i.e. ``ℤ``, to ``base ≡ base``.
-Try filling this in.
+   Dependent paths
+   ---------------
 
-.. raw:: html
+   We try making ``rewind``.
+   We can assume a point ``x : S¹``,
+   then case on what it is.
 
-   <p>
-   <details>
-   <summary>Solution</summary>
+   .. code:: agda
 
-We want this to be the correct inverse,
-described as looping around ``n`` times and adding that extra bit on the end.
-However there is nothing to add at the end in this case,
-so it should just be ``loop_times``,
-which we already defined in :ref:`quest1LoopSpaceOfTheCircle`.
+     rewind : (x : S¹) → helix x → base ≡ x
+     rewind base = {!!}
+     rewind (loop i) = {!!}
 
-.. raw:: html
+   In the case of ``base`` we want a map
+   from ``helix base`` i.e. ``ℤ``, to ``base ≡ base``.
+   Try filling this in.
 
-  </details>
-  </p>
+   .. raw:: html
 
-The case of ``loop i`` will be a lot more work.
-Checking the goal we see that at each point ``loop i``
-on the loop, it wants a point in the space
-``helix (loop i) → base ≡ (loop i)``,
-which it might reduce to ``sucℤPath i → base ≡ (loop i)``
-according to the definition of ``helix``.
+      <p>
+      <details>
+      <summary>Solution</summary>
 
-Collecting these spaces together along this ``i``,
-we obtain a loop in the space of spaces based at the space ``ℤ → base ≡ base``
-given by
+   We want this to be the correct inverse,
+   described as looping around ``n`` times and adding that extra bit on the end.
+   However there is nothing to add at the end in this case,
+   so it should just be ``loop_times``,
+   which we already defined in :ref:`quest1LoopSpaceOfTheCircle`.
 
-.. code::
+   .. raw:: html
 
-  λ i → helix (loop i) → base ≡ (loop i) : (ℤ → base ≡ base) ≡ (ℤ → base ≡ base).
+     </details>
+     </p>
 
-Now collecting the points we need to give into a "path" as well,
-we obtain the notion of a *dependent path* :
-each point of this "path" belongs to a space along the path of spaces.
-We define dependent paths and design a way of mapping out of
-``S¹`` in general in :ref:`quest5DependentPaths` from :ref:`0-trinitarianism`.
-We assume from now on knowledge of dependent paths.
+   The case of ``loop i`` will be a lot more work.
+   Checking the goal we see that at each point ``loop i``
+   on the loop, it wants a point in the space
+   ``helix (loop i) → base ≡ (loop i)``,
+   which it might reduce to ``sucℤPath i → base ≡ (loop i)``
+   according to the definition of ``helix``.
 
-Using ``outOfS¹``
------------------
+   Collecting these spaces together along this ``i``,
+   we obtain a loop in the space of spaces based at the space ``ℤ → base ≡ base``
+   given by
 
-Now that we have a way of mapping out of ``S¹`` (using ``PathD``),
-called ``outOfS¹D``,
-try to use it to repackage the work we have to far.
+   .. code::
 
-.. raw:: html
+     λ i → helix (loop i) → base ≡ (loop i) : (ℤ → base ≡ base) ≡ (ℤ → base ≡ base).
 
-  <p>
-  <details>
-  <summary>Solution</summary>
+   Now collecting the points we need to give into a "path" as well,
+   we obtain the notion of a *dependent path* :
+   each point of this "path" belongs to a space along the path of spaces.
+   We define dependent paths and design a way of mapping out of
+   ``S¹`` in general in :ref:`quest5DependentPaths` from :ref:`0-trinitarianism`.
+   We assume from now on knowledge of dependent paths.
 
-Originally we have
+   Using ``outOfS¹``
+   -----------------
 
-.. code:: agda
+   Now that we have a way of mapping out of ``S¹`` (using ``PathD``),
+   called ``outOfS¹D``,
+   try to use it to repackage the work we have to far.
 
-  rewind : (x : S¹) → helix x → base ≡ x
-  rewind base = loop_times
-  rewind (loop i) = {!!}
+   .. raw:: html
 
-Now we rearrange this to
+     <p>
+     <details>
+     <summary>Solution</summary>
 
-.. code:: agda
+   Originally we have
 
-  rewind : (x : S¹) → helix x → base ≡ x
-  rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times {!!}
+   .. code:: agda
 
-since our bundle over ``S¹`` is ``(λ x → helix x → base ≡ x)``
-and our image for ``base`` is ``loop_times``.
+     rewind : (x : S¹) → helix x → base ≡ x
+     rewind base = loop_times
+     rewind (loop i) = {!!}
 
-.. raw:: html
+   Now we rearrange this to
 
-  </details>
-  </p>
+   .. code:: agda
 
-Checking the last goal, it remains to give a dependent path of type
-``PathD (λ i → sucℤPath i → base ≡ loop i) loop_times loop_times``.
-Remembering the definition of ``PathD``,
-this should be exactly giving a path
-``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times ≡ loop_times``,
-since ``PathD`` reduces the issue of dependent paths to just paths in
-the end space, which is ``ℤ → base ≡ base`` in this case.
-Let's make this a chain of equalities :
+     rewind : (x : S¹) → helix x → base ≡ x
+     rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times {!!}
 
-.. raw:: html
+   since our bundle over ``S¹`` is ``(λ x → helix x → base ≡ x)``
+   and our image for ``base`` is ``loop_times``.
 
-  <p>
-  <details>
-  <summary>Solution</summary>
+   .. raw:: html
 
-.. code:: agda
+     </details>
+     </p>
 
-  rewind : (x : S¹) → helix x → base ≡ x
-  rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
-    (
-      pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
-    ≡⟨ {!!} ⟩
-      loop_times ∎
-    )
+   Checking the last goal, it remains to give a dependent path of type
+   ``PathD (λ i → sucℤPath i → base ≡ loop i) loop_times loop_times``.
+   Remembering the definition of ``PathD``,
+   this should be exactly giving a path
+   ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times ≡ loop_times``,
+   since ``PathD`` reduces the issue of dependent paths to just paths in
+   the end space, which is ``ℤ → base ≡ base`` in this case.
+   Let's make this a chain of equalities :
 
-.. raw:: html
+   .. raw:: html
 
-  </details>
-  </p>
+     <p>
+     <details>
+     <summary>Solution</summary>
+
+   .. code:: agda
+
+     rewind : (x : S¹) → helix x → base ≡ x
+     rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
+       (
+         pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
+       ≡⟨ {!!} ⟩
+         loop_times ∎
+       )
+
+   .. raw:: html
+
+     </details>
+     </p>
 
 Functions and ``pathToFun``
 ---------------------------
