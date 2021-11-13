@@ -933,6 +933,8 @@ Try figuring out why it works.
 
 All of this is included in the solutions file.
 
+.. _pathToFun:
+
 ``pathToFun``
 -------------
 
