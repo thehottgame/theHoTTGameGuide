@@ -83,8 +83,8 @@ but we will use ``rfl`` with an implicit argument
   the computer to recognise ``x`` as the same term as ``y``.
 
 
-Symmetry
---------
+Exercise - Symmetry
+-------------------
 
 For ``Id`` to be a good notion of equality it should at least be
 an equivalence relation.
@@ -149,7 +149,7 @@ We interpret this as
 - To map out of ``Id``, viewed as a total space,
   it suffices to map out of the diagonal.
 
-.. image:: images/idRec
+.. image:: images/idRec.png
    :width: 500
    :alt: idRec
 
@@ -194,8 +194,8 @@ We will be using the following version from now on :
 
    Sym : {A : Type} {x y : A} → Id x y → Id y x
 
-Transitivity
-------------
+Exercise - Transitivity
+-----------------------
 
 In ``0Trinitarianism/Quest4.agda``, try to formalize (and then prove)
 the following interpretations of the same statement :
@@ -276,28 +276,20 @@ but you can use whichever you prefer.
   </details>
   </p>
 
-Part 1 - Mapping out of ``Id``
-==============================
 
-Groupoid Laws
--------------
+Exercise - Groupoid Laws
+------------------------
 
-The identity type satisfies (infinity) groupoid laws,
-which we have as exercises below.
-This aligns well with the geometric perspective of types :
-in classical homotopy theory any space has a groupoid structure
-and any groupoid can be made into a space.
+The identity type satisfies some futher properties,
+which you can formalize then prove.
+You may notice that they look almost like the axioms of a group,
+except a bit bigger - for example there is not just a single identity
+element (``refl`` works at each point in the space).
 
-We describe the groupoid laws and leave their formalisation
-and proofs as exercises.
 Note that our solutions may differ to yours depending on
 your choice of how to define transitivity / concatenation.
 
-We take the geometric perspective :
-
-- ``rfl`` is the left and right identity under concatenation,
-  (we can also take ``Id`` as the notion of *equality of paths*)
-
+- concatenating ``rfl`` on the left and right does nothing,
 
   .. raw:: html
 
@@ -313,6 +305,8 @@ We take the geometric perspective :
      *rfl : {x y : A} (p : Id x y) → Id (p * rfl) p
      *rfl = {!!}
 
+  The first says if you concatenate ``rfl`` on the left
+  then it is equal to the original path.
 
   .. raw:: html
 
@@ -358,7 +352,7 @@ We take the geometric perspective :
      whenever they are mentioned.
      Make sure it is indented correctly.
 
-- ``Sym`` is a left and right inverse.
+- concatenating a path ``p`` with ``Sym p``  on the left and right gives ``refl``.
 
   .. raw:: html
 
@@ -411,7 +405,7 @@ We take the geometric perspective :
      Assoc : {A : Type} {w x y z : A} (p : Id w x) (q : Id x y) (r : Id y z)
              → Id ((p * q) * r) (p * (q * r))
      Assoc = {!!}
-   
+
   .. raw:: html
 
      </details>
@@ -433,6 +427,12 @@ We take the geometric perspective :
 
      </details>
      </p>
+
+These axioms say that any type is a *groupoid*,
+with the above structure.
+This aligns well with the geometric perspective of types :
+in classical homotopy theory any space has a groupoid structure
+and any groupoid can be made into a space.
 
 Recursor - The Mapping Out Property of ``Id``
 ---------------------------------------------
@@ -500,7 +500,7 @@ as we are trying to extract that idea.
   </details>
   </p>
 
-Part 2 - The Path Space
+Part 1 - The Path Space
 =======================
 
 If you came here from the quest on :ref:`fundamentalGroupOfTheCircle`
@@ -845,9 +845,9 @@ we just need to show that ``Id→Path (Path→Id refl) ≡ Id→Path rfl``.
 Concluding that the two types are isomorphic is a good reason to accept them as "the same"
 in the sense that if two spaces are isomorphic then they
 share the same properties, because isomorphism should interact nicely with other constructions.
-We expand upon this point in :ref:`part4Univalence`.
+We expand upon this point in :ref:`part3Univalence`.
 
-Part 3 - Properties of the Path Space
+Part 2 - Properties of the Path Space
 =====================================
 
 In :ref:`fundamentalGroupOfTheCircle`
@@ -1102,9 +1102,9 @@ of these definitions.)
   </details>
   </p>
 
-.. _part4Univalence:
+.. _part3Univalence:
 
-Part 4 - Univalence
+Part 3 - Univalence
 ===================
 
 Paths on Other Constructions

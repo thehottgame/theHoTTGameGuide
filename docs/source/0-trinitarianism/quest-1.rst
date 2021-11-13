@@ -15,6 +15,8 @@ the statement
 The goal of this quest is to define
 what it means for a natural to be even.
 
+.. _part0PredicatesDependentConstructionsBundles:
+
 Part 0 - Predicates / Dependent Constructions / Bundles
 =======================================================
 

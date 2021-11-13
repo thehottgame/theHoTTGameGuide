@@ -140,7 +140,8 @@ Try to define this in ``1FundamentalGroup/Quest5.agda``.
   </details>
   </p>
 
-We may introduce suggestive notation for dependent paths :
+If you like, we can introduce suggestive notation for dependent paths,
+but may be harder to read than ``PathD`` :
 
 .. code:: agda
 
@@ -298,6 +299,8 @@ we should be able to guess what the values on each side turn out to be.
   </details>
   </p>
 
+.. _mappingOutOfTheCirlce:
+
 Mapping out of the circle
 -------------------------
 
@@ -354,3 +357,41 @@ The next we can define using the first, using ``PathPIsoPathD``.
 
   </details>
   </p>
+
+.. admonition:: Cases / Induction / Recursors / Universal properties
+
+   In general, given a higher inductive type we will always
+   have the above process, which can be interpreted in the following ways :
+
+   - It is casing on where the term came from or where the proof came from.
+     For example to map out of the proposition "``A`` or ``B``"
+     we can case on if the proof came from ``A`` or from ``B``.
+     To map out of "``A`` and ``B``" we can case on the proof
+     and it must give us a pair, proving both.
+   - It is induction on the inductively defined type.
+     This was exemplified in our
+     :ref:`discussion on the naturals <part0PredicatesDependentConstructionsBundles>`.
+   - It is the mapping out property of the type, commonly called *the recursor*,
+     and it just considers what recipes went into making the type.
+     For example the only recipes that went into making the circle
+     are ``base`` and ``loop``.
+   - Often this can be seen as a universal property.
+     For example the universal property of disjoint sums (a.k.a coproducts a.k.a "or")
+     can be seen as saying
+     "to map out of ``A ⊔ B`` it suffices to give a
+     map out of ``A`` and a map out of ``B``"
+
+We should verify that the this mapping out property does actually give us
+what we expect.
+For example, we gave it a point ``b : B base`` to map ``base``.
+We therefore should expect that it does map ``base`` to ``b``.
+Tracing through the definitions we have made,
+we should be able to see this is true *externally*.
+
+More explicitely
+
+.. code:: agda
+
+   outOfS¹DBase : (B : S¹ → Type) (b : B base)
+     (p : b ≡ b along (λ i → B (loop i)))→ outOfS¹D B b p base ≡ b
+   outOfS¹DBase B b p = refl

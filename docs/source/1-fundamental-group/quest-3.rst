@@ -1,8 +1,8 @@
-.. _quest3TheMissingComparisonMap:
+.. _quest3TheLoopSpaceIsZ:
 
-************************************
-Quest 3 - The Missing Comparison Map
-************************************
+*********************************
+Quest 3 - The Loop Space is ``ℤ``
+*********************************
 
 In :ref:`quest1LoopSpaceOfTheCircle` we introduced our main
 method of proving that the fundamental group
@@ -53,9 +53,9 @@ Part 0 - Rewind
 Dependent paths
 ---------------
 
-We first try making ``rewind`` directly.
-If we assume a point ``x : S¹``,
-then we can case on what it is.
+We try making ``rewind``.
+We can assume a point ``x : S¹``,
+then case on what it is.
 
 .. code:: agda
 
@@ -255,35 +255,53 @@ We expect the outcome to be the same.
    pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
      pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
 
+..  https://q.uiver.app/?q=WzAsNCxbMCwwLCJBXzAiXSxbMCwyLCJBXzEiXSxbMiwwLCJCXzAiXSxbMiwyLCJCXzEiXSxbMCwxLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBBIiwyXSxbMiwzLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBCIl0sWzAsMiwiZiJdLFsxLDMsIlxcdGV4dHR0e3BhdGhUb0Z1bn1cXCxcXCxwX3tBQn0gXFwsXFwsZiAiLDJdXQ==
+
 .. image:: images/pathToFunAndPiTypes.png
   :width: 500
   :alt: pathToFunAndPiTypes
+  :align: center
 
-Here we simply use the result without proof.
 
-.. We prove it *somewhere*??
-.. missing link
+The proof of this in ``cubical agda`` is simply ``refl``,
+so we need not even extract it as a lemma.
+
+.. admonition:: A ``cubical`` hack
+
+   Is actually one of the axioms asserted in ``cubical agda``
+   that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
+   ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
+   Here we are using the ``cubical`` definition of ``pathToFun``
+   so we can simply write ``refl`` its proof.
+
+   However, according the definition of ``pathToFun`` we gave
+   in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
+   but can be shown to be internally equal using ``J``.
+   We warn that in order to prove this using our definitions,
 
 We interpret what this result means in our specific case :
 We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
 into another map in the space ``ℤ → base ≡ base``,
 by following along the diagram
 
+.. https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXFoiXSxbMCwyLCJcXFoiXSxbMiwwLCJcXHRleHR0dHtiYXNlfSBcXGVxdWl2IFxcdGV4dHR0e2Jhc2V9Il0sWzIsMiwiXFx0ZXh0dHR7YmFzZX0gXFxlcXVpdiBcXHRleHR0dHtiYXNlfSJdLFsxLDAsIlxcdGV4dHR0e3BhdGhUb0Z1bn0gXFxcXCBcXHRleHR0dHtzdWN9IFxcWlxcdGV4dHR0e1BhdGh9ICJdLFszLDIsIlxcdGV4dHR0e3BhdGhUb0Z1biB9IHBfXFxlcXVpdiIsMl0sWzAsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFx0ZXh0dHR7bG9vcFxcX3RpbWVzfSAiLDJdXQ==
+
 .. image:: images/pathToFunAndPiTypes'.png
   :width: 500
   :alt: pathToFunAndPiTypes'
+  :align: center
 
-Specifically, this map should take an ``n : ℤ`` and first send it backwards along
+Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath`` (``A``), supposedly giving us ``n - 1``.
 Then it applies ``loop_times``, obtaining the loop ``loop (n - 1) times``.
-Lastly it this loop follows along the path ``λ i → base ≡ loop i``
+Lastly it follows ``loop (n - 1) times`` along the path ``λ i → base ≡ loop i``
 (which itself is a loop starting and ending at ``base ≡ base`` in the space of spaces),
 obtaining some path from ``base ≡ base``, which we expect to be internally
 equal to ``loop n times``.
-We can see how this sweeps out the appropriate maps along the way :
 
-..
-   .. image:: images/mapFun.png
+.. We can see how this sweeps out the appropriate maps along the way :
+
+   .. image:: images/mapFun
      :width: 500
      :alt: description
 
@@ -302,7 +320,7 @@ as a new intermediate step in our chain of equalities.
    rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
      (
        pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
-     ≡⟨ pathToFun→ sucℤPath (λ i → base ≡ loop i) loop_times ⟩
+     ≡⟨ refl ⟩
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (pathToFun (sym sucℤPath) n)))
      ≡⟨ {!!} ⟩
        loop_times ∎
@@ -315,9 +333,8 @@ as a new intermediate step in our chain of equalities.
 
 We can simplify the above expression.
 We know that ``pathToFun (sym sucℤPath) n`` should follow ``n``
-along ``sucℤPath`` backwards,
-so it should be ``n - 1``.
-Try to formalize this.
+along ``sucℤPath`` backwards, so it should be ``n - 1``.
+We can use this to move a step closer to the goal.
 
 .. raw:: html
 
@@ -333,7 +350,7 @@ This equality is *definitional*.
    rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
      (
        pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
-     ≡⟨ pathToFun→ sucℤPath (λ i → base ≡ loop i) loop_times ⟩
+     ≡⟨ refl ⟩
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (pathToFun (sym sucℤPath) n)))
      ≡⟨ refl ⟩
        (λ n → pathToFun (λ i → base ≡ loop i) (loop (predℤ n) times))
@@ -346,15 +363,15 @@ This equality is *definitional*.
    </details>
    </p>
 
-The path fibration
-------------------
+The path fibration and ``pathToFun``
+------------------------------------
 
 It remains to find out how ``pathToFun`` interacts with the path of loops coming out of base.
-We call "the path of loops coming out of base" ``λ i → base ≡ loop i`` the path fibration
+We call "the path of loops coming out of base" ``λ i → base ≡ loop i`` the *path fibration*
 at ``base``.
-The picture tells us that we are gradually concatenating the input ``loop (n - 1) times``
+The animation tells us that we are gradually concatenating the input ``loop (n - 1) times``
 with ``loop``.
-Hence we should obtain ``loop (n - 1) times ∙ loop``.
+Hence we *should* obtain ``loop (n - 1) times ∙ loop``.
 We are a bit lucky here, and these are in fact *definitionally equal*,
 but to justify this in general, we can prove that
 "following along the path fibration is the same as concatenating".
@@ -422,7 +439,7 @@ To include this in ``rewind`` we have
    rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
      (
        pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
-     ≡⟨ pathToFun→ sucℤPath (λ i → base ≡ loop i) loop_times ⟩ -- how pathToFun interacts with →
+     ≡⟨ refl ⟩ -- how pathToFun interacts with →
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (pathToFun (sym sucℤPath) n)))
      ≡⟨ refl ⟩ -- sucℤPath is just taking successor, and so its inverse is definitionally taking predecessor
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (predℤ n)))
@@ -470,7 +487,7 @@ or just ``sucℤ predℤ n ≡ n``.
    rewind = outOfS¹D (λ x → helix x → base ≡ x) loop_times
      (
        pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
-     ≡⟨ pathToFun→ sucℤPath (λ i → base ≡ loop i) loop_times ⟩ -- how pathToFun interacts with →
+     ≡⟨ refl ⟩ -- how pathToFun interacts with →
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (pathToFun (sym sucℤPath) n)))
      ≡⟨ refl ⟩ -- sucℤPath is just taking successor, and so its inverse is definitionally taking predecessor
        (λ n → pathToFun (λ i → base ≡ loop i) (loop_times (predℤ n)))
@@ -489,3 +506,507 @@ or just ``sucℤ predℤ n ≡ n``.
 
   </details>
   </p>
+
+We can check that ``rewind base`` is indeed ``loop_times``
+by using ``C-c C-n``.
+This is to be expected as ``outOfS¹`` evaluated at ``base``
+should back exactly what we fed it,
+as mentioned in the :ref:`discussion on mapping out of the circle <mappingOutOfTheCirlce>`.
+
+Part 1 - ``rewind`` is a right inverse
+======================================
+
+We are now in a position to approach the main goal :
+
+.. code:: agda
+
+   loopSpaceS¹≡ℤ : loopSpace S¹ base ≡ ℤ
+   loopSpaceS¹≡ℤ = {!!}
+
+We have reduced this to giving an isomorphism,
+which involves giving the map ``windingNumber base`` forward
+and ``loop_times`` backwards,
+and showing that they are inverses of each other.
+
+Hence the next step is to show that
+"looping ``n`` times then taking the winding number gives back ``n``".
+Try to state and prove this in ``1FundamentalGroup/Quest3.agda``.
+In the hints we will use intuitive notation for integers
+that may not align exactly with ``agda`` code.
+
+.. The statement
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The statement</summary>
+
+.. code:: agda
+
+   windingNumberRewindBase : (n : ℤ) → windingNumber base (rewind base n) ≡ n
+   windingNumberRewindBase = {!!}
+
+We identify ``rewind base`` with ``loop_times``,
+since they are externally equal.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+
+.. Hint 0
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 0</summary>
+
+Since ``loop_times`` was defined by casing on ``n`` we case on ``n`` -
+it could be zero, a positive integer, negative one, or less than negative one.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 1
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 1</summary>
+
+Some of the cases are trivial -
+we know exactly what ``loop 0 times``
+and ``windingNumber base loop`` are.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution for Hint 1</summary>
+
+.. code:: agda
+
+   windingNumberRewindBase : (n : ℤ) → windingNumber base (rewind base n) ≡ n
+   windingNumberRewindBase (pos zero) = refl
+   windingNumberRewindBase (pos (suc n)) = {!!}
+   windingNumberRewindBase (negsuc zero) = refl
+   windingNumberRewindBase (negsuc (suc n)) = {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 2
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 2</summary>
+
+We can identify ``windingNumber base`` with its definition,
+reducing the problem to showing that
+``endPt helix (loop n times) 0`` is equal to ``n``,
+in the seperate cases.
+
+For the first case,
+we can reduce ``loop (n + 1) times`` to just ``loop n times ∙ loop``
+since that was the definition.
+Hence we are interested in what ``endPt helix (loop n times ∙ loop) 0`` is.
+Recalling our intuition behind ``endPt``,
+this amounts to following the point ``0`` up the ``helix`` along the path
+``loop n times ∙ loop``.
+This should just be going to ``endPt helix (loop n times) 0`` then adding ``1``.
+
+You can also check what ``agda`` reduces the expression to by writing it in the hole and
+then doing ``C-c C-n``.
+It should look something like ``sucℤ (transp (λ i → helix (loop pos n times i)) i0 (pos 0))``.
+Clearly it has reduced the definition a bit too far,
+but the important idea is there, that it is ``+ 1`` of whatever data we have already.
+
+Lastly we can just take ``sucℤ`` on both sides of an equality we have from the induction hypothesis.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Solution
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+For one of the cases we detail the
+thought process going on above,
+and for the last case we extract only the important part of the proof.
+
+.. code:: agda
+
+   windingNumberRewindBase : (n : ℤ) → windingNumber base (rewind base n) ≡ n
+   windingNumberRewindBase (pos zero) = refl
+   windingNumberRewindBase (pos (suc n)) =
+       windingNumber base (rewind base (pos (suc n)))
+     ≡⟨ refl ⟩
+       windingNumber base (loop (pos n) times ∙ loop)
+     ≡⟨ refl ⟩
+       endPt helix (loop (pos n) times ∙ loop) (pos zero)
+     ≡⟨ refl ⟩
+       sucℤ (endPt helix (loop (pos n) times) (pos zero))
+     ≡⟨ cong sucℤ (windingNumberRewindBase (pos n)) ⟩
+       sucℤ (pos n)
+     ≡⟨ refl ⟩
+       pos (suc n) ∎
+   windingNumberRewindBase (negsuc zero) = refl
+   windingNumberRewindBase (negsuc (suc n)) = cong predℤ (windingNumberRewindBase (negsuc n))
+
+.. raw:: html
+
+  </details>
+  </p>
+
+You might wonder if it is possible to make the above map work across all of ``S¹``,
+and the answer is yes.
+This is not really necessary for our goal,
+so feel free to skip to the next part if you are not interested.
+Try stating and proving the generalization of the above;
+which we call ``windingNumberRewind``.
+
+.. statement
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The Statement</summary>
+
+.. code:: agda
+
+   windingNumberRewind : (x : S¹) (n : helix x) → windingNumber x (rewind x n) ≡ n
+   windingNumberRewind = {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 0</summary>
+
+We defined ``rewind`` by casing on points in the circle
+and ``rewind`` is the first function being applied,
+so it would make sense to case on points in the circle.
+In the case when the point is ``base`` we can just give
+the map we wanted to generalize in the first place.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution to Hint 0</summary>
+
+.. code:: agda
+
+   windingNumberRewind : (x : S¹) (n : helix x) → windingNumber x (rewind x n) ≡ n
+   windingNumberRewind =
+     outOfS¹D (λ x → (n : helix x) → windingNumber x (rewind x n) ≡ n)
+       windingNumberRewindBase {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 1
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 1</summary>
+
+Checking the last hole we see that we need to give a dependent path from
+``windingNumberRewindBase`` to itself.
+According to the definition of a dependent path,
+this is just a path in the last fiber from ``pathToFun`` of ``windingNumberRewindBase``
+to ``windingNumberRewindBase``
+(the fiber is ``(n : ℤ) → windingNumber base (rewind base n) ≡ n``).
+Now this might seem very complicated :
+even after applying functional extensionality (this is equality of two functions)
+this would be "finding a path between paths in ``ℤ``".
+Try repeating that last bit in your head a couple of times.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 2
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 2</summary>
+
+We put a lot of effort into showing that ``ℤ`` is a set.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Solution
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+.. code:: agda
+
+   windingNumberRewind : (x : S¹) (n : helix x) → windingNumber x (rewind x n) ≡ n
+   windingNumberRewind = -- must case on x / use recursor / outOfS¹ since that is def of rewind
+     outOfS¹D (λ x → (n : helix x) → windingNumber x (rewind x n) ≡ n)
+       windingNumberRewindBase (
+         pathToFun
+           (λ i → (n : helix (loop i)) → windingNumber (loop i) (rewind (loop i) n) ≡ n)
+           windingNumberRewindBase
+       ≡⟨ funExt (λ x → isSetℤ _ _ _ _ ) ⟩
+         windingNumberRewindBase ∎)
+
+.. raw:: html
+
+  </details>
+  </p>
+
+Part 2 - ``rewind`` is a left inverse
+=====================================
+
+Try to show that ``rewind`` is a left inverse.
+
+.. The statement
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The Statement</summary>
+
+Just like we struggled to only define ``windingNumber base``
+without access to the entire circle,
+we make sure to include all the data we have access to.
+Note that this was not the case before.
+
+.. code:: agda
+
+   rewindWindingNumber : (x : S¹) (p : base ≡ x) → rewind x (windingNumber x p) ≡ p
+   rewindWindingNumber x = {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 0
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 0</summary>
+
+Remembering that ``windingNumber x p`` is externally equal to ``endPt helix p 0``,
+and that ``endPt`` is defined by path induction - using ``J``
+(this is not exactly true for ``endPt`` from the library for ``cubical`` reasons),
+the obvious thing to do here is to do path induction.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution for Hint 0</summary>
+
+.. code:: agda
+
+   rewindWindingNumber : (x : S¹) (p : base ≡ x) → rewind x (windingNumber x p) ≡ p
+   rewindWindingNumber x = J (λ x p → rewind x (windingNumber x p) ≡ p) {!!}
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 1
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 1</summary>
+
+It suffices to show that ``rewind x (windingNumber x refl) ≡ refl``,
+which by reducing the left side is the same as showing
+``loop_times (endPt helix refl 0) ≡ refl``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution to Hint 1</summary>
+
+.. code:: agda
+
+   rewindWindingNumber : (x : S¹) (p : base ≡ x) → rewind x (windingNumber x p) ≡ p
+   rewindWindingNumber x = J (λ x p → rewind x (windingNumber x p) ≡ p)
+        (rewind base (windingNumber base refl)
+      ≡⟨ refl ⟩
+        loop_times (endPt helix (refl {x = base}) (pos zero))
+      ≡⟨ {!!} ⟩
+        refl ∎)
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 2
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 2</summary>
+
+We know what ``endPt`` does to ``refl``, which is given by the result ``endPtRefl``.
+If you need to recall what ``endPtRefl`` proves you can type it into the hole
+and do ``C-c C-.`` for the goal and the type of ``endPtRefl``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution to Hint 2</summary>
+
+.. code:: agda
+
+   rewindWindingNumber : (x : S¹) (p : base ≡ x) → rewind x (windingNumber x p) ≡ p
+   rewindWindingNumber x = J (λ x p → rewind x (windingNumber x p) ≡ p)
+        (rewind base (windingNumber base refl)
+      ≡⟨ refl ⟩
+        loop_times (endPt helix (refl {x = base}) (pos zero))
+      ≡⟨ cong loop_times (cong (λ g → g (pos zero)) (endPtRefl {x = base} helix)) ⟩
+        loop (pos zero) times
+      ≡⟨ {!!} ⟩
+        refl ∎)
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+The last step is simply remembering how ``loop_times`` computes.
+
+.. code:: agda
+
+  rewindWindingNumber : (x : S¹) (p : base ≡ x) → rewind x (windingNumber x p) ≡ p
+  rewindWindingNumber x = J (λ x p → rewind x (windingNumber x p) ≡ p)
+       (rewind base (windingNumber base refl)
+     ≡⟨ refl ⟩
+       loop_times (endPt helix (refl {x = base}) (pos zero)) -- reduce both definitions
+     ≡⟨ cong loop_times (cong (λ g → g (pos zero)) (endPtRefl {x = base} helix)) ⟩
+       loop (pos zero) times
+     ≡⟨ refl ⟩
+       refl ∎)
+
+.. raw:: html
+
+  </details>
+  </p>
+
+Part 3 - The Loop Space is ``ℤ``
+================================
+
+We can conclude our main goal now, by collecting all of the components we have made above.
+We leave you the pleasure.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+As usual we construct an isomorphism,
+but we can choose to do this over the entire circle
+or just between ``loopSpace S¹ base`` and ``ℤ``.
+We do the former and have the latter as a corollary,
+but you could just do the latter directly as well.
+
+.. code:: agda
+
+   pathFibration≡helix : (x : S¹) → (base ≡ x) ≡ helix x
+   pathFibration≡helix x =
+     isoToPath (iso (windingNumber x) (rewind x) (windingNumberRewind x) (rewindWindingNumber x))
+
+   loopSpaceS¹≡ℤ : loopSpace S¹ base ≡ ℤ
+   loopSpaceS¹≡ℤ = pathFibration≡helix base
+
+.. raw:: html
+
+  </details>
+  </p>
+
+
+What now?
+---------
+
+We have mentioned already that we aren't *exactly* working with the fundamental group,
+but the loop space.
+In the final quest of this arc we discuss the definition of the fundamental group and
+show that the loop space in this case is the fundamental group already.
