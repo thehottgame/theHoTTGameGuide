@@ -19,6 +19,7 @@
          loopSpace≡ℤ : loopSpace S¹ base ≡ ℤ
          loopSpace≡Z = {!!}
 
+
    As usual we will show this via giving an isomorphism,
    so we must make comparison maps forward and back.
    However, we discovered we had to define the backwards map
