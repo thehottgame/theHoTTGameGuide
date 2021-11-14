@@ -199,8 +199,8 @@ that "looks like ``a1``", we try applying ``f`` to this point,
 then send it across again via the path ``B`` to the point
 ``f (pathToFun (sym A) a1)`` looks like in ``B1``.
 We expect the outcome to be the same.
-..
 
+..
    .. code:: agda
 
       pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
