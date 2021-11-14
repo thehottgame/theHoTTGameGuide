@@ -368,3 +368,11 @@ Try proving this using ``isProp→isSet``.
       ``TheHoTTGame.agda-lib``.
 
       The file containing the definition of the path space is ``Cubical.Foundations.Prelude``.
+
+All the diagrams
+
+1-fundamental-group quest 5
+
+.. https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXFoiXSxbMCwyLCJcXFoiXSxbMiwwLCJcXHRleHR0dHtiYXNlfSBcXGVxdWl2IFxcdGV4dHR0e2Jhc2V9Il0sWzIsMiwiXFx0ZXh0dHR7YmFzZX0gXFxlcXVpdiBcXHRleHR0dHtiYXNlfSJdLFsxLDAsIlxcdGV4dHR0e3BhdGhUb0Z1bn0gXFxcXCBcXHRleHR0dHtzdWN9IFxcWlxcdGV4dHR0e1BhdGh9ICJdLFszLDIsIlxcdGV4dHR0e3BhdGhUb0Z1biB9IHBfXFxlcXVpdiIsMl0sWzAsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFx0ZXh0dHR7bG9vcFxcX3RpbWVzfSAiLDJdXQ==
+
+..  https://q.uiver.app/?q=WzAsNCxbMCwwLCJBXzAiXSxbMCwyLCJBXzEiXSxbMiwwLCJCXzAiXSxbMiwyLCJCXzEiXSxbMCwxLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBBIiwyXSxbMiwzLCJcXHRleHR0dHtwYXRoVG9GdW4gfSBCIl0sWzAsMiwiZiJdLFsxLDMsIlxcdGV4dHR0e3BhdGhUb0Z1bn1cXCxcXCxwX3tBQn0gXFwsXFwsZiAiLDJdXQ==
