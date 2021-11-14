@@ -199,42 +199,43 @@ that "looks like ``a1``", we try applying ``f`` to this point,
 then send it across again via the path ``B`` to the point
 ``f (pathToFun (sym A) a1)`` looks like in ``B1``.
 We expect the outcome to be the same.
+..
 
-.. code:: agda
+   .. code:: agda
 
-   pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
-     pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
+      pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
+        pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
 
-.. image:: images/pathToFunAndPiTypes.png
-  :width: 500
-  :alt: pathToFunAndPiTypes
-  :align: center
+   .. image:: images/pathToFunAndPiTypes.png
+     :width: 500
+     :alt: pathToFunAndPiTypes
+     :align: center
 
-The proof of this in ``cubical agda`` is simply ``refl``,
-so we need not even extract it as a lemma.
+   The proof of this in ``cubical agda`` is simply ``refl``,
+   so we need not even extract it as a lemma.
 
-.. admonition:: A ``cubical`` hack
+   .. admonition:: A ``cubical`` hack
 
-   Is actually one of the axioms asserted in ``cubical agda``
-   that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
-   ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
-   Here we are using the ``cubical`` definition of ``pathToFun``
-   so we can simply give ``refl`` for its proof.
+      Is actually one of the axioms asserted in ``cubical agda``
+      that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
+      ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
+      Here we are using the ``cubical`` definition of ``pathToFun``
+      so we can simply give ``refl`` for its proof.
 
-   However, according the definition of ``pathToFun`` we gave
-   in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
-   but can be shown to be internally equal using ``J``.
-   We warn that in order to prove this using our definitions,
+      However, according the definition of ``pathToFun`` we gave
+      in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
+      but can be shown to be internally equal using ``J``.
+      We warn that in order to prove this using our definitions,
 
-We interpret what this result means in our specific case :
-We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
-into another map in the space ``ℤ → base ≡ base``,
-by following along the diagram
+   We interpret what this result means in our specific case :
+   We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
+   into another map in the space ``ℤ → base ≡ base``,
+   by following along the diagram
 
-.. image:: images/pathToFunAndPiTypes'.png
-  :width: 500
-  :alt: pathToFunAndPiTypes'
-  :align: center
+   .. image:: images/pathToFunAndPiTypes'.png
+     :width: 500
+     :alt: pathToFunAndPiTypes'
+     :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath``, supposedly giving us ``n - 1``.
