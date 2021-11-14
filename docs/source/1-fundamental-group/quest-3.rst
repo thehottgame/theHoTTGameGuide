@@ -213,7 +213,7 @@ We expect the outcome to be the same.
 The proof of this in ``cubical agda`` is simply ``refl``,
 so we need not even extract it as a lemma.
 
-.. admonition:: A cubical hack
+.. admonition:: A ``cubical`` hack
 
    Is actually one of the axioms asserted in ``cubical agda``
    that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
