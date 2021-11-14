@@ -237,7 +237,7 @@ by following along the diagram
   :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
-``sucℤPath`` (``A``), supposedly giving us ``n - 1``.
+``sucℤPath``, supposedly giving us ``n - 1``.
 Then it applies ``loop_times``, obtaining the loop ``loop (n - 1) times``.
 Lastly it follows ``loop (n - 1) times`` along the path ``λ i → base ≡ loop i``
 (which itself is a loop starting and ending at ``base ≡ base`` in the space of spaces),
