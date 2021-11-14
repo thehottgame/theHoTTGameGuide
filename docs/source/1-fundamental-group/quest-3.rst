@@ -210,17 +210,16 @@ We expect the outcome to be the same.
   :alt: pathToFunAndPiTypes
   :align: center
 
-
 The proof of this in ``cubical agda`` is simply ``refl``,
 so we need not even extract it as a lemma.
 
-.. admonition:: A ``cubical`` hack
+.. admonition:: A cubical hack
 
    Is actually one of the axioms asserted in ``cubical agda``
    that ``pathToFun (λ i → A i → B i) f`` is *externally equal to*
    ``λ a1 → pathToFun B (f (pathToFun (sym A) a1))``.
    Here we are using the ``cubical`` definition of ``pathToFun``
-   so we can simply write ``refl`` its proof.
+   so we can simply give ``refl`` for its proof.
 
    However, according the definition of ``pathToFun`` we gave
    in :ref:`Trinitarianism<pathToFun>`, they are not externally equal
