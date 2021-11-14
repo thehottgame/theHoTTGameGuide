@@ -230,8 +230,7 @@ We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
 into another map in the space ``ℤ → base ≡ base``,
 by following along the diagram
 
-..
-   .. image:: images/pathToFunAndPiTypes'.png
+.. image:: images/pathToFunAndPiTypes2.png
      :width: 500
      :alt: pathToFunAndPiTypes2
 
