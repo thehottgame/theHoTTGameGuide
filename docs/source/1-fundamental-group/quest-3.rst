@@ -208,7 +208,8 @@ We expect the outcome to be the same.
 .. image:: images/pathToFunAndPiTypes.png
   :width: 500
   :alt: pathToFunAndPiTypes
-  :align: center
+  ..
+     :align: center
 
 The proof of this in ``cubical agda`` is simply ``refl``,
 so we need not even extract it as a lemma.
@@ -221,11 +222,10 @@ so we need not even extract it as a lemma.
    Here we are using the ``cubical`` definition of ``pathToFun``
    so we can simply give ``refl`` for its proof.
 
-   ..
-      However, according the definition of ``pathToFun`` we gave
-      in :ref:`Trinitarianism <pathToFun>`, they are not externally equal
-      but can be shown to be internally equal using ``J``.
-      We warn that in order to prove this using our definitions,
+   However, according the definition of ``pathToFun`` we gave
+   in :ref:`Trinitarianism <pathToFun>`, they are not externally equal
+   but can be shown to be internally equal using ``J``.
+   We warn that in order to prove this using our definitions,
 
 We interpret what this result means in our specific case :
 We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
@@ -235,7 +235,8 @@ by following along the diagram
 .. image:: images/pathToFunAndPiTypes'.png
   :width: 500
   :alt: pathToFunAndPiTypes'
-  :align: center
+  ..
+     :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath``, supposedly giving us ``n - 1``.
