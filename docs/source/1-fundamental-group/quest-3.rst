@@ -234,7 +234,6 @@ We expect the outcome to be the same.
    by following along the diagram
 
 ..
-
    .. image:: images/pathToFunAndPiTypes'.png
      :width: 500
      :alt: pathToFunAndPiTypes'
