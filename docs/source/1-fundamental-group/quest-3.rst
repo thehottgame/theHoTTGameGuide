@@ -205,10 +205,11 @@ We expect the outcome to be the same.
    pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
      pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
 
-.. image:: images/pathToFunAndPiTypes.png
-  :width: 500
-  :alt: pathToFunAndPiTypes
-  :align: center
+..
+   .. image:: images/pathToFunAndPiTypes.png
+     :width: 500
+     :alt: pathToFunAndPiTypes
+     :align: center
 
 The proof of this in ``cubical agda`` is simply ``refl``,
 so we need not even extract it as a lemma.
@@ -231,10 +232,12 @@ We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
 into another map in the space ``ℤ → base ≡ base``,
 by following along the diagram
 
-.. image:: images/pathToFunAndPiTypes'.png
-  :width: 500
-  :alt: pathToFunAndPiTypes'
-  :align: center
+..
+
+   .. image:: images/pathToFunAndPiTypes'.png
+     :width: 500
+     :alt: pathToFunAndPiTypes'
+     :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath``, supposedly giving us ``n - 1``.
