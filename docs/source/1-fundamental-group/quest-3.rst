@@ -208,8 +208,8 @@ We expect the outcome to be the same.
 .. image:: images/pathToFunAndPiTypes.png
   :width: 500
   :alt: pathToFunAndPiTypes
-  ..
-     :align: center
+
+
 
 The proof of this in ``cubical agda`` is simply ``refl``,
 so we need not even extract it as a lemma.
@@ -235,8 +235,6 @@ by following along the diagram
 .. image:: images/pathToFunAndPiTypes'.png
   :width: 500
   :alt: pathToFunAndPiTypes'
-  ..
-     :align: center
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath``, supposedly giving us ``n - 1``.
