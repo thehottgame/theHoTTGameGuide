@@ -230,9 +230,10 @@ We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times
 into another map in the space ``ℤ → base ≡ base``,
 by following along the diagram
 
-.. image:: images/pathToFunAndPiTypes'.png
-  :width: 500
-  :alt: pathToFunAndPiTypes'
+..
+   .. image:: images/pathToFunAndPiTypes'.png
+     :width: 500
+     :alt: pathToFunAndPiTypes2
 
 Specifically, this map should take ``n : ℤ`` and first send it backwards along
 ``sucℤPath``, supposedly giving us ``n - 1``.
