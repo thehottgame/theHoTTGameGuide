@@ -395,3 +395,171 @@ More explicitely
    outOfS¹DBase : (B : S¹ → Type) (b : B base)
      (p : b ≡ b along (λ i → B (loop i)))→ outOfS¹D B b p base ≡ b
    outOfS¹DBase B b p = refl
+
+.. _part2HowPathToFunInteractsWithOtherTypes:
+
+Part 2 - How ``pathToFun`` Interacts with Other Types
+=====================================================
+
+When we are coming up with dependent paths between points in
+equal spaces connected by some path ``A``,
+we end up with needing some idea of what
+``pathToFun`` looks like when it goes along the path.
+For example, if ``A`` were ``λ i → B i → C i``,
+where ``B`` and ``C`` are respectfully paths between spaces,
+then we might guess that we can describe ``pathToFun B f``
+more explicitely by checking what it does on points.
+
+In this part we will consider different type constructions
+and how paths between them convert to functions between them
+via ``pathToFun``.
+A detailed motivating example can be found
+:ref:`here <quest3TheLoopSpaceIsZ>`.
+
+Function spaces
+---------------
+
+Suppose we have spaces ``A0 A1 B0 B1 : Type``
+and paths ``A : A0 ≡ A1`` and ``B : B0 ≡ B1``.
+Then let ``pAB`` denote the path
+``λ i → A i → B i : (A0 → B0) ≡ (A1 → B1)``.
+We want to figure out what ``pathToFun``
+does when it follows a function ``f : A0 → B0`` along the path ``pAB``.
+
+We know by functional extensionality that the function
+``pathToFun pAB f : A1 → B1``
+should be determined by what it does to terms in ``A1``,
+so we can assume ``a1 : A1``.
+The idea is we "apply ``f`` by sending ``a1`` back to ``A0``".
+Since ``pathToFun (sym A) a1`` is meant to give the point in ``A0``
+that "looks like ``a1``", we try applying ``f`` to this point,
+then send it across again via the path ``B`` to the point
+``f (pathToFun (sym A) a1)`` looks like in ``B1``.
+We expect the outcome to be the same.
+
+.. image:: ../1-fundamental-group/images/pathToFunAndPiTypes.png
+     :width: 500
+     :alt: pathToFunAndPiTypes
+
+Try to formalize and prove this in ``0Trinitarianism/Quest5.agda``.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>The Statement</summary>
+
+.. code:: agda
+
+   pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
+     pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
+   pathToFun→ = {!!}
+
+There are several ways to state the same idea. We didn't have to reverse the path ``A``
+for example.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. Hint 0
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 0</summary>
+
+We can induct on both ``A`` and ``B``.
+
+.. raw:: html
+
+   <p>
+   <details>
+   <summary>Solution for Hint 0</summary>
+
+.. code:: agda
+
+   J (λ A1 A → pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1)))
+  (
+    J (λ B1 B → pathToFun (λ i → A0 → B i) f ≡ λ a → pathToFun B (f (pathToFun (sym refl) a)))
+    (
+        pathToFun refl f
+      ≡⟨ {!!} ⟩
+        (λ a → pathToFun refl (f (pathToFun (sym refl) a))) ∎
+    )
+    B
+  )
+  A
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Hint 1</summary>
+
+There are many small equalities that are needed,
+for example, we need how ``sym`` and ``refl`` interact
+and what ``pathToFun`` does to ``refl``.
+At some point it would be useful to just check that
+the functions are equal on terms.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solutions</summary>
+
+.. code:: agda
+
+   pathToFun→ : {A0 A1 B0 B1 : Type} {A : A0 ≡ A1} {B : B0 ≡ B1} (f : A0 → B0) →
+     pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1))
+   pathToFun→ {A0} {A1} {B0} {B1} {A} {B} f =
+     J (λ A1 A → pathToFun (λ i → A i → B i) f ≡ λ a1 → pathToFun B (f (pathToFun (sym A) a1)))
+     (
+       J (λ B1 B → pathToFun (λ i → A0 → B i) f ≡ λ a → pathToFun B (f (pathToFun (sym refl) a)))
+       (
+           pathToFun refl f
+         ≡⟨ pathToFunReflx f ⟩
+           f
+         ≡⟨ funExt (λ a →
+              f a
+            ≡⟨ cong f (sym (pathToFunReflx a)) ⟩
+              f (pathToFun refl a)
+            ≡⟨ cong (λ p → f (pathToFun p a)) (sym symRefl) ⟩
+              f (pathToFun (sym refl) a)
+            ≡⟨ sym (pathToFunReflx (f (pathToFun (sym refl) a))) ⟩
+              pathToFun refl (f (pathToFun (sym refl) a)) ∎
+         )
+         ⟩
+           (λ a → pathToFun refl (f (pathToFun (sym refl) a))) ∎
+       )
+       B
+     )
+     A
+
+.. raw:: html
+
+  </details>
+  </p>
+
+More to come in the future
+--------------------------
+
+This quest is a work in progress.

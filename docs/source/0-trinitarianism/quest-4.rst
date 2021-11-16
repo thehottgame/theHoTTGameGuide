@@ -1186,7 +1186,6 @@ For example ``(x ≡ y) ≡ (Id x y)`` can now be shown.
 
 
 
-
 .. TODO
    - justifyig J geometrically
      - transport + paths out of x contractible to refl x

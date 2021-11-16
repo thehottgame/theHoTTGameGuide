@@ -10,7 +10,6 @@ method of proving that the fundamental group
 is ``ℤ``,
 and in :ref:`quest2ZIsASet` we decided that this
 means to show that they are equal spaces.
-
 .. admonition:: The Goal
 
    .. code:: agda
@@ -223,7 +222,8 @@ so we need not even extract it as a lemma.
    However, according the definition of ``pathToFun`` we gave
    in :ref:`Trinitarianism <pathToFun>`, they are not externally equal
    but can be shown to be internally equal using ``J``.
-   We warn that in order to prove this using our definitions,
+   We prove this from *our own definitions*
+   :ref:`here <part2HowPathToFunInteractsWithOtherTypes>`.
 
 We interpret what this result means in our specific case :
 We are making ``pathToFun (λ i → sucℤPath i → base ≡ loop i) loop_times``
