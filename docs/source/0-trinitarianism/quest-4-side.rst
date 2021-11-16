@@ -16,7 +16,7 @@ We call one of these directions
 
 .. code:: agda
 
-   funExt : (B : A → Type) (f g : (a : A) → B a) →
+   funExt : {B : A → Type} {f g : (a : A) → B a} →
       ((a : A) → f a ≡ g a) → f ≡ g
    funExt = {!!}
 
@@ -35,7 +35,7 @@ we can refine, and ``agda`` will assume such an ``i`` for us.
 
 .. code::
 
-   funExt : (B : A → Type) (f g : (a : A) → B a) →
+   funExt : {B : A → Type} {f g : (a : A) → B a} →
      ((a : A) → f a ≡ g a) → f ≡ g
    funExt B f g h = λ i a → {!!}
 
@@ -95,7 +95,7 @@ gives us a path from ``f a`` to ``g a`` in ``B a``.
 
 .. code:: agda
 
-  funExt : (B : A → Type) (f g : (a : A) → B a) →
+  funExt : {B : A → Type} {f g : (a : A) → B a} →
     ((a : A) → f a ≡ g a) → f ≡ g
   funExt B f g h = λ i a → h a i
 

@@ -20,6 +20,17 @@ Indeed we will take this to be our *definition* of (internal) equality.
 We will often adopt the geometric perspective,
 but change perspectives when appropriate.
 
+.. admonition:: Universe levels
+
+   In the solutions we always use ``Type u``,
+   but just write ``Type`` here.
+   There is no conceptual difference with using
+   an arbitrary universe,
+   but in practice we want to be as general as possible.
+
+   It is useful to stick to just using ``Type``,
+   and realise why it is not general enough when problems arise.
+
 Part 0 - The Identity Type
 ==========================
 
@@ -31,7 +42,7 @@ Given ``A : Type``  and  ``x y : A`` we have a type
 
 .. code:: agda
 
-   data Id {A : Type u} : (x y : A) → Type where
+   data Id {A : Type} : (x y : A) → Type where
 
      rfl : {x : A} → Id x x
 
@@ -350,6 +361,12 @@ your choice of how to define transitivity / concatenation.
      and it will assume ``A``, ``x`` and ``y`` implicitely
      whenever they are mentioned.
      Make sure it is indented correctly.
+     Beware that anything declared like this will be an
+     *implicit argument*.
+
+     We also recommend reading about the
+     `module system <https://agda.readthedocs.io/en/v2.6.0.1/language/module-system.html>`_
+     in ``agda``.
 
 - concatenating a path ``p`` with ``Sym p``  on the left and right gives ``refl``.
 
@@ -1037,6 +1054,26 @@ it computes on ``refl``, we apply that :
 
   </details>
   </p>
+
+We might want to also make ``pathToFunReflx`` - which says what
+``pathToFun refl`` does at each point.
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Solution</summary>
+
+.. code:: agda
+
+   pathToFunReflx : (x : A) → pathToFun (refl {x = A}) x ≡ x
+   pathToFunReflx x = cong (λ f → f x) pathToFunRefl
+
+.. raw:: html
+
+  </details>
+  </p>
+
 
 ``endPt``
 ---------
