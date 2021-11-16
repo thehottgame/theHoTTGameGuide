@@ -1161,9 +1161,7 @@ so we only need to show that
 
 Since ``fun`` was defined using ``J`` we need to know how
 ``J`` computes when it is fed ``refl``.
-We :ref:`described this before <JRefl>`, it is called ``JRefl``.
-
-.. missing link
+We :ref:`described this before <part1ThePathSpace>`, it is called ``JRefl``.
 
 .. raw:: html
 

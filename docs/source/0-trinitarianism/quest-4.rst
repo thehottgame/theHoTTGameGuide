@@ -183,9 +183,8 @@ There is an obvious one.
    We have *not* included a justification via the geometric perspective.
    This is because intuitively it's not quite obvious that to map out
    of the space of paths it suffices to map the constant path.
-   We will return to this issue when we justify the mapping out property geometrically.
-
-   .. missing link
+   We justify the mapping out property geometrically
+   in a :ref:`side quest <justifyingJ>`.
 
 We can also make the relevant arguments implicit.
 We will be using the following version from now on :
@@ -499,6 +498,8 @@ as we are trying to extract that idea.
 
   </details>
   </p>
+
+.. _part1ThePathSpace:
 
 Part 1 - The Path Space
 =======================
