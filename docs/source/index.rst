@@ -28,4 +28,4 @@ To get started with the HoTT Game, go to
 This game was created by
 `Joseph Hua <https://jlh18.github.io/>`_, 
 `Ken Lee <http://kl-i.github.io/>`_,
-and `<Bendit Chan https://benditchan.wordpress.com/>_`.
+and `<Bendit Chan https://benditchan.wordpress.com/>`_.
