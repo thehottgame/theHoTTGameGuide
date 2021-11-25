@@ -12,6 +12,10 @@ as a tool for trying out mathematics in HoTT.
 To get started with the HoTT Game, go to 
 `Getting Started <https://thehottgameguide.readthedocs.io/en/latest/getting-started/index.html>`_.
 
+This game was created by
+`Joseph Hua <https://jlh18.github.io/>`_, 
+`Ken Lee <http://kl-i.github.io/>`_,
+and `Bendit Chan <https://benditchan.wordpress.com/>`_.
 
 .. image:: 1-fundamental-group/images/doubleCover-final.gif
   :width: 1000
@@ -24,8 +28,3 @@ To get started with the HoTT Game, go to
    0-trinitarianism/index
    1-fundamental-group/index
   
-
-This game was created by
-`Joseph Hua <https://jlh18.github.io/>`_, 
-`Ken Lee <http://kl-i.github.io/>`_,
-and `Bendit Chan <https://benditchan.wordpress.com/>`_.
