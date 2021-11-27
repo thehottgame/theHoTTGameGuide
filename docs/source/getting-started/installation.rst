@@ -1,8 +1,12 @@
 .. _installation:
 
-*********************************
-Installation on MacOS and Windows
-*********************************
+************
+Installation
+************
+
+There are many ways to install agda and a couple of text editors in which it could be made working.
+`Here <https://sites.google.com/site/wakelinswan/teaching/installing-agda>`_ is *a* set of instructions by Andrew Swan -
+in particular the advice for ubuntu and atom seems to work well.
 
 Installation on MacOS
 =====================
@@ -83,7 +87,7 @@ we need to do the following :
 Installing ``Doom Emacs``
 -------------------------
 
-Do the following in ``terminal``.
+Do the following in a terminal.
 
 .. code::
 
@@ -116,10 +120,9 @@ Do the following in ``terminal``.
 Installing ``agda``
 -------------------
 
-
-- Open ``terminal``.
+- Open a terminal.
 - We will directly clone the ``agda`` repo for development version.
-  First use ``cd`` ("change directory") in ``terminal``
+  First use ``cd`` ("change directory") in the terminal
   to navigate to where you want to place the ``agda`` library.
   Then do the following
 
