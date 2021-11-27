@@ -14,7 +14,8 @@ This page will help you get the Game working for you.
 Installing Agda and the Cubical Agda library
 ============================================
 
-If you are a MacOS or Windows user we recommend you follow instructions on
+If you are would like detailed instructions on how to install agda and a supportive text editor - 
+in particular if you use MacOS or Windows - we recommend you follow instructions on
 :ref:`installation`.
 More general instructions follow:
 
