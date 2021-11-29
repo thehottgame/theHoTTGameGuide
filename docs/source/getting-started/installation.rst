@@ -62,6 +62,7 @@ we need to do the following :
   Now add the following to the end of the file
 
   .. code::
+
      export PATH="/usr/local/bin:$PATH"
 
   If you terminal was using ``bash`` instead, do
@@ -74,12 +75,14 @@ we need to do the following :
   Now add the the following to the end of the file
 
   .. code::
+
      export PATH="/usr/local/bin:$PATH"
 
   Once you've done this, save the files and close them.
 - Restart ``terminal`` and do the following again
 
   .. code::
+
      git --version
 
   You should see the version has now updated.
@@ -143,6 +146,7 @@ Installing ``agda``
   you can check ``agda`` is installed by doing the following in ``terminal`` :
 
   .. code::
+ 
      agda
 
 
@@ -170,6 +174,7 @@ Getting ``agda-mode`` in ``Doom Emacs``
   do
 
   .. code::
+
      doom sync
 
   If there are no errors, we all good.
@@ -260,23 +265,27 @@ so that it will look for it when an ``agda`` file uses code from it.
 - Navigate to ``Users/USERNAME`` by doing the following in ``terminal`` :
 
   .. code::
+
      cd
 
 - Do the following to see hidden files :
 
   .. code::
+
      ls -la
 
   *If there is no* ``.agda`` *folder*,
   *simply create one by doing*
 
   .. code::
+
      mkdir .agda
 
   If you do ``ls -la`` again, you should see ``.agda`` in the list.
 - Go into that folder by doing
 
   .. code::
+
      cd .agda
 
 - Check the contents of ``.agda`` by doing ``ls -la``.
