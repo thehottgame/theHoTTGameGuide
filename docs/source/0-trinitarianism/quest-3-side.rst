@@ -11,7 +11,7 @@ Try to express and prove in ``agda`` the statement
 
 .. admonition:: Problem statement
 
-   For any natural number it is even or is is not even.
+   For any natural number it is even or it is not even.
 
 We make a summary of what is needed:
 
