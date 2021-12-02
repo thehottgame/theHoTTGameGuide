@@ -25,7 +25,7 @@ If you use ``MacOS`` you can also try :ref:`installingOnMacOSWithNix`.
 .. admonition:: Important
 
    Depending on the text editor you choose to use, the instructions will be different.
-   However, *no matter the text editor you chooce*, you will need ``emacs`` installed somewhere on your computer,
+   However, *no matter the text editor you choose*, you will need ``emacs`` installed somewhere on your computer,
    as ``agda-mode`` relies on ``emacs`` in the background.
 
 .. _textEditors:
