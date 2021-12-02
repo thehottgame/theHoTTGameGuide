@@ -4,90 +4,218 @@
 Installation
 ************
 
+Overview
+========
+
+To get things up and running you will need three things
+
+1. ``agda`` installed on your computer. This is what will check if your code makes sense.
+2. A text editor, for example ``doom emacs``, ``atom``, ``vs-code``, or ``vim``.
+   This is an environment for you to edit files in.
+3. ``agda2-mode`` or ``agda-mode``. This should do syntax highlighting for your code (pretty colours)
+   and make sure the text editor has the right shortcuts.
+4. A clone of the cubical library, where all the existing ``agda`` code is.
+5. A clone of the HoTT Game, which is our code.
+
 There are many ways to install agda and a couple of text editors in which it could be made working.
-`Here <https://sites.google.com/site/wakelinswan/teaching/installing-agda>`_ is *a* set of instructions by Andrew Swan -
-in particular the advice for ubuntu and atom seems to work well.
+Here we will try to describe some ways to install it.
 
-Installation on MacOS
-=====================
+.. admonition:: Important
 
-The following is a work in progress.
+   Depending on the text editor you choose to use, the instructions will be different.
+   However, *no matter the text editor you chooce*, you will need ``emacs`` installed somewhere on your computer,
+   as ``agda-mode`` relies on ``emacs`` in the background.
 
-Getting Git
------------
+.. _textEditors:
 
-Macs come with ``git`` pre-installed.
-You can open ``terminal`` and type
+Text editors
+------------
 
-.. code-block::
+Whilst we will assume you use ``doom emacs`` (since it is the hardest to get used to),
+you do not have to use ``emacs``, and many people can't get used to the way it works.
+Here are three alternatives
 
-   git --version
+- ``atom`` :
 
-to see what version of ``git`` you have.
-It is most likely outdated if you've never used ``git`` before.
-To get the latest version
-visit `this site <https://sourceforge.net/projects/git-osx-installer/>`_ .
+  `Here <https://sites.google.com/site/wakelinswan/teaching/installing-agda>`_
+  is a set of instructions by Andrew Swan for getting ``agda`` working in ``atom``.
 
+- ``vs-code`` :
+  `Here <https://github.com/banacorn/agda-mode-vscode#agda-language-server>`_
+  is a set of instructions for getting ``agda`` working in ``vs-code`` (scroll down to ``installation``).
+  You might be able to skip steps ``1``, ``2`` and ``3`` by enabling
+  ``agdaMode.connection.agdaLanguageServer`` in the settings.
+  (We haven't tried this - feedback is welcome).
 
-.. ``brew link --overwrite git``
-.. ``rm -r .emacs.d``
+- ``vim`` :
+  `Here <https://github.com/derekelkins/agda-vim>`_
+  is a set of instructions for getting ``agda`` working in ``vim``.
+  (We haven't tried this - feedback is welcome).
 
-To tell your computer to use the correct version of ``git``,
-we need to do the following :
+.. _installingAgda:
 
-- Open ``terminal`` and do the following to bring yourself to your home
-  "directory".
+Installing ``agda``
+===================
+
+Here we give instructions for installing ``agda`` on each operating system.
+If you have specific advice / issues specific to your operating system then please let us know in
+`issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
+Another source for information is
+`official installation guide <https://agda.readthedocs.io/en/v2.5.4.2/getting-started/installation.html#prebuilt-packages-and-system-specific-instructions>`_,
+but our advice might be more relevant to you.
+
+Debian and Ubuntu
+-----------------
+
+Ubuntu already should have a version of ``emacs`` installed.
+If not, go to a terminal and type in
+
+.. code::
+
+   sudo apt-get install emacs
+
+To get ``agda``, go to a terminal and type in
+
+.. code::
+
+   sudo apt install agda-bin
+
+This is all you need to get ``agda``.
+Now you need to get a text editor and ``agda-mode``.
+
+MacOS
+-----
+
+This will give you both ``agda`` and ``agda-mode`` at once.
+
+- Open a terminal.
+- We will directly clone the ``agda`` repo for development version.
+  First use ``cd`` ("change directory") in the terminal
+  to navigate to where you want to place the ``agda`` library.
+  Then do the following
 
   .. code::
 
-     cd
-- Do the following to show all files in this "directory".
+    git clone https://github.com/agda/agda.git
+
+  This gets a copy of the ``agda`` repo.
+- Go into folder of agda repo then do
 
   .. code::
 
-     ls -la
+     cabal update
+     make install
 
-  Amongst these we are interested in a file called ``.zprofile``
-  or ``.bash_profile`` if your mac is older.
-- Look at the top of your terminal window and you should see ``zsh``
-  or ``bash`` if you're on an older mac.
-  This is the "shell" that your mac is using for ``terminal``.
-  If it is ``zsh``,
+  This will compile ``agda`` to make it usable.
+- Once process is finished,
+  you can check ``agda`` is installed by doing the following in ``terminal`` :
 
   .. code::
 
-     open .zprofile
+     agda
 
-  This should open the file ``.zprofile`` with ``text editor``.
-  Now add the following to the end of the file
+This is all you need to get ``agda`` and ``agda-mode``, now you just need a text editor.
+
+Windows
+-------
+
+We used powershell as the terminal, but others probably work too.
+
+.. warning::
+
+   Always use powershell as admin.
+
+For the prerequisites
+
+- install chocolatey: follow instructions on
+  `their page <https://chocolatey.org/install>`_
+- In (admin) powershell do (via chocolatey, cabal)
+  - ``choco install ghc``
+  - ``choco install cabal``
+  - ``cabal update``
+  In order to make ``cabal`` see ``ghc``,
+  close and reopen the terminal before doing the next steps.
+  You might want to also try ``refreshenv`` for this.
+  - ``cabal install happy``
+  - ``cabal install alex``
+
+Now to install ``agda``, first try using ``cabal`` by doing ``cabal install make``
+in the terminal. If this works then go with "using cabal", if not
+then try "using stack"
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Using ``cabal``</summary>
+
+- You should have installed ``make`` with ``cabal install make`` by this point, if not do so now.
+- Directly clone the repo for development version.
+  *You can choose where to put this* by navigating to some specific folder in the terminal and doing
 
   .. code::
-     export PATH="/usr/local/bin:$PATH"
 
-  If you terminal was using ``bash`` instead, do
+    git clone https://github.com/agda/agda.git
 
-  .. code::
-
-     open .bash_profile
-
-  This should open ``.bash_profile`` with ``text editor``.
-  Now add the the following to the end of the file
+- It should create a folder called ``agda`` (a copy of the github repo). You should do ``cd agda``
+  to go into that folder, then once you're in there do
 
   .. code::
-     export PATH="/usr/local/bin:$PATH"
 
-  Once you've done this, save the files and close them.
-- Restart ``terminal`` and do the following again
+     make install
 
-  .. code::
-     git --version
+  which installs ``agda`` using ``make`` (it says "run the file called ``MAKEFILE`` from the folder").
 
-  You should see the version has now updated.
+- Once installation is finished, try typing ``agda --version`` in powershell to check the version.
 
-Installing ``Doom Emacs``
--------------------------
+.. raw:: html
 
-Do the following in a terminal.
+  </details>
+  </p>
+
+.. raw:: html
+
+  <p>
+  <details>
+  <summary>Using ``stack``</summary>
+
+- Get stack using the installer `here <https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows>`_.
+- Run ``stack upgrade`` in the terminal
+- Doing ``cabal get Agda`` in the terminal will create a folder called ``Agda-2.6.2`` *where you are at in the terminal*.
+  *You can choose where to put this* by navigating to some specific folder in the terminal using ``cd FILENAME``.
+- Once you have created this ``Adgda-2.6.2``, go into it by doing ``cd Agda-2.6.2``.
+- In the folder ``Agda-2.6.2``, there should be a file called ``stack-9.0.1.yaml``.
+  Now you can try doing ``stack --stack-yaml stack-9.0.1.yaml install`` in the terminal (when you're in the folder ``Agda-2.6.2``)
+  to run that file.
+- Once installation is finished, try typing ``agda --version`` to check the version.
+
+.. raw:: html
+
+  </details>
+  </p>
+
+Installing ``doom emacs``
+=========================
+
+Here we give instructions for installing ``doom emacs`` on each operating system.
+If you have specific advice / issues specific to your operating system then please let us know in
+`issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
+
+Ubuntu
+------
+
+Try installing ``doom emacs`` according to
+the instructions on `their github repository <https://github.com/hlissner/doom-emacs#install>`_.
+However, we have experience difficulties with getting ``doom`` on ``ubuntu`` specifically,
+so you *might* be better off using :ref:`one of the other options <textEditors>`,
+in particular ``atom`` appears to work well.
+
+MacOS
+-----
+
+Make sure you have the `right version of git <gettingGitOnMacOS>`_.
+
+Do the following in a terminal to get ``doom emacs``.
 
 .. code::
 
@@ -117,40 +245,50 @@ Do the following in a terminal.
    # so that you can use 'doom' anywhere
    export PATH=”$HOME/.emacs.d/bin:$PATH”
 
-Installing ``agda``
--------------------
+This should give you ``doom emacs``.
+You might need to restart your computer and or ``emacs`` to make sure everything works correctly.
 
-- Open a terminal.
-- We will directly clone the ``agda`` repo for development version.
-  First use ``cd`` ("change directory") in the terminal
-  to navigate to where you want to place the ``agda`` library.
-  Then do the following
+Windows
+-------
 
-  .. code::
+There are detailed instructions for getting ``doom emacs`` on windows
+`here <https://earvingad.github.io/posts/doom_emacs_windows/>`_.
 
-    git clone https://github.com/agda/agda.git
+The advice given there for installing fonts *might not work*.
+If it doesn't work, try installing a font (for example
+`Iosevka <https://typeof.net/Iosevka/>`_)
+by following
+`these instructions <https://support.microsoft.com/en-us/office/add-a-font-b7c5f17c-4426-4b53-967f-455339c564c1>`_.
+Then go to ``.doom.d/config.el``
+and add the line (anywhere)
 
-  This gets a copy of the ``agda`` repo.
-- Go into folder of agda repo then do
+.. code:: elisp
 
-  .. code::
+    (setq doom-font (font-spec :family "Iosevka SS04" :size 18 :weight 'medium))
 
-     cabal update
-     make install
+Here the font name is ``Iosevka SS04``. You can also change the font size and weight.
 
-  This will compile ``agda`` to make it usable.
-- Once process is finished,
-  you can check ``agda`` is installed by doing the following in ``terminal`` :
+Other operating systems
+-----------------------
 
-  .. code::
-     agda
+Please refer to the instructions on `their github repository <https://github.com/hlissner/doom-emacs#install>`_.
+If you have specific advice / issues specific to your operating system then please let us know in
+`issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
 
+Getting ``agda2-mode`` or ``agda-mode``
+=======================================
 
-Getting ``agda-mode`` in ``Doom Emacs``
----------------------------------------
+If you have decided to use ``doom emacs`` then you can get ``agda2-mode`` inside ``doom emacs`` (details below).
+For other text editors, you must first install ``agda-mode``,
+and then find the relevant ad-on to the text editor to support ``agda-mode`` (details below).
 
-- to install ``agda2-mode`` open ``doom emacs``,
-  do the shortcut ``M-x``.
+Getting ``agda2-mode`` on ``doom emacs``
+----------------------------------------
+
+Here we install ``agda2-mode`` in ``Doom Emacs``.
+Note that this is *not* ``agda`` itself, but syntax highlighting and shortcuts for ``agda``.
+
+- Do the shortcut ``M-x`` in ``doom emacs``.
   (See :ref:`Emacs Commands <emacs-commands>` for how to do shortcuts in
   ``doom emacs``.)
   A window should pop up where you can type things.
@@ -161,18 +299,69 @@ Getting ``agda-mode`` in ``Doom Emacs``
      package-install
 
   Press enter and type in ``agda2-mode``.
-- Now use ``SPC f p``.
-  A selection of files should appear,
-  one of which is ``init.el``.
-- Open ``init.el`` and in ``lang`` section, uncomment ``agda``.
+- Now do the shortcut ``SPC f p``.
+  A selection of files should appear.
+  Type in ``init.el`` and hit enter (``RET``).
+- Now you are in ``init.el``. Look for the ``lang`` section and uncomment ``agda``.
   Save the file and close ``doom emacs`` using ``SPC q q``.
-- Open ``terminal``. To make the configurations of ``doom emacs`` up to date,
-  do
+- Open ``terminal``. To make the configurations of ``doom emacs`` up to date, do
 
   .. code::
+
      doom sync
 
-  If there are no errors, we all good.
+  If there are no errors, you should have ``agda2-mode`` in ``doom emacs``.
+
+Getting ``agda-mode`` on ``atom``
+---------------------------------
+
+The general instruction (you can do either step first) is
+
+-  Get ``agda-mode``
+-  Get the right packages on ``atom``
+
+The second half is easy and doesn't depend on your operating system :
+
+1. In ``atom`` select Preferences from the Edit menu.
+2. Select Install from the side menu.
+3. Type agda into the search box.
+4. Install the packages ``agda-mode`` and ``language-agda``
+
+For getting ``agda-mode`` we give instructions per operating system :
+
+Debian and Ubuntu
+-----------------
+
+You need to have ``agda`` already from :ref:`installingAgda`.
+Go to a terminal and type
+
+.. code::
+
+   sudo apt install agda-mode
+
+followed by
+
+.. code::
+
+   agda-mode setup
+
+This should get ``agda-mode``.
+
+MacOS
+-----
+
+We already got ``agda-mode`` when we got ``agda``.
+
+Windows
+-------
+
+
+
+
+.. ........................................................................
+
+
+
 
 To test things, make a ``test.agda`` file anywhere you'd like.
 - Using Doom Emacs, open ``test.agda``.
@@ -428,6 +617,8 @@ IN POWERSHELL
      make install
 
 - Once installation is finished, try typing ``agda`` in powershell to check version.
+
+.. HEREHEREHERE
 
 Getting ``agda-mode`` in ``doom emacs``:
 

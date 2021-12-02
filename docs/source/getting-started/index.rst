@@ -10,3 +10,4 @@ Getting Started
    about-hott-game
    installation
    emacs-commands
+   gitOnMac

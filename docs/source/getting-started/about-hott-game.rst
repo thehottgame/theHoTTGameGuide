@@ -25,7 +25,9 @@ It is recommended that you use ``agda`` in the text editor
 `emacs <https://www.gnu.org/software/emacs/tour/index.html>`_,
 specifically we recommend
 `doom emacs <https://github.com/hlissner/doom-emacs>`_,
-if you can't be bothered to do a bunch of configuration.
+but it can also work in
+`atom <https://atom.io/packages/agda-mode>`_ and
+`vs-code <https://github.com/banacorn/agda-mode-vscode#agda-language-server>`_.
 
 Once you have ``emacs`` and ``agda``, clone the
 `cubical library repository <https://github.com/agda/cubical>`_ (version 0.3)
