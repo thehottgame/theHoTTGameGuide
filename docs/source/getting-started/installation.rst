@@ -15,11 +15,12 @@ To get things up and running you will need five things
 3. support for ``agda2-mode`` or ``agda-mode`` in your text editor.
    This should do syntax highlighting for your code (pretty colours)
    and make sure the text editor has the right shortcuts.
-4. A clone of the cubical library, where all the existing ``agda`` code is.
+4. A clone of the cubical library.
 5. A clone of the HoTT Game, which is our code.
 
 There are many ways to install agda and a couple of text editors in which it could be made working.
 Here we will try to describe some ways to install it.
+If you use ``MacOS`` you can also try :ref:`installingOnMacOSWithNix`.
 
 .. admonition:: Important
 
@@ -548,3 +549,79 @@ so we need to repeat the above process for it.
   (``Control-c Control-l``).
   If all went correctly, the text should be highlighted and you should be ready to go.
   Congratulations, you can now play the HoTT Game.
+
+
+.. _installingOnMacOSWithNix:
+
+Installing on MacOS with Nix
+============================
+
+``Nixpkgs`` maintains a set of ``agda`` libraries that can be added to a
+derivation managed by the nix package manager.
+See `here <https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/agda.section.md>`_
+for details.
+The file ``shell.nix`` in our repository contains a derivation that will add ``emacs``, ``agda``, the ``agda standard library``,
+and ``cubical agda`` to your local nix store and subsequently to a local shell environment by adding these locations to your ``PATH``.
+
+However, because user configurations for ``emacs`` are mutable,
+it will not (easily) manage your (emacs configuration) dot-files,
+so we will use the underlying ``emacs`` provided by ``nixpkgs`` but install ``doom emacs`` normally in your local user's environment.
+
+Clone our repository into a folder by doing
+
+.. code::
+
+   git clone https://github.com/thehottgame/TheHoTTGame.git
+
+This can be done anywhere you like.
+
+Install nix using ``curl``, following guidance
+`here <https://nixos.org/download.htmlcurl -o install-nix-2.4 https://releases.nixos.org/nix/nix-2.4/install>`_.
+
+Open a terminal, and go to the folder ``TheHoTTGame``, which was cloned before.
+In ``TheHoTTGame``, do
+
+.. code:: bash
+
+   nix-shell
+
+This puts us in a nix shell with the above mentioned packages loaded on your ``PATH``.
+This shell is defined by the package set in ``shell.nix`` in the folder.
+After installation, to use ``agda`` libraries,
+you will need to use *this* shell (or another configured similarly)
+to load the requisite packages onto the ``PATH`` so that they can be found.
+
+Now you can install ``doom emacs`` whilst you're in the ``nix-shell`` :
+
+.. code:: bash
+
+   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+
+   ~/.emacs.d/bin/doom install
+
+You'll probably want to answer "yes" to the options unless you know better.
+Then `add the doom utility to your path <https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#the-bindoom-utility>`_.
+
+We recommend you add ``~/.emacs.d/bin`` to your ``PATH`` so you can call doom directly and from anywhere.
+Accomplish this by adding this to your ``.bashrc`` or ``.zshrc`` file: ``~export PATH=”$HOME/.emacs.d/bin:$PATH”~``.
+
+Add ``agda`` support to ``doom`` by editing your ``~/.doom.d/config.el`` (instructions above).
+In the languages section ``:lang``, you'll see ``;; agda``.
+Replace it with ``(agda +local)`` to tell doom to use the ``agda-mode`` version specified by the local environment.
+
+Once the file is saved, sync ``doom`` from within the ``nix-shell`` that was loaded above:
+
+.. code:: bash
+
+   doom sync
+
+You can now load the agda source code in this by starting doom from the nix-shell:
+
+.. code:: bash
+
+   doom run .
+
+open the file ``0Trinitarianism/Quest0.agda`` and tell ``agda-mode`` to load and check it by doing
+``SPC m l`` (``space``, ``m`` and ``l``, in that order.)
+If everything is configured correctly, you should get nice colors and any ``{!!}``
+will become interactive holes to fill.
