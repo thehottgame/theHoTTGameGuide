@@ -3,6 +3,12 @@
 Emacs Commands
 ==========================
 
+Agdapad
+-------
+
+``Agdapad`` uses ``emacs`` but not ``doom emacs``,
+so only the ``agda`` shortcuts (below) are relevant.
+
 Notation
 --------
 
@@ -40,12 +46,6 @@ The following commands are for *evil mode*:
 - ``SPC h '`` to look up how to write a symbol.
   (Put your cursor on the symbol first.)
 
-
-For beta users, to get the latest patch
-
-- do ``SPC g g`` for "git status"
-- then ``F`` for pull (whilst in "git status")
-
 Agda usage
 ----------
 
@@ -65,8 +65,12 @@ Agda usage
 - Normalise : ``C-c C-n`` asks you to give it term / point ``x``,
   it 'reduces' ``x`` to its 'simplest (normalised) form'
 - Combo : ``C-c C-.`` does ``C-c C-,`` and ``C-c C-d``
-- Looking up definitions : ``M-SPC c d`` looks up the definition of the thing you are hovering over.
-- Look up unicode commands : ``M-SPC h '`` looks up how to type the unicode character you are hovering over.
+- Looking up definitions : in ``agdapad``, clicking on something with the wheel of your mouse
+  looks up the definitions of that thing (try clicking on ``Type`` for example).
+  In ``doom emacs``, ``M-SPC c d`` looks up the definition of the thing you are hovering over.
+
+You can find more commands for ``agda`` in ``emacs``
+`here <https://agda.readthedocs.io/en/latest/tools/emacs-mode.html#keybindings>`_.
 
 Unicode commands
 ----------------
@@ -85,3 +89,6 @@ However here are some commonly used ones to get you started
 - insert ``\bN`` for ``ℕ`` and ``\bZ`` for ``ℤ``
 - insert ``\.`` for ``∙``
 - insert ``\sqcup`` for ``⊔``
+
+You can find more common symbols
+`here <https://agda.readthedocs.io/en/latest/tools/emacs-mode.html#show-me-some-commonly-used-characters>`_.

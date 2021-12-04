@@ -11,6 +11,22 @@ with the aim of introducing
 as a tool for trying out mathematics in HoTT.
 This page will help you get the Game working for you.
 
+Agdapad
+=======
+
+The HoTT Game can be played entirely in your browser using
+`Agdapad <https://agdapad.quasicoherent.io/>`_.
+If you want a quick start to the game without installing anything,
+you can go straight to the site, create your own ``agda`` session, and start playing.
+
+Specifically, once you open an ``agda`` session, you should see a welcome page
+(which contains useful information).
+Around the top left of the screen there is a folder icon.
+Click on the folder icon, and open the directory ``TheHoTTGame``.
+This contains everything you need for the game.
+
+Many thanks to Ingo Blechschmidt for incorporating the game into ``Agdapad``.
+
 Installing Agda and the Cubical Agda library
 ============================================
 
@@ -60,20 +76,23 @@ Some text should be highlighted, and any ``{!!}`` should turn into ``{ }``.
 Where to start?
 ===============
 
-You can start with ``0Trinitarianism`` if you are interested in
+You can start with :ref:`trinitarianism` if you are interested in
 how logic, type theory and category theory come together
 as different ways to view the same thing.
 If you are more interested in homotopy theory,
-try ``1FundamentalGroup`` where we show that the
+try :ref:`fundamentalGroupOfTheCircle` where we show that the
 fundamental group of ``S¹`` is ``ℤ``.
+We recommend starting with :ref:`fundamentalGroupOfTheCircle` for intuition,
+then going to `trinitarianism`.
 
 How to start?
 =============
 
-To start with ``1FundamentalGroup`` (for example),
+To start with `fundamentalGroupOfTheCircle` (for example),
 go to :ref:`quest0WorkingWithTheCircle`
 and follow the instructions there.
-Any ``agda`` should happen in your copy of the Hott Game repository.
+Any ``agda`` should happen in ``Agdapad``
+or your local copy of the repository.
 
 Emacs issues
 ============
