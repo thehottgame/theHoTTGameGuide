@@ -83,12 +83,12 @@ If you are more interested in homotopy theory,
 try :ref:`fundamentalGroupOfTheCircle` where we show that the
 fundamental group of ``S¹`` is ``ℤ``.
 We recommend starting with :ref:`fundamentalGroupOfTheCircle` for intuition,
-then going to `trinitarianism`.
+then going to :ref:`trinitarianism`.
 
 How to start?
 =============
 
-To start with `fundamentalGroupOfTheCircle` (for example),
+To start with :ref:`fundamentalGroupOfTheCircle` (for example),
 go to :ref:`quest0WorkingWithTheCircle`
 and follow the instructions there.
 Any ``agda`` should happen in ``Agdapad``
