@@ -123,7 +123,7 @@ Individually
 
      _∙_ : x ≡ y → y ≡ z → x ≡ z
 
-  Try typing ``_∙_`` or ``? ∙ ?`` in the hole (input ``/.``)
+  Try typing ``_∙_`` or ``? ∙ ?`` in the hole (input ``\.``)
   and refining.
   Checking the new holes you should see that now you need
   to give two loops.

@@ -520,7 +520,7 @@ We proceed in steps :
   Flip : Bool → Bool
   Flip x = {!!}
 
-* Make sure you are in :ref:`insert mode<emacsCommands`.
+* Make sure you are in :ref:`insert mode<emacsCommands>`.
 * :ref:`Check the goal<emacsCommands>`.
   It should be asking for a point in ``Bool``,
   since we have already given it an ``x : Bool`` at the front.
@@ -559,7 +559,7 @@ We proceed in steps :
   This means ``agda`` recognises ``Flip`` as a well-formulated term
   and is a point in the space of maps from ``Bool`` to ``Bool``.
 * We can also ask ``agda`` to compute outputs of ``Flip``.
-  Try ``C-c C-n`` (``n`` stands for :ref:`normalise <emacsCommands`),
+  Try ``C-c C-n`` (``n`` stands for :ref:`normalise <emacsCommands>`),
   ``agda`` should again be asking for an expression.
   Enter ``Flip true``.
   In the ``*Agda Information*`` window, you should see ``false``, as desired.
