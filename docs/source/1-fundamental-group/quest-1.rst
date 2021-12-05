@@ -264,7 +264,7 @@ Defining ``sucℤ``
      <summary>Hint</summary>
 
   Do ``C-c C-c`` on ``n``.
-  Then map ``negsuc 0`` to ``pos 0``.
+  Then map ``negsuc zero`` to ``pos zero``.
   For ``negsuc (suc n)``, map it to ``negsuc n``.
 
   .. raw:: html
@@ -274,8 +274,8 @@ Defining ``sucℤ``
 
 - This completes the definition of ``sucℤ``.
   Use ``C-c C-n`` to check it computes correctly.
-  E.g. check that ``sucℤ (- 1)`` computes to ``pos 0``
-  and ``sucℤ (pos 0)`` computes to ``pos 1``.
+  E.g. check that ``sucℤ (negsuc zero)`` computes to ``pos zero``
+  and ``sucℤ (pos zero)`` computes to ``pos (suc zero)``.
 
 ``sucℤ`` is an Isomorphism
 --------------------------
