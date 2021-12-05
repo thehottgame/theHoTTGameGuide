@@ -351,7 +351,7 @@ Hence try to define
    </p>
 
 Try computing a few values using ``C-c C-n``,
-you can try it on ``refl``, ``loop``, ``loop 3 times``, ``loop (- 1) times`` and so on.
+you can try it on ``refl``, ``loop``, 'loop three times', 'loop negative one times' and so on.
 
 Generalising
 ------------
