@@ -772,18 +772,10 @@ The path
   Try to follow what ``pathToFun`` does in the
   :ref:`animation<doubleCoverAnimation2>`.
 
-  .. raw:: html
+  .. admonition:: ``pathToFun``
 
-     <p>
-     <details>
-     <summary>``pathToFun``</summary>
-
-  ``pathToFun`` is called ``transport`` in the cubical library.
-
-  .. raw:: html
-
-     </details>
-     </p>
+    ``pathToFun`` is called ``transport`` in the cubical
+    library.
 
 
 .. _part3LiftingPathsUsingDoubleCover:
