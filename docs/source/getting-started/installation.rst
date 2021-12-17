@@ -331,7 +331,10 @@ Note that this is *not* ``agda`` itself, but syntax highlighting and shortcuts f
 Getting ``agda-mode`` on ``atom``
 ---------------------------------
 
-1. In ``atom`` select Preferences from the Edit menu.
+1. In ``atom`` select
+  - Edit > Preferences (GNU/Linux)
+  - Atom > Preferences (macOS)
+  - File > Settings (Windows)
 2. Select Install from the side menu.
 3. Type agda into the search box.
 4. Install the packages ``agda-mode`` and ``language-agda``
