@@ -166,7 +166,7 @@ Part 1 - Making a Path From ``ℤ`` to Itself
 
 In the previous part we have defined the map ``loop_times : ℤ → Ω S¹ base``.
 Creating the inverse map is difficult without access to the entire circle.
-Similarly to how we used ``doubleCover`` to distinguish ``refl`` and ``base``,
+Similarly to how we used ``doubleCover`` to distinguish ``Refl`` and ``loop``,
 the idea is to replace ``Bool`` with ``ℤ``,
 allowing us to distinguish between all loops on ``S¹``.
 In this quest we will construct one of the two comparison maps
