@@ -46,17 +46,17 @@ the higher homotopy groups of ``S¹`` might be.
 Whilst the data of the fundamental group ``π₁ S¹`` is captured
 in ``loopSpace S¹ base``,
 the data of ``π₂ S¹`` would be captured in
-``loopSpace (loopSpace S¹ base) refl``;
-loops in ``loopSpace S¹ base`` based at ``refl``.
-Points in the second loop space are paths ``h : refl ≡ refl``,
+``loopSpace (loopSpace S¹ base) Refl``;
+loops in ``loopSpace S¹ base`` based at ``Refl``.
+Points in the second loop space are paths ``h : Refl ≡ Refl``,
 i.e. ``h`` would be a homotopy from the constant path to itself.
 
 .. insert picture
 
-The second loop space contains an obvious point ``refl : refl ≡ refl``
+The second loop space contains an obvious point ``refl : Refl ≡ Refl``
 (this is of course not the same "refl" as the one before),
 and we could define the next loop space to be loops in
-``loopSpace (loopSpace S¹ base) refl`` based at (the new) ``refl``.
+``loopSpace (loopSpace S¹ base) Refl`` based at (the new) ``refl``.
 
 The important conclusion we will arrive at in this quest is
 that the loop space of ``ℤ`` - which will correspond to the
@@ -65,7 +65,7 @@ is trivial, in the sense that it just consists of a point (up to paths) :
 
 .. code::
 
-   loopSpace (loopSpace S¹ base) refl ≡ loopSpace ℤ 0 ≡ ⊤
+   loopSpace (loopSpace S¹ base) Refl ≡ loopSpace ℤ 0 ≡ ⊤
 
 Intuitively this is because the only loop (up to a path) in ``ℤ`` from
 ``0`` to itself is ``refl``,
