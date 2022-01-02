@@ -605,7 +605,7 @@ Then `add the doom utility to your path <https://github.com/hlissner/doom-emacs/
 We recommend you add ``~/.emacs.d/bin`` to your ``PATH`` so you can call doom directly and from anywhere.
 Accomplish this by adding this to your ``.bashrc`` or ``.zshrc`` file: ``~export PATH=”$HOME/.emacs.d/bin:$PATH”~``.
 
-Add ``agda`` support to ``doom`` by editing your ``~/.doom.d/config.el`` (instructions above).
+Add ``agda`` support to ``doom`` by editing your ``~/.doom.d/init.el`` (instructions above).
 In the languages section ``:lang``, you'll see ``;; agda``.
 Replace it with ``(agda +local)`` to tell doom to use the ``agda-mode`` version specified by the local environment.
 
