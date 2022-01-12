@@ -56,7 +56,8 @@ i.e. ``h`` would be a homotopy from the constant path to itself.
 The second loop space contains an obvious point ``refl : refl ≡ refl``
 (this is of course not the same "refl" as the one before),
 and we could define the next loop space to be loops in
-``loopSpace (loopSpace S¹ base) refl`` based at (the new) ``refl``.
+``loopSpace (loopSpace S¹ base) refl`` based at ``refl``
+(the one from ``loopSpace S¹ base`` that is).
 
 The important conclusion we will arrive at in this quest is
 that the loop space of ``ℤ`` - which will correspond to the
