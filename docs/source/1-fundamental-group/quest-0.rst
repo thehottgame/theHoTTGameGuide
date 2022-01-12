@@ -9,7 +9,7 @@ of ``S¹`` is ``ℤ``.
 In fact, our strategy will also show that the higher homotopy groups of
 ``S¹`` are all trivial.
 You don't need to know any prerequisites - in particular we will define
-the fundamental group and higher homotopy goroups
+the fundamental group and higher homotopy groups
 if you don't know what they are already.
 
 .. important::
