@@ -65,7 +65,7 @@ by adding a line
 
 .. code::
 
-   the-directory/HoTTGameLib.agda
+   the-directory/TheHoTTGame.agda-lib
 
 to your ``libraries`` file as above.
 
