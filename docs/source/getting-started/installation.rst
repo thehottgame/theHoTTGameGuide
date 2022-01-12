@@ -10,28 +10,35 @@ Overview
 To get things up and running you will need five things
 
 1. ``agda`` installed on your computer. This is what will check if your code makes sense.
+   (Automatic if using the ``Nix`` installation)
 2. A text editor, for example ``doom emacs``, ``atom``, ``vs-code``, or ``vim``.
    This is an environment for you to edit files in.
 3. support for ``agda2-mode`` or ``agda-mode`` in your text editor.
    This should do syntax highlighting for your code (pretty colours)
    and make sure the text editor has the right shortcuts.
-4. A clone of the cubical library.
+4. A clone of the cubical library. (Automatic if using the ``Nix`` installation.)
 5. A clone of the HoTT Game, which is our code.
 
-There are many ways to install agda and a couple of text editors in which it could be made working.
-Here we will try to describe some ways to install it.
-If you use ``MacOS`` you can also try :ref:`installingOnMacOSWithNix`.
+There are many ways to install ``agda``.
+On this page we will try to describe some ways to install it.
+There are roughly three ways:
 
-.. admonition:: Important
-
-   Depending on the text editor you choose to use, the instructions will be different.
-   However, *no matter the text editor you choose*, you will need ``emacs`` installed somewhere on your computer,
-   as ``agda-mode`` relies on ``emacs`` in the background.
+- Using ``Nix``. If you use windows this is probably the easiest and most
+  rewarding method.
+  It involves getting the ``NixOS``, a linux operating system inside
+  your computer, so you also get to try out linux.
+- Installing ``agda`` and the cubical library yourself
+- Using VS-code and getting the ``agdaLanguageServer``
 
 .. _textEditors:
 
 Text editors
 ------------
+
+.. admonition:: Important
+
+   *No matter the text editor you choose*, you will need ``emacs`` installed somewhere on your computer,
+   as ``agda-mode`` relies on ``emacs`` in the background.
 
 Whilst we will assume you use ``doom emacs`` in our guides (since it is the hardest to get used to),
 there are other options :
@@ -46,7 +53,7 @@ there are other options :
   is a set of instructions for getting ``agda`` working in ``vs-code`` (scroll down to ``installation``).
   You might be able to skip steps ``1``, ``2`` and ``3`` by enabling
   ``agdaMode.connection.agdaLanguageServer`` in the settings.
-  (We haven't tried this - feedback is welcome).
+  (We haven't tried this - feedback is welcome.)
 
 - ``vim`` :
   `Here <https://github.com/derekelkins/agda-vim>`_
@@ -210,6 +217,7 @@ then try "using stack"
 In either case we should have ``agda`` *and* ``agda-mode``.
 So we should just need to get a text editor.
 
+.. _installingDoomEmacs:
 Installing ``doom emacs``
 =========================
 
@@ -217,14 +225,33 @@ Here we give instructions for installing ``doom emacs`` on each operating system
 If you have specific advice / issues specific to your operating system then please let us know in
 `issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
 
-Ubuntu
-------
+Linux
+-----
 
-Try installing ``doom emacs`` according to
-the instructions on `their github repository <https://github.com/hlissner/doom-emacs#install>`_.
-However, we have experience difficulties with getting ``doom`` on ``ubuntu`` specifically,
+We have experience difficulties with getting ``doom`` on ``ubuntu`` specifically,
 so you *might* be better off using :ref:`one of the other options <textEditors>`,
 in particular ``atom`` appears to work well.
+Try installing ``doom emacs`` according to
+the instructions on `their github repository <https://github.com/hlissner/doom-emacs#install>`_.
+A quick guide follows:
+
+1. Go to a terminal and type in
+
+.. code:: bash
+
+   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+
+   ~/.emacs.d/bin/doom install
+
+You'll probably want to answer "yes" to the options unless you know better.
+We recommend you add ``~/.emacs.d/bin`` to your ``PATH``
+so you can call doom directly and from anywhere;
+accomplish this by going to the file ``~/.bashrc`` located in your home directory
+(or ``~/.zshrc`` file if you use zsh as your shell)
+and adding the line ``export PATH=$PATH:~/.emacs.d/bin`` at the end.
+
+This should give you ``doom emacs``.
+You might need to restart your computer and or ``emacs`` to make sure everything works correctly.
 
 MacOS
 -----
@@ -267,6 +294,11 @@ You might need to restart your computer and or ``emacs`` to make sure everything
 Windows
 -------
 
+.. admonition:: NixOS and WSL2
+
+   If you came from the NixOS and WSL2 instructions then go to the
+   :ref:`linux section<installingDoomEmacs>`.
+
 There are detailed instructions for getting ``doom emacs`` on windows
 `here <https://earvingad.github.io/posts/doom_emacs_windows/>`_.
 
@@ -284,12 +316,13 @@ and add the line (anywhere)
 
 Here the font name is ``Iosevka SS04``. You can also change the font size and weight.
 
-Other operating systems
------------------------
+Operating system specific issues
+--------------------------------
 
-Please refer to the instructions on `their github repository <https://github.com/hlissner/doom-emacs#install>`_.
-If you have specific advice / issues specific to your operating system then please let us know in
+If you have specific advice or issues specific to your operating system then please let us know in
 `issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
+
+.. _gettingAgda2ModeOrAgdaModeSupportForYourTextEditor:
 
 Getting ``agda2-mode`` or ``agda-mode`` support for your text editor
 ====================================================================
@@ -320,6 +353,8 @@ Note that this is *not* ``agda`` itself, but syntax highlighting and shortcuts f
   Type in ``init.el`` and hit enter (``RET``).
 - Now you are in ``init.el``. Look for the ``lang`` section and uncomment ``agda``.
   Save the file and close ``doom emacs`` using ``SPC q q``.
+  (If you came from the ``Nix`` installation guide replace ``agda`` with ``(agda +local)``
+  instead.)
 - Open ``terminal``. To make the configurations of ``doom emacs`` up to date, do
 
   .. code::
@@ -551,14 +586,18 @@ so we need to repeat the above process for it.
   Congratulations, you can now play the HoTT Game.
 
 
+
+Installing with Nix
+===================
+
 .. _installingOnMacOSWithNix:
 
-Installing on MacOS with Nix
-============================
+Linux and MacOS
+---------------
 
 ``Nixpkgs`` maintains a set of ``agda`` libraries that can be added to a
-derivation managed by the nix package manager.
-See `here <https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/agda.section.md>`_
+derivation managed by the nix package manager,
+see `here <https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/agda.section.md>`_
 for details.
 The file ``shell.nix`` in our repository contains a derivation that will add ``emacs``, ``agda``, the ``agda standard library``,
 and ``cubical agda`` to your local nix store and subsequently to a local shell environment by adding these locations to your ``PATH``.
@@ -567,61 +606,91 @@ However, because user configurations for ``emacs`` are mutable,
 it will not (easily) manage your (emacs configuration) dot-files,
 so we will use the underlying ``emacs`` provided by ``nixpkgs`` but install ``doom emacs`` normally in your local user's environment.
 
-Clone our repository into a folder by doing
+1. Install ``doom emacs`` (or whichever text editor you prefer)
+   via the method described for your operating system
+   :ref:`here<installingDoomEmacs>`.
+   (If you are on Windows with NixOS on WSL2 then you are a linux
+   user for the rest of the installation and should do everything in a termial inside NixOS.)
 
-.. code::
+2. Get ``agda2-mode`` support to ``doom`` (or whichever editor you prefer)
+   via the method described :ref:`above<gettingAgda2ModeOrAgdaModeSupportForYourTextEditor>`.
 
-   git clone https://github.com/thehottgame/TheHoTTGame.git
+3. Clone our repository into a folder by going to some directory using ``cd`` and doing
 
-This can be done anywhere you like.
+   .. code::
 
-Install nix using ``curl``, following guidance
-`here <https://nixos.org/download.htmlcurl -o install-nix-2.4 https://releases.nixos.org/nix/nix-2.4/install>`_.
+      git clone https://github.com/thehottgame/TheHoTTGame.git
 
-Open a terminal, and go to the folder ``TheHoTTGame``, which was cloned before.
-In ``TheHoTTGame``, do
+   This can be done anywhere you like.
 
-.. code:: bash
+4. Install ``Nix`` (*not* ``NixOS``) using following the guidance
+   `on the official site <https://nixos.org/download.html#nix-install-linux>`_.
+   We install the single-user version for linux
+   (compare this with what is written on the official website):
 
-   nix-shell
+   .. code::
 
-This puts us in a nix shell with the above mentioned packages loaded on your ``PATH``.
-This shell is defined by the package set in ``shell.nix`` in the folder.
-After installation, to use ``agda`` libraries,
-you will need to use *this* shell (or another configured similarly)
-to load the requisite packages onto the ``PATH`` so that they can be found.
+      sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
-Now you can install ``doom emacs`` whilst you're in the ``nix-shell`` :
+   If you are on MacOS this will be different, and if you are on Windows using NixOS
+   then this should also be exactly what you need.
 
-.. code:: bash
+5. Open a terminal, and use `cd` to navigate to the folder ``TheHoTTGame``, which was cloned before.
+   In ``TheHoTTGame``, do
 
-   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+   .. code:: bash
 
-   ~/.emacs.d/bin/doom install
+      nix-shell
 
-You'll probably want to answer "yes" to the options unless you know better.
-Then `add the doom utility to your path <https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#the-bindoom-utility>`_.
+   It might be that you need to restart your computer for this to work,
+   and you might need to wait a little bit for it to start working,
+   it might stay blank for a while.
+   Later booting of nix-shell should be faster than the first.
 
-We recommend you add ``~/.emacs.d/bin`` to your ``PATH`` so you can call doom directly and from anywhere.
-Accomplish this by adding this to your ``.bashrc`` or ``.zshrc`` file: ``~export PATH=”$HOME/.emacs.d/bin:$PATH”~``.
+   This should open up a ``Nix`` shell (inside your usual terminal),
+   from which you can do all the usual things in a terminal and more.
+   The above mentioned packages should automatically be loaded on your ``PATH``.
+   The above is all defined by the package set in
+   ``shell.nix`` in the folder ``TheHoTTGame``.
 
-Add ``agda`` support to ``doom`` by editing your ``~/.doom.d/config.el`` (instructions above).
-In the languages section ``:lang``, you'll see ``;; agda``.
-Replace it with ``(agda +local)`` to tell doom to use the ``agda-mode`` version specified by the local environment.
+6. Each time you wish to use ``agda`` (in particular its libraries),
+   you should do step 5 to load the requisite packages onto the ``PATH`` so that they can be found.
 
-Once the file is saved, sync ``doom`` from within the ``nix-shell`` that was loaded above:
+7. If you got ``doom``, go back to ``.doom.d/init.el``
+   and make sure that instead of uncommenting ``;; agda`` in the ``;; lang``,
+   *replace* it with ``(agda +local)`` to tell doom to use the ``agda-mode``
+   version specified by the local environment.
+   Once the file is saved, sync ``doom`` from within the ``nix-shell`` that was loaded above:
 
-.. code:: bash
+   .. code:: bash
 
-   doom sync
+      doom sync
 
-You can now load the agda source code in this by starting doom from the nix-shell:
+8. You can now load the agda source code in this by starting doom from the nix-shell:
 
-.. code:: bash
+   .. code:: bash
 
-   doom run .
+      doom run .
 
-open the file ``0Trinitarianism/Quest0.agda`` and tell ``agda-mode`` to load and check it by doing
-``SPC m l`` (``space``, ``m`` and ``l``, in that order.)
-If everything is configured correctly, you should get nice colors and any ``{!!}``
-will become interactive holes to fill.
+   Open the file ``0Trinitarianism/Quest0.agda`` and tell ``agda-mode`` to load and check it by doing
+   ``SPC m l`` (``space``, ``m`` and ``l``, in that order.)
+   If everything is configured correctly, you should get nice colors and any ``{!!}``
+   will become interactive holes to fill.
+
+Windows
+-------
+First have a read of the previous section for Linux and MacOS for an overview,
+since once you get NixOS with WSL2, you will be using a Linux operating system anyway.
+
+1. Get WSL2 following instructions `here <https://docs.microsoft.com/en-us/windows/wsl/install>`_.
+   You might also like to follow a `video guide <https://docs.microsoft.com/en-us/windows/wsl/install>`_.
+   Reboot your system.
+
+2. By default WSL2 will get ubuntu, which is fine, but is not the operating system we will use.
+   We want to get ``NixOS``, which we can do by following instructions
+   in the quick start section of `this github page <https://github.com/Trundle/NixOS-WSL>`_.
+   Reboot your system.
+
+3. Reopen ``NixOS`` and follow the
+   :ref:`rest of the installation instructions <installingOnMacOSWithNix>` as if you
+   are a linux user.
