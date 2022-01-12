@@ -317,6 +317,10 @@ You should compare your definition to ours in ``Quest1Solutions.agda``.
 Note that we have called this ``helix``, since the picture of this ``ℤ``-bundle
 looks like
 
+.. code::
+
+   Sorry! This picture is a work in progress.
+
 ..
    .. image:: images/helix.png
       :width: 1000
