@@ -686,7 +686,7 @@ First have a read of the previous section for Linux and MacOS for an overview,
 since once you get NixOS with WSL2, you will be using a Linux operating system anyway.
 
 1. Get WSL2 following instructions `here <https://docs.microsoft.com/en-us/windows/wsl/install>`_.
-   You might also like to follow a `video guide <https://docs.microsoft.com/en-us/windows/wsl/install>`_.
+   You might also like to follow a `video guide <https://www.youtube.com/watch?v=_fntjriRe48&t=985s>`_.
    Reboot your system.
 
 2. By default WSL2 will get ubuntu, which is fine, but is not the operating system we will use.
