@@ -30,9 +30,9 @@ Many thanks to Ingo Blechschmidt for incorporating the game into ``Agdapad``.
 Installing Agda and the Cubical Agda library
 ============================================
 
-If you are would like detailed instructions on how to install agda and a supportive text editor - 
-in particular if you use MacOS or Windows - we recommend you follow instructions on
-:ref:`installation`.
+A more long-term setup for using ``agda`` would be to install it locally.
+If you would like detailed instructions on how to install agda and a supportive text editor
+then we recommend you follow instructions on :ref:`installation`.
 More general instructions follow:
 
 Our Game is in ``agda``, which can be installed following instructions
@@ -99,3 +99,16 @@ Emacs issues
 
 If you can't figure out ``emacs`` or forget some command, then
 try consulting the :ref:`emacsCommands` page.
+
+Special thanks
+==============
+
+We would like to thank Kevin Buzzard for introducing us to formalization,
+making the Natural Numbers Game for learning ``lean``
+(which inspired this project), and helping the game gain publicity.
+We would also like to thank all those involved in the HoTT community 
+and writing the HoTT book, especially Steve Awodey, 
+who helped us post about the Game on homotopytypetheory.org.
+Lastly we thank all those who are trying out the game and giving us feedback.
+If you would like to get involved, simply open and issue and let us know what 
+you would like to do.
