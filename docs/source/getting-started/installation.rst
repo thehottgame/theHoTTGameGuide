@@ -374,8 +374,8 @@ Getting ``agda-mode`` on ``atom``
 3. Type agda into the search box.
 4. Install the packages ``agda-mode`` and ``language-agda``
 
-Test it
-=======
+Check the ``agda`` and ``agda-mode`` installations
+==================================================
 Once you have installed ``agda``, a text editor,
 and support for ``agda-mode`` in your text editor,
 you should test it.
