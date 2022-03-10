@@ -179,13 +179,13 @@ The plan is :
 2. Prove that ``sucℤ`` is an isomorphism by constructing
    an inverse map ``predℤ : ℤ → ℤ``.
 3. Turn the isomorphism ``sucℤ`` into a path
-   ``sucPath : ℤ ≡ ℤ`` using ``isoToPath``
+   ``sucℤPath : ℤ ≡ ℤ`` using ``isoToPath``
 4. Define ``helix : S¹ → Type`` by mapping ``base`` to ``ℤ`` and
-   a generic point ``loop i`` to ``sucPath i``.
+   a generic point ``loop i`` to ``sucℤPath i``.
 5. Use ``helix`` and ``endPt`` to define the map
    ``windingNumberBase : base ≡ base → ℤ``.
    Intuitively it counts how many times a path loops around ``S¹``.
-   a generic point ``loop i`` to ``sucPath i``.
+   a generic point ``loop i`` to ``sucℤPath i``.
 6. Generalize this across the circle.
 
 In this part, we focus on ``1``, ``2`` and ``3``.
@@ -317,14 +317,15 @@ You should compare your definition to ours in ``Quest1Solutions.agda``.
 Note that we have called this ``helix``, since the picture of this ``ℤ``-bundle
 looks like
 
-.. code::
 
-   Sorry! This picture is a work in progress.
+.. raw:: html
 
-..
-   .. image:: images/helix.png
-      :width: 1000
-      :alt: helix
+   <video controls width="600">
+
+      <source src="../_static/helix.webm"
+              type="video/webm">
+
+   </video>
 
 Counting Loops
 --------------
