@@ -368,7 +368,7 @@ your choice of how to define transitivity / concatenation.
      `module system <https://agda.readthedocs.io/en/v2.6.0.1/language/module-system.html>`_
      in ``agda``.
 
-- concatenating a path ``p`` with ``Sym p``  on the left and right gives ``refl``.
+- concatenating a path ``p`` with ``Sym p``  on the left and right gives ``rfl``.
 
   .. raw:: html
 
@@ -378,11 +378,11 @@ your choice of how to define transitivity / concatenation.
 
   .. code:: agda
 
+     Sym* : {A : Type} {x y : A} (p : Id x y) → Id (Sym p * p) rfl
+     Sym* = {!!}
+
      *Sym : {A : Type} {x y : A} (p : Id x y) → Id (p * Sym p) rfl
      *Sym = {!!}
-
-     Sym* : {A : Type} {x y : A} (p : Id x y) → Id rfl (p * Sym p)
-     Sym* = {!!}
 
   .. raw:: html
 
@@ -397,11 +397,11 @@ your choice of how to define transitivity / concatenation.
 
   .. code:: agda
 
+     Sym* : {A : Type} {x y : A} (p : Id x y) → Id (Sym p * p) rfl
+     Sym* rfl = rfl
+
      *Sym : {A : Type} {x y : A} (p : Id x y) → Id (p * Sym p) rfl
      *Sym rfl = rfl
-
-     Sym* : {A : Type} {x y : A} (p : Id x y) → Id rfl (p * Sym p)
-     Sym* rfl = rfl
 
   .. raw:: html
 
