@@ -612,7 +612,7 @@ Now we have two of goals :
   the path space looks like our classification,
   i.e. that ``(x ≡ y) ≡ (⊔NoConfusion x y)``
 - ``isSet⊔NoConfusion`` : For ``isSet⊔``, given
-  ``hA : isProp A``, ``hB : isProp B`` and ``x y : A ⊔ B``
+  ``hA : isSet A``, ``hB : isSet B`` and ``x y : A ⊔ B``
   we needed to show ``isProp (x ≡ y)``.
   Hence we want to show that under the same assumptions
   ``isProp (⊔NoConfusion x y)``.
