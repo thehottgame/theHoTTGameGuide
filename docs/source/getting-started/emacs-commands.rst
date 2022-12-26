@@ -1,6 +1,6 @@
 .. _emacsCommands:
 
-Emacs Commands
+Emacs and Unicode Commands
 ==========================
 
 Agdapad
@@ -18,7 +18,10 @@ Notation
 - ``S-x`` means ``Shift-x``
 - ``RET`` means enter
 
-Example ``C-c C-l`` in Agda files is ``Ctrl-c``, let go, ``Ctrl-l``
+Example: ``C-c C-l`` in Agda files is ``Ctrl-c``, let go, ``Ctrl-l``.
+For the input of unicode characters go to the end of this page or visit
+`this site <https://agda.readthedocs.io/en/latest/tools/emacs-mode.html#keybindings>`.
+
 
 General Doom Emacs usage
 ------------------------
@@ -82,8 +85,9 @@ However here are some commonly used ones to get you started
 - insert ``\==`` for ``≡``
 - insert ``\==n`` for ``≢``
 - insert ``\bot`` for ``⊥``
+- insert ``\top`` for ``⊤``
 - insert ``\neg`` for ``¬``
-- insert ``\GS`` for ``Σ``
+- insert ``\GS`` or ``\Sigma`` for ``Σ``
 - insert ``\cong`` for ``≅``
 - insert ``\^`` for superscript, e.g. ``S\^1`` for ``S¹``
 - insert ``\bN`` for ``ℕ`` and ``\bZ`` for ``ℤ``
