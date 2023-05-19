@@ -71,7 +71,7 @@ is trivial, in the sense that it just consists of a point (up to paths) :
 Intuitively this is because the only loop (up to a path) in ``ℤ`` from
 ``0`` to itself is ``refl``,
 so ``loopSpace ℤ 0`` is contractible -
-it looks just like the singleton space ``⊥``.
+it looks just like the singleton space ``⊤``.
 This is more general : *any two paths in* ``ℤ`` *are homotopic*,
 which we formalise in the definition ``isSet``.
 
