@@ -30,7 +30,7 @@ Theory - Definition of the Circle
 
 We begin by formalising the problem statement.
 
-A contruction of "the circle" is :
+A construction of "the circle" is :
 
 - a point called ``base``
 - an edge from that point to itself called ``loop``
@@ -637,7 +637,7 @@ The isomorphism
   If ``agda`` gives an error it could be due to
 
   1. missing spaces; ``agda`` is space sensitive
-  2. wrong indentation before ``rightInv`` and ``leftInv``; ``agda`` is intentation sensitive
+  2. wrong indentation before ``rightInv`` and ``leftInv``; ``agda`` is indentation sensitive
   3. missing the ``where`` in the second line.
   4. lower and upper case differences
 
