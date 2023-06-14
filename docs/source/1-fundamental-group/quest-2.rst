@@ -652,7 +652,7 @@ They should look like
           A B : Type
 
    at the beginning of your ``agda`` file,
-   and it will assume ``A`` and ``B`` implicitely
+   and it will assume ``A`` and ``B`` implicitly
    whenever they are mentioned.
    Make sure it is indented correctly.
 
