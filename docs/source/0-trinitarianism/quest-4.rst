@@ -89,7 +89,7 @@ but we will use ``rfl`` with an implicit argument
   exactly the same.
 
   If two terms are externally equal then they are internally equal,
-  and the proof that they are internall equal is ``rfl``.
+  and the proof that they are internally equal is ``rfl``.
   However, having a proof ``p : Id x y`` is not enough for
   the computer to recognise ``x`` as the same term as ``y``.
 
@@ -290,7 +290,7 @@ but you can use whichever you prefer.
 Exercise - Groupoid Laws
 ------------------------
 
-The identity type satisfies some futher properties,
+The identity type satisfies some further properties,
 which you can formalize then prove.
 You may notice that they look almost like the axioms of a group,
 except a bit bigger - for example there is not just a single identity
@@ -358,7 +358,7 @@ your choice of how to define transitivity / concatenation.
             x y : A
 
      at the beginning of your ``agda`` file,
-     and it will assume ``A``, ``x`` and ``y`` implicitely
+     and it will assume ``A``, ``x`` and ``y`` implicitly
      whenever they are mentioned.
      Make sure it is indented correctly.
      Beware that anything declared like this will be an
@@ -877,7 +877,7 @@ which we list here :
   we can show that paths also satisfy groupoid laws.
 - We have already made ``cong`` in the previous part (in Hint 6).
 - The function ``pathToFun`` which takes a path between spaces
-  and converts it to a function bewteen the spaces,
+  and converts it to a function between the spaces,
   following points along the path of spaces.
 - The function ``endPt`` which follows a path along a bundle.
 
@@ -1024,7 +1024,7 @@ Show that ``pathToFun`` sends ``refl`` to the identity map.
 
   <p>
   <details>
-  <summary>The Statment</summary>
+  <summary>The Statement</summary>
 
 .. code:: agda
 
