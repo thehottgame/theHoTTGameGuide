@@ -613,7 +613,7 @@ so we will use the underlying ``emacs`` provided by ``nixpkgs`` but install ``do
    via the method described for your operating system
    :ref:`here<installingDoomEmacs>`.
    (If you are on Windows with NixOS on WSL2 then you are a linux
-   user for the rest of the installation and should do everything in a termial inside NixOS.)
+   user for the rest of the installation and should do everything in a terminal inside NixOS.)
 
 2. Get ``agda2-mode`` support to ``doom`` (or whichever editor you prefer)
    via the method described :ref:`above<gettingAgda2ModeOrAgdaModeSupportForYourTextEditor>`.
