@@ -5,7 +5,7 @@
 Getting Git on MacOS
 ********************
 
-On certain older verions of ``MacOS`` one needs to get the right version of ``git``.
+On certain older versions of ``MacOS`` one needs to get the right version of ``git``.
 
 Check the version
 =================
