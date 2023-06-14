@@ -113,7 +113,7 @@ Here is an important one:
    TrueToTrue' : ⊤ → ⊤
    TrueToTrue' x = { }
 
-- Naviagate to the hole and check the goal.
+- Navigate to the hole and check the goal.
 - Note ``x`` is already taken out for you.
 - You can try type ``x`` in the hole and ``C-c C-c``
 - ``c`` stands for cases".
@@ -152,7 +152,7 @@ Part 1 - False / Empty / Initial object
    data ⊥ : Type where
 
 This reads "``⊥`` is an inductive type with no constructors",
-with interepretations
+with interpretations
 
 - ``⊥`` is a proposition "false" with no proofs
 - ``⊥`` is a construction "bot" with no recipes
@@ -202,7 +202,7 @@ Our interpretations are:
   there are "too many proofs" -
   mathematicians classically don't distinguish
   between proofs of a single proposition.
-  (ZFC doesnt even mention logic internally,
+  (ZFC doesn't even mention logic internally,
   but type theory does.)
   In this sense constructions are *proof relevant* types.
 
