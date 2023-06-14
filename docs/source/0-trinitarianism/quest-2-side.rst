@@ -24,7 +24,7 @@ These have interpretations :
   then "(``A`` and ``B``) implies ``C``".
   A proof of the converse is ``curry``.
 - `currying <https://en.wikipedia.org/wiki/Currying#:~:text=In%20mathematics%20and%20computer%20science,each%20takes%20a%20single%20argument>`_
-- this is a commonly occuring example of an *adjunction*.
+- this is a commonly occurring example of an *adjunction*.
   See `here <https://kl-i.github.io/posts/2021-07-12/#product-and-maps>`_
   for a more detailed explanation.
 
