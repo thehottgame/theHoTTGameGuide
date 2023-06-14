@@ -90,7 +90,7 @@ casing on ``n`` again, you should see
    loop negsuc n times = {!!}
 
 It says to map out of ``ℕ`` it suffices to map ``zero`` and
-map each succesive integer ``suc n`` inductively.
+map each successive integer ``suc n`` inductively.
 We can do the same with ``negsuc n``,
 obtaining four cases.
 
