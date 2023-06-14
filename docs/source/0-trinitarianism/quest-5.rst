@@ -299,7 +299,7 @@ we should be able to guess what the values on each side turn out to be.
   </details>
   </p>
 
-.. _mappingOutOfTheCirlce:
+.. _mappingOutOfTheCircle:
 
 Mapping out of the circle
 -------------------------
@@ -388,7 +388,7 @@ We therefore should expect that it does map ``base`` to ``b``.
 Tracing through the definitions we have made,
 we should be able to see this is true *externally*.
 
-More explicitely
+More explicitly
 
 .. code:: agda
 
@@ -408,7 +408,7 @@ we end up with needing some idea of what
 For example, if ``A`` were ``λ i → B i → C i``,
 where ``B`` and ``C`` are respectfully paths between spaces,
 then we might guess that we can describe ``pathToFun B f``
-more explicitely by checking what it does on points.
+more explicitly by checking what it does on points.
 
 In this part we will consider different type constructions
 and how paths between them convert to functions between them
