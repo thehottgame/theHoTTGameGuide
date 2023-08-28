@@ -37,7 +37,7 @@ we can refine, and ``agda`` will assume such an ``i`` for us.
 
    funExt : {B : A → Type} {f g : (a : A) → B a} →
      ((a : A) → f a ≡ g a) → f ≡ g
-   funExt B f g h = λ i a → {!!}
+   funExt h = λ i a → {!!}
 
 Checking the goal you should see something like the following
 (we have extracted the important parts):
@@ -49,9 +49,9 @@ Checking the goal you should see something like the following
   a : A
   i : I
   h : (a₁ : A) → f a₁ ≡ g a₁
-  g : (a₁ : A) → B a₁
-  f : (a₁ : A) → B a₁
-  B : A → Type
+  g : (a₁ : A) → B a₁   (not in scope)
+  f : (a₁ : A) → B a₁   (not in scope)
+  B : A → Type   (not in scope)
   A : Type   (not in scope)
   ———— Constraints ————————————————————————
   ?0 (i = i1) = g a : B a
@@ -97,7 +97,7 @@ gives us a path from ``f a`` to ``g a`` in ``B a``.
 
   funExt : {B : A → Type} {f g : (a : A) → B a} →
     ((a : A) → f a ≡ g a) → f ≡ g
-  funExt B f g h = λ i a → h a i
+  funExt h = λ i a → h a i
 
 .. raw:: html
 
