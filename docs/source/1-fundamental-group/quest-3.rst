@@ -562,7 +562,7 @@ and ``windingNumber base loop`` are.
 We can identify ``windingNumber base`` with its definition,
 reducing the problem to showing that
 ``endPt helix (loop n times) 0`` is equal to ``n``,
-in the seperate cases.
+in the separate cases.
 
 For the first case,
 we can reduce ``loop (n + 1) times`` to just ``loop n times ∙ loop``
