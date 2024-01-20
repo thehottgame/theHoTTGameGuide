@@ -170,8 +170,10 @@ We can make a map from ``⊥`` to any other type, in particular into ``⊤``.
 
 - Navigate to the hole and do cases on ``x``.
 
-``agda`` knows that there are no cases so there is nothing to do!
-(See ``Quest0Solutions.agda``)
+- Hint: you can try "cases", as before
+  ``agda`` knows that there are no cases so there is nothing to do!
+  (See ``Quest0Solutions.agda``)
+
 Our interpretations:
 
 - "false" implies "true".
