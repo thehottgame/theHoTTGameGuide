@@ -47,8 +47,6 @@ and has interpretations interpretations,
 - ``a`` is a point in the space ``A``
 - ``a`` is a generalised element of the object ``A`` in the category ``Type``.
 
-.. is the generalized element thing correct? Yes.
-
 The above tells you how we *make* a term of type ``⊤``.
 Lets see an example of *using* a term of type ``⊤``:
 
@@ -57,6 +55,10 @@ Lets see an example of *using* a term of type ``⊤``:
    TrueToTrue : ⊤ → ⊤
    TrueToTrue = {!!}
 
+.. admonition:: Unicode
+
+   One can find how to type ⊤ and other unicode symbols using
+   our :ref:`guide to emacs and list of emacs commands <emacsCommands>`.
 
 - enter ``C-c C-l`` (this means ``Ctrl-c Ctrl-l``).
   Whenever you do this, ``agda`` will check the document is written correctly.
@@ -125,7 +127,7 @@ One proof says for any term ``x : ⊤`` give ``x`` again.
 The other says it suffices to do the case of ``tt``,
 for which we just give ``tt``.
 
-.. admonition:: The same"
+.. admonition:: "The same"
 
    Are these proofs "the same"? What is "the same"?
 
