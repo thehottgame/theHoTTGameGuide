@@ -298,8 +298,19 @@ element (``refl`` works at each point in the space).
 
 Note that our solutions may differ to yours depending on
 your choice of how to define transitivity / concatenation.
+.. tip::
 
-- concatenating ``rfl`` on the left and right does nothing,
+   If you are tired of writing ``{A : Type} {x y : A}`` each time
+   you can stick
+
+   .. code::
+
+        private
+          variable
+            A : Type
+            x y : A
+
+- concatenating ``rfl`` on the left and right does nothing.
 
   .. raw:: html
 
@@ -344,18 +355,6 @@ your choice of how to define transitivity / concatenation.
 
      </details>
      </p>
-
-  .. tip::
-
-     If you are tired of writing ``{A : Type} {x y : A}`` each time
-     you can stick
-
-     .. code::
-
-        private
-          variable
-            A : Type
-            x y : A
 
      at the beginning of your ``agda`` file,
      and it will assume ``A``, ``x`` and ``y`` implicitly
@@ -408,7 +407,7 @@ your choice of how to define transitivity / concatenation.
      </details>
      </p>
 
-- Concatenation is associative
+- Concatenation is associative.
 
   .. raw:: html
 
