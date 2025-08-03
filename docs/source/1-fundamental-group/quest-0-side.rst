@@ -186,7 +186,7 @@ The definition of ``⊤`` is
 - Assume a path ``h : true ≡ false``
 - Define a map from ``Bool`` to ``Type``
   (as a lemma or using
-  `where <https://agda.readthedocs.io/en/v2.5.2/language/let-and-where.html#where-blocks>`_),
+  `where <https://agda.readthedocs.io/en/stable/language/let-and-where.html#where-blocks>`_),
   that takes ``true`` to ``⊤`` and ``false`` to ``⊥``.
   This is a *subsingleton bundle* over ``Bool``,
   since each *fiber* is ``⊤`` and ``⊥``,
