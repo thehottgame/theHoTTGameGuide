@@ -40,7 +40,7 @@ with interpretations
 - ``⊤`` is a terminal object: every object has a morphism into ``⊤`` given by ``· ↦ tt``
 
 In general, the expression ``a : A`` is read "``a`` is a term of type ``A``",
-and has interpretations interpretations,
+and has interpretations,
 
 - ``a`` is a proof of the proposition ``A``
 - ``a`` is a recipe for the construction ``A``
