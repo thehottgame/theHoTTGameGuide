@@ -165,7 +165,7 @@ we can do
 *Important observation* :
 the two proofs ``2 , tt`` and ``36 , tt`` of the statement
 "there exists an even natural" are not "the same" in any sense,
-since if they were ``div2 (2 , tt)`` would be "the same" ``div2 (36/2 , tt)``,
+since if they were, ``div2 (2 , tt)`` would be "the same" as ``div2 (36 , tt)``,
 and hence ``1`` would be "the same" as ``18``.
 
 .. admonition:: "The same"
