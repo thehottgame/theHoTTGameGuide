@@ -35,11 +35,6 @@ There are roughly three ways:
 Text editors
 ------------
 
-.. admonition:: Important
-
-   *No matter the text editor you choose*, you will need ``emacs`` installed somewhere on your computer,
-   as ``agda-mode`` relies on ``emacs`` in the background.
-
 Whilst we will assume you use ``doom emacs`` in our guides (since it is the hardest to get used to),
 there are other options :
 
@@ -66,10 +61,11 @@ Installing ``agda``
 ===================
 
 Here we give instructions for installing ``agda`` on each operating system.
+See :ref:`theHoTTGame` for supported versions.
 If you have specific advice / issues specific to your operating system then please let us know in
 `issues <https://github.com/thehottgame/TheHoTTGame/issues>`_.
 Another source for information is
-`official installation guide <https://agda.readthedocs.io/en/v2.5.4.2/getting-started/installation.html#prebuilt-packages-and-system-specific-instructions>`_,
+`official installation guide <https://agda.readthedocs.io/en/stable/getting-started/installation.html#prebuilt-packages-and-system-specific-instructions>`_,
 but our advice might be more relevant to you.
 
 Debian and Ubuntu
@@ -201,11 +197,11 @@ then try "using stack"
 
 - Get stack using the installer `here <https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows>`_.
 - Run ``stack upgrade`` in the terminal
-- Doing ``cabal get Agda`` in the terminal will create a folder called ``Agda-2.6.2`` *where you are at in the terminal*.
+- Doing ``cabal get Agda`` in the terminal will create a folder called ``Agda-VERSION`` *where you are at in the terminal* (with VERSION replaced with the actual version).
   *You can choose where to put this* by navigating to some specific folder in the terminal using ``cd FILENAME``.
-- Once you have created this ``Adgda-2.6.2``, go into it by doing ``cd Agda-2.6.2``.
-- In the folder ``Agda-2.6.2``, there should be a file called ``stack-9.0.1.yaml``.
-  Now you can try doing ``stack --stack-yaml stack-9.0.1.yaml install`` in the terminal (when you're in the folder ``Agda-2.6.2``)
+- Once you have created this ``Agda-VERSION``, go into it by doing ``cd Agda-VERSION``.
+- In the folder ``Agda-VERSION``, there should be a file called ``stack-9.0.1.yaml``.
+  Now you can try doing ``stack --stack-yaml stack-9.0.1.yaml install`` in the terminal (when you're in the folder ``Agda-VERSION``)
   to run that file.
 - Once installation is finished, try typing ``agda --version`` to check the version.
 
@@ -405,39 +401,31 @@ So we need to get the library.
 Getting the cubical library
 ===========================
 
-The HoTT Game currently requires the ``cubical-0.3`` library.
-We walk through an *example* of an installation of the ``cubical-0.3`` library.
+The HoTT Game currently requires the ``cubical`` library, version 0.8 or 0.9
+(but should also work with slightly older versions).
+We walk through an *example* of an installation of the ``cubical`` library.
 See the
 `Agda documentation <https://agda.readthedocs.io/en/latest/tools/package-system.html>`_
 for more about libraries.
 
 - Go `here <https://github.com/agda/cubical/releases>`_.
-  Under 'version 0.3',
+  Under the desired version,
   download the 'Source Code' file in either formats ``zip`` or ``tar.gz``.
 - Open the 'Source Code' file.
   It should turn into a folder which contains a folder called
   'cubical'.
   Choose a place for it to permanently stay,
   this can be anywhere you like.
-- Rename the folder 'cubical' to 'cubical-0.3'.
-  Inside it, there should be a ``cubical.agda-lib`` file
-  with contents
-
-  .. code::
-
-     name: cubical-0.3
-     include: .
-     depend:
-     flags: --cubical --no-import-sorts
+- Inside the ``cubical`` folder, there should be a ``cubical.agda-lib`` file.
 
   This is the file that tells ``agda`` "this is a library" when
   ``agda`` looks into this folder.
-  You can place the folder (now) called ``cubical-0.3`` anywhere you like.
+  You can place the folder called ``cubical`` anywhere you like.
   For the sake of this guide,
   let's say you put it in a place so that
-  the path is ``LOCATION/cubical-0.3``.
+  the path is ``LOCATION/cubical``.
 
-Now we need to tell ``agda`` this ``cubical-0.3`` library exists,
+Now we need to tell ``agda`` this ``cubical`` library exists,
 so that it will look for it when an ``agda`` file uses code from it.
 
 - Open a terminal and do
@@ -516,7 +504,7 @@ so that it will look for it when an ``agda`` file uses code from it.
 
   .. code::
 
-     LOCATION/cubical-0.3/cubical.agda-lib
+     LOCATION/cubical/cubical.agda-lib
 
   Save the file and close it.
 - Restart the terminal.
@@ -530,11 +518,11 @@ so that it will look for it when an ``agda`` file uses code from it.
         'BLAHBLAHBLAH/libraries'
      to install.
      Installed libraries:
-        cubical-0.3
-           (LOCATION/cubical-0.3/cubical.agda-lib)
+        cubical-VERSION
+           (LOCATION/cubical/cubical.agda-lib)
 
   Congratulations, ``agda`` is now aware of
-  the existence of the ``cubical-0.3`` library.
+  the existence of the ``cubical`` library.
 
 Getting The HoTT Game
 =====================
@@ -577,8 +565,8 @@ so we need to repeat the above process for it.
        'BLAHBLAHBLAH/libraries'
      to install.
      Installed libraries:
-       cubical-0.3
-         (LOCATION/cubical-0.3/cubical-0.3.agda-lib)
+       cubical-VERSION
+         (LOCATION/cubical/cubical.agda-lib)
        TheHoTTGame
          (LOCATION1/TheHoTTGame/TheHoTTGame.agda-lib)
 

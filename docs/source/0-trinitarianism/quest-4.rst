@@ -364,7 +364,7 @@ your choice of how to define transitivity / concatenation.
      *implicit argument*.
 
      We also recommend reading about the
-     `module system <https://agda.readthedocs.io/en/v2.6.0.1/language/module-system.html>`_
+     `module system <https://agda.readthedocs.io/en/stable/language/module-system.html>`_
      in ``agda``.
 
 - concatenating a path ``p`` with ``Sym p``  on the left and right gives ``rfl``.
