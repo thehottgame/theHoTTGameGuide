@@ -294,7 +294,7 @@ The identity type satisfies some further properties,
 which you can formalize then prove.
 You may notice that they look almost like the axioms of a group,
 except a bit bigger - for example there is not just a single identity
-element (``refl`` works at each point in the space).
+element (``rfl`` works at each point in the space).
 
 Note that our solutions may differ to yours depending on
 your choice of how to define transitivity / concatenation.
@@ -459,7 +459,7 @@ We may wish to extract the way we have made maps out of the identity type :
    Assuming a space ``A`` and a point ``x : A``.
    Given a bundle ``M : (y : A) (p : Id x y) → Type`` over the "space of paths out of ``x``",
    in order to make a map ``{y : A} (p : Id x y) → M y p``,
-   it suffices to give a point in ``M x refl``.
+   it suffices to give a point in ``M x rfl``.
    This is traditionally called the "recursor" of ``Id``.
    (We have still not justified this geometrically.)
 
